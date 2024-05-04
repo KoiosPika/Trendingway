@@ -1,16 +1,21 @@
+'use client'
+
 import { Input } from '@/components/ui/input'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import Image from 'next/image'
 import React from 'react'
+import { InstagramEmbed, TikTokEmbed } from 'react-social-media-embed';
 
 const page = () => {
     return (
         <div className='w-full flex justify-center items-center bg-white h-full'>
             <div className='w-full flex flex-col max-w-[1000px] justify-center items-center'>
                 <div className='my-3 justify-center items-center flex flex-col w-full'>
-                    <div className='rounded-t-lg flex h-[660px] w-[720px] flex-row justify-center items-center mt-3 p-3 md:w-4/5 bg-white'>
-                        <iframe className='rounded-lg h-[640px] w-[360px] mr-auto' height={1000} width={1000} src="https://youtube.com/embed/Z-_lzX_jXDY?si=78Ruilahxj5JOjRM"></iframe>
-                        <ScrollArea className='w-[400px] h-[640px] bg-white rounded-tr-lg rounded-br-lg flex flex-col items-center'>
+                    <div className='rounded-t-lg flex h-[750px] w-[720px] flex-row justify-center items-center mt-3 p-3 md:w-4/5 bg-white'>
+                        <div className='rounded-lg h-[750px] w-[360px]'>
+                            <TikTokEmbed url="https://www.tiktok.com/@dustymdouglas/video/7361248935085739310?is_from_webapp=1&sender_device=pc" width={350} />
+                        </div>
+                        <ScrollArea className='w-[400px] h-[750px] bg-white rounded-tr-lg rounded-br-lg flex flex-col items-center'>
                             <div className='mt-2 font-semibold text-center'>Review</div>
                             <div className='w-full mt-2 mb-5 flex flex-col items-center justify-center'>
                                 <p className='bg-purple-500 text-white px-3 py-2 rounded-lg font-semibold mr-auto ml-5'>Content</p>

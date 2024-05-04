@@ -42,7 +42,7 @@ const NavItems = () => {
         return (
           <li
             key={link.route}
-            className={`text-black flex-center whitespace-nowrap hover:text-black hover:bg-yellow-200 p-1 rounded-md`}
+            className={`text-black flex-center whitespace-nowrap hover:text-black hover:bg-yellow-300 p-1 rounded-md`}
           >
             <Image src={link.icon} alt='icon' height={25} width={25} className='mr-5 ml-2 md:hidden'/>
             <Link className='text-[14px] font-semibold' href={link.route}>{link.label}</Link>

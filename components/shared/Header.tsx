@@ -22,7 +22,7 @@ const Header = () => {
           <Link href={'/my-orders'} className='flex justify-center items-center'>
             <Image src={'/icons/bell.svg'} alt='bell' height={20} width={20} />
           </Link>
-          <Button asChild className='rounded-md bg-white border-2 border-black hover:bg-yellow-300' size={'icon'}>
+          <Button asChild className='rounded-md bg-white border-2 border-black hover:bg-yellow-400' size={'icon'}>
             <Link href={'/sign-in'}>
               <Image src={'/icons/login.svg'} alt='sigin' width={20} height={20} />
             </Link>
