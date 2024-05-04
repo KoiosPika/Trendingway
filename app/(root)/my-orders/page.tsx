@@ -18,7 +18,7 @@ const page = () => {
                     <p className='text-[12px] text-slate-400'>2h ago</p>
                   </div>
                 </div>
-                <p className='ml-3 mt-2 mr-auto text-[12.5px] h-[50px] overflow-hidden'> to know if me doing something wrong to know if I'm doing something wrong to know if I'm doing something wrong</p>
+                <p className='ml-3 mt-2 mr-auto text-[12.5px] h-[50px] overflow-hidden'> to know if me doing something wrong to know if me doing something wrong to know if me doing something wrong</p>
                 <Link href={'/review/34626'} className='bg-yellow-400 w-full flex flex-row items-center justify-center gap-2 py-1 rounded-lg mt-4 mb-2'>
                   <Image src={'/icons/star-black.svg'} alt='star' height={15} width={15} />
                   <p className='text-[13px] md:text-[16px]'>Start Review</p>
@@ -32,7 +32,7 @@ const page = () => {
                     <p className='text-[12px] text-slate-400'>2h ago</p>
                   </div>
                 </div>
-                <p className='ml-3 mt-2 mr-auto text-[12.5px] h-[50px] overflow-hidden'> to know if me doing something wrong to know if I'm doing something wrong to know if I'm doing something wrong</p>
+                <p className='ml-3 mt-2 mr-auto text-[12.5px] h-[50px] overflow-hidden'> to know if me doing something wrong to know if me doing something wrong to know if me doing something wrong</p>
                 <Link href={'/review/34626'} className='bg-yellow-400 w-full flex flex-row items-center justify-center gap-2 py-1 rounded-lg mt-4 mb-2'>
                   <Image src={'/icons/star-black.svg'} alt='star' height={15} width={15} />
                   <p className='text-[13px] md:text-[16px]'>Start Review</p>
@@ -46,7 +46,7 @@ const page = () => {
                     <p className='text-[12px] text-slate-400'>2h ago</p>
                   </div>
                 </div>
-                <p className='ml-3 mt-2 mr-auto text-[12.5px] h-[50px] overflow-hidden'> to know if me doing something wrong to know if I'm doing something wrong to know if I'm doing something wrong</p>
+                <p className='ml-3 mt-2 mr-auto text-[12.5px] h-[50px] overflow-hidden'> to know if me doing something wrong to know if me doing something wrong to know if me doing something wrong</p>
                 <Link href={'/review/34626'} className='bg-yellow-400 w-full flex flex-row items-center justify-center gap-2 py-1 rounded-lg mt-4 mb-2'>
                   <Image src={'/icons/star-black.svg'} alt='star' height={15} width={15} />
                   <p className='text-[13px] md:text-[16px]'>Start Review</p>
