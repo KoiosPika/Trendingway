@@ -4,11 +4,6 @@ import React from 'react'
 
 const page = () => {
 
-    const bio = `200k on Instagram
-400k on TikTok
-15k on Snapchat
-will help you grow your account`;
-
     const rate = 3.5;
     const yellowStarsCount = Math.round(rate);
     const greyStarsCount = 5 - yellowStarsCount;
@@ -56,15 +51,15 @@ will help you grow your account`;
                     </div>
                     <p className='mr-auto my-3 font-semibold text-[18px] ml-3'>About Me:</p>
                     <p className='mx-5'>Hey My name is Robert Benjamin and my mission is simple. I want to help as many people as possible grow on TikTok, Instagram and YouTube.
-                        I currently have the #1 YouTube channel for helping people grow on TikTok, Instagram and YouTube. Don’t believe me? Go search for TikTok Algorithm, Instagram Reels Algorithm, YouTube Shorts Algorithm and several more searches. </p>
+                        I currently have the #1 YouTube channel for helping people grow on TikTok, Instagram and YouTube. believe me? Go search for TikTok Algorithm, Instagram Reels Algorithm, YouTube Shorts Algorithm and several more searches. </p>
                     <p className='mr-auto mb-3 mt-6 font-semibold text-[18px] ml-3'>Reviews from users:</p>
                     <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 px-3'>
                         {arr.map((index) =>
-                            <div className='bg-[#292929] h-[270px] w-[290px] rounded-[8px] p-5 text-white'>
+                            <div key={index} className='bg-[#292929] h-[270px] w-[290px] rounded-[8px] p-5 text-white'>
                                 <p className='h-[160px] overflow-hidden my-2'>
-                                    "Instead of editing videos and posting regular videos, I now run a bunch
+                                    Instead of editing videos and posting regular videos, I now run a bunch
                                     of faceless short channels automated with ShortX, that rack up hundreds
-                                    of subscribers per day."
+                                    of subscribers per day.
                                 </p>
                                 <div className='flex flex-row items-center'>
                                     <Image className='w-[60px] h-[60px] p-1 rounded-full bg-[#6e44ff] mr-2' src={'/images/pfp.png'} alt="Avatar" width={200} height={200} />

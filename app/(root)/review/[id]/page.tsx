@@ -102,7 +102,7 @@ const page = () => {
                                 <p className='text-[12px] text-slate-400'>2h ago</p>
                             </div>
                             <div className='bg-gray-300 p-1 rounded-r-lg rounded-bl-lg'>
-                                <p className='text-[13px]'>Hello, I'm not getting any views can you help me?</p>
+                                <p className='text-[13px]'>Hello,me not getting any views can you help me?</p>
                             </div>
                         </div>
                     </div>
