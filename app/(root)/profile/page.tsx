@@ -53,18 +53,17 @@ const page = async () => {
                                 ))}
                                 <p className='ml-2 text-black font-semibold'>({user.nofreviews})</p>
                             </div>
-                            <a>{user.websiteLink}</a>
+                            <a href={user.websiteLink} target='_blank' className='text-blue-600 hover:underline'>{user.websiteLink}</a>
                         </div>
                         <div className='flex flex-col md:flex-row w-full gap-2 my-3 text-white'>
-                            <Link href={'/upload'} className='bg-purple-500 flex-1 flex justify-center items-center py-2 rounded-[10px] font-semibold'>Request Review</Link>
-                            <Link href={'/edit-profile'} className='bg-yellow-500 flex-1 flex justify-center items-center py-2 rounded-[10px] font-semibold'>Edit Profile</Link>
+                            <Link href={'/edit-profile'} className='bg-blue-600 flex-1 flex justify-center items-center py-2 rounded-[10px] font-semibold'>Edit Profile</Link>
                         </div>
                     </div>
                     {user.aboutMe && <p className='mr-auto my-3 font-semibold text-[18px] ml-3'>About Me:</p>}
                     <p className='mx-5'>{user.aboutMe}</p>
                     <p className='mr-auto mt-10 mb-3 font-semibold text-[18px] ml-3'>Services by {user?.User?.username}: </p>
                     <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 px-3'>
-                        <OneVideoRequest />
+                        <OneVideoRequest price={user.oneVideoPrice} userId={userId} reviewer={user.User._id} />
                         <div className='bg-[#3A51AE] h-[320px] w-[290px] rounded-[8px] p-5 text-white flex flex-col items-center'>
                             <h4 className='text-[20px] font-semibold mb-3 bg-red-600 w-full text-center rounded-lg'>3 Videos Review</h4>
                             <Image src={'/icons/reels.png'} className='h-[180px] w-[250px]' alt='icon' height={1000} width={1000} />

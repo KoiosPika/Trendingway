@@ -1,14 +1,19 @@
+import OneVideoRequest from '@/components/shared/OneVideoRequest';
 import { getUserDataByUsername } from '@/lib/actions/userData.actions';
 import { IUserData } from '@/lib/database/models/userData.model';
+import { auth } from '@clerk/nextjs/server';
 import Image from 'next/image'
 import Link from 'next/link';
 import React from 'react'
 
 const page = async ({ params: { username } }: { params: { username: string } }) => {
-    
+
+    const { sessionClaims } = auth();
+    const userId = sessionClaims?.userId as string;
+
     const user: IUserData = await getUserDataByUsername(username)
 
-    const rate = user.avgReview;
+    const rate = user?.avgReview;
     const yellowStarsCount = Math.round(rate);
     const greyStarsCount = 5 - yellowStarsCount;
 
@@ -58,13 +63,7 @@ const page = async ({ params: { username } }: { params: { username: string } }) 
                     <p className='mx-5'>{user.aboutMe}</p>
                     <p className='mr-auto mt-10 mb-3 font-semibold text-[18px] ml-3'>Services by {user?.User?.username}: </p>
                     <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 px-3'>
-                        <div className='bg-[#3A51AE] h-[320px] w-[290px] rounded-[8px] p-5 text-white flex flex-col items-center'>
-                            <h4 className='text-[20px] font-semibold mb-3 bg-red-600 w-full text-center rounded-lg'>1 Video Review</h4>
-                            <Image src={'/icons/reel.png'} className='h-[200px] w-[200px]' alt='icon' height={1000} width={1000} />
-                            <div className='mt-auto bg-yellow-300 w-full text-center rounded-lg py-1 text-black font-semibold'>
-                                <p>${user.oneVideoPrice}</p>
-                            </div>
-                        </div>
+                        <OneVideoRequest price={user.oneVideoPrice} userId={userId} reviewer={user.User._id} />
                         <div className='bg-[#3A51AE] h-[320px] w-[290px] rounded-[8px] p-5 text-white flex flex-col items-center'>
                             <h4 className='text-[20px] font-semibold mb-3 bg-red-600 w-full text-center rounded-lg'>3 Videos Review</h4>
                             <Image src={'/icons/reels.png'} className='h-[180px] w-[250px]' alt='icon' height={1000} width={1000} />

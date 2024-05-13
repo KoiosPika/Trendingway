@@ -1,4 +1,16 @@
 import { Schema, model, models, Document } from "mongoose";
+import { IUser } from "./user.model";
+
+export interface IRequest extends Document {
+    _id: string
+    User: IUser,
+    Reviwer: IUser,
+    postLink: string,
+    description: string,
+    platform: string,
+    reviewed: boolean,
+    price: number
+}
 
 const RequestSchema = new Schema({
     User: { type: Schema.Types.ObjectId, ref: "User" },
@@ -7,7 +19,7 @@ const RequestSchema = new Schema({
     description: { type: String },
     platform: { type: String },
     reviewed: { type: Boolean, default: false },
-    price: {type: Number}
+    price: { type: Number }
 })
 
 const Request = models.Request || model('Request', RequestSchema);
