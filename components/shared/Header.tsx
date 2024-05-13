@@ -5,8 +5,11 @@ import NavItems from './NavItems'
 import MobileNav from './MobileNav'
 import { Button } from '../ui/button'
 import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
+import { auth } from '@clerk/nextjs/server'
+import { getUserbyUserId } from '@/lib/actions/user.actions'
 
-const Header = () => {
+const Header = async () => {
+
   return (
     <header className='w-full py-2 md:px-10 bg-white'>
       <div className='flex items-center justify-evenly'>

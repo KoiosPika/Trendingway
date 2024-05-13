@@ -1,4 +1,20 @@
 import { Schema, model, models, Document } from "mongoose";
+import { IUser } from "./user.model";
+
+export interface IUserData extends Document {
+    _id: string,
+    User: IUser
+    websiteLink: string,
+    oneVideoPrice: number,
+    threeVideoPrice: number
+    accountAuditPrice: number
+    aboutMe: string
+    creditBalance: number
+    withdrawBalance: number
+    nofreviews: number
+    avgReview: number
+    nofVideoesReviewed: number
+}
 
 const UserDataSchema = new Schema({
     User: { type: Schema.Types.ObjectId, ref: "User" },

@@ -29,3 +29,15 @@ export async function createUser(user: { clerkId: string, username: string, emai
         console.log(error)
     }
 }
+
+export async function getUserbyUserId(userId:string){
+    try {
+        await connectToDatabase();
+
+        const user = await User.findById(userId)
+
+        return JSON.parse(JSON.stringify(user));
+    } catch (error) {
+        console.log(error)
+    }
+}
