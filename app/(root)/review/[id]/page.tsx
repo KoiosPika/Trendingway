@@ -18,7 +18,6 @@ import {
 
 
 const page = () => {
-    const [open, setOpen] = React.useState(false);
     return (
         <div className='w-full flex justify-center items-center bg-white h-full'>
             <div className='w-full flex flex-col md:max-w-[1000px] justify-center items-center'>
