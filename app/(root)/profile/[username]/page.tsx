@@ -17,9 +17,6 @@ const page = async ({ params: { username } }: { params: { username: string } }) 
     const yellowStarsCount = Math.round(rate);
     const greyStarsCount = 5 - yellowStarsCount;
 
-    const arr = [1, 2, 3];
-
-
     return (
         <div className='w-full flex justify-center items-center bg-white'>
             <div className='w-full flex flex-col max-w-[900px] justify-center items-center'>
@@ -59,8 +56,10 @@ const page = async ({ params: { username } }: { params: { username: string } }) 
                             <Link href={'/edit-profile'} className='bg-black flex-1 flex justify-center items-center py-2 rounded-[10px] font-semibold'>Edit Profile</Link>
                         </div>
                     </div>
-                    {user.aboutMe && <p className='mr-auto my-3 font-semibold text-[18px] ml-3'>About Me:</p>}
-                    <p className='mx-5'>{user.aboutMe}</p>
+                    <p className='mr-auto my-3 font-semibold text-[18px] ml-3'>About Me:</p>
+                    <p className='mx-5'>{user.aboutMe || `Hi I'm ${user?.User.username}`}</p>
+                    <p className='mr-auto my-3 font-semibold text-[18px] ml-3'>About Me:</p>
+                    <p className='mx-5'>{user.aboutMe || `Hi I'm ${user?.User.username}`}</p>
                     <p className='mr-auto mt-10 mb-3 font-semibold text-[18px] ml-3'>Services by {user?.User?.username}: </p>
                     <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 px-3'>
                         <OneVideoRequest price={user.oneVideoPrice} userId={userId} reviewer={user.User._id} />

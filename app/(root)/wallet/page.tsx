@@ -1,7 +1,13 @@
+import Checkout from '@/components/shared/Checkout'
+import { auth } from '@clerk/nextjs/server'
 import Image from 'next/image'
 import React from 'react'
 
 const page = () => {
+
+    const { sessionClaims } = auth();
+    const userId = sessionClaims?.userId as string;
+
     return (
         <div className='w-full flex justify-center items-center bg-white'>
             <div className='w-full flex flex-col max-w-[1000px] justify-center items-center'>
@@ -18,10 +24,10 @@ const page = () => {
                             </div>
                             <p className='font-semibold mx-7 my-3 text-[22px]'>$ 10.00</p>
                             <div className='grid grid-cols-2 gap-3 text-center'>
-                                <div className='bg-white text-black font-semibold p-2 rounded-lg'>$2.00</div>
-                                <div className='bg-white text-black font-semibold p-2 rounded-lg'>$5.00</div>
-                                <div className='bg-white text-black font-semibold p-2 rounded-lg'>$15.00</div>
-                                <div className='bg-white text-black font-semibold p-2 rounded-lg'>$20.00</div>
+                                <Checkout userId={userId} amount={2} />
+                                <Checkout userId={userId} amount={5} />
+                                <Checkout userId={userId} amount={15} />
+                                <Checkout userId={userId} amount={20} />
                             </div>
                         </div>
                         <div className='w-11/12 p-8 my-3 rounded-lg bg-black text-white'>

@@ -18,8 +18,8 @@ const page = async () => {
     const yellowStarsCount = Math.round(rate);
     const greyStarsCount = 5 - yellowStarsCount;
 
-    const arr = [1, 2, 3];
-
+    const Languages = ['Arabic', 'English', 'Arabic', 'English'];
+    const Content = ['Food', 'Sport', 'Faceless']
 
     return (
         <div className='w-full flex justify-center items-center bg-white'>
@@ -59,8 +59,17 @@ const page = async () => {
                             <Link href={'/edit-profile'} className='bg-blue-600 flex-1 flex justify-center items-center py-2 rounded-[10px] font-semibold'>Edit Profile</Link>
                         </div>
                     </div>
-                    {user.aboutMe && <p className='mr-auto my-3 font-semibold text-[18px] ml-3'>About Me:</p>}
-                    <p className='mx-5'>{user.aboutMe}</p>
+                    <p className='mr-auto my-3 font-semibold text-[18px] ml-3'>Tags:</p>
+                    <div className='mx-5 flex flex-row gap-3 w-full flex-wrap'>
+                        {Languages.map((language) => (
+                            <p key={language} className='bg-orange-200 text-orange-600 px-3 py-2 rounded-lg font-semibold'>{language}</p>
+                        ))}
+                        {Content.map((content) => (
+                            <p key={content} className='bg-green-200 text-green-600 px-3 py-2 rounded-lg font-semibold'>{content}</p>
+                        ))}
+                    </div>
+                    <p className='mr-auto my-3 font-semibold text-[18px] ml-3'>About Me:</p>
+                    <p className='mx-5'>{user.aboutMe || `Hi I'm ${user?.User.username}`}</p>
                     <p className='mr-auto mt-10 mb-3 font-semibold text-[18px] ml-3'>Services by {user?.User?.username}: </p>
                     <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 px-3'>
                         <OneVideoRequest price={user.oneVideoPrice} userId={userId} reviewer={user.User._id} />

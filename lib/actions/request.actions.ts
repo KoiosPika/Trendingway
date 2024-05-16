@@ -39,7 +39,7 @@ export async function getAllRequests(userId: string) {
     try {
         await connectToDatabase();
 
-        const requests = await populateRequest(Request.find({ Reviewer: userId }))
+        const requests = await populateRequest(Request.find({ Reviewer: userId, reviewed: false }))
 
         return JSON.parse(JSON.stringify(requests));
     } catch (error) {
