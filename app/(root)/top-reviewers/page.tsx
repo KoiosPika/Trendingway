@@ -193,10 +193,10 @@ const page = () => {
                     <div className='rounded-lg flex justify-center items-center my-3 py-3 px-6 w-11/12 gap-10 bg-white'>
                         <table className='w-full border-2 border-black rounded-lg'>
                             <thead className='text-center text-[12px] bg-black'>
-                                <tr className='text-white'>
-                                    <th className='md:text-[18px] p-3 md:font-semibold'>Rank</th>
-                                    <th className='md:text-[18px] md:font-semibold'>Reviewer</th>
-                                    <th className='md:text-[18px] md:font-semibold'>Rating</th>
+                                <tr className='text-white w-full'>
+                                    <th className='md:text-[18px] p-3 md:font-semibold w-1/6'>Rank</th>
+                                    <th className='md:text-[18px] md:font-semibold w-3/6'>Reviewer</th>
+                                    <th className='md:text-[18px] md:font-semibold w-2/6'>Rating</th>
                                 </tr>
                             </thead>
                             <tbody className='text-[12px] text-center'>

@@ -62,7 +62,7 @@ const page = async () => {
                         </div>
                     </div>
                     <p className='mr-auto my-3 font-semibold text-[18px] ml-3'>Tags:</p>
-                    <div className='mx-5 flex flex-row gap-3 w-full flex-wrap my-3'>
+                    <div className='mx-5 flex flex-row gap-3 w-full flex-wrap my-3 px-5'>
                         {Languages.map((language) => (
                             <p key={language} className='bg-orange-200 text-orange-600 px-3 py-2 rounded-lg font-semibold'>{language}</p>
                         ))}
@@ -92,9 +92,9 @@ const page = async () => {
                     </div>
                     <div className='w-full my-3'>
                         <p className='mr-auto my-3 font-semibold text-[18px] ml-3'>Connect with other influencers:</p>
-                        <div className='grid grid-cols-2 gap-5'>
+                        <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
                             {arr.map((_,index) => (
-                                <div key={index} className='bg-white border-2 border-slate-200 rounded-lg py-3 flex flex-row justify-center items-center p-3' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
+                                <div key={index} className='bg-white border-2 border-slate-200 rounded-lg py-3 flex flex-row justify-center items-center p-3 m-3' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                                     <div className='flex flex-col w-1/3 justify-center items-center'>
                                         <Image className='w-[100px] h-[100px] rounded-full my-2' src={'/images/pfp.png'} alt='pfp' height={300} width={300} />
                                         <div className='mx-3 flex flex-row'>
