@@ -1,12 +1,16 @@
 import Checkout from '@/components/shared/Checkout'
+import { getUserDataByUserId } from '@/lib/actions/userData.actions'
+import { IUserData } from '@/lib/database/models/userData.model'
 import { auth } from '@clerk/nextjs/server'
 import Image from 'next/image'
 import React from 'react'
 
-const page = () => {
+const page = async () => {
 
     const { sessionClaims } = auth();
     const userId = sessionClaims?.userId as string;
+
+    const user:IUserData = await getUserDataByUserId(userId)
 
     return (
         <div className='w-full flex justify-center items-center bg-white'>
@@ -22,7 +26,7 @@ const page = () => {
                                 <Image src={'/icons/wallet.svg'} alt='wallet' height={20} width={20} />
                                 <p className='font-semibold'>Current Balance</p>
                             </div>
-                            <p className='font-semibold mx-7 my-3 text-[22px]'>$ 10.00</p>
+                            <p className='font-semibold mx-7 my-3 text-[22px]'>$ {(user?.creditBalance).toFixed(2)}</p>
                             <div className='grid grid-cols-2 gap-3 text-center'>
                                 <Checkout userId={userId} amount={2} />
                                 <Checkout userId={userId} amount={5} />

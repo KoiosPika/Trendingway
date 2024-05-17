@@ -16,20 +16,10 @@ export const createOrder = async (order: { User: string, amount: number, created
             buyer: order.User,
         });
 
-        const ticketValue: { [key: string]: number } = {
-            '1.99': 8,
-            '3.99': 15,
-            '6.99': 26,
-            '9.99': 40
-        };
-
-
-        const user = await UserData.findOne({ User: order.User });
-
-        await UserData.updateOne(
-            { User: order.User },
-            { $set: { creditBalance: order.amount } }
-        )
+        await UserData.findOneAndUpdate(
+            { "User": order.User },
+            { '$inc': { "creditBalance": order.amount } }
+        );
 
         return JSON.parse(JSON.stringify(newOrder));
     } catch (error) {
@@ -58,7 +48,7 @@ export const checkoutOrder = async (order: { amount: number, User: string }) => 
                 buyerId: order.User,
             },
             mode: 'payment',
-            success_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/profile/tickets`,
+            success_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/wallet`,
             cancel_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/`,
         });
 
