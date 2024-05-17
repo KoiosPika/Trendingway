@@ -42,8 +42,8 @@ const page = async () => {
                         <div className='w-11/12 p-8 my-3 rounded-lg bg-black text-white'>
                             <p className='font-semibold mb-3 text-[18px]'>Recent Orders</p>
                             <div className='grid grid-cols-2 lg:grid-cols-3 gap-3 font-semibold'>
-                                {orders.map((order: IOrder) => (
-                                    <div className='flex flex-col justify-center items-center p-5 bg-white text-black rounded-lg'>
+                                {orders.map((order: IOrder, index: number) => (
+                                    <div key={index} className='flex flex-col justify-center items-center p-5 bg-white text-black rounded-lg'>
                                         <p className='text-[10px] md:text-[13px]'>{formatDate(order.createdAt)}</p>
                                         <p className='text-[30px] md:text-[35px] mb-2'>${(order.amount).toFixed(2)}</p>
                                     </div>
