@@ -1,6 +1,9 @@
 import Checkout from '@/components/shared/Checkout'
+import { getAllOrders } from '@/lib/actions/order.actions'
 import { getUserDataByUserId } from '@/lib/actions/userData.actions'
+import { IOrder } from '@/lib/database/models/order.model'
 import { IUserData } from '@/lib/database/models/userData.model'
+import { formatDate } from '@/lib/utils'
 import { auth } from '@clerk/nextjs/server'
 import Image from 'next/image'
 import React from 'react'
@@ -10,7 +13,9 @@ const page = async () => {
     const { sessionClaims } = auth();
     const userId = sessionClaims?.userId as string;
 
-    const user:IUserData = await getUserDataByUserId(userId)
+    const user: IUserData = await getUserDataByUserId(userId)
+
+    const orders = await getAllOrders(userId);
 
     return (
         <div className='w-full flex justify-center items-center bg-white'>
@@ -37,66 +42,12 @@ const page = async () => {
                         <div className='w-11/12 p-8 my-3 rounded-lg bg-black text-white'>
                             <p className='font-semibold mb-3 text-[18px]'>Recent Orders</p>
                             <div className='grid grid-cols-2 lg:grid-cols-3 gap-3 font-semibold'>
-                                <div className='flex flex-col justify-center items-center p-5 bg-white text-black rounded-lg'>
-                                    <p className='text-[10px] md:text-[13px]'>Friday 23, 2024</p>
-                                    <p className='text-[30px] md:text-[35px] mb-2'>$5.00</p>
-                                    <p className='text-[10px] ml-auto mt-auto underline'>More Details →</p>
-                                </div>
-                                <div className='flex flex-col justify-center items-center p-5 bg-white text-black rounded-lg'>
-                                    <p className='text-[10px] md:text-[13px]'>Friday 23, 2024</p>
-                                    <p className='text-[30px] md:text-[35px]'>$5.00</p>
-                                    <p className='text-[10px] ml-auto mt-auto underline'>More Details →</p>
-                                </div>
-                                <div className='flex flex-col justify-center items-center p-5 bg-white text-black rounded-lg'>
-                                    <p className='text-[10px] md:text-[13px]'>Friday 23, 2024</p>
-                                    <p className='text-[30px] md:text-[35px]'>$15.00</p>
-                                    <p className='text-[10px] ml-auto mt-auto underline'>More Details →</p>
-                                </div>
-                                <div className='flex flex-col justify-center items-center p-5 bg-white text-black rounded-lg'>
-                                    <p className='text-[10px] md:text-[13px]'>Friday 23, 2024</p>
-                                    <p className='text-[30px] md:text-[35px] mb-2'>$5.00</p>
-                                    <p className='text-[10px] ml-auto mt-auto underline'>More Details →</p>
-                                </div>
-                                <div className='flex flex-col justify-center items-center p-5 bg-white text-black rounded-lg'>
-                                    <p className='text-[10px] md:text-[13px]'>Friday 23, 2024</p>
-                                    <p className='text-[30px] md:text-[35px]'>$5.00</p>
-                                    <p className='text-[10px] ml-auto mt-auto underline'>More Details →</p>
-                                </div>
-                                <div className='flex flex-col justify-center items-center p-5 bg-white text-black rounded-lg'>
-                                    <p className='text-[10px] md:text-[13px]'>Friday 23, 2024</p>
-                                    <p className='text-[30px] md:text-[35px]'>$15.00</p>
-                                    <p className='text-[10px] ml-auto mt-auto underline'>More Details →</p>
-                                </div>
-                                <div className='flex flex-col justify-center items-center p-5 bg-white text-black rounded-lg'>
-                                    <p className='text-[10px] md:text-[13px]'>Friday 23, 2024</p>
-                                    <p className='text-[30px] md:text-[35px] mb-2'>$5.00</p>
-                                    <p className='text-[10px] ml-auto mt-auto underline'>More Details →</p>
-                                </div>
-                                <div className='flex flex-col justify-center items-center p-5 bg-white text-black rounded-lg'>
-                                    <p className='text-[10px] md:text-[13px]'>Friday 23, 2024</p>
-                                    <p className='text-[30px] md:text-[35px]'>$5.00</p>
-                                    <p className='text-[10px] ml-auto mt-auto underline'>More Details →</p>
-                                </div>
-                                <div className='flex flex-col justify-center items-center p-5 bg-white text-black rounded-lg'>
-                                    <p className='text-[10px] md:text-[13px]'>Friday 23, 2024</p>
-                                    <p className='text-[30px] md:text-[35px]'>$15.00</p>
-                                    <p className='text-[10px] ml-auto mt-auto underline'>More Details →</p>
-                                </div>
-                                <div className='flex flex-col justify-center items-center p-5 bg-white text-black rounded-lg'>
-                                    <p className='text-[10px] md:text-[13px]'>Friday 23, 2024</p>
-                                    <p className='text-[30px] md:text-[35px] mb-2'>$5.00</p>
-                                    <p className='text-[10px] ml-auto mt-auto underline'>More Details →</p>
-                                </div>
-                                <div className='flex flex-col justify-center items-center p-5 bg-white text-black rounded-lg'>
-                                    <p className='text-[10px] md:text-[13px]'>Friday 23, 2024</p>
-                                    <p className='text-[30px] md:text-[35px]'>$5.00</p>
-                                    <p className='text-[10px] ml-auto mt-auto underline'>More Details →</p>
-                                </div>
-                                <div className='flex flex-col justify-center items-center p-5 bg-white text-black rounded-lg'>
-                                    <p className='text-[10px] md:text-[13px]'>Friday 23, 2024</p>
-                                    <p className='text-[30px] md:text-[35px]'>$15.00</p>
-                                    <p className='text-[10px] ml-auto mt-auto underline'>More Details →</p>
-                                </div>
+                                {orders.map((order: IOrder) => (
+                                    <div className='flex flex-col justify-center items-center p-5 bg-white text-black rounded-lg'>
+                                        <p className='text-[10px] md:text-[13px]'>{formatDate(order.createdAt)}</p>
+                                        <p className='text-[30px] md:text-[35px] mb-2'>${(order.amount).toFixed(2)}</p>
+                                    </div>
+                                ))}
                             </div>
                         </div>
                     </div>

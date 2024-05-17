@@ -1,5 +1,13 @@
 import { Schema, model, models, Document } from "mongoose";
 
+export interface IOrder extends Document {
+    _id: string,
+    User: string,
+    amount: number,
+    stripeId: string,
+    createdAt: Date
+}
+
 const OrderSchema = new Schema({
     User: { type: Schema.Types.ObjectId, ref: "User" },
     amount: { type: Number },

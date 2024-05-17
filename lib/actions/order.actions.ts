@@ -18,8 +18,8 @@ export const createOrder = async (order: { User: string, amount: number, created
 
         await UserData.findOneAndUpdate(
             { "User": order.User },
-            { '$inc': { "creditBalance": order.amount } }
-        );
+            { '$inc': { "creditBalance": order.amount } },
+        )
 
         return JSON.parse(JSON.stringify(newOrder));
     } catch (error) {
@@ -55,5 +55,19 @@ export const checkoutOrder = async (order: { amount: number, User: string }) => 
         redirect(session.url!)
     } catch (error) {
         throw error;
+    }
+}
+
+export async function getAllOrders(userId: string) {
+    try {
+        await connectToDatabase();
+
+        const orders = await Order.find({
+            User: userId
+        }).sort({createdAt: -1})
+
+        return JSON.parse(JSON.stringify(orders))
+    } catch (error) {
+        console.log(error)
     }
 }
