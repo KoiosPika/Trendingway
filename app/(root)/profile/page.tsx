@@ -73,27 +73,21 @@ const page = async () => {
                     <p className='mr-auto my-3 font-semibold text-[18px] ml-3'>About Me:</p>
                     <p className='mx-5'>{user.aboutMe || `Hi I'm ${user?.User.username}`}</p>
                     <p className='mr-auto mt-10 mb-3 font-semibold text-[18px] ml-3'>Services by {user?.User?.username}: </p>
-                    <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 px-3'>
+                    <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-5 px-3 w-full'>
                         <OneVideoRequest price={user.oneVideoPrice} userId={userId} reviewer={user.User._id} />
-                        <div className='bg-[#3A51AE] h-[320px] w-[290px] rounded-[8px] p-5 text-white flex flex-col items-center'>
-                            <h4 className='text-[20px] font-semibold mb-3 bg-red-600 w-full text-center rounded-lg'>3 Videos Review</h4>
-                            <Image src={'/icons/reels.png'} className='h-[180px] w-[250px]' alt='icon' height={1000} width={1000} />
-                            <div className='mt-auto bg-yellow-300 w-full text-center rounded-lg py-1 text-black font-semibold'>
-                                <p>${user.threeVideoPrice}</p>
+                        <div className='border-[1px] border-slate-300 rounded-lg h-[120px] flex justify-center items-center gap-8' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
+                            <div className='flex flex-col items-center gap-2'>
+                                <Image src={'/icons/account.svg'} alt='video' width={200} height={200} className='bg-orange-400 w-[55px] h-[55px] p-2 rounded-full' />
+                                <p className='font-semibold'>Review one video</p>
                             </div>
-                        </div>
-                        <div className='bg-[#3A51AE] h-[320px] w-[290px] rounded-[8px] p-5 text-white flex flex-col items-center'>
-                            <h4 className='text-[20px] font-semibold mb-3 bg-red-600 w-full text-center rounded-lg'>Account Review</h4>
-                            <Image src={'/icons/reel.png'} className='h-[200px] w-[200px]' alt='icon' height={1000} width={1000} />
-                            <div className='mt-auto bg-yellow-300 w-full text-center rounded-lg py-1 text-black font-semibold'>
-                                <p>${user.accountAuditPrice}</p>
-                            </div>
+                            <div className='h-3/4 w-[2px] bg-black'></div>
+                            <p className='text-[25px] font-semibold'>$0.99</p>
                         </div>
                     </div>
                     <div className='w-full my-3'>
                         <p className='mr-auto my-3 font-semibold text-[18px] ml-3'>Connect with other influencers:</p>
                         <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
-                            {arr.map((_,index) => (
+                            {arr.map((_, index) => (
                                 <div key={index} className='bg-white border-2 border-slate-200 rounded-lg py-3 flex flex-row justify-center items-center p-3 m-3' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                                     <div className='flex flex-col w-1/3 justify-center items-center'>
                                         <Image className='w-[100px] h-[100px] rounded-full my-2' src={'/images/pfp.png'} alt='pfp' height={300} width={300} />
