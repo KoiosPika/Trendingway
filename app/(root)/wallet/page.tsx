@@ -32,8 +32,8 @@ const page = async () => {
                                     <Image src={'/icons/wallet.svg'} alt='wallet' height={20} width={20} />
                                     <p className='text-white font-semibold text-[18px]'>Current Balance</p>
                                 </div>
-                                <p className='ml-7 text-[25px] font-semibold text-white'>$39.00</p>
-                                <div className='flex flex-row items-center gap-2 ml-auto bg-white px-2 py-1 rounded-lg border-[1px] border-black h-[40px]'>
+                                <p className='ml-7 text-[25px] font-semibold text-white'>${(user.creditBalance).toFixed(2)}</p>
+                                <div className='flex flex-row items-center gap-2 ml-auto bg-white px-2 py-1 rounded-lg h-[40px]'>
                                     <Image src={'/icons/plus.svg'} alt='dollar' height={20} width={20}/>
                                     <p className='font-semibold text-[13px]'>Recharge Below</p>
                                 </div>
@@ -43,8 +43,8 @@ const page = async () => {
                                     <Image src={'/icons/wallet.svg'} alt='wallet' height={20} width={20} />
                                     <p className='text-white font-semibold text-[18px]'>Ready to withdraw</p>
                                 </div>
-                                <p className='ml-7 text-[25px] font-semibold text-white'>$39.00</p>
-                                <div className='flex flex-row items-center gap-2 ml-auto bg-white px-2 py-1 rounded-lg border-[1px] border-black h-[40px]'>
+                                <p className='ml-7 text-[25px] font-semibold text-white'>${(user.withdrawBalance).toFixed(2)}</p>
+                                <div className='flex flex-row items-center gap-2 ml-auto bg-white px-2 py-1 rounded-lg h-[40px]'>
                                     <Image src={'/icons/dollar.svg'} alt='dollar' height={15} width={15}/>
                                     <p className='font-semibold text-[13px]'>Initiate Transaction</p>
                                 </div>
