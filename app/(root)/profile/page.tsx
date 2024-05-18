@@ -81,7 +81,7 @@ const page = async () => {
                                 <p className='font-semibold'>Review one video</p>
                             </div>
                             <div className='h-3/4 w-[2px] bg-black'></div>
-                            <p className='text-[25px] font-semibold'>$0.99</p>
+                            <p className='text-[25px] font-semibold'>$4.99</p>
                         </div>
                     </div>
                     <div className='w-full my-3'>
