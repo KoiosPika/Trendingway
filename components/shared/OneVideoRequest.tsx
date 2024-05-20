@@ -25,7 +25,7 @@ const OneVideoRequest = ({ price, userId, reviewer }: { price: number, userId: s
     return (
         <AlertDialog>
             <AlertDialogTrigger>
-                <div className='border-[1px] border-slate-300 rounded-lg h-[120px] flex justify-center items-center gap-8' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
+                <div className='border-[1px] border-slate-300 rounded-lg h-[150px] flex justify-center items-center gap-8' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                     <div className='flex flex-col items-center gap-2'>
                         <Image src={'/icons/video.svg'} alt='video' width={200} height={200} className='bg-blue-400 w-[55px] h-[55px] p-2 rounded-full' />
                         <p className='font-semibold'>Review one video</p>

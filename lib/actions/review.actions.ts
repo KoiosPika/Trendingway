@@ -1,18 +1,18 @@
 'use server'
 
 import { connectToDatabase } from '@/lib/database'
-import User from '@/lib/database/models/user.model'
+import User, { IUser } from '@/lib/database/models/user.model'
 import UserData from '../database/models/userData.model'
 import Review, { IReview } from '../database/models/review.model'
 import Request from '../database/models/request.model'
 
-export async function createReview(review: { request: string, contentNotes: string, brightnessNotes: string, descriptionNotes: string, hashtagsNotes: string, soundNotes: string, additionalNotes: string }) {
+export async function createReview(review: { request: string, contentNotes: string, brightnessNotes: string, descriptionNotes: string, hashtagsNotes: string, soundNotes: string, additionalNotes: string, Reviewer: string }) {
     try {
         await connectToDatabase()
 
-        console.log(review.request)
+        console.log(review)
 
-        const newReview : IReview = await Review.create({
+        const newReview: IReview = await Review.create({
             Request: review.request,
             contentReview: 3,
             contentNotes: review.contentNotes,
@@ -28,10 +28,15 @@ export async function createReview(review: { request: string, contentNotes: stri
             overallReview: 3,
         })
 
-        await Request.findOneAndUpdate({
-            _id: review.request,
-            reviewed: true
-        })
+        const updatedRequest = await Request.findOneAndUpdate(
+            { _id: review.request },
+            { $set: { reviewed: true } }
+        )
+
+        await UserData.findOneAndUpdate(
+            { User: review.Reviewer },
+            { $set: { withdrawBalance: updatedRequest.price * 0.8 } }
+        )
 
         return JSON.parse(JSON.stringify(newReview))
     } catch (error) {

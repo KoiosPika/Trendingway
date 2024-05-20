@@ -201,7 +201,7 @@ const page = () => {
                             </thead>
                             <tbody className='text-[12px] text-center'>
                                 {arr.map((_, index) => (
-                                <tr key={index} className='bg-gray-200'>
+                                <tr key={index} style={{backgroundColor: index%2==0 ? '#D1CBCA':'white'}}>
                                     <td>
                                         <p className='md:text-[15px] md:font-bold'>{index + 1}</p>
                                     </td>

@@ -1,4 +1,5 @@
 import OneVideoRequest from '@/components/shared/OneVideoRequest';
+import { Button } from '@/components/ui/button';
 import { getUserbyUserId } from '@/lib/actions/user.actions';
 import { getUserDataByUserId, getUserDataByUsername } from '@/lib/actions/userData.actions';
 import { IUserData } from '@/lib/database/models/userData.model';
@@ -64,10 +65,10 @@ const page = async () => {
                     <p className='mr-auto my-3 font-semibold text-[18px] ml-3'>Tags:</p>
                     <div className='mx-5 flex flex-row gap-3 w-full flex-wrap my-3 px-5'>
                         {Languages.map((language) => (
-                            <p key={language} className='bg-orange-200 text-orange-600 px-3 py-2 rounded-lg font-semibold'>{language}</p>
+                            <p key={language} className='bg-orange-200 text-orange-600 px-3 py-2 rounded-lg font-semibold border-[2px] border-orange-600'>{language}</p>
                         ))}
                         {Content.map((content) => (
-                            <p key={content} className='bg-green-200 text-green-600 px-3 py-2 rounded-lg font-semibold'>{content}</p>
+                            <p key={content} className='bg-green-200 text-green-600 px-3 py-2 rounded-lg font-semibold border-[2px] border-green-600'>{content}</p>
                         ))}
                     </div>
                     <p className='mr-auto my-3 font-semibold text-[18px] ml-3'>About Me:</p>
@@ -75,10 +76,10 @@ const page = async () => {
                     <p className='mr-auto mt-10 mb-3 font-semibold text-[18px] ml-3'>Services by {user?.User?.username}: </p>
                     <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-5 px-3 w-full'>
                         <OneVideoRequest price={user.oneVideoPrice} userId={userId} reviewer={user.User._id} />
-                        <div className='border-[1px] border-slate-300 rounded-lg h-[120px] flex justify-center items-center gap-8' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
+                        <div className='border-[1px] border-slate-300 rounded-lg h-[150px] flex justify-center items-center gap-8' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                             <div className='flex flex-col items-center gap-2'>
                                 <Image src={'/icons/account.svg'} alt='video' width={200} height={200} className='bg-orange-400 w-[55px] h-[55px] p-2 rounded-full' />
-                                <p className='font-semibold'>Review one video</p>
+                                <p className='font-semibold'>Profile Audit</p>
                             </div>
                             <div className='h-3/4 w-[2px] bg-black'></div>
                             <p className='text-[25px] font-semibold'>$4.99</p>

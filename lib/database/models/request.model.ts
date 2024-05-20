@@ -4,7 +4,7 @@ import { IUser } from "./user.model";
 export interface IRequest extends Document {
     _id: string
     User: IUser,
-    Reviwer: IUser,
+    Reviewer: IUser,
     postLink: string,
     description: string,
     platform: string,

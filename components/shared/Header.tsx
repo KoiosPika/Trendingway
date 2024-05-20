@@ -15,7 +15,7 @@ const Header = async () => {
       <div className='flex items-center justify-evenly'>
         <MobileNav />
         <Link href={'/'}>
-          <Image className='bg-white h-[55px] w-[55px]' src={'/images/logo_2.PNG'} alt='logo' height={1000} width={1000} />
+          <Image className='h-[60px] w-[60px] bg-yellow-400 rounded-full border-[2px] border-black' src={'/logo.png'} alt='logo' height={1000} width={1000} />
         </Link>
 
         <nav className='hidden md:block'>
@@ -23,10 +23,10 @@ const Header = async () => {
         </nav>
 
         <div className='flex justify-end gap-5'>
-          <Link href={'/my-orders'} className='flex justify-center items-center'>
-            <Image src={'/icons/bell.svg'} alt='bell' height={20} width={20} />
-          </Link>
           <SignedIn>
+            <Link href={'/my-orders'} className='flex justify-center items-center'>
+              <Image src={'/icons/bell.svg'} alt='bell' height={20} width={20} />
+            </Link>
             <UserButton />
           </SignedIn>
           <SignedOut>

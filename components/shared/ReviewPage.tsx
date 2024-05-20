@@ -4,14 +4,14 @@ import { Input } from '@/components/ui/input'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
-import { InstagramEmbed, TikTokEmbed } from 'react-social-media-embed';
+import { InstagramEmbed, TikTokEmbed, YouTubeEmbed } from 'react-social-media-embed';
 import { Drawer, DrawerContent, DrawerFooter, DrawerHeader, DrawerTitle, DrawerTrigger, } from "@/components/ui/drawer"
 import { getRequestById } from '@/lib/actions/request.actions'
 import { IRequest } from '@/lib/database/models/request.model'
 import { createReview } from '@/lib/actions/review.actions'
 
 
-const ReviewPage = ({ id } : { id: string } ) => {
+const ReviewPage = ({ id }: { id: string }) => {
 
     const [request, setRequest] = useState<IRequest>()
 
@@ -21,20 +21,34 @@ const ReviewPage = ({ id } : { id: string } ) => {
     const [hashtagsNotes, setHashtagsNotes] = useState<string>('')
     const [soundNotes, setSoundNotes] = useState<string>('')
     const [additionalNotes, setAdditionalNotes] = useState<string>('')
+    const [height, setHeight] = useState(0)
 
     useEffect(() => {
         async function getRequest() {
             const thisRequest = await getRequestById(id)
 
-            setRequest(thisRequest);
+            setRequest(thisRequest)
         }
 
         getRequest()
     }, [])
 
+    useEffect(()=>{
+        if(request){
+            if(request.platform === 'TikTok'){
+                setHeight(750)
+            } else if(request.platform === 'Instagram'){
+                setHeight(600)
+            } else if(request.platform === 'Youtube'){
+                setHeight(700);
+            }
+        }
+    },[request])
+
     const submitReview = async () => {
         const review = {
             request: id,
+            Reviewer: request?.Reviewer?._id || '',
             contentNotes: contentNotes || '',
             brightnessNotes: brightnessNotes || '',
             descriptionNotes: descriptionNotes || '',
@@ -50,10 +64,19 @@ const ReviewPage = ({ id } : { id: string } ) => {
             <div className='w-full flex flex-col md:max-w-[1000px] justify-center items-center'>
                 <div className='my-3 justify-center items-center flex flex-col w-full'>
                     <div className='rounded-t-lg flex h-[750px] md:flex-row justify-center items-center mt-3 p-3 w-full lg:w-4/5'>
-                        <div className='rounded-lg h-[750px] w-[360px]'>
-                            {request && <TikTokEmbed url={request?.postLink} width={350} />}
-                        </div>
-                        <ScrollArea className='hidden md:block w-[400px] h-[750px] bg-white rounded-tr-lg rounded-br-lg flex-col items-center'>
+                        {request?.platform === 'TikTok' &&
+                            <div className='rounded-lg h-[750px] w-[360px]'>
+                                {request && <TikTokEmbed url={request?.postLink} width={350} />}
+                            </div>}
+                        {request?.platform === 'Instagram' &&
+                            <div className='rounded-lg h-[600px] w-[360px]'>
+                                {request && <InstagramEmbed url={request?.postLink} width={350} />}
+                            </div>}
+                        {request?.platform === 'Youtube' &&
+                            <div className='rounded-lg h-[700px] w-[360px]'>
+                                {request && <YouTubeEmbed url={request?.postLink} width={350} height={height} />}
+                            </div>}
+                        <ScrollArea className={`hidden md:block w-[400px] h-[${height}px] bg-white rounded-tr-lg rounded-br-lg flex-col items-center`}>
                             <div className='mt-2 font-semibold text-center'>Review</div>
                             <div className='w-full mt-2 mb-5 flex flex-col items-center justify-center'>
                                 <p className='bg-purple-500 text-white px-3 py-2 rounded-lg font-semibold mr-auto ml-5'>Content</p>

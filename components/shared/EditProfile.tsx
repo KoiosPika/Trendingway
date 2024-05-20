@@ -7,6 +7,7 @@ import { getUserbyUserId } from '@/lib/actions/user.actions'
 import { editUserData, getUserDataByUserId } from '@/lib/actions/userData.actions'
 import { IUserData } from '@/lib/database/models/userData.model'
 import { Button } from '../ui/button'
+import Image from 'next/image'
 
 const EditProfile = ({ userId }: { userId: string }) => {
 
@@ -32,7 +33,7 @@ const EditProfile = ({ userId }: { userId: string }) => {
 
     return (
         <div className='w-full flex justify-center items-center'>
-            <div className='w-full flex flex-col max-w-[900px] justify-center items-center'>
+            <div className='w-full flex flex-col max-w-[1000px] justify-center items-center'>
                 <div className='my-3 justify-center items-center flex flex-col w-full'>
                     <div className='rounded-lg flex flex-col justify-center items-center my-3 p-3 w-full md:w-4/5 bg-white'>
                         <p className='text-[20px] font-semibold bg-black px-4 py-2 rounded-lg text-white'>Edit Profile</p>
@@ -46,18 +47,30 @@ const EditProfile = ({ userId }: { userId: string }) => {
                         </div>
                         <div className='flex flex-col justify-center items-center w-4/5 gap-3 my-3'>
                             <p className='font-semibold mr-auto'>Services:</p>
-                            <div className='flex flex-row w-full'>
-                                <div className='bg-black text-white rounded-l-lg w-5/12 text-center flex justify-center items-center font-semibold'>1 Video Review</div>
-                                <Input value={oneVideoPrice} className='border-2 border-black rounded-l-none font-semibold' type='number' onChange={(e) => setOneVideoPrice(Number(e.target.value))} />
+                            <div className='grid grid-cols-1 lg:grid-cols-2 w-full gap-3'>
+                                <div className='border-[1px] border-slate-300 rounded-lg h-[150px] flex justify-center items-center gap-2' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
+                                    <div className='flex flex-col items-center gap-2 flex-1'>
+                                        <Image src={'/icons/video.svg'} alt='video' width={200} height={200} className='bg-blue-400 w-[55px] h-[55px] p-2 rounded-full' />
+                                        <p className='font-semibold'>Review one video</p>
+                                    </div>
+                                    <div className='h-3/4 w-[2px] bg-black'></div>
+                                    <div className='flex flex-row items-center justify-center flex-1 mr-auto'>
+                                        <p className='text-[25px] font-semibold'>$</p>
+                                        <Input value={oneVideoPrice} className='text-[25px] font-semibold w-2/3 border-0' type='number' onChange={(e) => setOneVideoPrice(Number(e.target.value))} />
+                                    </div>
+                                </div>
+                                <div className='border-[1px] border-slate-300 rounded-lg h-[150px] flex justify-center items-center gap-2' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
+                                    <div className='flex flex-col items-center gap-2 flex-1'>
+                                        <Image src={'/icons/account.svg'} alt='video' width={200} height={200} className='bg-orange-400 w-[55px] h-[55px] p-2 rounded-full' />
+                                        <p className='font-semibold'>Profile Audit</p>
+                                    </div>
+                                    <div className='h-3/4 w-[2px] bg-black'></div>
+                                    <div className='flex flex-row items-center justify-center flex-1 mr-auto'>
+                                        <p className='text-[25px] font-semibold'>$</p>
+                                        <Input value={oneVideoPrice} className='text-[25px] font-semibold w-2/3 border-0' type='number' onChange={(e) => setOneVideoPrice(Number(e.target.value))} />
+                                    </div>
+                                </div>
                             </div>
-                            {/* <div className='flex flex-row w-full'>
-                                <div className='bg-black text-white rounded-l-lg w-5/12 text-center flex justify-center items-center font-semibold'>3 Video Review</div>
-                                <Input defaultValue={user?.threeVideoPrice} className='border-2 border-black rounded-l-none font-semibold' />
-                            </div>
-                            <div className='flex flex-row w-full'>
-                                <div className='bg-black text-white rounded-l-lg w-5/12 text-center flex justify-center items-center font-semibold'>Account Audit</div>
-                                <Input defaultValue={user?.accountAuditPrice} className='border-2 border-black rounded-l-none font-semibold' />
-                            </div> */}
                             <Button className='my-3 bg-black p-3 rounded-lg' onClick={handleSubmit}>
                                 <p className='font-semibold text-[15px] text-white'>Save Info</p>
                             </Button>

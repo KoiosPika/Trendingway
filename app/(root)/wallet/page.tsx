@@ -1,4 +1,5 @@
 import Checkout from '@/components/shared/Checkout'
+import StripeSetup from '@/components/shared/StripeSetup'
 import { getAllOrders } from '@/lib/actions/order.actions'
 import { getUserDataByUserId } from '@/lib/actions/userData.actions'
 import { IOrder } from '@/lib/database/models/order.model'
@@ -27,30 +28,30 @@ const page = async () => {
                             <p className='ml-3 my-5 text-[22px] font-semibold text-black'>Good Morning, Rami</p>
                         </div>
                         <div className='grid grid-cols-1 md:grid-cols-2 w-11/12 gap-2'>
-                            <div className='flex flex-col bg-red-500 w-full p-4  rounded-lg'>
+                            <div className='flex flex-col bg-red-500 w-full p-4 rounded-lg'>
                                 <div className='flex flex-row items-center gap-2'>
                                     <Image src={'/icons/wallet.svg'} alt='wallet' height={20} width={20} />
                                     <p className='text-white font-semibold text-[18px]'>Current Balance</p>
                                 </div>
                                 <p className='ml-7 text-[25px] font-semibold text-white'>${(user.creditBalance).toFixed(2)}</p>
                                 <div className='flex flex-row items-center gap-2 ml-auto bg-white px-2 py-1 rounded-lg h-[40px]'>
-                                    <Image src={'/icons/plus.svg'} alt='dollar' height={20} width={20}/>
+                                    <Image src={'/icons/plus.svg'} alt='dollar' height={20} width={20} />
                                     <p className='font-semibold text-[13px]'>Recharge Below</p>
                                 </div>
                             </div>
-                            <div className='flex flex-col bg-green-600 w-full p-4  rounded-lg'>
+                            <div className='flex flex-col bg-green-600 w-full p-4 rounded-lg'>
                                 <div className='flex flex-row items-center gap-2'>
                                     <Image src={'/icons/wallet.svg'} alt='wallet' height={20} width={20} />
                                     <p className='text-white font-semibold text-[18px]'>Ready to withdraw</p>
                                 </div>
                                 <p className='ml-7 text-[25px] font-semibold text-white'>${(user.withdrawBalance).toFixed(2)}</p>
                                 <div className='flex flex-row items-center gap-2 ml-auto bg-white px-2 py-1 rounded-lg h-[40px]'>
-                                    <Image src={'/icons/dollar.svg'} alt='dollar' height={15} width={15}/>
+                                    <Image src={'/icons/dollar.svg'} alt='dollar' height={15} width={15} />
                                     <p className='font-semibold text-[13px]'>Initiate Transaction</p>
                                 </div>
                             </div>
                         </div>
-                        <div className='w-11/12 p-8 my-3 rounded-lg bg-purple-600 text-white'>
+                        <div className='w-11/12 p-8 my-3 rounded-lg bg-blue-600 text-white'>
                             <div className='flex flex-row gap-2 mb-4'>
                                 <Image src={'/icons/plus-white.svg'} alt='wallet' height={20} width={20} />
                                 <p className='font-semibold text-[20px]'>Recharge your wallet</p>
@@ -62,8 +63,10 @@ const page = async () => {
                                 <Checkout userId={userId} amount={20} />
                             </div>
                         </div>
-                        <div className='w-11/12 p-8 my-2 rounded-lg bg-orange-600 text-white'>
-                        <div className='flex flex-row gap-2 mb-4'>
+                        <StripeSetup userId={userId}/>
+
+                        <div className='w-11/12 p-8 my-2 rounded-lg bg-orange-500 text-white'>
+                            <div className='flex flex-row gap-2 mb-4'>
                                 <Image src={'/icons/invoice.svg'} alt='wallet' height={20} width={20} />
                                 <p className='font-semibold text-[20px]'>Recent Orders</p>
                             </div>

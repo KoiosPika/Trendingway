@@ -13,7 +13,8 @@ export interface IUserData extends Document {
     withdrawBalance: number
     nofreviews: number
     avgReview: number
-    nofVideoesReviewed: number
+    nofVideoesReviewed: number,
+    expressAccountID: string
 }
 
 const UserDataSchema = new Schema({
@@ -28,6 +29,7 @@ const UserDataSchema = new Schema({
     nofreviews: { type: Number, default: 0 },
     avgReview: { type: Number, default: 0 },
     nofVideoesReviewed: { type: Number, default: 0 },
+    expressAccountID: { type: String }
 })
 
 const UserData = models.UserData || model('UserData', UserDataSchema);
