@@ -34,7 +34,7 @@ export async function updateUser({ id, user }: { id: string, user: { username: s
     try {
         await connectToDatabase();
 
-        const thisUser = await User.findByIdAndUpdate(
+        const thisUser = await User.findOneAndUpdate(
             { clerkId: id },
             {
                 '$set': { username: user.username, photo: user.image_url }
