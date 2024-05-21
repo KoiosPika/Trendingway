@@ -37,7 +37,7 @@ export async function getUserDataByUserId(userId: string) {
     }
 }
 
-export async function editUserData({ userId, aboutMe, link, oneVideoPrice }: { userId: string, aboutMe: string, link: string, oneVideoPrice: number }) {
+export async function editUserData({ userId, aboutMe, link, oneVideoPrice, languages, categories }: { userId: string, aboutMe: string, link: string, oneVideoPrice: number, languages: string[], categories: string[] }) {
     try {
         await connectToDatabase()
 
@@ -45,7 +45,9 @@ export async function editUserData({ userId, aboutMe, link, oneVideoPrice }: { u
             User: userId,
             aboutMe,
             websiteLink: link,
-            oneVideoPrice
+            oneVideoPrice,
+            languages,
+            categories
         })
 
         return JSON.parse(JSON.stringify(userData))

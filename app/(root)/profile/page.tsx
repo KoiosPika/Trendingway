@@ -58,8 +58,8 @@ const page = async () => {
                             </div>
                             <a href={user.websiteLink} target='_blank' className='text-blue-600 hover:underline'>{user.websiteLink}</a>
                         </div>
-                        <div className='flex flex-col md:flex-row w-full gap-2 my-3 text-white'>
-                            <Link href={'/edit-profile'} className='bg-blue-600 flex-1 flex justify-center items-center py-2 rounded-[10px] font-semibold'>Edit Profile</Link>
+                        <div className='flex flex-col md:flex-row w-full gap-2 my-3 text-black'>
+                            <Link href={'/edit-profile'} className='bg-yellow-400 flex-1 flex justify-center items-center py-2 rounded-[20px] font-bold'>Edit Profile</Link>
                         </div>
                     </div>
                     <p className='mr-auto my-3 font-semibold text-[18px] ml-3'>Tags:</p>

@@ -14,7 +14,9 @@ export interface IUserData extends Document {
     nofreviews: number
     avgReview: number
     nofVideoesReviewed: number,
-    expressAccountID: string
+    expressAccountID: string,
+    languages: string[],
+    categories: string[],
 }
 
 const UserDataSchema = new Schema({
@@ -29,7 +31,9 @@ const UserDataSchema = new Schema({
     nofreviews: { type: Number, default: 0 },
     avgReview: { type: Number, default: 0 },
     nofVideoesReviewed: { type: Number, default: 0 },
-    expressAccountID: { type: String }
+    expressAccountID: { type: String },
+    languages: { type: [String], required: true },
+    categories: { type: [String], required: true },
 })
 
 const UserData = models.UserData || model('UserData', UserDataSchema);

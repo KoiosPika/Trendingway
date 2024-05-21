@@ -20,7 +20,7 @@ const page = async () => {
 
     return (
         <div className='w-full flex justify-center items-center bg-white'>
-            <div className='w-full flex flex-col max-w-[1000px] justify-center items-center'>
+            <div className='w-full flex flex-col max-w-[1100px] justify-center items-center'>
                 <div className='my-3 justify-center items-center flex flex-col w-full'>
                     <div className='rounded-lg flex flex-col justify-center items-center my-3 p-3 w-full md:w-4/5 bg-white'>
                         <div className='flex flex-row items-center mr-auto ml-5'>

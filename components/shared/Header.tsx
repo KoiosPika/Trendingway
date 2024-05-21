@@ -15,7 +15,7 @@ const Header = async () => {
       <div className='flex items-center justify-evenly'>
         <MobileNav />
         <Link href={'/'}>
-          <Image className='h-[60px] w-[60px] bg-yellow-400 rounded-full border-[2px] border-black' src={'/logo.png'} alt='logo' height={1000} width={1000} />
+          <Image className='h-[60px] w-[60px] bg-[#fcd62e] rounded-full border-[2px] border-black' src={'/logo.png'} alt='logo' height={1000} width={1000} />
         </Link>
 
         <nav className='hidden md:block'>
@@ -36,7 +36,6 @@ const Header = async () => {
               </Link>
             </Button>
           </SignedOut>
-
         </div>
       </div>
     </header>

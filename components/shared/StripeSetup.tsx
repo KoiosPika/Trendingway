@@ -22,7 +22,7 @@ const StripeSetup = ({ userId }: { userId: string }) => {
             </div>
             <p className='ml-9'>Set up your Stripe Connect Express account to receive the money</p>
             <div className='flex flex-row w-full mt-3'>
-                <p onClick={handleCreate} className='ml-auto bg-yellow-400 text-[#6772e4] font-semibold py-2 px-4 rounded cursor-pointer inline-block'>Set Up Now!</p>
+                <p onClick={handleCreate} className='ml-auto bg-white text-[#6772e4] font-semibold py-2 px-4 cursor-pointer inline-block border-[2px] border-yellow-500 rounded-full'>Set Up Now!</p>
             </div>
         </div>
     )

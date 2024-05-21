@@ -11,6 +11,7 @@ const page = () => {
     const greyStarsCount = 5 - yellowStarsCount;
 
     const arr = [1, 2, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4];
+
     return (
         <div className='w-full flex justify-center items-center bg-white h-full'>
             <div className='w-full flex flex-col max-w-[900px] justify-center items-center'>
@@ -191,52 +192,52 @@ const page = () => {
                         </div>
                     </div>
                     <div className='rounded-lg flex justify-center items-center my-3 py-3 px-6 w-11/12 gap-10 bg-white'>
-                        <table className='w-full border-2 border-black rounded-lg'>
-                            <thead className='text-center text-[12px] bg-black'>
-                                <tr className='text-white w-full'>
-                                    <th className='md:text-[18px] p-3 md:font-semibold w-1/6'>Rank</th>
-                                    <th className='md:text-[18px] md:font-semibold w-3/6'>Reviewer</th>
-                                    <th className='md:text-[18px] md:font-semibold w-2/6'>Rating</th>
+                        <table className='w-full rounded-lg'>
+                            <thead className='text-center text-[12px] bg-yellow-400'>
+                                <tr className='text-black w-full'>
+                                    <th className='md:text-[18px] p-3 md:font-bold w-1/6'>Rank</th>
+                                    <th className='md:text-[18px] md:font-bold w-3/6'>Reviewer</th>
+                                    <th className='md:text-[18px] md:font-bold w-2/6'>Rating</th>
                                 </tr>
                             </thead>
                             <tbody className='text-[12px] text-center'>
                                 {arr.map((_, index) => (
-                                <tr key={index} style={{backgroundColor: index%2==0 ? '#D1CBCA':'white'}}>
-                                    <td>
-                                        <p className='md:text-[15px] md:font-bold'>{index + 1}</p>
-                                    </td>
-                                    <td className='flex justify-center items-center h-[35px] md:h-[60px]'>
-                                        <div className='flex flex-row items-center justify-center gap-3 h-8 w-7/8 '>
-                                            <Image src={'/images/pfp.png'} alt='pfp' className='w-[20px] h-[20px] md:w-[40px] md:h-[40px] border-2 border-black rounded-full' width={100} height={100} />
-                                            <p className='truncate font-bold text-[10px] md:text-[13px] mr-auto'>Jane Doeeee</p>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div className='flex flex-row items-center justify-center'>
-                                            {Array.from({ length: yellowStarsCount }).map((_, index) => (
-                                                <Image
-                                                    key={`yellow-${index}`}
-                                                    src="/icons/star-yellow.svg"
-                                                    alt="Yellow Star"
-                                                    width={100}
-                                                    height={100}
-                                                    className='h-[10px] w-[10px] md:h-[20px] md:w-[20px]'
-                                                />
-                                            ))}
-                                            {Array.from({ length: greyStarsCount }).map((_, index) => (
-                                                <Image
-                                                    key={`grey-${index}`}
-                                                    src="/icons/star-grey.svg"
-                                                    alt="Grey Star"
-                                                    height={100}
-                                                    width={100}
-                                                    className='h-[10px] w-[10px] md:h-[20px] md:w-[20px]'
-                                                />
-                                            ))}
-                                            <p className='ml-2 text-black font-semibold text-[11px] md:text-[15px]'>(5.2k)</p>
-                                        </div>
-                                    </td>
-                                </tr>))}
+                                    <tr key={index} style={{ backgroundColor: index % 2 == 0 ? '#D1CBCA' : 'white' }}>
+                                        <td>
+                                            <p className='md:text-[15px] md:font-bold'>{index + 1}</p>
+                                        </td>
+                                        <td className='flex justify-center items-center h-[35px] md:h-[60px]'>
+                                            <div className='flex flex-row items-center justify-center gap-3 h-8 w-7/8 '>
+                                                <Image src={'/images/pfp.png'} alt='pfp' className='w-[20px] h-[20px] md:w-[40px] md:h-[40px] border-2 border-black rounded-full' width={100} height={100} />
+                                                <p className='truncate font-bold text-[10px] md:text-[13px] mr-auto'>Jane Doeeee</p>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div className='flex flex-row items-center justify-center'>
+                                                {Array.from({ length: yellowStarsCount }).map((_, index) => (
+                                                    <Image
+                                                        key={`yellow-${index}`}
+                                                        src="/icons/star-yellow.svg"
+                                                        alt="Yellow Star"
+                                                        width={100}
+                                                        height={100}
+                                                        className='h-[10px] w-[10px] md:h-[20px] md:w-[20px]'
+                                                    />
+                                                ))}
+                                                {Array.from({ length: greyStarsCount }).map((_, index) => (
+                                                    <Image
+                                                        key={`grey-${index}`}
+                                                        src="/icons/star-grey.svg"
+                                                        alt="Grey Star"
+                                                        height={100}
+                                                        width={100}
+                                                        className='h-[10px] w-[10px] md:h-[20px] md:w-[20px]'
+                                                    />
+                                                ))}
+                                                <p className='ml-2 text-black font-semibold text-[11px] md:text-[15px]'>(5.2k)</p>
+                                            </div>
+                                        </td>
+                                    </tr>))}
                             </tbody>
                         </table>
                     </div>

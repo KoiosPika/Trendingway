@@ -7,7 +7,7 @@ const Footer = () => {
         <footer className="bg-[#1A1A2E] text-white py-10 px-6"> {/* Use your brand colors */}
             <div className="max-w-7xl mx-auto flex flex-col space-y-4 md:space-y-0 md:flex-row md:justify-between md:items-center">
                 <div className="flex flex-col items-center md:items-start">
-                    <Image className='rounded-full bg-white h-[60px] w-[60px]' src={'/images/logo_2.PNG'} alt='logo' height={1000} width={1000} />
+                <Image className='h-[60px] w-[60px] bg-[#fcd62e] rounded-full border-[2px] border-black' src={'/logo.png'} alt='logo' height={1000} width={1000} />
                 </div>
                 <div className="grid grid-cols-2 gap-5 text-center text-sm">
                     <a href="/" className="hover:text-gray-200">Home</a>
