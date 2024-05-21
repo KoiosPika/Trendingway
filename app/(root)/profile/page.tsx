@@ -19,9 +19,6 @@ const page = async () => {
     const yellowStarsCount = Math.round(rate);
     const greyStarsCount = 5 - yellowStarsCount;
 
-    const Languages = ['Arabic', 'English', 'Arabic', 'English'];
-    const Content = ['Food', 'Sport', 'Faceless']
-
     const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 0]
 
     return (
@@ -59,16 +56,16 @@ const page = async () => {
                             <a href={user.websiteLink} target='_blank' className='text-blue-600 hover:underline'>{user.websiteLink}</a>
                         </div>
                         <div className='flex flex-col md:flex-row w-full gap-2 my-3 text-black'>
-                            <Link href={'/edit-profile'} className='bg-yellow-400 flex-1 flex justify-center items-center py-2 rounded-[20px] font-bold'>Edit Profile</Link>
+                            <Link href={'/edit-profile'} className='bg-yellow-400 flex-1 flex justify-center items-center py-2 rounded-[20px] font-bold border-2 border-black'>Edit Profile</Link>
                         </div>
                     </div>
                     <p className='mr-auto my-3 font-semibold text-[18px] ml-3'>Tags:</p>
                     <div className='mx-5 flex flex-row gap-3 w-full flex-wrap my-3 px-5'>
-                        {Languages.map((language) => (
-                            <p key={language} className='bg-orange-200 text-orange-600 px-3 py-2 rounded-lg font-semibold border-[2px] border-orange-600'>{language}</p>
+                        {user.languages.map((language:any) => (
+                            language && <p key={language} className='bg-orange-200 text-orange-600 px-3 py-2 rounded-lg font-semibold border-[2px] border-orange-600'>{language}</p>
                         ))}
-                        {Content.map((content) => (
-                            <p key={content} className='bg-green-200 text-green-600 px-3 py-2 rounded-lg font-semibold border-[2px] border-green-600'>{content}</p>
+                        {user.categories.map((category:any) => (
+                            category && <p key={category} className='bg-green-200 text-green-600 px-3 py-2 rounded-lg font-semibold border-[2px] border-green-600'>{category}</p>
                         ))}
                     </div>
                     <p className='mr-auto my-3 font-semibold text-[18px] ml-3'>About Me:</p>

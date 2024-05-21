@@ -30,7 +30,24 @@ export async function createUser(user: { clerkId: string, username: string, emai
     }
 }
 
-export async function getUserbyUserId(userId:string){
+export async function updateUser({ id, user }: { id: string, user: { username: string, image_url: string } }) {
+    try {
+        await connectToDatabase();
+
+        const thisUser = await User.findByIdAndUpdate(
+            { clerkId: id },
+            {
+                '$set': { username: user.username, photo: user.image_url }
+            }
+        )
+
+        return JSON.parse(JSON.stringify(thisUser));
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export async function getUserbyUserId(userId: string) {
     try {
         await connectToDatabase();
 

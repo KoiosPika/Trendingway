@@ -9,8 +9,11 @@ import { IUserData } from '@/lib/database/models/userData.model'
 import { Button } from '../ui/button'
 import Image from 'next/image'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, } from "@/components/ui/select"
+import { useRouter } from 'next/navigation'
 
 const EditProfile = ({ userId }: { userId: string }) => {
+
+    const router = useRouter()
 
     const [aboutMe, setAboutMe] = useState<string>('')
     const [link, setLink] = useState<string>('')
@@ -20,6 +23,7 @@ const EditProfile = ({ userId }: { userId: string }) => {
 
     const [selectedLanguage, setSelectedLanguage] = useState<string[]>(['']);
     const [selectedCategory, setSelectedCategory] = useState<string[]>(['']);
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
         async function getUser() {
@@ -44,7 +48,14 @@ const EditProfile = ({ userId }: { userId: string }) => {
     }, [category])
 
     const handleSubmit = async () => {
+
+        setLoading(true)
+
         await editUserData({ userId, aboutMe, link, oneVideoPrice, languages: selectedLanguage, categories: selectedCategory })
+
+        setLoading(false)
+
+        router.push(`/profile`)
     }
 
     const handleAddLanguage = (language: string) => {
@@ -277,7 +288,7 @@ const EditProfile = ({ userId }: { userId: string }) => {
                                         <p onClick={() => handleDeleteLangauge(index)} className='bg-red-300 px-2 border-[1px] border-red-500 text-red-500 font-bold rounded-sm hover:cursor-pointer'>x</p>
                                     </div>))}
                             </div>
-                            <Button className='my-3 bg-black p-3 rounded-lg' onClick={handleSubmit}>
+                            <Button disabled={loading} className='my-3 bg-black p-3 rounded-lg' onClick={handleSubmit}>
                                 <p className='font-semibold text-[15px] text-white'>Save Info</p>
                             </Button>
                         </div>
