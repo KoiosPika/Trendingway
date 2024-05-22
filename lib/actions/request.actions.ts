@@ -10,11 +10,11 @@ const populateRequest = (query: any) => {
         .populate({ path: 'Reviewer', model: User, select: "_id photo username" })
 }
 
-export async function createRequest({ User, Reviewer, postLink, description, platform, price }: { User: string, Reviewer: string, postLink: string, description: string, platform: string, price: number }) {
+export async function createRequest({ User, Reviewer, postLink, description, platform, price, type }: { User: string, Reviewer: string, postLink: string, description: string, platform: string, price: number, type: string }) {
     try {
         await connectToDatabase()
 
-        const request = await Request.create({ User, Reviewer, postLink, description, platform, reviewed: false, price })
+        const request = await Request.create({ User, Reviewer, postLink, description, platform, reviewed: false, price, type })
 
         return JSON.parse(JSON.stringify(request))
 

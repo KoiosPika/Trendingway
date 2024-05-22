@@ -9,6 +9,7 @@ export interface IRequest extends Document {
     description: string,
     platform: string,
     reviewed: boolean,
+    type: string
     price: number
 }
 
@@ -19,7 +20,9 @@ const RequestSchema = new Schema({
     description: { type: String },
     platform: { type: String },
     reviewed: { type: Boolean, default: false },
-    price: { type: Number }
+    price: { type: Number },
+    type: { type: String },
+    createdAt: { type: Date, default: Date.now() }
 })
 
 const Request = models.Request || model('Request', RequestSchema);

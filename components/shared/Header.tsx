@@ -24,7 +24,7 @@ const Header = async () => {
 
         <div className='flex justify-end gap-5'>
           <SignedIn>
-            <Link href={'/my-orders'} className='flex justify-center items-center'>
+            <Link href={'/my-orders/requests'} className='flex justify-center items-center'>
               <Image src={'/icons/bell.svg'} alt='bell' height={20} width={20} />
             </Link>
             <UserButton />

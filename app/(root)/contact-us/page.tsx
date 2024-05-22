@@ -1,4 +1,5 @@
 import { Input } from '@/components/ui/input'
+import { Textarea } from '@/components/ui/textarea'
 import React from 'react'
 
 const page = () => {
@@ -14,7 +15,7 @@ const page = () => {
                         </div>
                         <div className='flex flex-col justify-center items-center w-4/5 gap-3 my-3'>
                             <p className='font-semibold mr-auto'>How can we help you:</p>
-                            <Input className='w-full border-2 border-black text-[16px] h-[150px]' />
+                            <Textarea className='w-full border-2 border-black text-[16px] h-[150px]' />
                         </div>
                         <div className='my-5 bg-black text-white w-4/5 text-center p-2 rounded-lg'>
                             <p className='font-semibold'>Submit</p>

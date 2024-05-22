@@ -5,13 +5,14 @@ export interface IUserData extends Document {
     _id: string,
     User: IUser
     websiteLink: string,
-    oneVideoPrice: number,
-    threeVideoPrice: number
-    accountAuditPrice: number
+    TextReview: number,
+    VideoReview: number,
+    VideoProfileReview: number,
+    TextProfileReview: number,
     aboutMe: string
     creditBalance: number
     withdrawBalance: number
-    nofreviews: number
+    nofReviews: number
     avgReview: number
     nofVideoesReviewed: number,
     expressAccountID: string,
@@ -22,13 +23,14 @@ export interface IUserData extends Document {
 const UserDataSchema = new Schema({
     User: { type: Schema.Types.ObjectId, ref: "User" },
     websiteLink: { type: String },
-    oneVideoPrice: { type: Number, default: 0 },
-    threeVideoPrice: { type: Number, default: 0 },
-    accountAuditPrice: { type: Number, default: 0 },
+    TextReview: { type: Number, default: 0.99 },
+    VideoReview: { type: Number, default: 2.99 },
+    VideoProfileReview: { type: Number, default: 4.99 },
+    TextProfileReview: { type: Number, default: 3.99 },
     aboutMe: { type: String },
     creditBalance: { type: Number, default: 0 },
     withdrawBalance: { type: Number, default: 0 },
-    nofreviews: { type: Number, default: 0 },
+    nofReviews: { type: Number, default: 0 },
     avgReview: { type: Number, default: 0 },
     nofVideoesReviewed: { type: Number, default: 0 },
     expressAccountID: { type: String },

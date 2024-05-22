@@ -8,7 +8,7 @@ import { Input } from '../ui/input'
 import { Textarea } from '../ui/textarea'
 import { createRequest } from '@/lib/actions/request.actions'
 
-const OneVideoRequest = ({ price, userId, reviewer }: { price: number, userId: string, reviewer: string }) => {
+const TextProfileReview = ({ price, userId, reviewer }: { price: number, userId: string, reviewer: string }) => {
 
     const [platform, setPlatform] = useState<string>('Instagram')
     const [URL, setURL] = useState<string>('')
@@ -16,7 +16,7 @@ const OneVideoRequest = ({ price, userId, reviewer }: { price: number, userId: s
 
     const handleRequest = async () => {
         try {
-            await createRequest({ User: userId, Reviewer: reviewer, postLink: URL, description, platform, price })
+            await createRequest({ User: userId, Reviewer: reviewer, postLink: URL, description, platform, price, type:'TextProfileReview' })
         } catch (error) {
             console.log(error);
         }
@@ -27,31 +27,31 @@ const OneVideoRequest = ({ price, userId, reviewer }: { price: number, userId: s
             <AlertDialogTrigger>
                 <div className='border-[1px] border-slate-300 rounded-lg h-[150px] flex justify-center items-center gap-8' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                     <div className='flex flex-col items-center gap-2'>
-                        <Image src={'/icons/video.svg'} alt='video' width={200} height={200} className='bg-blue-400 w-[55px] h-[55px] p-2 rounded-full' />
-                        <p className='font-semibold'>Review one video</p>
+                        <Image src={'/icons/account.svg'} alt='video' width={200} height={200} className='bg-orange-500 w-[55px] h-[55px] p-2 rounded-full' />
+                        <p className='font-semibold'>Text Profile Review</p>
                     </div>
                     <div className='h-3/4 w-[2px] bg-black'></div>
-                    <p className='text-[25px] font-semibold'>$0.99</p>
+                    <p className='text-[25px] font-semibold'>$4.99</p>
                 </div>
             </AlertDialogTrigger>
-            <AlertDialogContent className="bg-blue-500 border-0">
+            <AlertDialogContent className="bg-orange-500 border-0">
                 <AlertDialogHeader>
                     <AlertDialogTitle className="flex flex-row items-center justify-between">
                         <p className="text-white underline">Request Review</p>
                         <AlertDialogCancel className="rounded-full bg-white text-black">X</AlertDialogCancel>
                     </AlertDialogTitle>
-                    <p className='font-semibold text-white text-[16px]'>Video URL</p>
+                    <p className='font-semibold text-white text-[16px]'>Account URL</p>
                     <Input value={URL} placeholder="Video URL" className="border-[1px] border-black" onChange={(e) => setURL(e.target.value)} />
                     <p className='font-semibold text-white text-[16px]'>Choose a platform</p>
                     <div className='grid grid-cols-3 w-full gap-3 bg-white rounded-md font-semibold border-2 border-white'>
                         <p
-                            style={{ backgroundColor: platform === 'Instagram' ? 'orange' : 'white', color: platform === 'Instagram' ? 'white' : 'black' }}
+                            style={{ backgroundColor: platform === 'Instagram' ? 'black' : 'white', color: platform === 'Instagram' ? 'white' : 'black' }}
                             className='text-center p-2 text-[13px] md:text-[16px] rounded-l-md hover:cursor-pointer' onClick={() => setPlatform('Instagram')}>Instagram</p>
                         <p
-                            style={{ backgroundColor: platform === 'Youtube' ? 'orange' : 'white', color: platform === 'Youtube' ? 'white' : 'black' }}
+                            style={{ backgroundColor: platform === 'Youtube' ? 'black' : 'white', color: platform === 'Youtube' ? 'white' : 'black' }}
                             className='text-center p-2 text-[13px] md:text-[16px] hover:cursor-pointer' onClick={() => setPlatform('Youtube')}>Youtube</p>
                         <p
-                            style={{ backgroundColor: platform === 'TikTok' ? 'orange' : 'white', color: platform === 'TikTok' ? 'white' : 'black' }}
+                            style={{ backgroundColor: platform === 'TikTok' ? 'black' : 'white', color: platform === 'TikTok' ? 'white' : 'black' }}
                             className='text-center p-2 text-[13px] md:text-[16px] rounded-r-md hover:cursor-pointer' onClick={() => setPlatform('TikTok')}>Tiktok</p>
                     </div>
                     <p className='font-semibold text-white text-[16px]'>Description</p>
@@ -65,4 +65,4 @@ const OneVideoRequest = ({ price, userId, reviewer }: { price: number, userId: s
     )
 }
 
-export default OneVideoRequest
+export default TextProfileReview

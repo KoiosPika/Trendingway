@@ -1,9 +1,12 @@
 import { Schema, model, models, Document } from "mongoose";
 import { IRequest } from "./request.model";
+import { IUser } from "./user.model";
 
 export interface IReview extends Document {
     _id: string
     Request: IRequest,
+    Reviewer: IUser,
+    reviewURL:string
     contentReview: number,
     contentNotes: string,
     brightnessReview: number,
@@ -20,6 +23,8 @@ export interface IReview extends Document {
 
 const ReviewSchema = new Schema({
     Request: { type: Schema.Types.ObjectId, ref: "Request" },
+    Reviewer: { type: Schema.Types.ObjectId, ref: "User" },
+    reviewURL: { type: String },
     contentReview: { type: Number },
     contentNotes: { type: String },
     brightnessReview: { type: Number },

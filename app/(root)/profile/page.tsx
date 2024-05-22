@@ -1,4 +1,3 @@
-import OneVideoRequest from '@/components/shared/OneVideoRequest';
 import { Button } from '@/components/ui/button';
 import { getUserbyUserId } from '@/lib/actions/user.actions';
 import { getUserDataByUserId, getUserDataByUsername } from '@/lib/actions/userData.actions';
@@ -7,6 +6,10 @@ import { auth } from '@clerk/nextjs/server';
 import Image from 'next/image'
 import Link from 'next/link';
 import React from 'react'
+import TextReview from '@/components/shared/TextReview';
+import VideoReview from '@/components/shared/VideoReview';
+import TextProfileReview from '@/components/shared/TextProfileReview';
+import VideoProfileReview from '@/components/shared/VideoProfileReview';
 
 const page = async () => {
 
@@ -61,10 +64,10 @@ const page = async () => {
                     </div>
                     <p className='mr-auto my-3 font-semibold text-[18px] ml-3'>Tags:</p>
                     <div className='mx-5 flex flex-row gap-3 w-full flex-wrap my-3 px-5'>
-                        {user.languages.map((language:any) => (
+                        {user.languages.map((language: any) => (
                             language && <p key={language} className='bg-orange-200 text-orange-600 px-3 py-2 rounded-lg font-semibold border-[2px] border-orange-600'>{language}</p>
                         ))}
-                        {user.categories.map((category:any) => (
+                        {user.categories.map((category: any) => (
                             category && <p key={category} className='bg-green-200 text-green-600 px-3 py-2 rounded-lg font-semibold border-[2px] border-green-600'>{category}</p>
                         ))}
                     </div>
@@ -72,15 +75,10 @@ const page = async () => {
                     <p className='mx-5'>{user.aboutMe || `Hi I'm ${user?.User.username}`}</p>
                     <p className='mr-auto mt-10 mb-3 font-semibold text-[18px] ml-3'>Services by {user?.User?.username}: </p>
                     <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-5 px-3 w-full'>
-                        <OneVideoRequest price={user.oneVideoPrice} userId={userId} reviewer={user.User._id} />
-                        <div className='border-[1px] border-slate-300 rounded-lg h-[150px] flex justify-center items-center gap-8' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
-                            <div className='flex flex-col items-center gap-2'>
-                                <Image src={'/icons/account.svg'} alt='video' width={200} height={200} className='bg-orange-400 w-[55px] h-[55px] p-2 rounded-full' />
-                                <p className='font-semibold'>Profile Audit</p>
-                            </div>
-                            <div className='h-3/4 w-[2px] bg-black'></div>
-                            <p className='text-[25px] font-semibold'>$4.99</p>
-                        </div>
+                        <TextReview price={user.oneVideoPrice} userId={userId} reviewer={user.User._id} />
+                        <TextProfileReview price={user.oneVideoPrice} userId={userId} reviewer={user.User._id} />
+                        <VideoReview price={user.oneVideoPrice} userId={userId} reviewer={user.User._id} />
+                        <VideoProfileReview price={user.oneVideoPrice} userId={userId} reviewer={user.User._id} />
                     </div>
                     <div className='w-full my-3'>
                         <p className='mr-auto my-3 font-semibold text-[18px] ml-3'>Connect with other influencers:</p>

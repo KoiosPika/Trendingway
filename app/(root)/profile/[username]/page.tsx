@@ -1,4 +1,4 @@
-import OneVideoRequest from '@/components/shared/OneVideoRequest';
+import OneVideoRequest from '@/components/shared/TextReview';
 import { getUserDataByUsername } from '@/lib/actions/userData.actions';
 import { IUserData } from '@/lib/database/models/userData.model';
 import { auth } from '@clerk/nextjs/server';
