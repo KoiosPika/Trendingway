@@ -17,7 +17,10 @@ const EditProfile = ({ userId }: { userId: string }) => {
 
     const [aboutMe, setAboutMe] = useState<string>('')
     const [link, setLink] = useState<string>('')
-    const [oneVideoPrice, setOneVideoPrice] = useState<number>(0)
+    const [TextReview, setTextReview] = useState<number>(0)
+    const [VideoReview, setVideoReview] = useState<number>(0)
+    const [TextProfileReview, setTextProfileReview] = useState<number>(0)
+    const [VideoProfileReview, setVideoProfileReview] = useState<number>(0)
     const [language, setLanguage] = useState('')
     const [category, setCategory] = useState('')
 
@@ -30,7 +33,10 @@ const EditProfile = ({ userId }: { userId: string }) => {
             const myUser: IUserData = await getUserDataByUserId(userId)
             setAboutMe(myUser.aboutMe);
             setLink(myUser.websiteLink);
-            setOneVideoPrice(myUser.TextReview);
+            setTextReview(myUser.TextReview);
+            setTextProfileReview(myUser.TextProfileReview);
+            setVideoReview(myUser.VideoReview);
+            setVideoProfileReview(myUser.VideoProfileReview);
             setSelectedCategory(myUser.categories);
             setSelectedLanguage(myUser.languages)
         }
@@ -51,7 +57,7 @@ const EditProfile = ({ userId }: { userId: string }) => {
 
         setLoading(true)
 
-        await editUserData({ userId, aboutMe, link, oneVideoPrice, languages: selectedLanguage, categories: selectedCategory })
+        await editUserData({ userId, aboutMe, link, TextReview, VideoReview, TextProfileReview, VideoProfileReview, languages: selectedLanguage, categories: selectedCategory })
 
         setLoading(false)
 
@@ -90,27 +96,49 @@ const EditProfile = ({ userId }: { userId: string }) => {
                         </div>
                         <div className='flex flex-col justify-center items-center w-4/5 gap-3 my-3'>
                             <p className='font-bold mr-auto bg-orange-400 px-4 py-2 rounded-full'>Services:</p>
-                            <div className='grid grid-cols-1 lg:grid-cols-2 w-full gap-3'>
+                            <div className='w-full flex flex-col gap-3'>
                                 <div className='border-[1px] border-slate-300 rounded-lg h-[150px] flex justify-center items-center gap-2' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                                     <div className='flex flex-col items-center gap-2 flex-1'>
-                                        <Image src={'/icons/video.svg'} alt='video' width={200} height={200} className='bg-blue-400 w-[55px] h-[55px] p-2 rounded-full' />
-                                        <p className='font-semibold'>Review one video</p>
+                                        <Image src={'/icons/video.svg'} alt='video' width={200} height={200} className='bg-blue-500 w-[55px] h-[55px] p-2 rounded-full' />
+                                        <p className='font-semibold'>Text Review</p>
                                     </div>
                                     <div className='h-3/4 w-[2px] bg-black'></div>
                                     <div className='flex flex-row items-center justify-center flex-1 mr-auto'>
                                         <p className='text-[25px] font-semibold'>$</p>
-                                        <Input value={oneVideoPrice} className='text-[25px] font-semibold w-2/3 border-0' type='number' onChange={(e) => setOneVideoPrice(Number(e.target.value))} />
+                                        <Input value={TextReview} className='text-[25px] font-semibold w-2/3 border-0' type='number' onChange={(e) => setTextReview(Number(e.target.value))} />
                                     </div>
                                 </div>
                                 <div className='border-[1px] border-slate-300 rounded-lg h-[150px] flex justify-center items-center gap-2' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                                     <div className='flex flex-col items-center gap-2 flex-1'>
-                                        <Image src={'/icons/account.svg'} alt='video' width={200} height={200} className='bg-orange-400 w-[55px] h-[55px] p-2 rounded-full' />
-                                        <p className='font-semibold'>Profile Audit</p>
+                                        <Image src={'/icons/video-icon.svg'} alt='video' width={200} height={200} className='bg-red-500 w-[55px] h-[55px] p-2 rounded-full' />
+                                        <p className='font-semibold'>Video Review</p>
                                     </div>
                                     <div className='h-3/4 w-[2px] bg-black'></div>
                                     <div className='flex flex-row items-center justify-center flex-1 mr-auto'>
                                         <p className='text-[25px] font-semibold'>$</p>
-                                        <Input value={oneVideoPrice} className='text-[25px] font-semibold w-2/3 border-0' type='number' onChange={(e) => setOneVideoPrice(Number(e.target.value))} />
+                                        <Input value={VideoReview} className='text-[25px] font-semibold w-2/3 border-0' type='number' onChange={(e) => setVideoReview(Number(e.target.value))} />
+                                    </div>
+                                </div>
+                                <div className='border-[1px] border-slate-300 rounded-lg h-[150px] flex justify-center items-center gap-2' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
+                                    <div className='flex flex-col items-center gap-2 flex-1'>
+                                        <Image src={'/icons/account.svg'} alt='video' width={200} height={200} className='bg-orange-500 w-[55px] h-[55px] p-2 rounded-full' />
+                                        <p className='font-semibold'>Text Profile Review</p>
+                                    </div>
+                                    <div className='h-3/4 w-[2px] bg-black'></div>
+                                    <div className='flex flex-row items-center justify-center flex-1 mr-auto'>
+                                        <p className='text-[25px] font-semibold'>$</p>
+                                        <Input value={TextProfileReview} className='text-[25px] font-semibold w-2/3 border-0' type='number' onChange={(e) => setTextProfileReview(Number(e.target.value))} />
+                                    </div>
+                                </div>
+                                <div className='border-[1px] border-slate-300 rounded-lg h-[150px] flex justify-center items-center gap-2' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
+                                    <div className='flex flex-col items-center gap-2 flex-1'>
+                                        <Image src={'/icons/video-icon.svg'} alt='video' width={200} height={200} className='bg-green-600 w-[55px] h-[55px] p-2 rounded-full' />
+                                        <p className='font-semibold'>Video Profile Review</p>
+                                    </div>
+                                    <div className='h-3/4 w-[2px] bg-black'></div>
+                                    <div className='flex flex-row items-center justify-center flex-1 mr-auto'>
+                                        <p className='text-[25px] font-semibold'>$</p>
+                                        <Input value={VideoProfileReview} className='text-[25px] font-semibold w-2/3 border-0' type='number' onChange={(e) => setVideoProfileReview(Number(e.target.value))} />
                                     </div>
                                 </div>
                             </div>
@@ -274,7 +302,7 @@ const EditProfile = ({ userId }: { userId: string }) => {
                                 </div>
                             </div>
                             <div className='flex w-full rounded-lg min-h-[50px] justify-center items-center flex-wrap gap-2 p-3 bg-slate-200'>
-                                {selectedCategory.map((content,index) => (
+                                {selectedCategory.map((content, index) => (
                                     content &&
                                     <div key={index} className='flex flex-row items-center bg-green-200 border-[2px] border-green-600 rounded-lg px-3 py-2 gap-2'>
                                         <p key={content} className=' text-green-600 font-bold'>{content}</p>

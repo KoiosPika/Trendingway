@@ -16,16 +16,16 @@ const MobileNav = () => {
             className='cursor-pointer ml-2' />
 
         </SheetTrigger>
-        <SheetContent className='flex flex-col gap-6 bg-blue-800 lg:hidden' side={'left'}>
+        <SheetContent className='flex flex-col gap-6 bg-yellow-500 lg:hidden' side={'left'}>
           <div className='flex flex-row items-center'>
             <Image
-              className='rounded-full'
-              src={'/assets/images/logo_header.png'}
+              className='rounded-full border-2 border-black'
+              src={'/logo.png'}
               alt='logo'
               width={50}
               height={50}
             />
-            <p className='font-semibold text-[18px] ml-2 text-white'>Main Menu</p>
+            <p className='font-bold text-[18px] ml-2 text-black'>Main Menu</p>
           </div>
           <NavItems />
         </SheetContent>

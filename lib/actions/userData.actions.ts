@@ -37,7 +37,8 @@ export async function getUserDataByUserId(userId: string) {
     }
 }
 
-export async function editUserData({ userId, aboutMe, link, oneVideoPrice, languages, categories }: { userId: string, aboutMe: string, link: string, oneVideoPrice: number, languages: string[], categories: string[] }) {
+export async function editUserData({ userId, aboutMe, link, TextReview, VideoReview, TextProfileReview, VideoProfileReview, languages, categories }:
+    { userId: string, aboutMe: string, link: string, TextReview: number, VideoReview: number, TextProfileReview: number, VideoProfileReview: number, languages: string[], categories: string[] }) {
     try {
         await connectToDatabase()
 
@@ -45,7 +46,10 @@ export async function editUserData({ userId, aboutMe, link, oneVideoPrice, langu
             User: userId,
             aboutMe,
             websiteLink: link,
-            oneVideoPrice,
+            TextReview,
+            VideoReview,
+            TextProfileReview,
+            VideoProfileReview,
             languages,
             categories
         })

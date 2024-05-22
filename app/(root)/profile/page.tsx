@@ -18,7 +18,7 @@ const page = async () => {
 
     const user = await getUserDataByUserId(userId)
 
-    const rate = user.avgReview;
+    const rate = user?.avgReview;
     const yellowStarsCount = Math.round(rate);
     const greyStarsCount = 5 - yellowStarsCount;
 
@@ -54,9 +54,9 @@ const page = async () => {
                                         height={24}
                                     />
                                 ))}
-                                <p className='ml-2 text-black font-semibold'>({user.nofReviews})</p>
+                                <p className='ml-2 text-black font-semibold'>({user?.nofReviews})</p>
                             </div>
-                            <a href={user.websiteLink} target='_blank' className='text-blue-600 hover:underline'>{user.websiteLink}</a>
+                            <a href={user.websiteLink} target='_blank' className='text-blue-600 hover:underline'>{user?.websiteLink}</a>
                         </div>
                         <div className='flex flex-col md:flex-row w-full gap-2 my-3 text-black'>
                             <Link href={'/edit-profile'} className='bg-yellow-400 flex-1 flex justify-center items-center py-2 rounded-[20px] font-bold border-2 border-black'>Edit Profile</Link>
@@ -75,10 +75,10 @@ const page = async () => {
                     <p className='mx-5'>{user.aboutMe || `Hi I'm ${user?.User.username}`}</p>
                     <p className='mr-auto mt-10 mb-3 font-semibold text-[18px] ml-3'>Services by {user?.User?.username}: </p>
                     <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-5 px-3 w-full'>
-                        <TextReview price={0.99} userId={userId} reviewer={user.User._id} />
-                        <TextProfileReview price={1.99} userId={userId} reviewer={user.User._id} />
-                        <VideoReview price={2.99} userId={userId} reviewer={user.User._id} />
-                        <VideoProfileReview price={3.99} userId={userId} reviewer={user.User._id} />
+                        <TextReview price={user?.TextReview} userId={userId} reviewer={user.User._id} />
+                        <VideoReview price={user?.VideoReview} userId={userId} reviewer={user.User._id} />
+                        <TextProfileReview price={user?.TextProfileReview} userId={userId} reviewer={user.User._id} />
+                        <VideoProfileReview price={user?.VideoProfileReview} userId={userId} reviewer={user.User._id} />
                     </div>
                     <div className='w-full my-3'>
                         <p className='mr-auto my-3 font-semibold text-[18px] ml-3'>Connect with other influencers:</p>

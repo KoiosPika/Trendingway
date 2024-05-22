@@ -25,7 +25,7 @@ const NavItems = () => {
     },
     {
       label: 'Wallet',
-      icon: '/assets/icons/email.svg',
+      icon: '/icons/wallet.svg',
       route: '/wallet'
     },
     {
@@ -43,7 +43,7 @@ const NavItems = () => {
         return (
           <li
             key={link.route}
-            className={`text-black flex-center whitespace-nowrap hover:text-black hover:bg-yellow-300 p-1 rounded-md`}
+            className={`text-black flex-center flex flex-row whitespace-nowrap hover:text-black hover:bg-yellow-300 p-1 rounded-md`}
           >
             <Image src={link.icon} alt='icon' height={25} width={25} className='mr-5 ml-2 md:hidden' />
             <Link className='text-[16px] font-bold' href={link.route}>{link.label}</Link>

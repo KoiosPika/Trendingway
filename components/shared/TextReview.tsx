@@ -31,7 +31,7 @@ const TextReview = ({ price, userId, reviewer }: { price: number, userId: string
                         <p className='font-semibold'>Text Review</p>
                     </div>
                     <div className='h-3/4 w-[2px] bg-black'></div>
-                    <p className='text-[25px] font-semibold'>$0.99</p>
+                    <p className='text-[25px] font-semibold'>${price}</p>
                 </div>
             </AlertDialogTrigger>
             <AlertDialogContent className="bg-blue-500 border-0">
@@ -58,7 +58,7 @@ const TextReview = ({ price, userId, reviewer }: { price: number, userId: string
                     <Textarea value={description} placeholder='Describe the problem' onChange={(e) => setDescription(e.target.value)} />
                 </AlertDialogHeader>
                 <AlertDialogFooter>
-                    <AlertDialogAction className="bg-white text-black font-semibold hover:bg-yellow-400" onClick={() => handleRequest()}>Request for $0.99</AlertDialogAction>
+                    <AlertDialogAction className="bg-white text-black font-semibold hover:bg-yellow-400" onClick={() => handleRequest()}>Request for ${price}</AlertDialogAction>
                 </AlertDialogFooter>
             </AlertDialogContent>
         </AlertDialog>
