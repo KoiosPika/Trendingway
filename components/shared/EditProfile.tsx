@@ -30,7 +30,7 @@ const EditProfile = ({ userId }: { userId: string }) => {
             const myUser: IUserData = await getUserDataByUserId(userId)
             setAboutMe(myUser.aboutMe);
             setLink(myUser.websiteLink);
-            setOneVideoPrice(myUser.oneVideoPrice);
+            setOneVideoPrice(myUser.TextReview);
             setSelectedCategory(myUser.categories);
             setSelectedLanguage(myUser.languages)
         }
