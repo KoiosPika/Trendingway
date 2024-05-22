@@ -54,7 +54,7 @@ const page = async () => {
                                         height={24}
                                     />
                                 ))}
-                                <p className='ml-2 text-black font-semibold'>({user.nofreviews})</p>
+                                <p className='ml-2 text-black font-semibold'>({user.nofReviews})</p>
                             </div>
                             <a href={user.websiteLink} target='_blank' className='text-blue-600 hover:underline'>{user.websiteLink}</a>
                         </div>
@@ -75,10 +75,10 @@ const page = async () => {
                     <p className='mx-5'>{user.aboutMe || `Hi I'm ${user?.User.username}`}</p>
                     <p className='mr-auto mt-10 mb-3 font-semibold text-[18px] ml-3'>Services by {user?.User?.username}: </p>
                     <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-5 px-3 w-full'>
-                        <TextReview price={user.oneVideoPrice} userId={userId} reviewer={user.User._id} />
-                        <TextProfileReview price={user.oneVideoPrice} userId={userId} reviewer={user.User._id} />
-                        <VideoReview price={user.oneVideoPrice} userId={userId} reviewer={user.User._id} />
-                        <VideoProfileReview price={user.oneVideoPrice} userId={userId} reviewer={user.User._id} />
+                        <TextReview price={0.99} userId={userId} reviewer={user.User._id} />
+                        <TextProfileReview price={1.99} userId={userId} reviewer={user.User._id} />
+                        <VideoReview price={2.99} userId={userId} reviewer={user.User._id} />
+                        <VideoProfileReview price={3.99} userId={userId} reviewer={user.User._id} />
                     </div>
                     <div className='w-full my-3'>
                         <p className='mr-auto my-3 font-semibold text-[18px] ml-3'>Connect with other influencers:</p>

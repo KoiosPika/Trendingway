@@ -47,7 +47,7 @@ const page = async ({ params: { username } }: { params: { username: string } }) 
                                         height={24}
                                     />
                                 ))}
-                                <p className='ml-2 text-black font-semibold'>({user.nofreviews})</p>
+                                <p className='ml-2 text-black font-semibold'>({user.nofReviews})</p>
                             </div>
                             <a>{user.websiteLink}</a>
                         </div>
@@ -62,19 +62,19 @@ const page = async ({ params: { username } }: { params: { username: string } }) 
                     <p className='mx-5'>{user.aboutMe || `Hi I'm ${user?.User.username}`}</p>
                     <p className='mr-auto mt-10 mb-3 font-semibold text-[18px] ml-3'>Services by {user?.User?.username}: </p>
                     <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 px-3'>
-                        <OneVideoRequest price={user.oneVideoPrice} userId={userId} reviewer={user.User._id} />
+                        <OneVideoRequest price={0.99} userId={userId} reviewer={user.User._id} />
                         <div className='bg-[#3A51AE] h-[320px] w-[290px] rounded-[8px] p-5 text-white flex flex-col items-center'>
                             <h4 className='text-[20px] font-semibold mb-3 bg-red-600 w-full text-center rounded-lg'>3 Videos Review</h4>
                             <Image src={'/icons/reels.png'} className='h-[180px] w-[250px]' alt='icon' height={1000} width={1000} />
                             <div className='mt-auto bg-yellow-300 w-full text-center rounded-lg py-1 text-black font-semibold'>
-                                <p>${user.threeVideoPrice}</p>
+                                <p>${1.99}</p>
                             </div>
                         </div>
                         <div className='bg-[#3A51AE] h-[320px] w-[290px] rounded-[8px] p-5 text-white flex flex-col items-center'>
                             <h4 className='text-[20px] font-semibold mb-3 bg-red-600 w-full text-center rounded-lg'>Account Review</h4>
                             <Image src={'/icons/reel.png'} className='h-[200px] w-[200px]' alt='icon' height={1000} width={1000} />
                             <div className='mt-auto bg-yellow-300 w-full text-center rounded-lg py-1 text-black font-semibold'>
-                                <p>${user.accountAuditPrice}</p>
+                                <p>${0.99}</p>
                             </div>
                         </div>
                     </div>
