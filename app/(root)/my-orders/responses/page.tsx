@@ -1,4 +1,4 @@
-import { getAllRequests } from '@/lib/actions/request.actions'
+import { getAllResponses } from '@/lib/actions/request.actions'
 import { IRequest } from '@/lib/database/models/request.model'
 import { timeAgo } from '@/lib/utils'
 import { auth } from '@clerk/nextjs/server'
@@ -12,7 +12,7 @@ const page = async () => {
   const { sessionClaims } = auth();
   const userId = sessionClaims?.userId as string;
 
-  const requests = await getAllRequests(userId)
+  const requests = await getAllResponses(userId)
 
   return (
     <div className='w-full flex justify-center bg-white h-full'>

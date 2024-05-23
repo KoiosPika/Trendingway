@@ -42,21 +42,24 @@ export async function editUserData({ userId, aboutMe, link, TextReview, VideoRev
     try {
         await connectToDatabase()
 
-        const userData = await UserData.findOneAndUpdate({
-            User: userId,
-            aboutMe,
-            websiteLink: link,
-            TextReview,
-            VideoReview,
-            TextProfileReview,
-            VideoProfileReview,
-            languages,
-            categories
-        })
+        const userData = await UserData.findOneAndUpdate(
+            { User: userId },
+            {
+                '$set': {
+                    aboutMe,
+                    websiteLink: link,
+                    TextReview,
+                    VideoReview,
+                    TextProfileReview,
+                    VideoProfileReview,
+                    languages,
+                    categories
+                }
+            })
 
-        return JSON.parse(JSON.stringify(userData))
+    return JSON.parse(JSON.stringify(userData))
 
-    } catch (error) {
-        console.log(error)
-    }
+} catch (error) {
+    console.log(error)
+}
 }

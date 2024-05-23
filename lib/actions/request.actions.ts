@@ -35,11 +35,35 @@ export async function getRequestById(id: string) {
     }
 }
 
-export async function getAllRequests(userId: string) {
+export async function getAllOrders(userId: string) {
     try {
         await connectToDatabase();
 
         const requests = await populateRequest(Request.find({ Reviewer: userId, reviewed: false }))
+
+        return JSON.parse(JSON.stringify(requests));
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export async function getAllRequests(userId: string) {
+    try {
+        await connectToDatabase();
+
+        const requests = await populateRequest(Request.find({ User: userId, reviewed: false }))
+
+        return JSON.parse(JSON.stringify(requests));
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export async function getAllResponses(userId: string) {
+    try {
+        await connectToDatabase();
+
+        const requests = await populateRequest(Request.find({ User: userId, reviewed: true }))
 
         return JSON.parse(JSON.stringify(requests));
     } catch (error) {

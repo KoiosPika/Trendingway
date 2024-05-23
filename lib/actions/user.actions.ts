@@ -11,7 +11,7 @@ export async function createUser(user: { clerkId: string, username: string, emai
         const newUser = await User.create({ ...user })
 
         const newUserData = await UserData.create({
-            User: newUser._id,
+            User: newUser?._id,
             websiteLink: null,
             oneVideoPrice: 0.99,
             threeVideoPrice: 2.99,
