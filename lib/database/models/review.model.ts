@@ -6,7 +6,7 @@ export interface IReview extends Document {
     _id: string
     Request: IRequest,
     Reviewer: IUser,
-    reviewURL:string
+    reviewURL: string
     contentReview: number,
     contentNotes: string,
     brightnessReview: number,
@@ -18,7 +18,13 @@ export interface IReview extends Document {
     soundReview: number,
     soundNotes: string,
     additionalNotes: string,
-    overallReview: number
+    bioReview: number,
+    bioNotes: string,
+    highlightsReview: number,
+    highlightsNotes: string,
+    postsReview: number,
+    postsNotes: string,
+    createdAt: Date
 }
 
 const ReviewSchema = new Schema({
@@ -35,8 +41,14 @@ const ReviewSchema = new Schema({
     hashtagsNotes: { type: String },
     soundReview: { type: Number },
     soundNotes: { type: String },
+    bioReview: { type: String },
+    bioNotes: { type: String },
+    highlightsReview: { type: String },
+    highlightsNotes: { type: String },
+    postsReview: { type: String },
+    postsNotes: { type: String },
     additionalNotes: { type: String },
-    overallReview: { type: Number }
+    createdAt: { type: Date, default: Date.now() }
 })
 
 const Review = models.Review || model('Review', ReviewSchema);

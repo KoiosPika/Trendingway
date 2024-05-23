@@ -10,7 +10,8 @@ export interface IRequest extends Document {
     platform: string,
     reviewed: boolean,
     type: string
-    price: number
+    price: number,
+    createdAt: Date
 }
 
 const RequestSchema = new Schema({

@@ -16,7 +16,7 @@ const VideoProfileReview = ({ price, userId, reviewer }: { price: number, userId
 
     const handleRequest = async () => {
         try {
-            await createRequest({ User: userId, Reviewer: reviewer, postLink: URL, description, platform, price, type: 'TextProfileReview' })
+            await createRequest({ User: userId, Reviewer: reviewer, postLink: URL, description, platform, price, type: 'VideoProfileReview' })
         } catch (error) {
             console.log(error);
         }

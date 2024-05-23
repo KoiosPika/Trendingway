@@ -6,7 +6,7 @@ import UserData from '../database/models/userData.model'
 import Review, { IReview } from '../database/models/review.model'
 import Request from '../database/models/request.model'
 
-export async function createReview(review: { request: string, contentNotes: string, brightnessNotes: string, descriptionNotes: string, hashtagsNotes: string, soundNotes: string, additionalNotes: string, Reviewer: string }) {
+export async function createTextReview(review: { request: string, contentNotes: string, brightnessNotes: string, descriptionNotes: string, hashtagsNotes: string, soundNotes: string, additionalNotes: string, Reviewer: string }) {
     try {
         await connectToDatabase()
 
@@ -43,3 +43,87 @@ export async function createReview(review: { request: string, contentNotes: stri
         console.log(error)
     }
 }
+
+export async function createVideoReview(review: { request: string, videoURL: string, Reviewer: string }) {
+    try {
+        await connectToDatabase()
+
+        const newReview: IReview = await Review.create({
+            Request: review.request,
+            Reviewer: review.Reviewer,
+            reviewURL: review.videoURL
+        })
+
+        const updatedRequest = await Request.findOneAndUpdate(
+            { _id: review.request },
+            { $set: { reviewed: true } }
+        )
+
+        await UserData.findOneAndUpdate(
+            { User: review.Reviewer },
+            { $set: { withdrawBalance: updatedRequest.price * 0.8 } }
+        )
+
+        return JSON.parse(JSON.stringify(newReview))
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export async function createVideoProfileReview(review: { request: string, videoURL: string, Reviewer: string }) {
+    try {
+        await connectToDatabase()
+
+        const newReview: IReview = await Review.create({
+            Request: review.request,
+            Reviewer: review.Reviewer,
+            reviewURL: review.videoURL
+        })
+
+        const updatedRequest = await Request.findOneAndUpdate(
+            { _id: review.request },
+            { $set: { reviewed: true } }
+        )
+
+        await UserData.findOneAndUpdate(
+            { User: review.Reviewer },
+            { $set: { withdrawBalance: updatedRequest.price * 0.8 } }
+        )
+
+        return JSON.parse(JSON.stringify(newReview))
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export async function createTextProfileReview(review: { request: string, bioNotes: string, highlightsNotes: string, postsNotes: string, additionalNotes: string, Reviewer: string }) {
+    try {
+        await connectToDatabase()
+
+        const newReview: IReview = await Review.create({
+            Request: review.request,
+            Reviewer: review.Reviewer,
+            bioReview: 3,
+            bioNotes: review.bioNotes,
+            highlightsReview: 3,
+            highlightsNotes: review.highlightsNotes,
+            postsReview: 3,
+            postsNotes: review.postsNotes,
+        })
+
+        const updatedRequest = await Request.findOneAndUpdate(
+            { _id: review.request },
+            { $set: { reviewed: true } }
+        )
+
+        await UserData.findOneAndUpdate(
+            { User: review.Reviewer },
+            { $set: { withdrawBalance: updatedRequest.price * 0.8 } }
+        )
+
+        return JSON.parse(JSON.stringify(newReview))
+    } catch (error) {
+        console.log(error)
+    }
+}
+
