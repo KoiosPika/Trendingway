@@ -305,15 +305,15 @@ const EditProfile = ({ userId }: { userId: string }) => {
                                 {selectedCategory.map((content, index) => (
                                     content &&
                                     <div key={index} className='flex flex-row items-center bg-green-200 border-[2px] border-green-600 rounded-lg px-3 py-2 gap-2'>
+                                        <p onClick={() => handleDeleteCategories(index)} className='bg-red-600 px-2 text-white font-bold rounded-sm hover:cursor-pointer'>x</p>
                                         <p key={content} className=' text-green-600 font-bold'>{content}</p>
-                                        <p onClick={() => handleDeleteCategories(index)} className='bg-red-300 px-2 border-[1px] border-red-500 text-red-500 font-bold rounded-sm hover:cursor-pointer'>x</p>
                                     </div>
                                 ))}
                                 {selectedLanguage.map((language, index) => (
                                     language &&
                                     <div key={index} className='flex flex-row items-center bg-orange-200 border-[2px] border-orange-600 rounded-lg px-3 py-2 gap-2'>
+                                        <p onClick={() => handleDeleteLangauge(index)} className='bg-red-600 px-2 text-white font-bold rounded-sm hover:cursor-pointer'>x</p>
                                         <p key={language} className=' text-orange-600 font-bold'>{language}</p>
-                                        <p onClick={() => handleDeleteLangauge(index)} className='bg-red-300 px-2 border-[1px] border-red-500 text-red-500 font-bold rounded-sm hover:cursor-pointer'>x</p>
                                     </div>))}
                             </div>
                             <Button disabled={loading} className='my-3 bg-black p-3 rounded-lg' onClick={handleSubmit}>

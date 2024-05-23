@@ -65,14 +65,16 @@ const ReviewPage = ({ id }: { id: string }) => {
                             <div className='rounded-lg h-[700px] w-[360px]'>
                                 {request && <YouTubeEmbed url={request?.postLink} width={350} height={height} />}
                             </div>}
-                        {request?.type === 'TextReview' &&
-                            <TextReviewForm height={height} id={id} reviewer={request?.Reviewer?._id} />}
-                        {request?.type === 'VideoReview' &&
-                            <VideoReviewForm height={height} id={id} reviewer={request?.Reviewer?._id} />}
-                        {request?.type === 'TextProfileReview' &&
-                            <TextProfileReviewForm height={height} id={id} reviewer={request?.Reviewer?._id} />}
-                        {request?.type === 'VideoProfileReview' &&
-                            <VideoProfileReviewForm height={height} id={id} reviewer={request?.Reviewer?._id} />}
+                        <div className='hidden md:block'>
+                            {request?.type === 'TextReview' &&
+                                <TextReviewForm height={height} id={id} reviewer={request?.Reviewer?._id} />}
+                            {request?.type === 'VideoReview' &&
+                                <VideoReviewForm height={height} id={id} reviewer={request?.Reviewer?._id} />}
+                            {request?.type === 'TextProfileReview' &&
+                                <TextProfileReviewForm height={height} id={id} reviewer={request?.Reviewer?._id} />}
+                            {request?.type === 'VideoProfileReview' &&
+                                <VideoProfileReviewForm height={height} id={id} reviewer={request?.Reviewer?._id} />}
+                        </div>
                     </div>
                     <div className='w-4/5 py-2 px-4 bg-white flex items-center gap-2 rounded-b-lg'>
                         {request && <Image src={request?.User?.photo} alt='pfp' className='h-[60px] w-[60px] border-2 border-green-400 rounded-full mb-auto' height={1000} width={1000} />}
@@ -93,17 +95,16 @@ const ReviewPage = ({ id }: { id: string }) => {
                             </div>
                         </DrawerTrigger>
                         <DrawerContent className="h-5/6">
-                            <DrawerHeader>
-                                <DrawerTitle>Review</DrawerTitle>
-                            </DrawerHeader>
-                            {request?.type === 'TextReview' &&
-                                <TextReviewForm height={height} id={id} reviewer={request?.Reviewer?._id} />}
-                            {request?.type === 'VideoReview' &&
-                                <VideoReviewForm height={height} id={id} reviewer={request?.Reviewer?._id} />}
-                            {request?.type === 'TextProfileReview' &&
-                                <TextProfileReviewForm height={height} id={id} reviewer={request?.Reviewer?._id} />}
-                            {request?.type === 'VideoProfileReview' &&
-                                <VideoProfileReviewForm height={height} id={id} reviewer={request?.Reviewer?._id} />}
+                            <div className='h-full flex'>
+                                {request?.type === 'TextReview' &&
+                                    <TextReviewForm height={height} id={id} reviewer={request?.Reviewer?._id} />}
+                                {request?.type === 'VideoReview' &&
+                                    <VideoReviewForm height={height} id={id} reviewer={request?.Reviewer?._id} />}
+                                {request?.type === 'TextProfileReview' &&
+                                    <TextProfileReviewForm height={height} id={id} reviewer={request?.Reviewer?._id} />}
+                                {request?.type === 'VideoProfileReview' &&
+                                    <VideoProfileReviewForm height={height} id={id} reviewer={request?.Reviewer?._id} />}
+                            </div>
                             <DrawerFooter>
                             </DrawerFooter>
                         </DrawerContent>

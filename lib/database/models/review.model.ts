@@ -48,7 +48,7 @@ const ReviewSchema = new Schema({
     postsReview: { type: String },
     postsNotes: { type: String },
     additionalNotes: { type: String },
-    createdAt: { type: Date, default: Date.now() }
+    createdAt: { type: Date, default: Date.now }
 })
 
 const Review = models.Review || model('Review', ReviewSchema);

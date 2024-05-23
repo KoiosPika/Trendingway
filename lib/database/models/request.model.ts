@@ -23,7 +23,7 @@ const RequestSchema = new Schema({
     reviewed: { type: Boolean, default: false },
     price: { type: Number },
     type: { type: String },
-    createdAt: { type: Date, default: Date.now() }
+    createdAt: { type: Date, default: Date.now }
 })
 
 const Request = models.Request || model('Request', RequestSchema);

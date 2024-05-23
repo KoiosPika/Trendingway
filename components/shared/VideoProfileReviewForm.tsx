@@ -20,7 +20,7 @@ const VideoProfileReviewForm = ({ height, id, reviewer }: { height: number, id: 
     }
 
     return (
-        <ScrollArea className={`hidden md:block w-[400px] h-[${height}px] bg-white rounded-tr-lg rounded-br-lg flex-col items-center`}>
+        <ScrollArea className={`w-[400px] h-full md:h-[${height}px] bg-white rounded-tr-lg rounded-br-lg flex-col items-center`}>
             <div className='mt-2 font-semibold text-center'>Review</div>
             <div className='w-full mt-2 mb-5 flex flex-col items-center justify-center'>
                 <p className='bg-purple-500 text-white px-3 py-2 rounded-lg font-semibold mr-auto ml-5 my-3'>Video Link:</p>
