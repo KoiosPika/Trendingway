@@ -16,10 +16,10 @@ async function createAccount(userId: string) {
 
         await connectToDatabase();
 
-        const user = await UserData.findOneAndUpdate({
-            User: userId,
-            expressAccountID: account.id
-        })
+        const user = await UserData.findOneAndUpdate(
+            { User: userId },
+            { '$set': { expressAccountID: account.id } }
+        )
 
         return JSON.parse(JSON.stringify(user.expressAccountID))
 
