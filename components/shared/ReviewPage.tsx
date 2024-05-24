@@ -17,13 +17,6 @@ import VideoProfileReviewForm from './VideoProfileReviewForm'
 const ReviewPage = ({ id }: { id: string }) => {
 
     const [request, setRequest] = useState<IRequest>()
-
-    const [contentNotes, setContentNotes] = useState<string>('')
-    const [brightnessNotes, setBrightnessNotes] = useState<string>('')
-    const [descriptionNotes, setDescriptionNotes] = useState<string>('')
-    const [hashtagsNotes, setHashtagsNotes] = useState<string>('')
-    const [soundNotes, setSoundNotes] = useState<string>('')
-    const [additionalNotes, setAdditionalNotes] = useState<string>('')
     const [height, setHeight] = useState(0)
 
     useEffect(() => {

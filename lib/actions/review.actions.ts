@@ -6,6 +6,11 @@ import UserData from '../database/models/userData.model'
 import Review, { IReview } from '../database/models/review.model'
 import Request from '../database/models/request.model'
 
+const populateReview = (query: any) => {
+    return query
+        .populate({ path: 'Request', model: Request, select: "User postLink description platform type" })
+}
+
 export async function createTextReview(review: { request: string, contentNotes: string, brightnessNotes: string, descriptionNotes: string, hashtagsNotes: string, soundNotes: string, additionalNotes: string, Reviewer: string }) {
     try {
         await connectToDatabase()
@@ -35,7 +40,7 @@ export async function createTextReview(review: { request: string, contentNotes: 
 
         await UserData.findOneAndUpdate(
             { User: review.Reviewer },
-            { $set: { withdrawBalance: updatedRequest.price * 0.8 } }
+            {'$inc': { withdrawBalance: updatedRequest.price * 0.8 } }
         )
 
         return JSON.parse(JSON.stringify(newReview))
@@ -61,7 +66,7 @@ export async function createVideoReview(review: { request: string, videoURL: str
 
         await UserData.findOneAndUpdate(
             { User: review.Reviewer },
-            { $set: { withdrawBalance: updatedRequest.price * 0.8 } }
+            { '$inc': { withdrawBalance: updatedRequest.price * 0.8 } }
         )
 
         return JSON.parse(JSON.stringify(newReview))
@@ -87,7 +92,7 @@ export async function createVideoProfileReview(review: { request: string, videoU
 
         await UserData.findOneAndUpdate(
             { User: review.Reviewer },
-            { $set: { withdrawBalance: updatedRequest.price * 0.8 } }
+            { '$inc': { withdrawBalance: updatedRequest.price * 0.8 } }
         )
 
         return JSON.parse(JSON.stringify(newReview))
@@ -109,6 +114,7 @@ export async function createTextProfileReview(review: { request: string, bioNote
             highlightsNotes: review.highlightsNotes,
             postsReview: 3,
             postsNotes: review.postsNotes,
+            additionalNotes: review.additionalNotes
         })
 
         const updatedRequest = await Request.findOneAndUpdate(
@@ -118,7 +124,7 @@ export async function createTextProfileReview(review: { request: string, bioNote
 
         await UserData.findOneAndUpdate(
             { User: review.Reviewer },
-            { $set: { withdrawBalance: updatedRequest.price * 0.8 } }
+            { '$inc': { withdrawBalance: updatedRequest.price * 0.8 } }
         )
 
         return JSON.parse(JSON.stringify(newReview))
@@ -127,3 +133,14 @@ export async function createTextProfileReview(review: { request: string, bioNote
     }
 }
 
+export async function getReviewByRequestId(id: string) {
+    try {
+        await connectToDatabase();
+
+        const review = await populateReview(Review.findOne({ Request: id }))
+
+        return JSON.parse(JSON.stringify(review))
+    } catch (error) {
+        console.log(error)
+    }
+}

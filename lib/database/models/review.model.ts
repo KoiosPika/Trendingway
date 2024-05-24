@@ -24,6 +24,7 @@ export interface IReview extends Document {
     highlightsNotes: string,
     postsReview: number,
     postsNotes: string,
+    rated: boolean,
     createdAt: Date
 }
 
@@ -41,13 +42,14 @@ const ReviewSchema = new Schema({
     hashtagsNotes: { type: String },
     soundReview: { type: Number },
     soundNotes: { type: String },
-    bioReview: { type: String },
+    bioReview: { type: Number },
     bioNotes: { type: String },
-    highlightsReview: { type: String },
+    highlightsReview: { type: Number },
     highlightsNotes: { type: String },
-    postsReview: { type: String },
+    postsReview: { type: Number },
     postsNotes: { type: String },
     additionalNotes: { type: String },
+    rated: { type: Boolean, default: false },
     createdAt: { type: Date, default: Date.now }
 })
 
