@@ -7,11 +7,13 @@ import { InstagramEmbed, TikTokEmbed, YouTubeEmbed } from 'react-social-media-em
 import Image from 'next/image';
 import { ScrollArea } from '../ui/scroll-area';
 import RatingDialog from './RatingDialog';
+import { Button } from '../ui/button';
 
 const ResponsePage = ({ id }: { id: string }) => {
 
     const [review, setReview] = useState<IReview>()
     const [height, setHeight] = useState(0)
+    const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 0]
 
     useEffect(() => {
         if (review) {
@@ -216,11 +218,34 @@ const ResponsePage = ({ id }: { id: string }) => {
                                 {review && <YouTubeEmbed url={review?.reviewURL} width={350} height={height} />}
                             </div>}
                             <div className='w-full flex flex-row justify-center items-center text-center my-6'>
-                                <RatingDialog id={id}/>
+                                {!review?.rated && <RatingDialog id={id}/>}
+                                {review?.rated && <Button className='w-1/2 flex justify-center items-center bg-green-700'>Rated</Button>}
                             </div>
                         </ScrollArea>
                     </div>
                 </div>
+                <div className='w-full md:w-4/5 my-3'>
+                        <p className='mr-auto my-3 font-semibold text-[18px] ml-3'>Connect with other influencers:</p>
+                        <div className='grid grid-cols-1 md:grid-cols-2'>
+                            {arr.map((_, index) => (
+                                <div key={index} className='bg-white border-2 border-slate-200 rounded-lg py-3 flex flex-row justify-center items-center p-3 m-3' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
+                                    <div className='flex flex-col w-1/3 justify-center items-center'>
+                                        <Image className='w-[100px] h-[100px] rounded-full my-2' src={'/images/pfp.png'} alt='pfp' height={300} width={300} />
+                                        <div className='mx-3 flex flex-row'>
+                                            <p className='font-semibold'>iamerika</p>
+                                        </div>
+                                    </div>
+                                    <div className='flex flex-col w-2/3 gap-3'>
+                                        <p> temporibus accusantium laboriosam et explicabo deserunt necessitatibus inventore fugiat saepe architecto placeat dolorem?</p>
+                                        <div className=' grid grid-cols-3 gap-2'>
+                                            <p className='bg-green-200 text-green-600 px-3 py-2 rounded-lg font-bold text-center border-[2px] border-green-600'>sport</p>
+                                            <p className='bg-green-200 text-green-600 px-3 py-2 rounded-lg font-bold text-center border-[2px] border-green-600'>sport</p>
+                                            <p className='bg-green-200 text-green-600 px-3 py-2 rounded-lg font-bold text-center border-[2px] border-green-600'>sport</p>
+                                        </div>
+                                    </div>
+                                </div>))}
+                        </div>
+                    </div>
             </div>
         </div>
     )

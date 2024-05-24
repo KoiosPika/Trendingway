@@ -3,6 +3,7 @@
 import { connectToDatabase } from "../database"
 import Request from "../database/models/request.model"
 import User from "../database/models/user.model"
+import UserData from "../database/models/userData.model"
 
 const populateRequest = (query: any) => {
     return query
@@ -15,6 +16,11 @@ export async function createRequest({ User, Reviewer, postLink, description, pla
         await connectToDatabase()
 
         const request = await Request.create({ User, Reviewer, postLink, description, platform, reviewed: false, price, type })
+
+        await UserData.findOneAndUpdate(
+            { User },
+            { '$inc': { creditBalance: (-1 * price) } }
+        )
 
         return JSON.parse(JSON.stringify(request))
 

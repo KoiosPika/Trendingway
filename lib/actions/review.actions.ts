@@ -8,7 +8,7 @@ import Request from '../database/models/request.model'
 
 const populateReview = (query: any) => {
     return query
-        .populate({ path: 'Request', model: Request, select: "User postLink description platform type" })
+        .populate({ path: 'Request', model: Request, select: "User Reviewer postLink description platform type" })
 }
 
 export async function createTextReview(review: { request: string, contentNotes: string, brightnessNotes: string, descriptionNotes: string, hashtagsNotes: string, soundNotes: string, additionalNotes: string, Reviewer: string }) {
@@ -149,24 +149,31 @@ export async function submitReviewRate(id: string, rating: number) {
     try {
         await connectToDatabase();
 
-        const review = await Review.findOneAndUpdate(
-            { _id: id },
+        const review = await populateReview(Review.findOneAndUpdate(
+            { Request: id },
             { '$set': { rated: true } }
-        );
+        ));
 
-        await UserData.findOneAndUpdate(
-            { User: review.Reviewer },
-            {
-                $set: {
-                    nofReviews: { $add: ["$nofReviews", 1] },
-                    avgReview: {
-                        $divide: [
-                            { $add: [{ $multiply: ["$avgReview", "$nofReviews"] }, rating] },
-                            { $add: ["$nofReviews", 1] }
-                        ]
+        console.log(review);
+
+        await UserData.updateOne(
+            { User: review?.Request?.Reviewer },
+            [
+                {
+                    $set: {
+                        nofReviews: { $add: ["$nofReviews", 1] },
+                        avgReview: {
+                            $let: {
+                                vars: {
+                                    totalReviews: { $add: ["$nofReviews", 1] },
+                                    newTotalRating: { $add: [{ $multiply: ["$avgReview", "$nofReviews"] }, rating] }
+                                },
+                                in: { $divide: ["$$newTotalRating", "$$totalReviews"] }
+                            }
+                        }
                     }
                 }
-            }
+            ]
         )
 
 
