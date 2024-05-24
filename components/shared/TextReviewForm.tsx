@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { Input } from '../ui/input'
 import { ScrollArea } from '../ui/scroll-area'
 import { createTextReview } from '@/lib/actions/review.actions'
+import { useRouter } from 'next/navigation'
 
 const TextReviewForm = ({ height, id, reviewer }: { height: number, id: string, reviewer: string }) => {
     const [contentNotes, setContentNotes] = useState<string>('')
@@ -11,8 +12,13 @@ const TextReviewForm = ({ height, id, reviewer }: { height: number, id: string, 
     const [hashtagsNotes, setHashtagsNotes] = useState<string>('')
     const [soundNotes, setSoundNotes] = useState<string>('')
     const [additionalNotes, setAdditionalNotes] = useState<string>('')
+    const [loading, setLoading] = useState<boolean>(false)
+    const router = useRouter();
 
     const submitReview = async () => {
+
+        setLoading(true);
+
         const review = {
             request: id,
             Reviewer: reviewer || '',
@@ -24,6 +30,10 @@ const TextReviewForm = ({ height, id, reviewer }: { height: number, id: string, 
             additionalNotes: descriptionNotes || ''
         }
         await createTextReview(review)
+
+        router.push('/wallet')
+
+        setLoading(false);
     }
 
     return (
@@ -104,10 +114,14 @@ const TextReviewForm = ({ height, id, reviewer }: { height: number, id: string, 
                 <Input value={additionalNotes} onChange={(e) => setAdditionalNotes(e.target.value)} placeholder='Notes about hashtags:' className='w-4/5 border-2 border-black' />
             </div>
             <div className='w-full flex flex-row justify-center items-center text-center my-6'>
-                <div onClick={submitReview} className='w-1/3 bg-green-400 flex flex-row items-center justify-center gap-2 rounded-md hover:cursor-pointer'>
+                {!loading && <div onClick={submitReview} className='w-1/3 bg-green-400 flex flex-row items-center justify-center gap-2 rounded-md hover:cursor-pointer'>
                     <Image src={'/icons/star-black.svg'} alt='star' height={15} width={15} />
                     <p className='py-1 rounded-md font-semibold'>Submit</p>
-                </div>
+                </div>}
+                {loading && <div className='w-1/3 bg-green-200 flex flex-row items-center justify-center gap-2 rounded-md hover:cursor-pointer'>
+                    <Image src={'/icons/star-black.svg'} alt='star' height={15} width={15} />
+                    <p className='py-1 rounded-md font-semibold'>Submitting</p>
+                </div>}
             </div>
         </ScrollArea>
     )

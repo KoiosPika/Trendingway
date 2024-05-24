@@ -58,7 +58,7 @@ const ReviewPage = ({ id }: { id: string }) => {
                             <div className='rounded-lg h-[700px] w-[360px]'>
                                 {request && <YouTubeEmbed url={request?.postLink} width={350} height={height} />}
                             </div>}
-                        <div className='hidden md:block'>
+                        <div className={`hidden md:block h-[${height}px]`}>
                             {request?.type === 'TextReview' &&
                                 <TextReviewForm height={height} id={id} reviewer={request?.Reviewer?._id} />}
                             {request?.type === 'VideoReview' &&

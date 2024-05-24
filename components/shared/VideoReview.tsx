@@ -1,18 +1,31 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '../ui/alert-dialog'
 import { Button } from '../ui/button'
 import Image from 'next/image'
 import { Input } from '../ui/input'
 import { Textarea } from '../ui/textarea'
 import { createRequest } from '@/lib/actions/request.actions'
+import { getUserDataByUserId } from '@/lib/actions/userData.actions'
+import { IUserData } from '@/lib/database/models/userData.model'
 
 const VideoReview = ({ price, userId, reviewer }: { price: number, userId: string, reviewer: string }) => {
 
     const [platform, setPlatform] = useState<string>('Instagram')
     const [URL, setURL] = useState<string>('')
     const [description, setDescription] = useState<string>('')
+    const [user, setUser] = useState<IUserData>()
+
+    useEffect(()=> {
+        async function getUser(){
+            const userData = await getUserDataByUserId(userId);
+
+            setUser(userData);
+        }
+
+        getUser();
+    },[])
 
     const handleRequest = async () => {
         try {
@@ -58,7 +71,8 @@ const VideoReview = ({ price, userId, reviewer }: { price: number, userId: strin
                     <Textarea value={description} placeholder='Describe the problem' onChange={(e) => setDescription(e.target.value)} />
                 </AlertDialogHeader>
                 <AlertDialogFooter>
-                    <AlertDialogAction className="bg-white text-black font-semibold hover:bg-yellow-400" onClick={() => handleRequest()}>Request for ${price}</AlertDialogAction>
+                    {user && (user?.creditBalance < price) && <Button className='bg-red-700 hover:bg-red-700 hover:cursor-default'>Insuffient Funds</Button>}
+                    {user && (user?.creditBalance >= price) && <AlertDialogAction className="bg-white text-black font-semibold hover:bg-yellow-400" onClick={() => handleRequest()}>Request for ${price}</AlertDialogAction>}
                 </AlertDialogFooter>
             </AlertDialogContent>
         </AlertDialog>

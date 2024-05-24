@@ -59,12 +59,18 @@ const ResponsePage = ({ id }: { id: string }) => {
                                 <div className='flex flex-row justify-around my-3'>
                                     <p className='mr-3 font-semibold my-2 bg-yellow-400 px-2 py-1 rounded-lg'>Rating</p>
                                     <div className='flex flex-row items-center w-full justify-center gap-2'>
-                                        <Image className='w-[20px] h-[20px] lg:w-[30px] lg:h-[30px]' src={'/icons/star-yellow.svg'} alt='star' width={100} height={100} />
-                                        <Image className='w-[20px] h-[20px] lg:w-[30px] lg:h-[30px]' src={'/icons/star-yellow.svg'} alt='star' width={100} height={100} />
-                                        <Image className='w-[20px] h-[20px] lg:w-[30px] lg:h-[30px]' src={'/icons/star-yellow.svg'} alt='star' width={100} height={100} />
-                                        <Image className='w-[20px] h-[20px] lg:w-[30px] lg:h-[30px]' src={'/icons/star-grey.svg'} alt='star' width={100} height={100} />
-                                        <Image className='w-[20px] h-[20px] lg:w-[30px] lg:h-[30px]' src={'/icons/star-grey.svg'} alt='star' width={100} height={100} />
+                                        {Array.from({ length: 5 }, (_, index) => (
+                                            <Image
+                                                key={index}
+                                                className='w-[25px] h-[25px] lg:w-[30px] lg:h-[30px]'
+                                                src={index < review?.contentReview ? '/icons/star-yellow.svg' : '/icons/star-grey.svg'}
+                                                alt='star'
+                                                width={100}
+                                                height={100}
+                                            />
+                                        ))}
                                     </div>
+
                                 </div>
                                 <p className='w-4/5 bg-slate-300 p-1.5 rounded-lg text-[16px] font-semibold'>{review?.contentNotes}</p>
                             </div>}
@@ -73,11 +79,16 @@ const ResponsePage = ({ id }: { id: string }) => {
                                 <div className='flex flex-row justify-around  my-3'>
                                     <p className='mr-3 font-semibold my-2 bg-yellow-400 px-2 py-1 rounded-lg'>Rating</p>
                                     <div className='flex flex-row items-center w-full justify-center gap-2'>
-                                        <Image className='w-[20px] h-[20px] lg:w-[30px] lg:h-[30px]' src={'/icons/star-yellow.svg'} alt='star' width={100} height={100} />
-                                        <Image className='w-[20px] h-[20px] lg:w-[30px] lg:h-[30px]' src={'/icons/star-yellow.svg'} alt='star' width={100} height={100} />
-                                        <Image className='w-[20px] h-[20px] lg:w-[30px] lg:h-[30px]' src={'/icons/star-yellow.svg'} alt='star' width={100} height={100} />
-                                        <Image className='w-[20px] h-[20px] lg:w-[30px] lg:h-[30px]' src={'/icons/star-grey.svg'} alt='star' width={100} height={100} />
-                                        <Image className='w-[20px] h-[20px] lg:w-[30px] lg:h-[30px]' src={'/icons/star-grey.svg'} alt='star' width={100} height={100} />
+                                        {Array.from({ length: 5 }, (_, index) => (
+                                            <Image
+                                                key={index}
+                                                className='w-[25px] h-[25px] lg:w-[30px] lg:h-[30px]'
+                                                src={index < review?.brightnessReview ? '/icons/star-yellow.svg' : '/icons/star-grey.svg'}
+                                                alt='star'
+                                                width={100}
+                                                height={100}
+                                            />
+                                        ))}
                                     </div>
                                 </div>
                                 <p className='w-4/5 bg-slate-300 p-1.5 rounded-lg text-[16px] font-semibold'>{review?.brightnessNotes}</p>
@@ -87,11 +98,16 @@ const ResponsePage = ({ id }: { id: string }) => {
                                 <div className='flex flex-row justify-around my-3'>
                                     <p className='mr-3 font-semibold my-2 bg-yellow-400 px-2 py-1 rounded-lg'>Rating</p>
                                     <div className='flex flex-row items-center w-full justify-center gap-2'>
-                                        <Image className='w-[20px] h-[20px] lg:w-[30px] lg:h-[30px]' src={'/icons/star-yellow.svg'} alt='star' width={100} height={100} />
-                                        <Image className='w-[20px] h-[20px] lg:w-[30px] lg:h-[30px]' src={'/icons/star-yellow.svg'} alt='star' width={100} height={100} />
-                                        <Image className='w-[20px] h-[20px] lg:w-[30px] lg:h-[30px]' src={'/icons/star-yellow.svg'} alt='star' width={100} height={100} />
-                                        <Image className='w-[20px] h-[20px] lg:w-[30px] lg:h-[30px]' src={'/icons/star-grey.svg'} alt='star' width={100} height={100} />
-                                        <Image className='w-[20px] h-[20px] lg:w-[30px] lg:h-[30px]' src={'/icons/star-grey.svg'} alt='star' width={100} height={100} />
+                                        {Array.from({ length: 5 }, (_, index) => (
+                                            <Image
+                                                key={index}
+                                                className='w-[25px] h-[25px] lg:w-[30px] lg:h-[30px]'
+                                                src={index < review?.descriptionReview ? '/icons/star-yellow.svg' : '/icons/star-grey.svg'}
+                                                alt='star'
+                                                width={100}
+                                                height={100}
+                                            />
+                                        ))}
                                     </div>
                                 </div>
                                 <p className='w-4/5 bg-slate-300 p-1.5 rounded-lg text-[16px] font-semibold'>{review?.descriptionNotes}</p>
@@ -101,11 +117,16 @@ const ResponsePage = ({ id }: { id: string }) => {
                                 <div className='flex flex-row justify-around my-3'>
                                     <p className='mr-3 font-semibold my-2 bg-yellow-400 px-2 py-1 rounded-lg'>Rating</p>
                                     <div className='flex flex-row items-center w-full justify-center gap-2'>
-                                        <Image className='w-[20px] h-[20px] lg:w-[30px] lg:h-[30px]' src={'/icons/star-yellow.svg'} alt='star' width={100} height={100} />
-                                        <Image className='w-[20px] h-[20px] lg:w-[30px] lg:h-[30px]' src={'/icons/star-yellow.svg'} alt='star' width={100} height={100} />
-                                        <Image className='w-[20px] h-[20px] lg:w-[30px] lg:h-[30px]' src={'/icons/star-yellow.svg'} alt='star' width={100} height={100} />
-                                        <Image className='w-[20px] h-[20px] lg:w-[30px] lg:h-[30px]' src={'/icons/star-grey.svg'} alt='star' width={100} height={100} />
-                                        <Image className='w-[20px] h-[20px] lg:w-[30px] lg:h-[30px]' src={'/icons/star-grey.svg'} alt='star' width={100} height={100} />
+                                        {Array.from({ length: 5 }, (_, index) => (
+                                            <Image
+                                                key={index}
+                                                className='w-[25px] h-[25px] lg:w-[30px] lg:h-[30px]'
+                                                src={index < review?.hashtagsReview ? '/icons/star-yellow.svg' : '/icons/star-grey.svg'}
+                                                alt='star'
+                                                width={100}
+                                                height={100}
+                                            />
+                                        ))}
                                     </div>
                                 </div>
                                 <p className='w-4/5 bg-slate-300 p-1.5 rounded-lg text-[16px] font-semibold'>{review?.hashtagsNotes}</p>
@@ -115,11 +136,16 @@ const ResponsePage = ({ id }: { id: string }) => {
                                 <div className='flex flex-row justify-around my-3'>
                                     <p className='mr-3 font-semibold my-2 bg-yellow-400 px-2 py-1 rounded-lg'>Rating</p>
                                     <div className='flex flex-row items-center w-full justify-center gap-2'>
-                                        <Image className='w-[20px] h-[20px] lg:w-[30px] lg:h-[30px]' src={'/icons/star-yellow.svg'} alt='star' width={100} height={100} />
-                                        <Image className='w-[20px] h-[20px] lg:w-[30px] lg:h-[30px]' src={'/icons/star-yellow.svg'} alt='star' width={100} height={100} />
-                                        <Image className='w-[20px] h-[20px] lg:w-[30px] lg:h-[30px]' src={'/icons/star-yellow.svg'} alt='star' width={100} height={100} />
-                                        <Image className='w-[20px] h-[20px] lg:w-[30px] lg:h-[30px]' src={'/icons/star-grey.svg'} alt='star' width={100} height={100} />
-                                        <Image className='w-[20px] h-[20px] lg:w-[30px] lg:h-[30px]' src={'/icons/star-grey.svg'} alt='star' width={100} height={100} />
+                                        {Array.from({ length: 5 }, (_, index) => (
+                                            <Image
+                                                key={index}
+                                                className='w-[25px] h-[25px] lg:w-[30px] lg:h-[30px]'
+                                                src={index < review?.soundReview ? '/icons/star-yellow.svg' : '/icons/star-grey.svg'}
+                                                alt='star'
+                                                width={100}
+                                                height={100}
+                                            />
+                                        ))}
                                     </div>
                                 </div>
                                 <p className='w-4/5 bg-slate-300 p-1.5 rounded-lg text-[16px] font-semibold'>{review?.soundNotes}</p>
@@ -129,11 +155,16 @@ const ResponsePage = ({ id }: { id: string }) => {
                                 <div className='flex flex-row justify-around my-3'>
                                     <p className='mr-3 font-semibold my-2 bg-yellow-400 px-2 py-1 rounded-lg'>Rating</p>
                                     <div className='flex flex-row items-center w-full justify-center gap-2'>
-                                        <Image className='w-[20px] h-[20px] lg:w-[30px] lg:h-[30px]' src={'/icons/star-yellow.svg'} alt='star' width={100} height={100} />
-                                        <Image className='w-[20px] h-[20px] lg:w-[30px] lg:h-[30px]' src={'/icons/star-yellow.svg'} alt='star' width={100} height={100} />
-                                        <Image className='w-[20px] h-[20px] lg:w-[30px] lg:h-[30px]' src={'/icons/star-yellow.svg'} alt='star' width={100} height={100} />
-                                        <Image className='w-[20px] h-[20px] lg:w-[30px] lg:h-[30px]' src={'/icons/star-grey.svg'} alt='star' width={100} height={100} />
-                                        <Image className='w-[20px] h-[20px] lg:w-[30px] lg:h-[30px]' src={'/icons/star-grey.svg'} alt='star' width={100} height={100} />
+                                        {Array.from({ length: 5 }, (_, index) => (
+                                            <Image
+                                                key={index}
+                                                className='w-[25px] h-[25px] lg:w-[30px] lg:h-[30px]'
+                                                src={index < review?.bioReview ? '/icons/star-yellow.svg' : '/icons/star-grey.svg'}
+                                                alt='star'
+                                                width={100}
+                                                height={100}
+                                            />
+                                        ))}
                                     </div>
                                 </div>
                                 <p className='w-4/5 bg-slate-300 p-1.5 rounded-lg text-[16px] font-semibold'>{review?.bioNotes}</p>
@@ -143,11 +174,16 @@ const ResponsePage = ({ id }: { id: string }) => {
                                 <div className='flex flex-row justify-around  my-3'>
                                     <p className='mr-3 font-semibold my-2 bg-yellow-400 px-2 py-1 rounded-lg'>Rating</p>
                                     <div className='flex flex-row items-center w-full justify-center gap-2'>
-                                        <Image className='w-[20px] h-[20px] lg:w-[30px] lg:h-[30px]' src={'/icons/star-yellow.svg'} alt='star' width={100} height={100} />
-                                        <Image className='w-[20px] h-[20px] lg:w-[30px] lg:h-[30px]' src={'/icons/star-yellow.svg'} alt='star' width={100} height={100} />
-                                        <Image className='w-[20px] h-[20px] lg:w-[30px] lg:h-[30px]' src={'/icons/star-yellow.svg'} alt='star' width={100} height={100} />
-                                        <Image className='w-[20px] h-[20px] lg:w-[30px] lg:h-[30px]' src={'/icons/star-grey.svg'} alt='star' width={100} height={100} />
-                                        <Image className='w-[20px] h-[20px] lg:w-[30px] lg:h-[30px]' src={'/icons/star-grey.svg'} alt='star' width={100} height={100} />
+                                        {Array.from({ length: 5 }, (_, index) => (
+                                            <Image
+                                                key={index}
+                                                className='w-[25px] h-[25px] lg:w-[30px] lg:h-[30px]'
+                                                src={index < review?.highlightsReview ? '/icons/star-yellow.svg' : '/icons/star-grey.svg'}
+                                                alt='star'
+                                                width={100}
+                                                height={100}
+                                            />
+                                        ))}
                                     </div>
                                 </div>
                                 <p className='w-4/5 bg-slate-300 p-1.5 rounded-lg text-[16px] font-semibold'>{review?.highlightsNotes}</p>
@@ -157,11 +193,16 @@ const ResponsePage = ({ id }: { id: string }) => {
                                 <div className='flex flex-row justify-around my-3'>
                                     <p className='mr-3 font-semibold my-2 bg-yellow-400 px-2 py-1 rounded-lg'>Rating</p>
                                     <div className='flex flex-row items-center w-full justify-center gap-2'>
-                                        <Image className='w-[20px] h-[20px] lg:w-[30px] lg:h-[30px]' src={'/icons/star-yellow.svg'} alt='star' width={100} height={100} />
-                                        <Image className='w-[20px] h-[20px] lg:w-[30px] lg:h-[30px]' src={'/icons/star-yellow.svg'} alt='star' width={100} height={100} />
-                                        <Image className='w-[20px] h-[20px] lg:w-[30px] lg:h-[30px]' src={'/icons/star-yellow.svg'} alt='star' width={100} height={100} />
-                                        <Image className='w-[20px] h-[20px] lg:w-[30px] lg:h-[30px]' src={'/icons/star-grey.svg'} alt='star' width={100} height={100} />
-                                        <Image className='w-[20px] h-[20px] lg:w-[30px] lg:h-[30px]' src={'/icons/star-grey.svg'} alt='star' width={100} height={100} />
+                                        {Array.from({ length: 5 }, (_, index) => (
+                                            <Image
+                                                key={index}
+                                                className='w-[25px] h-[25px] lg:w-[30px] lg:h-[30px]'
+                                                src={index < review?.postsReview ? '/icons/star-yellow.svg' : '/icons/star-grey.svg'}
+                                                alt='star'
+                                                width={100}
+                                                height={100}
+                                            />
+                                        ))}
                                     </div>
                                 </div>
                                 <p className='w-4/5 bg-slate-300 p-1.5 rounded-lg text-[16px] font-semibold'>{review?.postsNotes}</p>

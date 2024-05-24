@@ -5,18 +5,27 @@ import { ScrollArea } from '../ui/scroll-area'
 import Image from 'next/image'
 import { Input } from '../ui/input'
 import { createVideoProfileReview } from '@/lib/actions/review.actions'
+import { useRouter } from 'next/navigation'
 
 const VideoProfileReviewForm = ({ height, id, reviewer }: { height: number, id: string, reviewer: string }) => {
     const [URL, setURL] = useState('')
+    const [loading, setLoading] = useState<boolean>(false)
+    const router = useRouter();
 
     const submitVideoProfileReview = async () => {
+
+        setLoading(true);
         const review = {
             request: id,
-            videoURL: URL, 
+            videoURL: URL,
             Reviewer: reviewer
         }
 
         await createVideoProfileReview(review)
+
+        router.push('/wallet')
+        
+        setLoading(false)
     }
 
     return (
@@ -27,10 +36,14 @@ const VideoProfileReviewForm = ({ height, id, reviewer }: { height: number, id: 
                 <Input value={URL} onChange={(e) => setURL(e.target.value)} placeholder='Notes about hashtags:' className='w-4/5 border-2 border-black' />
             </div>
             <div className='w-full flex flex-row justify-center items-center text-center my-6'>
-                <div onClick={submitVideoProfileReview} className='w-1/3 bg-green-400 flex flex-row items-center justify-center gap-2 rounded-md hover:cursor-pointer'>
+                {!loading && <div onClick={submitVideoProfileReview} className='w-1/3 bg-green-400 flex flex-row items-center justify-center gap-2 rounded-md hover:cursor-pointer'>
                     <Image src={'/icons/star-black.svg'} alt='star' height={15} width={15} />
                     <p className='py-1 rounded-md font-semibold'>Submit</p>
-                </div>
+                </div>}
+                {loading && <div className='w-1/3 bg-green-200 flex flex-row items-center justify-center gap-2 rounded-md hover:cursor-pointer'>
+                    <Image src={'/icons/star-black.svg'} alt='star' height={15} width={15} />
+                    <p className='py-1 rounded-md font-semibold'>Submitting</p>
+                </div>}
             </div>
         </ScrollArea>
     )
