@@ -40,7 +40,7 @@ export async function createTextReview(review: { request: string, contentNotes: 
 
         await UserData.findOneAndUpdate(
             { User: review.Reviewer },
-            {'$inc': { withdrawBalance: updatedRequest.price * 0.8 } }
+            { '$inc': { withdrawBalance: updatedRequest.price * 0.8 } }
         )
 
         return JSON.parse(JSON.stringify(newReview))
@@ -140,6 +140,36 @@ export async function getReviewByRequestId(id: string) {
         const review = await populateReview(Review.findOne({ Request: id }))
 
         return JSON.parse(JSON.stringify(review))
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export async function submitReviewRate(id: string, rating: number) {
+    try {
+        await connectToDatabase();
+
+        const review = await Review.findOneAndUpdate(
+            { _id: id },
+            { '$set': { rated: true } }
+        );
+
+        await UserData.findOneAndUpdate(
+            { User: review.Reviewer },
+            {
+                $set: {
+                    nofReviews: { $add: ["$nofReviews", 1] },
+                    avgReview: {
+                        $divide: [
+                            { $add: [{ $multiply: ["$avgReview", "$nofReviews"] }, rating] },
+                            { $add: ["$nofReviews", 1] }
+                        ]
+                    }
+                }
+            }
+        )
+
+
     } catch (error) {
         console.log(error)
     }

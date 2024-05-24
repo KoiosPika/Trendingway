@@ -6,6 +6,7 @@ import { IReview } from '@/lib/database/models/review.model';
 import { InstagramEmbed, TikTokEmbed, YouTubeEmbed } from 'react-social-media-embed';
 import Image from 'next/image';
 import { ScrollArea } from '../ui/scroll-area';
+import RatingDialog from './RatingDialog';
 
 const ResponsePage = ({ id }: { id: string }) => {
 
@@ -215,10 +216,7 @@ const ResponsePage = ({ id }: { id: string }) => {
                                 {review && <YouTubeEmbed url={review?.reviewURL} width={350} height={height} />}
                             </div>}
                             <div className='w-full flex flex-row justify-center items-center text-center my-6'>
-                                <div className='w-1/3 bg-green-400 flex flex-row items-center justify-center gap-2 rounded-md hover:cursor-pointer'>
-                                    <Image src={'/icons/star-black.svg'} alt='star' height={15} width={15} />
-                                    <p className='py-1 rounded-md font-semibold'>Rate</p>
-                                </div>
+                                <RatingDialog id={id}/>
                             </div>
                         </ScrollArea>
                     </div>
