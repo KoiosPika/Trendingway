@@ -3,7 +3,7 @@
 import Stripe from "stripe";
 import UserData, { IUserData } from "../database/models/userData.model";
 import { connectToDatabase } from "../database";
-import { redirect } from "next/navigation";
+import nodemailer from 'nodemailer';
 
 async function createAccount(userId: string) {
     const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
@@ -63,3 +63,26 @@ export async function handleCreatingAccount(userId: string) {
     }
 }
 
+export async function createEmail(email: string, message: string) {
+
+    let transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: process.env.GMAIL_USER,
+            pass: process.env.GMAIL_PASS,
+        },
+    });
+
+    let mailOptions = {
+        from: email,
+        to: process.env.GMAIL_USER,
+        subject: `New contact form submission from Trendingway`,
+        text: message,
+    };
+
+    try {
+        await transporter.sendMail(mailOptions);
+    } catch (error) {
+        console.log(error);
+    }
+}

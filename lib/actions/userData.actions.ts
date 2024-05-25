@@ -57,9 +57,22 @@ export async function editUserData({ userId, aboutMe, link, TextReview, VideoRev
                 }
             })
 
-    return JSON.parse(JSON.stringify(userData))
+        return JSON.parse(JSON.stringify(userData))
 
-} catch (error) {
-    console.log(error)
+    } catch (error) {
+        console.log(error)
+    }
 }
+
+export async function getUsers(){
+    try {
+        await connectToDatabase();
+
+        const users = await populateUsers(UserData.find())
+
+        return JSON.parse(JSON.stringify(users));
+        
+    } catch (error) {
+        console.log(error)
+    }
 }

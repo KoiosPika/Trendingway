@@ -12,17 +12,19 @@ const Header = async () => {
 
   return (
     <header className='w-full py-2 md:px-10 bg-white'>
-      <div className='flex items-center justify-evenly'>
+      <div className='flex items-center justify-between md:justify-evenly px-2'>
         <MobileNav />
-        <Link href={'/'}>
-          <Image className='h-[60px] w-[60px] bg-[#fcd62e] rounded-full border-[2px] border-black' src={'/logo.png'} alt='logo' height={1000} width={1000} />
-        </Link>
+        <div className='flex flex-1 md:flex-none justify-center'>
+          <Link href={'/'}>
+            <Image className='h-[60px] w-[60px] bg-[#fcd62e] rounded-full border-[2px] border-black' src={'/logo.png'} alt='logo' height={1000} width={1000} />
+          </Link>
+        </div>
 
         <nav className='hidden md:block'>
           <NavItems />
         </nav>
 
-        <div className='flex justify-end gap-5'>
+        <div className='flex justify-end gap-3'>
           <SignedIn>
             <Link href={'/my-orders/requests'} className='flex justify-center items-center'>
               <Image src={'/icons/bell.svg'} alt='bell' height={20} width={20} />

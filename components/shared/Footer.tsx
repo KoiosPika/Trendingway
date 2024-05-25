@@ -10,15 +10,15 @@ const Footer = () => {
                 <Image className='h-[60px] w-[60px] bg-[#fcd62e] rounded-full border-[2px] border-black' src={'/logo.png'} alt='logo' height={1000} width={1000} />
                 </div>
                 <div className="grid grid-cols-2 gap-5 text-center text-sm">
-                    <a href="/" className="hover:text-gray-200">Home</a>
-                    <a href="/privacy" className="hover:text-gray-200">Privacy Policy</a>
-                    <a href="/pricing" className="hover:text-gray-200">Pricing</a>
-                    <a href="/terms" className="hover:text-gray-200">Terms And Conditions</a>
-                    <a href="/features" className="hover:text-gray-200">Features</a>
-                    <a href="/support" className="hover:text-gray-200">Contact Support</a>
+                    <a href="/" className="hover:text-gray-200 font-semibold">Home</a>
+                    <a href="/privacy" className="hover:text-gray-200 font-semibold">Privacy Policy</a>
+                    <a href="/features" className="hover:text-gray-200 font-semibold">Profile</a>
+                    <a href="/terms" className="hover:text-gray-200 font-semibold">Terms And Conditions</a>
+                    <a href="/wallet" className="hover:text-gray-200 font-semibold">Wallet</a>
+                    <a href="/contact-us" className="hover:text-gray-200 font-semibold">Contact Support</a>
                 </div>
                 <div className="flex justify-center mt-4 md:mt-0">
-                    <p className='text-black'>hello</p>
+                    <Image src={'/images/qr code.PNG'} alt='qr_code' height={200} width={200} className='h-[75px] w-[75px]'/>
                 </div>
             </div>
         </footer>

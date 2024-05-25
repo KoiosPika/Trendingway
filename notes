@@ -7,3 +7,5 @@ TextReview
 VideoReview
 TextProfileReview
 VideoProfileReview
+
+npm install --save-dev @types/nodemailer

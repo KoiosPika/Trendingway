@@ -12,6 +12,7 @@ import TextReviewForm from './TextReviewForm'
 import VideoReviewForm from './VideoReviewForm'
 import TextProfileReviewForm from './TextProfileReviewForm'
 import VideoProfileReviewForm from './VideoProfileReviewForm'
+import { timeAgo } from '@/lib/utils'
 
 
 const ReviewPage = ({ id }: { id: string }) => {
@@ -74,7 +75,7 @@ const ReviewPage = ({ id }: { id: string }) => {
                         <div>
                             <div className='font-semibold flex items-center gap-2'>
                                 <p className='text-[13px]'>{request?.User?.username}</p>
-                                <p className='text-[12px] text-slate-400'>2h ago</p>
+                                {request && <p className='text-[12px] text-slate-400'>{timeAgo(request?.createdAt.toString())}</p>}
                             </div>
                             <div className='bg-gray-300 p-1 rounded-r-lg rounded-bl-lg'>
                                 <p className='text-[13px]'>{request?.description}</p>

@@ -7,10 +7,20 @@ import { useRouter } from 'next/navigation'
 
 const TextReviewForm = ({ height, id, reviewer }: { height: number, id: string, reviewer: string }) => {
     const [contentNotes, setContentNotes] = useState<string>('')
+    const [contentReview, setContentReview] = useState<number>(1)
+
     const [brightnessNotes, setBrightnessNotes] = useState<string>('')
+    const [brightnessReview, setBrightnessReview] = useState<number>(1)
+
     const [descriptionNotes, setDescriptionNotes] = useState<string>('')
+    const [descriptionReview, setDescriptionReview] = useState<number>(1)
+
     const [hashtagsNotes, setHashtagsNotes] = useState<string>('')
+    const [hashtagsReview, setHashtagsReview] = useState<number>(1)
+
     const [soundNotes, setSoundNotes] = useState<string>('')
+    const [soundReview, setSoundReview] = useState<number>(1)
+
     const [additionalNotes, setAdditionalNotes] = useState<string>('')
     const [loading, setLoading] = useState<boolean>(false)
     const router = useRouter();
@@ -23,10 +33,15 @@ const TextReviewForm = ({ height, id, reviewer }: { height: number, id: string, 
             request: id,
             Reviewer: reviewer || '',
             contentNotes: contentNotes || '',
+            contentReview,
             brightnessNotes: brightnessNotes || '',
+            brightnessReview,
             descriptionNotes: descriptionNotes || '',
+            descriptionReview,
             hashtagsNotes: hashtagsNotes || '',
+            hashtagsReview,
             soundNotes: soundNotes || '',
+            soundReview,
             additionalNotes: descriptionNotes || ''
         }
         await createTextReview(review)
@@ -44,11 +59,17 @@ const TextReviewForm = ({ height, id, reviewer }: { height: number, id: string, 
                 <div className='flex flex-row justify-around my-3'>
                     <p className='mr-3 font-semibold my-2 bg-yellow-400 px-2 py-1 rounded-lg'>Rating</p>
                     <div className='flex flex-row items-center w-full justify-center gap-2'>
-                        <Image className='w-[20px] h-[20px] lg:w-[30px] lg:h-[30px]' src={'/icons/star-yellow.svg'} alt='star' width={100} height={100} />
-                        <Image className='w-[20px] h-[20px] lg:w-[30px] lg:h-[30px]' src={'/icons/star-yellow.svg'} alt='star' width={100} height={100} />
-                        <Image className='w-[20px] h-[20px] lg:w-[30px] lg:h-[30px]' src={'/icons/star-yellow.svg'} alt='star' width={100} height={100} />
-                        <Image className='w-[20px] h-[20px] lg:w-[30px] lg:h-[30px]' src={'/icons/star-grey.svg'} alt='star' width={100} height={100} />
-                        <Image className='w-[20px] h-[20px] lg:w-[30px] lg:h-[30px]' src={'/icons/star-grey.svg'} alt='star' width={100} height={100} />
+                        {Array.from({ length: 5 }, (_, index) => (
+                            <Image
+                                key={index}
+                                className='w-[25px] h-[25px] lg:w-[30px] lg:h-[30px]'
+                                src={index < contentReview ? '/icons/star-yellow.svg' : '/icons/star-grey.svg'}
+                                alt='star'
+                                width={100}
+                                height={100}
+                                onClick={() => setContentReview(index + 1)}
+                            />
+                        ))}
                     </div>
                 </div>
                 <Input value={contentNotes} onChange={(e) => setContentNotes(e.target.value)} placeholder='Notes about content' className='w-4/5 border-2 border-black text-[16px]' />
@@ -58,11 +79,17 @@ const TextReviewForm = ({ height, id, reviewer }: { height: number, id: string, 
                 <div className='flex flex-row justify-around  my-3'>
                     <p className='mr-3 font-semibold my-2 bg-yellow-400 px-2 py-1 rounded-lg'>Rating</p>
                     <div className='flex flex-row items-center w-full justify-center gap-2'>
-                        <Image className='w-[20px] h-[20px] lg:w-[30px] lg:h-[30px]' src={'/icons/star-yellow.svg'} alt='star' width={100} height={100} />
-                        <Image className='w-[20px] h-[20px] lg:w-[30px] lg:h-[30px]' src={'/icons/star-yellow.svg'} alt='star' width={100} height={100} />
-                        <Image className='w-[20px] h-[20px] lg:w-[30px] lg:h-[30px]' src={'/icons/star-yellow.svg'} alt='star' width={100} height={100} />
-                        <Image className='w-[20px] h-[20px] lg:w-[30px] lg:h-[30px]' src={'/icons/star-grey.svg'} alt='star' width={100} height={100} />
-                        <Image className='w-[20px] h-[20px] lg:w-[30px] lg:h-[30px]' src={'/icons/star-grey.svg'} alt='star' width={100} height={100} />
+                        {Array.from({ length: 5 }, (_, index) => (
+                            <Image
+                                key={index}
+                                className='w-[25px] h-[25px] lg:w-[30px] lg:h-[30px]'
+                                src={index < brightnessReview ? '/icons/star-yellow.svg' : '/icons/star-grey.svg'}
+                                alt='star'
+                                width={100}
+                                height={100}
+                                onClick={() => setBrightnessReview(index + 1)}
+                            />
+                        ))}
                     </div>
                 </div>
                 <Input value={brightnessNotes} onChange={(e) => setBrightnessNotes(e.target.value)} placeholder='Notes about brightness:' className='w-4/5 border-2 border-black' />
@@ -72,11 +99,17 @@ const TextReviewForm = ({ height, id, reviewer }: { height: number, id: string, 
                 <div className='flex flex-row justify-around my-3'>
                     <p className='mr-3 font-semibold my-2 bg-yellow-400 px-2 py-1 rounded-lg'>Rating</p>
                     <div className='flex flex-row items-center w-full justify-center gap-2'>
-                        <Image className='w-[20px] h-[20px] lg:w-[30px] lg:h-[30px]' src={'/icons/star-yellow.svg'} alt='star' width={100} height={100} />
-                        <Image className='w-[20px] h-[20px] lg:w-[30px] lg:h-[30px]' src={'/icons/star-yellow.svg'} alt='star' width={100} height={100} />
-                        <Image className='w-[20px] h-[20px] lg:w-[30px] lg:h-[30px]' src={'/icons/star-yellow.svg'} alt='star' width={100} height={100} />
-                        <Image className='w-[20px] h-[20px] lg:w-[30px] lg:h-[30px]' src={'/icons/star-grey.svg'} alt='star' width={100} height={100} />
-                        <Image className='w-[20px] h-[20px] lg:w-[30px] lg:h-[30px]' src={'/icons/star-grey.svg'} alt='star' width={100} height={100} />
+                        {Array.from({ length: 5 }, (_, index) => (
+                            <Image
+                                key={index}
+                                className='w-[25px] h-[25px] lg:w-[30px] lg:h-[30px]'
+                                src={index < descriptionReview ? '/icons/star-yellow.svg' : '/icons/star-grey.svg'}
+                                alt='star'
+                                width={100}
+                                height={100}
+                                onClick={() => setDescriptionReview(index + 1)}
+                            />
+                        ))}
                     </div>
                 </div>
                 <Input value={descriptionNotes} onChange={(e) => setDescriptionNotes(e.target.value)} placeholder='Notes about hashtags:' className='w-4/5 border-2 border-black' />
@@ -86,11 +119,17 @@ const TextReviewForm = ({ height, id, reviewer }: { height: number, id: string, 
                 <div className='flex flex-row justify-around my-3'>
                     <p className='mr-3 font-semibold my-2 bg-yellow-400 px-2 py-1 rounded-lg'>Rating</p>
                     <div className='flex flex-row items-center w-full justify-center gap-2'>
-                        <Image className='w-[20px] h-[20px] lg:w-[30px] lg:h-[30px]' src={'/icons/star-yellow.svg'} alt='star' width={100} height={100} />
-                        <Image className='w-[20px] h-[20px] lg:w-[30px] lg:h-[30px]' src={'/icons/star-yellow.svg'} alt='star' width={100} height={100} />
-                        <Image className='w-[20px] h-[20px] lg:w-[30px] lg:h-[30px]' src={'/icons/star-yellow.svg'} alt='star' width={100} height={100} />
-                        <Image className='w-[20px] h-[20px] lg:w-[30px] lg:h-[30px]' src={'/icons/star-grey.svg'} alt='star' width={100} height={100} />
-                        <Image className='w-[20px] h-[20px] lg:w-[30px] lg:h-[30px]' src={'/icons/star-grey.svg'} alt='star' width={100} height={100} />
+                        {Array.from({ length: 5 }, (_, index) => (
+                            <Image
+                                key={index}
+                                className='w-[25px] h-[25px] lg:w-[30px] lg:h-[30px]'
+                                src={index < hashtagsReview ? '/icons/star-yellow.svg' : '/icons/star-grey.svg'}
+                                alt='star'
+                                width={100}
+                                height={100}
+                                onClick={() => setHashtagsReview(index + 1)}
+                            />
+                        ))}
                     </div>
                 </div>
                 <Input value={hashtagsNotes} onChange={(e) => setHashtagsNotes(e.target.value)} placeholder='Notes about hashtags:' className='w-4/5 border-2 border-black' />
@@ -100,11 +139,17 @@ const TextReviewForm = ({ height, id, reviewer }: { height: number, id: string, 
                 <div className='flex flex-row justify-around my-3'>
                     <p className='mr-3 font-semibold my-2 bg-yellow-400 px-2 py-1 rounded-lg'>Rating</p>
                     <div className='flex flex-row items-center w-full justify-center gap-2'>
-                        <Image className='w-[20px] h-[20px] lg:w-[30px] lg:h-[30px]' src={'/icons/star-yellow.svg'} alt='star' width={100} height={100} />
-                        <Image className='w-[20px] h-[20px] lg:w-[30px] lg:h-[30px]' src={'/icons/star-yellow.svg'} alt='star' width={100} height={100} />
-                        <Image className='w-[20px] h-[20px] lg:w-[30px] lg:h-[30px]' src={'/icons/star-yellow.svg'} alt='star' width={100} height={100} />
-                        <Image className='w-[20px] h-[20px] lg:w-[30px] lg:h-[30px]' src={'/icons/star-grey.svg'} alt='star' width={100} height={100} />
-                        <Image className='w-[20px] h-[20px] lg:w-[30px] lg:h-[30px]' src={'/icons/star-grey.svg'} alt='star' width={100} height={100} />
+                        {Array.from({ length: 5 }, (_, index) => (
+                            <Image
+                                key={index}
+                                className='w-[25px] h-[25px] lg:w-[30px] lg:h-[30px]'
+                                src={index < soundReview ? '/icons/star-yellow.svg' : '/icons/star-grey.svg'}
+                                alt='star'
+                                width={100}
+                                height={100}
+                                onClick={() => setSoundReview(index + 1)}
+                            />
+                        ))}
                     </div>
                 </div>
                 <Input value={soundNotes} onChange={(e) => setSoundNotes(e.target.value)} placeholder='Notes about hashtags:' className='w-4/5 border-2 border-black' />
