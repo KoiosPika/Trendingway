@@ -6,6 +6,7 @@ export interface IReview extends Document {
     _id: string
     Request: IRequest,
     Reviewer: IUser,
+    User: IUser,
     reviewURL: string
     contentReview: number,
     contentNotes: string,
@@ -31,6 +32,7 @@ export interface IReview extends Document {
 const ReviewSchema = new Schema({
     Request: { type: Schema.Types.ObjectId, ref: "Request" },
     Reviewer: { type: Schema.Types.ObjectId, ref: "User" },
+    User: { type: Schema.Types.ObjectId, ref: "User" },
     reviewURL: { type: String },
     contentReview: { type: Number },
     contentNotes: { type: String },

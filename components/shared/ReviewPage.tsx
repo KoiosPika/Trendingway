@@ -61,13 +61,13 @@ const ReviewPage = ({ id }: { id: string }) => {
                             </div>}
                         <div className={`hidden md:block h-[${height}px]`}>
                             {request?.type === 'TextReview' &&
-                                <TextReviewForm height={height} id={id} reviewer={request?.Reviewer?._id} />}
+                                <TextReviewForm height={height} id={id} reviewer={request?.Reviewer?._id} user={request?.User?._id} />}
                             {request?.type === 'VideoReview' &&
-                                <VideoReviewForm height={height} id={id} reviewer={request?.Reviewer?._id} />}
+                                <VideoReviewForm height={height} id={id} reviewer={request?.Reviewer?._id} user={request?.User?._id} />}
                             {request?.type === 'TextProfileReview' &&
-                                <TextProfileReviewForm height={height} id={id} reviewer={request?.Reviewer?._id} />}
+                                <TextProfileReviewForm height={height} id={id} reviewer={request?.Reviewer?._id} user={request?.User?._id} />}
                             {request?.type === 'VideoProfileReview' &&
-                                <VideoProfileReviewForm height={height} id={id} reviewer={request?.Reviewer?._id} />}
+                                <VideoProfileReviewForm height={height} id={id} reviewer={request?.Reviewer?._id} user={request?.User?._id} />}
                         </div>
                     </div>
                     <div className='w-4/5 py-2 px-4 bg-white flex items-center gap-2 rounded-b-lg'>
@@ -91,13 +91,13 @@ const ReviewPage = ({ id }: { id: string }) => {
                         <DrawerContent className="h-5/6">
                             <div className='h-full flex'>
                                 {request?.type === 'TextReview' &&
-                                    <TextReviewForm height={height} id={id} reviewer={request?.Reviewer?._id} />}
+                                    <TextReviewForm height={height} id={id} reviewer={request?.Reviewer?._id} user={request?.User?._id} />}
                                 {request?.type === 'VideoReview' &&
-                                    <VideoReviewForm height={height} id={id} reviewer={request?.Reviewer?._id} />}
+                                    <VideoReviewForm height={height} id={id} reviewer={request?.Reviewer?._id} user={request?.User?._id} />}
                                 {request?.type === 'TextProfileReview' &&
-                                    <TextProfileReviewForm height={height} id={id} reviewer={request?.Reviewer?._id} />}
+                                    <TextProfileReviewForm height={height} id={id} reviewer={request?.Reviewer?._id} user={request?.User?._id} />}
                                 {request?.type === 'VideoProfileReview' &&
-                                    <VideoProfileReviewForm height={height} id={id} reviewer={request?.Reviewer?._id} />}
+                                    <VideoProfileReviewForm height={height} id={id} reviewer={request?.Reviewer?._id} user={request?.User?._id} />}
                             </div>
                             <DrawerFooter>
                             </DrawerFooter>

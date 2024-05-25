@@ -11,7 +11,7 @@ const populateReview = (query: any) => {
         .populate({ path: 'Request', model: Request, select: "User Reviewer postLink description platform type" })
 }
 
-export async function createTextReview(review: { request: string, contentNotes: string, contentReview: number, brightnessNotes: string, brightnessReview: number, descriptionNotes: string, descriptionReview: number, hashtagsNotes: string, hashtagsReview: number, soundNotes: string, soundReview: number, additionalNotes: string, Reviewer: string }) {
+export async function createTextReview(review: { request: string, contentNotes: string, contentReview: number, brightnessNotes: string, brightnessReview: number, descriptionNotes: string, descriptionReview: number, hashtagsNotes: string, hashtagsReview: number, soundNotes: string, soundReview: number, additionalNotes: string, Reviewer: string, User: string }) {
     try {
         await connectToDatabase()
 
@@ -19,6 +19,8 @@ export async function createTextReview(review: { request: string, contentNotes: 
 
         const newReview: IReview = await Review.create({
             Request: review.request,
+            Reviewer: review.Reviewer,
+            User: review.User,
             contentReview: review.contentReview,
             contentNotes: review.contentNotes,
             brightnessReview: review.brightnessReview,
@@ -54,13 +56,14 @@ export async function createTextReview(review: { request: string, contentNotes: 
     }
 }
 
-export async function createVideoReview(review: { request: string, videoURL: string, Reviewer: string }) {
+export async function createVideoReview(review: { request: string, videoURL: string, Reviewer: string, User: string }) {
     try {
         await connectToDatabase()
 
         const newReview: IReview = await Review.create({
             Request: review.request,
             Reviewer: review.Reviewer,
+            User: review.User,
             reviewURL: review.videoURL
         })
 
@@ -85,13 +88,14 @@ export async function createVideoReview(review: { request: string, videoURL: str
     }
 }
 
-export async function createVideoProfileReview(review: { request: string, videoURL: string, Reviewer: string }) {
+export async function createVideoProfileReview(review: { request: string, videoURL: string, Reviewer: string, User: string }) {
     try {
         await connectToDatabase()
 
         const newReview: IReview = await Review.create({
             Request: review.request,
             Reviewer: review.Reviewer,
+            User: review.User,
             reviewURL: review.videoURL
         })
 
@@ -116,13 +120,14 @@ export async function createVideoProfileReview(review: { request: string, videoU
     }
 }
 
-export async function createTextProfileReview(review: { request: string, bioNotes: string, bioReview: number, highlightsNotes: string, highlightsReview: number, postsNotes: string, postsReview: number, additionalNotes: string, Reviewer: string }) {
+export async function createTextProfileReview(review: { request: string, bioNotes: string, bioReview: number, highlightsNotes: string, highlightsReview: number, postsNotes: string, postsReview: number, additionalNotes: string, Reviewer: string, User: string }) {
     try {
         await connectToDatabase()
 
         const newReview: IReview = await Review.create({
             Request: review.request,
             Reviewer: review.Reviewer,
+            User: review.User,
             bioReview: review.bioReview,
             bioNotes: review.bioNotes,
             highlightsReview: review.highlightsReview,

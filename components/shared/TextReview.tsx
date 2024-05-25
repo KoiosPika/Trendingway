@@ -16,20 +16,25 @@ const TextReview = ({ price, userId, reviewer }: { price: number, userId: string
     const [URL, setURL] = useState<string>('')
     const [description, setDescription] = useState<string>('')
     const [user, setUser] = useState<IUserData>()
+    const [isVisible, setIsVisible] = useState(false);
 
-    useEffect(()=> {
-        async function getUser(){
+    const handleClick = () => {
+        setIsVisible(!isVisible);
+    };
+
+    useEffect(() => {
+        async function getUser() {
             const userData = await getUserDataByUserId(userId);
 
             setUser(userData);
         }
 
         getUser();
-    },[])
+    }, [])
 
     const handleRequest = async () => {
         try {
-            await createRequest({ User: userId, Reviewer: reviewer, postLink: URL, description, platform, price, type:'TextReview' })
+            await createRequest({ User: userId, Reviewer: reviewer, postLink: URL, description, platform, price, type: 'TextReview' })
         } catch (error) {
             console.log(error);
         }
@@ -50,11 +55,28 @@ const TextReview = ({ price, userId, reviewer }: { price: number, userId: string
             <AlertDialogContent className="bg-blue-500 border-0">
                 <AlertDialogHeader>
                     <AlertDialogTitle className="flex flex-row items-center justify-between">
-                        <p className="text-white underline">Request Review</p>
+                        <p className="text-white">Request Review</p>
                         <AlertDialogCancel className="rounded-full bg-white text-black">X</AlertDialogCancel>
                     </AlertDialogTitle>
                     <p className='font-semibold text-white text-[16px]'>Video URL</p>
-                    <Input value={URL} placeholder="Video URL" className="border-[1px] border-black" onChange={(e) => setURL(e.target.value)} />
+                    <div className='flex flex-row'>
+                        <Input value={URL} placeholder="Video URL" onChange={(e) => setURL(e.target.value)} />
+                        <div className="relative inline-block w-[25px]">
+                            <button
+                                onClick={handleClick}
+                                className="px-2 py-2 text-yellow-300 rounded"
+                            >
+                                <span className="px-2 border-[3px] border-yellow-300 rounded-full font-bold">i</span>
+                            </button>
+                            {isVisible && (
+                                <div className="absolute w-[200px] bottom-[-25px] h-[90px] transform -translate-x-full mt-2 p-2 bg-black text-white text-[14px] rounded-lg border shadow-lg">
+                                    <div className="flex items-center justify-center w-full">
+                                        Copy and paste the link of the video from the web browser not the app
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    </div>
                     <p className='font-semibold text-white text-[16px]'>Choose a platform</p>
                     <div className='grid grid-cols-3 w-full gap-3 bg-white rounded-md font-semibold border-2 border-white'>
                         <p

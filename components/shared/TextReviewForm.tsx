@@ -5,7 +5,7 @@ import { ScrollArea } from '../ui/scroll-area'
 import { createTextReview } from '@/lib/actions/review.actions'
 import { useRouter } from 'next/navigation'
 
-const TextReviewForm = ({ height, id, reviewer }: { height: number, id: string, reviewer: string }) => {
+const TextReviewForm = ({ height, id, reviewer, user }: { height: number, id: string, reviewer: string, user:string }) => {
     const [contentNotes, setContentNotes] = useState<string>('')
     const [contentReview, setContentReview] = useState<number>(1)
 
@@ -31,6 +31,7 @@ const TextReviewForm = ({ height, id, reviewer }: { height: number, id: string, 
 
         const review = {
             request: id,
+            User:user,
             Reviewer: reviewer || '',
             contentNotes: contentNotes || '',
             contentReview,

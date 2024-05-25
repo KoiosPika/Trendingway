@@ -7,7 +7,7 @@ import { Input } from '../ui/input'
 import { createTextProfileReview } from '@/lib/actions/review.actions'
 import { useRouter } from 'next/navigation'
 
-const TextProfileReviewForm = ({ height, id, reviewer }: { height: number, id: string, reviewer: string }) => {
+const TextProfileReviewForm = ({ height, id, reviewer, user }: { height: number, id: string, reviewer: string, user:string }) => {
 
     const [bioNotes, setBioNotes] = useState<string>('')
     const [bioReview, setBioReview] = useState<number>(1)
@@ -35,6 +35,7 @@ const TextProfileReviewForm = ({ height, id, reviewer }: { height: number, id: s
             postsNotes,
             postsReview,
             additionalNotes,
+            User:user,
             Reviewer: reviewer
         }
 

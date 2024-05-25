@@ -7,7 +7,7 @@ import { Input } from '../ui/input'
 import { createVideoProfileReview } from '@/lib/actions/review.actions'
 import { useRouter } from 'next/navigation'
 
-const VideoProfileReviewForm = ({ height, id, reviewer }: { height: number, id: string, reviewer: string }) => {
+const VideoProfileReviewForm = ({ height, id, reviewer, user }: { height: number, id: string, reviewer: string, user:string }) => {
     const [URL, setURL] = useState('')
     const [loading, setLoading] = useState<boolean>(false)
     const router = useRouter();
@@ -18,6 +18,7 @@ const VideoProfileReviewForm = ({ height, id, reviewer }: { height: number, id: 
         const review = {
             request: id,
             videoURL: URL,
+            User:user,
             Reviewer: reviewer
         }
 

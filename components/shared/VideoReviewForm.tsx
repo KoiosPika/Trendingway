@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { createVideoReview } from '@/lib/actions/review.actions'
 import { useRouter } from 'next/navigation'
 
-const VideoReviewForm = ({ height, id, reviewer }: { height: number, id: string, reviewer: string }) => {
+const VideoReviewForm = ({ height, id, reviewer, user }: { height: number, id: string, reviewer: string, user:string }) => {
     const [URL, setURL] = useState('')
     const [loading, setLoading] = useState<boolean>(false)
     const router = useRouter();
@@ -17,6 +17,7 @@ const VideoReviewForm = ({ height, id, reviewer }: { height: number, id: string,
         const review = {
             request: id,
             videoURL: URL, 
+            User:user,
             Reviewer: reviewer
         }
 
