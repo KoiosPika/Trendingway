@@ -28,6 +28,8 @@ const EditProfile = ({ userId }: { userId: string }) => {
     const [selectedCategory, setSelectedCategory] = useState<string[]>(['']);
     const [loading, setLoading] = useState(false)
 
+    const enableSaving = TextReview >= 0.99 && VideoReview >= 1.99 && TextProfileReview >= 2.99 && VideoProfileReview >= 3.99;
+
     useEffect(() => {
         async function getUser() {
             const myUser: IUserData = await getUserDataByUserId(userId)
@@ -87,58 +89,70 @@ const EditProfile = ({ userId }: { userId: string }) => {
                     <div className='rounded-lg flex flex-col justify-center items-center my-3 p-3 w-full md:w-4/5 bg-white'>
                         <p className='text-[20px] font-bold px-4 py-2 rounded-lg text-black'>Edit Profile</p>
                         <div className='flex flex-col justify-center items-center w-4/5 gap-3 my-3'>
-                            <p className='font-semibold mr-auto bg-green-400 px-4 py-2 rounded-full'>About Me:</p>
-                            <Textarea value={aboutMe} className='w-full border-2 border-black text-[16px]' onChange={(e) => setAboutMe(e.target.value)} />
+                            <p className='font-semibold mr-auto bg-green-400 px-4 py-2 rounded-full text-[13px] md:text-[16px]'>About Me:</p>
+                            <Textarea value={aboutMe} className='w-full border-2 border-black text-[14px] md:text-[16px] font-semibold' onChange={(e) => setAboutMe(e.target.value)} />
                         </div>
                         <div className='flex flex-col justify-center items-center w-4/5 gap-3 my-3'>
-                            <p className='font-semibold mr-auto bg-blue-400 px-4 py-2 rounded-full'>Personal Link:</p>
-                            <Input value={link} className='w-full border-2 border-black text-[16px]' onChange={(e) => setLink(e.target.value)} />
+                            <p className='font-semibold mr-auto bg-blue-400 px-4 py-2 rounded-full text-[13px] md:text-[16px]'>Personal Link:</p>
+                            <Input value={link} className='w-full border-2 border-black text-[14px] md:text-[16px] font-semibold' onChange={(e) => setLink(e.target.value)} />
                         </div>
                         <div className='flex flex-col justify-center items-center w-4/5 gap-3 my-3'>
-                            <p className='font-bold mr-auto bg-orange-400 px-4 py-2 rounded-full'>Services:</p>
+                            <p className='font-bold mr-auto bg-orange-400 px-4 py-2 rounded-full text-[13px] md:text-[16px]'>Services:</p>
                             <div className='w-full flex flex-col gap-3'>
                                 <div className='border-[1px] border-slate-300 rounded-lg h-[150px] flex justify-center items-center gap-2' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                                     <div className='flex flex-col items-center gap-2 flex-1'>
-                                        <Image src={'/icons/video.svg'} alt='video' width={200} height={200} className='bg-blue-500 w-[55px] h-[55px] p-2 rounded-full' />
-                                        <p className='font-semibold'>Text Review</p>
+                                        <Image src={'/icons/video.svg'} alt='video' width={200} height={200} className='bg-blue-500 w-[35px] h-[35px] md:w-[55px] md:h-[55px] p-1 md:p-2 rounded-full' />
+                                        <p className='font-semibold text-[13px] md:text-[16px]'>Text Review</p>
                                     </div>
                                     <div className='h-3/4 w-[2px] bg-black'></div>
-                                    <div className='flex flex-row items-center justify-center flex-1 mr-auto'>
-                                        <p className='text-[25px] font-semibold'>$</p>
-                                        <Input value={TextReview} className='text-[25px] font-semibold w-2/3 border-0' type='number' onChange={(e) => setTextReview(Number(e.target.value))} />
+                                    <div className='flex flex-col items-center justify-center flex-1 mr-auto'>
+                                        <div className='flex flex-row justify-center items-center w-full'>
+                                            <p className='text-[20px] md:text-[25px] font-semibold' style={{ color: TextReview < 0.99 ? 'red' : 'black' }}>$</p>
+                                            <Input value={TextReview} className='text-[20px] md:text-[25px] font-semibold w-2/3 border-0' type='number' onChange={(e) => setTextReview(Number(e.target.value))} style={{ color: TextReview < 0.99 ? 'red' : 'black' }} />
+                                        </div>
+                                        {TextReview < 0.99 && <p className='mt-[5px] mr-auto text-[10px] md:text-[12px]  font-semibold text-red-500'>Price Can't be Bellow 0.99</p>}
                                     </div>
                                 </div>
                                 <div className='border-[1px] border-slate-300 rounded-lg h-[150px] flex justify-center items-center gap-2' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                                     <div className='flex flex-col items-center gap-2 flex-1'>
-                                        <Image src={'/icons/video-icon.svg'} alt='video' width={200} height={200} className='bg-red-500 w-[55px] h-[55px] p-2 rounded-full' />
-                                        <p className='font-semibold'>Video Review</p>
+                                        <Image src={'/icons/video-icon.svg'} alt='video' width={200} height={200} className='bg-red-500 w-[35px] h-[35px] md:w-[55px] md:h-[55px] p-1 md:p-2 rounded-full' />
+                                        <p className='font-semibold text-[13px] md:text-[16px]'>Video Review</p>
                                     </div>
                                     <div className='h-3/4 w-[2px] bg-black'></div>
-                                    <div className='flex flex-row items-center justify-center flex-1 mr-auto'>
-                                        <p className='text-[25px] font-semibold'>$</p>
-                                        <Input value={VideoReview} className='text-[25px] font-semibold w-2/3 border-0' type='number' onChange={(e) => setVideoReview(Number(e.target.value))} />
+                                    <div className='flex flex-col items-center justify-center flex-1 mr-auto'>
+                                        <div className='flex flex-row justify-center items-center w-full'>
+                                            <p className='text-[20px] md:text-[25px] font-semibold' style={{ color: VideoReview < 1.99 ? 'red' : 'black' }}>$</p>
+                                            <Input value={VideoReview} className='text-[20px] md:text-[25px] font-semibold w-2/3 border-0' type='number' onChange={(e) => setVideoReview(Number(e.target.value))} style={{ color: VideoReview < 1.99 ? 'red' : 'black' }} />
+                                        </div>
+                                        {VideoReview < 1.99 && <p className='mt-[5px] mr-auto text-[10px] md:text-[12px]  font-semibold text-red-500'>Price Can't be Bellow 1.99</p>}
                                     </div>
                                 </div>
                                 <div className='border-[1px] border-slate-300 rounded-lg h-[150px] flex justify-center items-center gap-2' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                                     <div className='flex flex-col items-center gap-2 flex-1'>
-                                        <Image src={'/icons/account.svg'} alt='video' width={200} height={200} className='bg-orange-500 w-[55px] h-[55px] p-2 rounded-full' />
-                                        <p className='font-semibold'>Text Profile Review</p>
+                                        <Image src={'/icons/account.svg'} alt='video' width={200} height={200} className='bg-orange-500 w-[35px] h-[35px] md:w-[55px] md:h-[55px] p-1 md:p-2 rounded-full' />
+                                        <p className='font-semibold text-[13px] md:text-[16px]'>Text Profile Review</p>
                                     </div>
                                     <div className='h-3/4 w-[2px] bg-black'></div>
-                                    <div className='flex flex-row items-center justify-center flex-1 mr-auto'>
-                                        <p className='text-[25px] font-semibold'>$</p>
-                                        <Input value={TextProfileReview} className='text-[25px] font-semibold w-2/3 border-0' type='number' onChange={(e) => setTextProfileReview(Number(e.target.value))} />
+                                    <div className='flex flex-col items-center justify-center flex-1 mr-auto'>
+                                        <div className='flex flex-row justify-center items-center w-full'>
+                                            <p className='text-[20px] md:text-[25px] font-semibold' style={{ color: TextProfileReview < 2.99 ? 'red' : 'black' }}>$</p>
+                                            <Input value={TextProfileReview} className='text-[20px] md:text-[25px] font-semibold w-2/3 border-0' type='number' onChange={(e) => setTextProfileReview(Number(e.target.value))} style={{ color: TextProfileReview < 1.99 ? 'red' : 'black' }} />
+                                        </div>
+                                        {TextProfileReview < 2.99 && <p className='mt-[5px] mr-auto text-[10px] md:text-[12px] font-semibold text-red-500'>Price Can't be Bellow 2.99</p>}
                                     </div>
                                 </div>
                                 <div className='border-[1px] border-slate-300 rounded-lg h-[150px] flex justify-center items-center gap-2' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                                     <div className='flex flex-col items-center gap-2 flex-1'>
-                                        <Image src={'/icons/video-icon.svg'} alt='video' width={200} height={200} className='bg-green-600 w-[55px] h-[55px] p-2 rounded-full' />
-                                        <p className='font-semibold'>Video Profile Review</p>
+                                        <Image src={'/icons/video-icon.svg'} alt='video' width={200} height={200} className='bg-green-600 w-[35px] h-[35px] md:w-[55px] md:h-[55px] p-1 md:p-2 rounded-full' />
+                                        <p className='font-semibold text-[13px] md:text-[16px]'>Video Profile Review</p>
                                     </div>
                                     <div className='h-3/4 w-[2px] bg-black'></div>
-                                    <div className='flex flex-row items-center justify-center flex-1 mr-auto'>
-                                        <p className='text-[25px] font-semibold'>$</p>
-                                        <Input value={VideoProfileReview} className='text-[25px] font-semibold w-2/3 border-0' type='number' onChange={(e) => setVideoProfileReview(Number(e.target.value))} />
+                                    <div className='flex flex-col items-center justify-center flex-1 mr-auto'>
+                                        <div className='flex flex-row justify-center items-center w-full'>
+                                            <p className='text-[20px] md:text-[25px] font-semibold' style={{ color: VideoProfileReview < 3.99 ? 'red' : 'black' }}>$</p>
+                                            <Input value={VideoProfileReview} className='text-[20px] md:text-[25px] font-semibold w-2/3 border-0' type='number' onChange={(e) => setVideoProfileReview(Number(e.target.value))} style={{ color: VideoProfileReview < 3.99 ? 'red' : 'black' }} />
+                                        </div>
+                                        {VideoProfileReview < 3.99 && <p className='mt-[5px] mr-auto text-[10px] md:text-[12px] font-semibold text-red-500'>Price Can't be Bellow 3.99</p>}
                                     </div>
                                 </div>
                             </div>
@@ -305,20 +319,25 @@ const EditProfile = ({ userId }: { userId: string }) => {
                                 {selectedCategory.map((content, index) => (
                                     content &&
                                     <div key={index} className='flex flex-row items-center bg-green-200 border-[2px] border-green-600 rounded-lg px-3 py-2 gap-2'>
-                                        <p onClick={() => handleDeleteCategories(index)} className='bg-red-600 px-2 text-white font-bold rounded-sm hover:cursor-pointer'>x</p>
-                                        <p key={content} className=' text-green-600 font-bold'>{content}</p>
+                                        <p onClick={() => handleDeleteCategories(index)} className='bg-red-600 px-1 md:px-2 text-white font-bold rounded-sm hover:cursor-pointer text-[12px] md:text-[16px]'>x</p>
+                                        <p key={content} className=' text-green-600 font-bold text-[12px] md:text-[16px]'>{content}</p>
                                     </div>
                                 ))}
                                 {selectedLanguage.map((language, index) => (
                                     language &&
                                     <div key={index} className='flex flex-row items-center bg-orange-200 border-[2px] border-orange-600 rounded-lg px-3 py-2 gap-2'>
-                                        <p onClick={() => handleDeleteLangauge(index)} className='bg-red-600 px-2 text-white font-bold rounded-sm hover:cursor-pointer'>x</p>
-                                        <p key={language} className=' text-orange-600 font-bold'>{language}</p>
+                                        <p onClick={() => handleDeleteLangauge(index)} className='bg-red-600 px-1 md:px-2 text-white font-bold rounded-sm hover:cursor-pointer text-[12px] md:text-[16px]'>x</p>
+                                        <p key={language} className=' text-orange-600 font-bold text-[12px] md:text-[16px]'>{language}</p>
                                     </div>))}
                             </div>
-                            <Button disabled={loading} className='my-3 bg-black p-3 rounded-lg' onClick={handleSubmit}>
-                                <p className='font-semibold text-[15px] text-white'>Save Info</p>
-                            </Button>
+                            {enableSaving &&
+                                <Button disabled={loading} className='my-3 bg-black p-3 rounded-lg' onClick={handleSubmit}>
+                                    <p className='font-semibold text-[15px] text-white'>Save Info</p>
+                                </Button>}
+                            {!enableSaving &&
+                                <Button disabled={loading} className='my-3 bg-slate-500 p-3 rounded-lg disabled hover:cursor-default hover:bg-slate-500'>
+                                    <p className='font-semibold text-[15px] text-white'>Save Info</p>
+                                </Button>}
                         </div>
                     </div>
                 </div>

@@ -90,7 +90,7 @@ const page = async () => {
                         <p className='mr-auto my-3 font-semibold text-[18px] ml-3'>Connect with other influencers:</p>
                         <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
                             {users.map((user: IUserData) => (
-                                <div key={user._id} className='bg-white border-2 border-slate-200 rounded-lg flex flex-row justify-center items-center p-1 m-3' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
+                                <Link href={`/profile/${user?.User?.username}`} key={user._id} className='bg-white border-2 border-slate-200 rounded-lg flex flex-row justify-center items-center p-1 m-3' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                                     <div className='flex flex-col w-1/3 justify-center items-center'>
                                         <Image className='w-[100px] h-[100px] rounded-full my-2' src={user?.User?.photo} alt='pfp' height={300} width={300} />
                                         <div className='mx-3 flex flex-row'>
@@ -105,7 +105,7 @@ const page = async () => {
                                             ))}
                                         </div>
                                     </div>
-                                </div>))}
+                                </Link>))}
                         </div>
                     </div>
                 </div>

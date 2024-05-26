@@ -9,6 +9,8 @@ import Request from '../database/models/request.model'
 const populateReview = (query: any) => {
     return query
         .populate({ path: 'Request', model: Request, select: "User Reviewer postLink description platform type" })
+        .populate({ path: 'User', model:User, select: "username photo"})
+        .populate({ path: 'Reviewer', model:User, select: "username photo"})
 }
 
 export async function createTextReview(review: { request: string, contentNotes: string, contentReview: number, brightnessNotes: string, brightnessReview: number, descriptionNotes: string, descriptionReview: number, hashtagsNotes: string, hashtagsReview: number, soundNotes: string, soundReview: number, additionalNotes: string, Reviewer: string, User: string }) {
@@ -202,6 +204,18 @@ export async function submitReviewRate(id: string, rating: number) {
         )
 
 
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export async function getAllResponses(userId: string) {
+    try {
+        await connectToDatabase();
+
+        const requests = await populateReview(Review.find({ User: userId }).sort({createdAt:-1}))
+
+        return JSON.parse(JSON.stringify(requests));
     } catch (error) {
         console.log(error)
     }

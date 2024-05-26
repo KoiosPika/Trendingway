@@ -64,15 +64,3 @@ export async function getAllRequests(userId: string) {
         console.log(error)
     }
 }
-
-export async function getAllResponses(userId: string) {
-    try {
-        await connectToDatabase();
-
-        const requests = await populateRequest(Request.find({ User: userId, reviewed: true }).sort({createdAt:-1}))
-
-        return JSON.parse(JSON.stringify(requests));
-    } catch (error) {
-        console.log(error)
-    }
-}

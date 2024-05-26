@@ -64,14 +64,46 @@ export async function editUserData({ userId, aboutMe, link, TextReview, VideoRev
     }
 }
 
-export async function getUsers(){
+export async function getUsers() {
     try {
         await connectToDatabase();
 
         const users = await populateUsers(UserData.find())
 
         return JSON.parse(JSON.stringify(users));
-        
+
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export async function getTopUsers() {
+    try {
+        await connectToDatabase();
+
+        const users = await User.aggregate([
+            {
+                $addFields: {
+                    compositeScore: {
+                        $add: [
+                            { $multiply: ['$avgReview', 0.7] }, // Weighted avgReview (e.g., 70%)
+                            { $multiply: ['$nofReviews', 0.3] } // Weighted nofReviews (e.g., 30%)
+                        ]
+                    }
+                }
+            },
+            {
+                $sort: { compositeScore: -1 } // Sort by compositeScore in descending order
+            }
+        ]);
+
+        const userIds = users.map(user => user._id);
+
+        // Fetch and populate user data
+        const populatedUsers = await populateUsers(UserData.find({ User: { $in: userIds } }));
+
+        return JSON.parse(JSON.stringify(populatedUsers));
+
     } catch (error) {
         console.log(error)
     }

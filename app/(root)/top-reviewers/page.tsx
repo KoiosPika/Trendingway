@@ -2,19 +2,17 @@ import Image from 'next/image'
 import Link from 'next/link';
 import React from 'react'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, } from "@/components/ui/select"
+import { getTopUsers } from '@/lib/actions/userData.actions';
+import { IUserData } from '@/lib/database/models/userData.model';
 
 
-const page = () => {
+const page = async () => {
 
-    const rate = 3.5;
-    const yellowStarsCount = Math.round(rate);
-    const greyStarsCount = 5 - yellowStarsCount;
-
-    const arr = [1, 2, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4];
+    const users = await getTopUsers()
 
     return (
-        <div className='w-full flex justify-center items-center bg-white h-full'>
-            <div className='w-full flex flex-col max-w-[900px] justify-center items-center'>
+        <div className='w-full flex justify-center bg-white h-full'>
+            <div className='w-full flex flex-col max-w-[900px] items-center'>
                 <div className='my-3 justify-center items-center flex flex-col w-full'>
                     <div className='flex justify-around items-center my-3 py-2 px-3 w-full gap-3 text-black text-[12px] md:text-[16px]'>
                         <div className='bg-white text-black font-semibold py-[3px] px-[5px] rounded-md w-2/4'>
@@ -201,40 +199,30 @@ const page = () => {
                                 </tr>
                             </thead>
                             <tbody className='text-[12px] text-center'>
-                                {arr.map((_, index) => (
-                                    <tr key={index} style={{ backgroundColor: index % 2 == 0 ? '#D1CBCA' : 'white' }}>
+                                {users?.map((user: IUserData, index: any) => (
+                                    <tr key={user?._id} style={{ backgroundColor: index % 2 == 0 ? '#D9DCDE' : 'white' }}>
                                         <td>
                                             <p className='md:text-[15px] md:font-bold'>{index + 1}</p>
                                         </td>
                                         <td className='flex justify-center items-center h-[35px] md:h-[60px]'>
-                                            <div className='flex flex-row items-center justify-center gap-3 h-8 w-7/8 '>
-                                                <Image src={'/images/pfp.png'} alt='pfp' className='w-[20px] h-[20px] md:w-[40px] md:h-[40px] border-2 border-black rounded-full' width={100} height={100} />
-                                                <p className='truncate font-bold text-[10px] md:text-[13px] mr-auto'>Jane Doeeee</p>
-                                            </div>
+                                            <Link href={`/profile/${user?.User?.username}`} className='flex flex-row items-center justify-center gap-3 h-8 w-7/8 '>
+                                                <Image src={user?.User?.photo} alt='pfp' className='w-[20px] h-[20px] md:w-[40px] md:h-[40px] border-[2px] border-black rounded-full' width={100} height={100} />
+                                                <p className='truncate font-bold text-[10px] md:text-[13px] mr-auto'>{user?.User?.username}</p>
+                                            </Link>
                                         </td>
                                         <td>
                                             <div className='flex flex-row items-center justify-center'>
-                                                {Array.from({ length: yellowStarsCount }).map((_, index) => (
+                                                {Array.from({ length: 5 }, (_, index) => (
                                                     <Image
-                                                        key={`yellow-${index}`}
-                                                        src="/icons/star-yellow.svg"
-                                                        alt="Yellow Star"
+                                                        key={index}
+                                                        className='h-[10px] w-[10px] md:h-[20px] md:w-[20px]'
+                                                        src={index < Math.floor(user?.avgReview) ? '/icons/star-yellow.svg' : '/icons/star-grey.svg'}
+                                                        alt='star'
                                                         width={100}
                                                         height={100}
-                                                        className='h-[10px] w-[10px] md:h-[20px] md:w-[20px]'
                                                     />
                                                 ))}
-                                                {Array.from({ length: greyStarsCount }).map((_, index) => (
-                                                    <Image
-                                                        key={`grey-${index}`}
-                                                        src="/icons/star-grey.svg"
-                                                        alt="Grey Star"
-                                                        height={100}
-                                                        width={100}
-                                                        className='h-[10px] w-[10px] md:h-[20px] md:w-[20px]'
-                                                    />
-                                                ))}
-                                                <p className='ml-2 text-black font-semibold text-[11px] md:text-[15px]'>(5.2k)</p>
+                                                <p className='ml-2 text-black font-semibold text-[11px] md:text-[15px]'>({user?.nofReviews})</p>
                                             </div>
                                         </td>
                                     </tr>))}

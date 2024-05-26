@@ -3,7 +3,7 @@ import TextReview from '@/components/shared/TextReview';
 import OneVideoRequest from '@/components/shared/TextReview';
 import VideoProfileReview from '@/components/shared/VideoProfileReview';
 import VideoReview from '@/components/shared/VideoReview';
-import { getUserDataByUsername } from '@/lib/actions/userData.actions';
+import { getUserDataByUsername, getUsers } from '@/lib/actions/userData.actions';
 import { IUserData } from '@/lib/database/models/userData.model';
 import { auth } from '@clerk/nextjs/server';
 import Image from 'next/image'
@@ -21,7 +21,7 @@ const page = async ({ params: { username } }: { params: { username: string } }) 
     const yellowStarsCount = Math.round(rate);
     const greyStarsCount = 5 - yellowStarsCount;
 
-    const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 0]
+    const users = await getUsers();
 
     return (
         <div className='w-full flex justify-center items-center bg-white'>
@@ -34,31 +34,38 @@ const page = async ({ params: { username } }: { params: { username: string } }) 
                                 <Image src={'/icons/verified.svg'} alt='verified' height={20} width={20} />
                             </div>
                             <Image className='h-[200px] w-[200px] bg-white rounded-full border-2 border-slate-300' src={user?.User?.photo} alt='pfp' height={500} width={500} />
-                            <div className='flex flex-row items-center'>
-                                {Array.from({ length: yellowStarsCount }).map((_, index) => (
-                                    <Image
-                                        key={`yellow-${index}`}
-                                        src="/icons/star-yellow.svg"
-                                        alt="Yellow Star"
-                                        width={24}
-                                        height={24}
-                                    />
-                                ))}
-                                {Array.from({ length: greyStarsCount }).map((_, index) => (
-                                    <Image
-                                        key={`grey-${index}`}
-                                        src="/icons/star-grey.svg"
-                                        alt="Grey Star"
-                                        width={24}
-                                        height={24}
-                                    />
-                                ))}
-                                <p className='ml-2 text-black font-semibold'>({user.nofReviews})</p>
+                            <div className='w-full flex flex-row'>
+                                <div className='flex flex-row items-center'>
+                                    {Array.from({ length: yellowStarsCount }).map((_, index) => (
+                                        <Image
+                                            key={`yellow-${index}`}
+                                            src="/icons/star-yellow.svg"
+                                            alt="Yellow Star"
+                                            width={24}
+                                            height={24}
+                                        />
+                                    ))}
+                                    {Array.from({ length: greyStarsCount }).map((_, index) => (
+                                        <Image
+                                            key={`grey-${index}`}
+                                            src="/icons/star-grey.svg"
+                                            alt="Grey Star"
+                                            width={24}
+                                            height={24}
+                                        />
+                                    ))}
+                                    <p className='ml-2 text-black font-semibold'>({user.nofReviews})</p>
+                                    <div className='h-[25px] w-[2px] bg-black mx-5' />
+                                    <div className='flex flex-row items-center gap-2'>
+                                        <p className='text-yellow-600 font-bold'>{user?.nofVideoesReviewed}</p>
+                                        <p className='text-black font-bold'>Reviews</p>
+                                    </div>
+                                </div>
                             </div>
                             <a href={user.websiteLink} target='_blank' className='text-blue-600 hover:underline'>{user?.websiteLink}</a>
                         </div>
-                        <div className='flex flex-col md:flex-row w-full gap-2 my-3 text-black'>
-                            <Link href={'#services'} className='bg-yellow-400 flex-1 flex justify-center items-center py-2 rounded-[20px] font-bold border-2 border-black'>Browse Services</Link>
+                        <div className='flex flex-col justify-center items-center md:flex-row w-full gap-2 my-3 text-black'>
+                            <Link href={'#services'} className='bg-yellow-400 w-3/4 self-center flex justify-center items-center py-2 rounded-[10px] font-bold'>Browse Services</Link>
                         </div>
                     </div>
                     <p className='mr-auto my-3 font-semibold text-[18px] ml-3'>Tags:</p>
@@ -82,23 +89,23 @@ const page = async ({ params: { username } }: { params: { username: string } }) 
                     <div className='w-full my-3'>
                         <p className='mr-auto my-3 font-semibold text-[18px] ml-3'>Connect with other influencers:</p>
                         <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
-                            {arr.map((_, index) => (
-                                <div key={index} className='bg-white border-2 border-slate-200 rounded-lg py-3 flex flex-row justify-center items-center p-3 m-3' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
+                            {users.map((user: IUserData) => (
+                                <Link href={`/profile/${user?.User?.username}`} key={user._id} className='bg-white border-2 border-slate-200 rounded-lg flex flex-row justify-center items-center p-1 m-3' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                                     <div className='flex flex-col w-1/3 justify-center items-center'>
-                                        <Image className='w-[100px] h-[100px] rounded-full my-2' src={'/images/pfp.png'} alt='pfp' height={300} width={300} />
+                                        <Image className='w-[100px] h-[100px] rounded-full my-2' src={user?.User?.photo} alt='pfp' height={300} width={300} />
                                         <div className='mx-3 flex flex-row'>
-                                            <p className='font-semibold'>iamerika</p>
+                                            <p className='font-bold md:text-[16px] text-[12px]'>{user?.User?.username}</p>
                                         </div>
                                     </div>
                                     <div className='flex flex-col w-2/3 gap-3'>
-                                        <p> temporibus accusantium laboriosam et explicabo deserunt necessitatibus inventore fugiat saepe architecto placeat dolorem?</p>
-                                        <div className=' grid grid-cols-3 gap-2'>
-                                            <p className='bg-green-200 text-green-600 px-3 py-2 rounded-lg font-bold text-center border-[2px] border-green-600'>sport</p>
-                                            <p className='bg-green-200 text-green-600 px-3 py-2 rounded-lg font-bold text-center border-[2px] border-green-600'>sport</p>
-                                            <p className='bg-green-200 text-green-600 px-3 py-2 rounded-lg font-bold text-center border-[2px] border-green-600'>sport</p>
+                                        <p className='font-semibold line-clamp-4 md:text-[14px] text-[12px]'>{user?.aboutMe}</p>
+                                        <div className='flex flex-wrap gap-1'>
+                                            {user?.categories.slice(0, 3).map((category: any, index) => (
+                                                <p key={category} className='bg-green-200 text-green-600 px-3 py-2 rounded-lg font-bold border-[2px] border-green-600 text-[10px] lg:text-[12.5px]'>{category}</p>
+                                            ))}
                                         </div>
                                     </div>
-                                </div>))}
+                                </Link>))}
                         </div>
                     </div>
                 </div>
