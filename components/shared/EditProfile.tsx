@@ -110,7 +110,7 @@ const EditProfile = ({ userId }: { userId: string }) => {
                                             <p className='text-[20px] md:text-[25px] font-semibold' style={{ color: TextReview < 0.99 ? 'red' : 'black' }}>$</p>
                                             <Input value={TextReview} className='text-[20px] md:text-[25px] font-semibold w-2/3 border-0' type='number' onChange={(e) => setTextReview(Number(e.target.value))} style={{ color: TextReview < 0.99 ? 'red' : 'black' }} />
                                         </div>
-                                        {TextReview < 0.99 && <p className='mt-[5px] mr-auto text-[10px] md:text-[12px]  font-semibold text-red-500'>Price Can't be Bellow 0.99</p>}
+                                        {TextReview < 0.99 && <p className='mt-[5px] mr-auto text-[10px] md:text-[12px]  font-semibold text-red-500'>{`Price Can't be Bellow 0.99`}</p>}
                                     </div>
                                 </div>
                                 <div className='border-[1px] border-slate-300 rounded-lg h-[150px] flex justify-center items-center gap-2' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
@@ -124,7 +124,7 @@ const EditProfile = ({ userId }: { userId: string }) => {
                                             <p className='text-[20px] md:text-[25px] font-semibold' style={{ color: VideoReview < 1.99 ? 'red' : 'black' }}>$</p>
                                             <Input value={VideoReview} className='text-[20px] md:text-[25px] font-semibold w-2/3 border-0' type='number' onChange={(e) => setVideoReview(Number(e.target.value))} style={{ color: VideoReview < 1.99 ? 'red' : 'black' }} />
                                         </div>
-                                        {VideoReview < 1.99 && <p className='mt-[5px] mr-auto text-[10px] md:text-[12px]  font-semibold text-red-500'>Price Can't be Bellow 1.99</p>}
+                                        {VideoReview < 1.99 && <p className='mt-[5px] mr-auto text-[10px] md:text-[12px]  font-semibold text-red-500'>{`Price Can't be Bellow 1.99`}</p>}
                                     </div>
                                 </div>
                                 <div className='border-[1px] border-slate-300 rounded-lg h-[150px] flex justify-center items-center gap-2' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
@@ -138,7 +138,7 @@ const EditProfile = ({ userId }: { userId: string }) => {
                                             <p className='text-[20px] md:text-[25px] font-semibold' style={{ color: TextProfileReview < 2.99 ? 'red' : 'black' }}>$</p>
                                             <Input value={TextProfileReview} className='text-[20px] md:text-[25px] font-semibold w-2/3 border-0' type='number' onChange={(e) => setTextProfileReview(Number(e.target.value))} style={{ color: TextProfileReview < 1.99 ? 'red' : 'black' }} />
                                         </div>
-                                        {TextProfileReview < 2.99 && <p className='mt-[5px] mr-auto text-[10px] md:text-[12px] font-semibold text-red-500'>Price Can't be Bellow 2.99</p>}
+                                        {TextProfileReview < 2.99 && <p className='mt-[5px] mr-auto text-[10px] md:text-[12px] font-semibold text-red-500'>{`Price Can't be Bellow 2.99`}</p>}
                                     </div>
                                 </div>
                                 <div className='border-[1px] border-slate-300 rounded-lg h-[150px] flex justify-center items-center gap-2' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
@@ -152,7 +152,7 @@ const EditProfile = ({ userId }: { userId: string }) => {
                                             <p className='text-[20px] md:text-[25px] font-semibold' style={{ color: VideoProfileReview < 3.99 ? 'red' : 'black' }}>$</p>
                                             <Input value={VideoProfileReview} className='text-[20px] md:text-[25px] font-semibold w-2/3 border-0' type='number' onChange={(e) => setVideoProfileReview(Number(e.target.value))} style={{ color: VideoProfileReview < 3.99 ? 'red' : 'black' }} />
                                         </div>
-                                        {VideoProfileReview < 3.99 && <p className='mt-[5px] mr-auto text-[10px] md:text-[12px] font-semibold text-red-500'>Price Can't be Bellow 3.99</p>}
+                                        {VideoProfileReview < 3.99 && <p className='mt-[5px] mr-auto text-[10px] md:text-[12px] font-semibold text-red-500'>{`Price Can't be Bellow 3.99`}</p>}
                                     </div>
                                 </div>
                             </div>
