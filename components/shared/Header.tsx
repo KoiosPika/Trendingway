@@ -11,15 +11,14 @@ import { getUserbyUserId } from '@/lib/actions/user.actions'
 const Header = async () => {
 
   return (
-    <header className='w-full py-2 md:px-10 bg-white'>
+    <header className='w-full py-1 md:px-10 bg-white'>
       <div className='flex items-center justify-between md:justify-evenly px-2'>
         <MobileNav />
         <div className='flex flex-1 md:flex-none justify-center'>
           <Link href={'/'}>
-            <Image className='h-[60px] w-[60px] bg-[#fcd62e] rounded-full border-[2px] border-black' src={'/logo.png'} alt='logo' height={1000} width={1000} />
+          <Image className='h-[60px] w-[60px] bg-black rounded-full' src={'/images/logoIcon.png'} alt='logo' height={1000} width={1000} />
           </Link>
         </div>
-
         <nav className='hidden md:block'>
           <NavItems />
         </nav>

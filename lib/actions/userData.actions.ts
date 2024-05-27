@@ -99,7 +99,6 @@ export async function getTopUsers() {
 
         const userIds = users.map(user => user._id);
 
-        // Fetch and populate user data
         const populatedUsers = await populateUsers(UserData.find({ User: { $in: userIds } }));
 
         return JSON.parse(JSON.stringify(populatedUsers));

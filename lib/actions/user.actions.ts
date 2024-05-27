@@ -58,3 +58,15 @@ export async function getUserbyUserId(userId: string) {
         console.log(error)
     }
 }
+
+export async function getUsersByUsername(partialUsername: string) {
+    try {
+        await connectToDatabase();
+
+        const users = await User.find({ username: { $regex: partialUsername, $options: 'i' } });
+
+        return JSON.parse(JSON.stringify(users));
+    } catch (error) {
+        console.log(error)
+    }
+}

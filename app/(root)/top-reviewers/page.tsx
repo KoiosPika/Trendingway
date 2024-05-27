@@ -206,7 +206,7 @@ const page = async () => {
                                         </td>
                                         <td className='flex justify-center items-center h-[35px] md:h-[60px]'>
                                             <Link href={`/profile/${user?.User?.username}`} className='flex flex-row items-center justify-center gap-3 h-8 w-7/8 '>
-                                                <Image src={user?.User?.photo} alt='pfp' className='w-[20px] h-[20px] md:w-[40px] md:h-[40px] border-[2px] border-black rounded-full' width={100} height={100} />
+                                                <Image src={user?.User?.photo} alt='pfp' className='w-[20px] h-[20px] md:w-[45px] md:h-[45px] border-[2px] border-black rounded-full' width={100} height={100} />
                                                 <p className='truncate font-bold text-[10px] md:text-[13px] mr-auto'>{user?.User?.username}</p>
                                             </Link>
                                         </td>
@@ -222,7 +222,7 @@ const page = async () => {
                                                         height={100}
                                                     />
                                                 ))}
-                                                <p className='ml-2 text-black font-semibold text-[11px] md:text-[15px]'>({user?.nofReviews})</p>
+                                                <p className='ml-2 text-black font-semibold text-[9px] md:text-[15px]'>({user?.nofReviews})</p>
                                             </div>
                                         </td>
                                     </tr>))}
