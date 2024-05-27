@@ -15,22 +15,27 @@ const NavItems = () => {
   const Links = [
     {
       label: 'Profile',
-      icon: '/assets/icons/trophy.svg',
+      icon: '/icons/user.svg',
       route: `/profile`
     },
     {
       label: 'Top Reviewers',
-      icon: '/assets/icons/email.svg',
+      icon: '/icons/rank.svg',
       route: '/top-reviewers'
     },
     {
+      label: 'Notifications',
+      icon: '/icons/bell.svg',
+      route: '/my-orders/orders'
+    },
+    {
       label: 'Wallet',
-      icon: '/icons/wallet.svg',
+      icon: '/icons/wallet-black.svg',
       route: '/wallet'
     },
     {
       label: 'Contact Us',
-      icon: '/assets/icons/email.svg',
+      icon: '/icons/email.svg',
       route: '/contact-us'
     },
   ]
@@ -45,8 +50,8 @@ const NavItems = () => {
             key={link.route}
             className={`text-black flex-center flex flex-row whitespace-nowrap hover:text-black hover:bg-yellow-300 p-1 rounded-md`}
           >
-            <Image src={link.icon} alt='icon' height={25} width={25} className='mr-5 ml-2 md:hidden' />
-            <Link className='text-[16px] font-bold' href={link.route}>{link.label}</Link>
+            <Image src={link.icon} alt='icon' height={20} width={20} className='mr-5 ml-2 md:hidden' />
+            <Link className='text-[14px] lg:text-[16px] font-bold' href={link.route}>{link.label}</Link>
           </li>
         )
       })}

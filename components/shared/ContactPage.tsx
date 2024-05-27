@@ -12,11 +12,15 @@ const ContactPage = () => {
     const router = useRouter();
     const [email, setEmail] = useState<string>('')
     const [message, setMessage] = useState<string>('')
+    const [Loading, setLoading] = useState<boolean>(false)
 
     const handleEmail = async () => {
         try {
+            setLoading(true);
             await createEmail(email, message)
             router.push('/profile')
+
+            setLoading(false);
 
         } catch (error) {
             console.log(error);
@@ -37,9 +41,12 @@ const ContactPage = () => {
                             <p className='font-semibold mr-auto'>How can we help you:</p>
                             <Textarea value={message} onChange={(e) => setMessage(e.target.value)} className='w-full border-2 border-black text-[16px] h-[150px]' />
                         </div>
-                        <Button onClick={handleEmail} className='my-5 bg-green-500 hover:bg-green-500 text-black w-2/5 text-center p-2 rounded-lg'>
+                        {!Loading && <Button onClick={handleEmail} className='my-5 bg-yellow-400 hover:bg-yellow-400 text-black w-2/5 text-center p-2 rounded-lg'>
                             <p className='font-semibold text-[16px]'>Submit</p>
-                        </Button>
+                        </Button>}
+                        {Loading && <Button disabled className='my-5 bg-yellow-400 hover:bg-yellow-400 text-black w-2/5 text-center p-2 rounded-lg'>
+                            <p className='font-semibold text-[16px]'>Submitting...</p>
+                        </Button>}
                     </div>
                 </div>
             </div>
