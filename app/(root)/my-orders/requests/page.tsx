@@ -58,6 +58,12 @@ const page = async () => {
             </div>
           </div>
         </div>
+        {requests.length == 0 &&
+          <div className='w-full h-full bg-white flex justify-center items-center gap-3'>
+            <Image src={'/icons/hourglass.svg'} alt='up' height={25} width={25} />
+            <p className='text-[22px] font-bold'>No Requests</p>
+          </div>
+        }
       </div>
     </div>
   )

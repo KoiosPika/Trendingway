@@ -214,7 +214,7 @@ const ResponsePage = ({ id }: { id: string }) => {
                                 <p className='bg-purple-500 text-white px-3 py-2 rounded-lg font-semibold mr-auto ml-5 my-3'>Additional Notes</p>
                                 <p className='w-4/5 bg-slate-300 p-1.5 rounded-lg text-[16px] font-semibold'>{review?.additionalNotes}</p>
                             </div>}
-                            {review?.reviewURL && <div className='rounded-lg h-[700px] w-[360px]'>
+                            {review?.reviewURL && <div className='rounded-lg h-[700px] w-[360px] flex justify-center items-center'>
                                 {review && <YouTubeEmbed url={review?.reviewURL} width={350} height={height} />}
                             </div>}
                             <div className='w-full flex flex-row justify-center items-center text-center my-6'>

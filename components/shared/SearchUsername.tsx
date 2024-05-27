@@ -35,7 +35,7 @@ const SearchUsername = () => {
     return (
         <div className='w-full flex flex-col justify-center items-center'>
             <div className='flex flex-row items-center w-5/6 md:w-3/5 justify-center relative'>
-                <Input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search for influencers" className="border-2 border-black w-full rounded-lg font-bold text-[16px] mb-1" />
+                <Input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search for insighters" className="border-2 border-black w-full rounded-lg font-bold text-[16px] mb-1" />
                 {loading && <Image src={'/icons/spinner.svg'} alt='loading' height={20} width={20} className='absolute right-2' />}
                 {!loading && <Image src={'/icons/search-black.svg'} alt='loading' height={20} width={20} className='absolute right-2 top-3' />}
             </div>

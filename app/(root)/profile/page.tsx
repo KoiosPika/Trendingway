@@ -36,20 +36,11 @@ const page = async () => {
                             <Image className='h-[200px] w-[200px] bg-white rounded-full border-2 border-slate-300' src={user?.User?.photo} alt='pfp' height={500} width={500} />
                             <div className='w-full flex flex-row'>
                                 <div className='flex flex-row items-center'>
-                                    {Array.from({ length: yellowStarsCount }).map((_, index) => (
+                                {Array.from({ length: 5 }, (_, index) => (
                                         <Image
-                                            key={`yellow-${index}`}
-                                            src="/icons/star-yellow.svg"
-                                            alt="Yellow Star"
-                                            width={24}
-                                            height={24}
-                                        />
-                                    ))}
-                                    {Array.from({ length: greyStarsCount }).map((_, index) => (
-                                        <Image
-                                            key={`grey-${index}`}
-                                            src="/icons/star-grey.svg"
-                                            alt="Grey Star"
+                                            key={index}
+                                            src={index < Math.ceil(user?.avgReview) ? '/icons/star-yellow.svg' : '/icons/star-grey.svg'}
+                                            alt='star'
                                             width={24}
                                             height={24}
                                         />
@@ -95,6 +86,19 @@ const page = async () => {
                                         <Image className='w-[100px] h-[100px] rounded-full my-2' src={user?.User?.photo} alt='pfp' height={300} width={300} />
                                         <div className='mx-3 flex flex-row'>
                                             <p className='font-bold md:text-[16px] text-[12px]'>{user?.User?.username}</p>
+                                        </div>
+                                        <div className="flex flex-row items-center">
+                                            {Array.from({ length: 5 }, (_, index) => (
+                                                <Image
+                                                    key={index}
+                                                    className='h-[10px] w-[10px] md:h-[12px] md:w-[12px]'
+                                                    src={index < Math.ceil(user?.avgReview) ? '/icons/star-yellow.svg' : '/icons/star-grey.svg'}
+                                                    alt='star'
+                                                    width={100}
+                                                    height={100}
+                                                />
+                                            ))}
+                                            <p className="text-[12px] mx-1 font-semibold">({user?.nofReviews})</p>
                                         </div>
                                     </div>
                                     <div className='flex flex-col w-2/3 gap-3'>

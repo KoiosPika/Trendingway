@@ -58,6 +58,12 @@ const page = async () => {
             </div>
           </div>
         </div>
+        {reviews.length == 0 &&
+          <div className='w-full h-full bg-white flex justify-center items-center gap-3'>
+            <Image src={'/icons/up.svg'} alt='up' height={30} width={30} className='rotate-180' />
+            <p className='text-[22px] font-bold'>No Responses</p>
+          </div>
+        }
       </div>
     </div>
   )

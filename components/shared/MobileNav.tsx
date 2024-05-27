@@ -16,7 +16,7 @@ const MobileNav = () => {
             className='cursor-pointer ml-2' />
 
         </SheetTrigger>
-        <SheetContent className='flex flex-col gap-6 bg-yellow-500 lg:hidden' side={'left'}>
+        <SheetContent className='flex flex-col gap-6 bg-white lg:hidden' side={'left'}>
           <div className='flex flex-row items-center pb-3 border-b-[2px] border-black'>
             <Image
               className='rounded-full border-2 bg-black border-black'

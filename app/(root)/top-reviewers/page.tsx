@@ -216,7 +216,7 @@ const page = async () => {
                                                     <Image
                                                         key={index}
                                                         className='h-[10px] w-[10px] md:h-[20px] md:w-[20px]'
-                                                        src={index < Math.floor(user?.avgReview) ? '/icons/star-yellow.svg' : '/icons/star-grey.svg'}
+                                                        src={index < Math.ceil(user?.avgReview) ? '/icons/star-yellow.svg' : '/icons/star-grey.svg'}
                                                         alt='star'
                                                         width={100}
                                                         height={100}

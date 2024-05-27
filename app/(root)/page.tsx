@@ -17,11 +17,11 @@ const page = async () => {
       <div className='w-full flex flex-col max-w-[900px] justify-center items-center'>
         <div className='my-3 justify-center items-center flex flex-col w-full'>
           <div className="flex w-full justify-center items-center mt-8 mb-3">
-            <Image src={'/images/logoafter.png'} alt="logo" className="h-[150px] w-[150px] md:h-[250px] md:w-[250px]" height={1000} width={1000} />
+            <Image src={'/images/uncut.png'} alt="logo" className="h-[150px] w-[150px] md:h-[250px] md:w-[250px]" height={1000} width={1000} />
           </div>
             <SearchUsername />  
           <div className='w-full my-3'>
-            <p className='mr-auto my-3 font-semibold text-[18px] ml-3'>Connect with other influencers:</p>
+            <p className='mr-auto my-3 font-semibold text-[18px] ml-3'>Connect with other insighters:</p>
             <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
               {users.map((user: IUserData) => (
                 <Link href={`/profile/${user?.User?.username}`} key={user._id} className='bg-white border-2 border-slate-200 rounded-lg flex flex-row justify-center items-center p-1 m-3' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>

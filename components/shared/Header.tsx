@@ -18,7 +18,7 @@ const Header = () => {
         <MobileNav />
         <div className='flex md:flex-none justify-center'>
             <Link href={'/'}>
-              <Image className='h-[60px] w-[60px] bg-black rounded-full' src={'/images/logoIcon.png'} alt='logo' height={60} width={60} />
+              <Image className='h-[60px] w-[60px] bg-black rounded-full' src={'/images/uncut.png'} alt='logo' height={1000} width={1000} />
             </Link>
         </div>
         <nav className='hidden md:block'>
