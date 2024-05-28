@@ -64,7 +64,7 @@ const ResponsePage = ({ id }: { id: string }) => {
                                     <p className='ml-2 mr-auto'>{review?.User?.username}</p>
                                 </div>
                                 {review &&
-                                    <div className='rounded-lg h-[700px] flex justify-center items-center w-full'>
+                                    <div className='rounded-lg h-[700px] flex justify-center items-center w-full mt-7'>
                                         <TikTokEmbed url={review?.Request?.postLink} width={350} />
                                     </div>}
                             </ScrollArea>}

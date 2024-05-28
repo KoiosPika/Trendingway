@@ -46,7 +46,19 @@ const ReviewPage = ({ id }: { id: string }) => {
         <div className='w-full flex justify-center items-center bg-white h-full'>
             <div className='w-full flex flex-col md:max-w-[1000px] justify-center items-center'>
                 <div className='my-3 justify-center items-center flex flex-col w-full'>
-                    <div className='rounded-t-lg flex h-[750px] md:flex-row justify-center items-center mt-3 p-3 w-full lg:w-4/5'>
+                    <div className='w-full py-2 px-4 bg-white flex items-center gap-2 rounded-b-lg'>
+                        {request && <Image src={request?.User?.photo} alt='pfp' className='h-[60px] w-[60px] border-2 border-green-400 rounded-full mb-auto' height={1000} width={1000} />}
+                        <div>
+                            <div className='font-semibold flex items-center gap-2'>
+                                <p className='text-[13px]'>{request?.User?.username}</p>
+                                {request && <p className='text-[12px] text-slate-400'>{timeAgo(request?.createdAt.toString())}</p>}
+                            </div>
+                            <div className='bg-gray-300 p-1 rounded-r-lg rounded-bl-lg'>
+                                <p className='text-[13px]'>{request?.description}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div className='rounded-t-lg flex h-[750px] md:flex-row p-3 w-full lg:w-4/5'>
                         {request?.platform === 'TikTok' &&
                             <div className='rounded-lg h-[750px] w-[360px]'>
                                 {request && <TikTokEmbed url={request?.postLink} width={350} />}
@@ -68,18 +80,6 @@ const ReviewPage = ({ id }: { id: string }) => {
                                 <TextProfileReviewForm height={height} id={id} reviewer={request?.Reviewer?._id} user={request?.User?._id} />}
                             {request?.type === 'VideoProfileReview' &&
                                 <VideoProfileReviewForm height={height} id={id} reviewer={request?.Reviewer?._id} user={request?.User?._id} />}
-                        </div>
-                    </div>
-                    <div className='w-4/5 py-2 px-4 bg-white flex items-center gap-2 rounded-b-lg'>
-                        {request && <Image src={request?.User?.photo} alt='pfp' className='h-[60px] w-[60px] border-2 border-green-400 rounded-full mb-auto' height={1000} width={1000} />}
-                        <div>
-                            <div className='font-semibold flex items-center gap-2'>
-                                <p className='text-[13px]'>{request?.User?.username}</p>
-                                {request && <p className='text-[12px] text-slate-400'>{timeAgo(request?.createdAt.toString())}</p>}
-                            </div>
-                            <div className='bg-gray-300 p-1 rounded-r-lg rounded-bl-lg'>
-                                <p className='text-[13px]'>{request?.description}</p>
-                            </div>
                         </div>
                     </div>
                     <Drawer>

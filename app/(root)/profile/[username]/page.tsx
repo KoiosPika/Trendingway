@@ -5,6 +5,7 @@ import VideoProfileReview from '@/components/shared/VideoProfileReview';
 import VideoReview from '@/components/shared/VideoReview';
 import { getUserDataByUsername, getUsers } from '@/lib/actions/userData.actions';
 import { IUserData } from '@/lib/database/models/userData.model';
+import { SignedIn, SignedOut } from '@clerk/nextjs';
 import { auth } from '@clerk/nextjs/server';
 import Image from 'next/image'
 import Link from 'next/link';

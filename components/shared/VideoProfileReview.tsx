@@ -9,6 +9,8 @@ import { Textarea } from '../ui/textarea'
 import { createRequest } from '@/lib/actions/request.actions'
 import { IUserData } from '@/lib/database/models/userData.model'
 import { getUserDataByUserId } from '@/lib/actions/userData.actions'
+import { SignedIn, SignedOut } from '@clerk/nextjs'
+import Link from 'next/link'
 
 const VideoProfileReview = ({ price, userId, reviewer }: { price: number, userId: string, reviewer: string }) => {
 
@@ -58,7 +60,7 @@ const VideoProfileReview = ({ price, userId, reviewer }: { price: number, userId
             <AlertDialogContent className="bg-green-700 border-0">
                 <AlertDialogHeader>
                     <AlertDialogTitle className="flex flex-row items-center justify-between">
-                        <p className="text-white underline">Request Review</p>
+                        <p className="text-black font-bold text-[18px] bg-yellow-300 px-3 rounded-md">Request Review</p>
                         <AlertDialogCancel className="rounded-full bg-white text-black">X</AlertDialogCancel>
                     </AlertDialogTitle>
                     <p className='font-semibold text-white text-[16px]'>Video URL</p>
@@ -95,10 +97,19 @@ const VideoProfileReview = ({ price, userId, reviewer }: { price: number, userId
                     <p className='font-semibold text-white text-[16px]'>Description</p>
                     <Textarea value={description} placeholder='Describe the problem' onChange={(e) => setDescription(e.target.value)} />
                 </AlertDialogHeader>
-                <AlertDialogFooter>
-                    {user && (user?.creditBalance < price) && <Button className='bg-red-700 hover:bg-red-700 hover:cursor-default'>Insuffient Funds</Button>}
-                    {user && (user?.creditBalance >= price) && <AlertDialogAction className="bg-white text-black font-semibold hover:bg-yellow-400" onClick={() => handleRequest()}>Request for ${price}</AlertDialogAction>}
-                </AlertDialogFooter>
+                <SignedIn>
+                    <AlertDialogFooter>
+                        {user && (user?.creditBalance < price) && <Button className='bg-red-700 hover:bg-red-700 hover:cursor-default'>Insuffient Funds</Button>}
+                        {user && (user?.creditBalance >= price) && <AlertDialogAction className="bg-white text-black font-semibold hover:bg-yellow-400" onClick={() => handleRequest()}>Request for ${price}</AlertDialogAction>}
+                    </AlertDialogFooter>
+                </SignedIn>
+                <SignedOut>
+                    <AlertDialogFooter>
+                        <Link href={'/sign-in'} className='w-full'>
+                            <Button className='bg-yellow-400 hover:bg-yellow-400 text-black font-bold w-full'>Sign In</Button>
+                        </Link>
+                    </AlertDialogFooter>
+                </SignedOut>
             </AlertDialogContent>
         </AlertDialog>
     )
