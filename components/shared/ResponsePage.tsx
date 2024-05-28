@@ -50,7 +50,7 @@ const ResponsePage = ({ id }: { id: string }) => {
                                 <p className='text-[13px]'>{review?.User?.username}</p>
                                 {review && <p className='text-[12px] text-slate-400'>{timeAgo(review?.createdAt.toString())}</p>}
                             </div>
-                            <div className='bg-gray-300 p-1 rounded-r-lg rounded-bl-lg'>
+                            <div className='bg-slate-200 p-1 rounded-r-lg rounded-bl-lg'>
                                 <p className='text-[13px]'>{review?.Request?.description}</p>
                             </div>
                         </div>
@@ -58,7 +58,7 @@ const ResponsePage = ({ id }: { id: string }) => {
                     <div className='rounded-t-lg flex flex-col h-full md:h-[750px] md:flex-row justify-center items-center mt-3 p-3 w-full lg:w-4/5'>
 
                         {review?.Request?.platform === 'TikTok' &&
-                            <ScrollArea className={`rounded-lg h-full md:h-[${height}px] w-full md:w-[400px] bg-slate-200 md:mt-5 flex-col flex justify-center items-center`}>
+                            <ScrollArea className={`rounded-lg h-full md:h-[${height}px] w-full md:w-[400px] bg-white md:mt-5 flex-col flex justify-center items-center border-[2px] border-slate-300`}>
                                 <div className='mt-2 font-semibold text-center w-full flex justify-center items-center mb-3'>
                                     {review && <Image className='w-[50px] h-[50px] rounded-full ml-3 border-2 border-green-400' src={review?.User?.photo} alt='pfp' height={500} width={500} />}
                                     <p className='ml-2 mr-auto'>{review?.User?.username}</p>
@@ -71,7 +71,7 @@ const ResponsePage = ({ id }: { id: string }) => {
 
 
                         {review?.Request?.platform === 'Instagram' &&
-                            <ScrollArea className={`rounded-lg h-full md:h-[${height}px] w-full md:w-[400px] bg-slate-200 md:mt-5 flex-col flex justify-center items-center`}>
+                            <ScrollArea className={`rounded-lg h-full md:h-[${height}px] w-full md:w-[400px] bg-white md:mt-5 flex-col flex justify-center items-center border-[2px] border-slate-300`}>
                                 <div className='mt-2 font-semibold text-center w-full flex justify-center items-center mb-3'>
                                     {review && <Image className='w-[50px] h-[50px] rounded-full ml-3 border-2 border-green-400' src={review?.User?.photo} alt='pfp' height={500} width={500} />}
                                     <p className='ml-2 mr-auto'>{review?.User?.username}</p>
@@ -84,7 +84,7 @@ const ResponsePage = ({ id }: { id: string }) => {
 
 
                         {review?.Request?.platform === 'Youtube' &&
-                            <ScrollArea className={`rounded-lg h-full md:h-[${height}px] w-full md:w-[400px] bg-slate-200 md:mt-5 flex-col flex justify-center items-center`}>
+                            <ScrollArea className={`rounded-lg h-full md:h-[${height}px] w-full md:w-[400px] bg-white md:mt-5 flex-col flex justify-center items-center border-[2px] border-slate-300`} style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                                 <div className='mt-2 font-semibold text-center w-full flex justify-center items-center mb-3'>
                                     {review && <Image className='w-[50px] h-[50px] rounded-full ml-3 border-2 border-green-400' src={review?.User?.photo} alt='pfp' height={500} width={500} />}
                                     <div className='flex flex-col mr-auto ml-2'>
@@ -98,7 +98,7 @@ const ResponsePage = ({ id }: { id: string }) => {
                             </ScrollArea>}
 
 
-                        <ScrollArea className={`w-full md:w-[400px] h-full md:h-[${height}px] bg-slate-200 rounded-lg flex-col flex justify-center items-center md:mt-5 md:ml-3`}>
+                        <ScrollArea className={`w-full md:w-[400px] h-full md:h-[${height}px] bg-white rounded-lg flex-col flex justify-center items-center mt-5 md:ml-3 border-[2px] border-slate-300`} style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                             <div className='mt-2 font-semibold text-center w-full flex justify-center items-center mb-3'>
                                 {review && <Image className='w-[50px] h-[50px] rounded-full ml-3 border-2 border-green-400' src={review?.Reviewer?.photo} alt='pfp' height={500} width={500} />}
                                 <p className='ml-2 mr-auto'>{review?.Reviewer?.username}</p>
@@ -122,7 +122,7 @@ const ResponsePage = ({ id }: { id: string }) => {
                                         </div>
 
                                     </div>
-                                    <p className='w-4/5 bg-slate-300 p-1.5 rounded-lg text-[16px] font-semibold'>{review?.contentNotes}</p>
+                                    <p className='w-4/5 bg-slate-200 p-1.5 rounded-lg text-[16px] font-semibold'>{review?.contentNotes}</p>
                                 </div>}
                             {review?.brightnessNotes && <div className='w-full mt-2 mb-5 flex flex-col items-center justify-center'>
                                 <p className='bg-purple-500 text-white px-3 py-2 rounded-lg font-semibold mr-auto ml-5'>Brightness</p>
@@ -141,7 +141,7 @@ const ResponsePage = ({ id }: { id: string }) => {
                                         ))}
                                     </div>
                                 </div>
-                                <p className='w-4/5 bg-slate-300 p-1.5 rounded-lg text-[16px] font-semibold'>{review?.brightnessNotes}</p>
+                                <p className='w-4/5 bg-slate-200 p-1.5 rounded-lg text-[16px] font-semibold'>{review?.brightnessNotes}</p>
                             </div>}
                             {review?.descriptionNotes && <div className='w-full mt-2 mb-5 flex flex-col items-center justify-center'>
                                 <p className='bg-purple-500 text-white px-3 py-2 rounded-lg font-semibold mr-auto ml-5'>Title & Description</p>
@@ -160,7 +160,7 @@ const ResponsePage = ({ id }: { id: string }) => {
                                         ))}
                                     </div>
                                 </div>
-                                <p className='w-4/5 bg-slate-300 p-1.5 rounded-lg text-[16px] font-semibold'>{review?.descriptionNotes}</p>
+                                <p className='w-4/5 bg-slate-200 p-1.5 rounded-lg text-[16px] font-semibold'>{review?.descriptionNotes}</p>
                             </div>}
                             {review?.hashtagsNotes && <div className='w-full mt-2 mb-5 flex flex-col items-center justify-center'>
                                 <p className='bg-purple-500 text-white px-3 py-2 rounded-lg font-semibold mr-auto ml-5'>Hashtags</p>
@@ -179,7 +179,7 @@ const ResponsePage = ({ id }: { id: string }) => {
                                         ))}
                                     </div>
                                 </div>
-                                <p className='w-4/5 bg-slate-300 p-1.5 rounded-lg text-[16px] font-semibold'>{review?.hashtagsNotes}</p>
+                                <p className='w-4/5 bg-slate-200 p-1.5 rounded-lg text-[16px] font-semibold'>{review?.hashtagsNotes}</p>
                             </div>}
                             {review?.soundNotes && <div className='w-full mt-2 mb-5 flex flex-col items-center justify-center'>
                                 <p className='bg-purple-500 text-white px-3 py-2 rounded-lg font-semibold mr-auto ml-5'>Sound</p>
@@ -198,7 +198,7 @@ const ResponsePage = ({ id }: { id: string }) => {
                                         ))}
                                     </div>
                                 </div>
-                                <p className='w-4/5 bg-slate-300 p-1.5 rounded-lg text-[16px] font-semibold'>{review?.soundNotes}</p>
+                                <p className='w-4/5 bg-slate-200 p-1.5 rounded-lg text-[16px] font-semibold'>{review?.soundNotes}</p>
                             </div>}
                             {review?.bioNotes && <div className='w-full mt-2 mb-5 flex flex-col items-center justify-center'>
                                 <p className='bg-purple-500 text-white px-3 py-2 rounded-lg font-semibold mr-auto ml-5'>Bio</p>
@@ -217,7 +217,7 @@ const ResponsePage = ({ id }: { id: string }) => {
                                         ))}
                                     </div>
                                 </div>
-                                <p className='w-4/5 bg-slate-300 p-1.5 rounded-lg text-[16px] font-semibold'>{review?.bioNotes}</p>
+                                <p className='w-4/5 bg-slate-200 p-1.5 rounded-lg text-[16px] font-semibold'>{review?.bioNotes}</p>
                             </div>}
                             {review?.highlightsNotes && <div className='w-full mt-2 mb-5 flex flex-col items-center justify-center'>
                                 <p className='bg-purple-500 text-white px-3 py-2 rounded-lg font-semibold mr-auto ml-5'>Highlights</p>
@@ -236,7 +236,7 @@ const ResponsePage = ({ id }: { id: string }) => {
                                         ))}
                                     </div>
                                 </div>
-                                <p className='w-4/5 bg-slate-300 p-1.5 rounded-lg text-[16px] font-semibold'>{review?.highlightsNotes}</p>
+                                <p className='w-4/5 bg-slate-200 p-1.5 rounded-lg text-[16px] font-semibold'>{review?.highlightsNotes}</p>
                             </div>}
                             {review?.postsNotes && <div className='w-full mt-2 mb-5 flex flex-col items-center justify-center'>
                                 <p className='bg-purple-500 text-white px-3 py-2 rounded-lg font-semibold mr-auto ml-5'>Posts</p>
@@ -255,11 +255,11 @@ const ResponsePage = ({ id }: { id: string }) => {
                                         ))}
                                     </div>
                                 </div>
-                                <p className='w-4/5 bg-slate-300 p-1.5 rounded-lg text-[16px] font-semibold'>{review?.postsNotes}</p>
+                                <p className='w-4/5 bg-slate-200 p-1.5 rounded-lg text-[16px] font-semibold'>{review?.postsNotes}</p>
                             </div>}
                             {review?.additionalNotes && <div className='w-full mt-2 mb-5 flex flex-col items-center justify-center'>
                                 <p className='bg-purple-500 text-white px-3 py-2 rounded-lg font-semibold mr-auto ml-5 my-3'>Additional Notes</p>
-                                <p className='w-4/5 bg-slate-300 p-1.5 rounded-lg text-[16px] font-semibold'>{review?.additionalNotes}</p>
+                                <p className='w-4/5 bg-slate-200 p-1.5 rounded-lg text-[16px] font-semibold'>{review?.additionalNotes}</p>
                             </div>}
                             {review?.reviewURL && <div className='rounded-lg h-[700px] flex justify-center items-center w-full'>
                                 {review && <YouTubeEmbed url={review?.reviewURL} width={350} height={height} />}
