@@ -21,15 +21,15 @@ const page = async () => {
         <div className='my-3 justify-center items-center flex flex-col w-full rounded-lg mb-auto'>
           <div className='w-11/12 p-8 my-3 rounded-lg bg-white text-black'>
             <div className='flex flex-row justify-around items-center my-3 font-bold'>
-              <Link href={'/my-orders/orders'} className='flex flex-col md:flex-row justify-center items-center gap-3 px-4 py-3 text-center w-full'>
+              <Link href={'/notifications/orders'} className='flex flex-col md:flex-row justify-center items-center gap-3 px-4 py-3 text-center w-full'>
                 <Image src={'/icons/up.svg'} alt='up' height={20} width={20} />
                 <p className='text-[12px] md:text-[15px]'>Orders</p>
               </Link>
-              <Link href={'/my-orders/responses'} className='flex flex-col md:flex-row justify-center items-center gap-3 px-4 py-3 text-center w-full border-t-2 border-[#258FC7] text-[#258FC7]'>
+              <Link href={'/notifications/responses'} className='flex flex-col md:flex-row justify-center items-center gap-3 px-4 py-3 text-center w-full border-t-2 border-[#258FC7] text-[#258FC7]'>
                 <Image src={'/icons/hourglass-blue.svg'} alt='up' height={15} width={15} className='rotate-180' />
                 <p className='text-[12px] md:text-[15px]'>Requests</p>
               </Link>
-              <Link href={'/my-orders/responses'} className='flex flex-col md:flex-row justify-center items-center gap-3 px-4 py-3 text-center w-full rounded-r-lg'>
+              <Link href={'/notifications/responses'} className='flex flex-col md:flex-row justify-center items-center gap-3 px-4 py-3 text-center w-full rounded-r-lg'>
                 <Image src={'/icons/down.svg'} alt='up' height={20} width={20} className='rotate-180' />
                 <p className='text-[12px] md:text-[15px]'>Responses</p>
               </Link>
@@ -59,7 +59,7 @@ const page = async () => {
           </div>
         </div>
         {requests.length == 0 &&
-          <div className='w-full h-full bg-white flex justify-center items-center gap-3'>
+          <div className='w-full h-[250px] md:h-full bg-white flex justify-center items-center gap-3'>
             <Image src={'/icons/hourglass.svg'} alt='up' height={25} width={25} />
             <p className='text-[22px] font-bold'>No Requests</p>
           </div>

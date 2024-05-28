@@ -19,14 +19,14 @@ const NavItems = () => {
       route: `/profile`
     },
     {
-      label: 'Top Reviewers',
+      label: 'Insighters',
       icon: '/icons/rank.svg',
-      route: '/top-reviewers'
+      route: '/insighters'
     },
     {
       label: 'Notifications',
       icon: '/icons/bell.svg',
-      route: '/my-orders/orders'
+      route: '/notifications/orders'
     },
     {
       label: 'Wallet',

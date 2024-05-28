@@ -14,7 +14,7 @@ const page = async () => {
         <div className='w-full flex justify-center bg-white h-full'>
             <div className='w-full flex flex-col max-w-[900px] items-center'>
                 <div className='my-3 justify-center items-center flex flex-col w-full'>
-                    <div className='flex justify-around items-center my-3 py-2 px-3 w-full gap-3 text-black text-[12px] md:text-[16px]'>
+                    <div className='flex justify-around items-center my-3 py-2 px-3 w-full md:gap-3 text-black text-[12px] md:text-[16px]'>
                         <div className='bg-white text-black font-semibold py-[3px] px-[5px] rounded-md w-2/4'>
                             <Select>
                                 <SelectTrigger className="text-[12px] sm:text-[15px] broder-2 border-black flex justify-center items-center">
@@ -185,11 +185,11 @@ const page = async () => {
                                 </SelectContent>
                             </Select>
                         </div>
-                        <div className='w-1/4 bg-black flex justify-center items-center py-2 rounded-lg'>
-                            <Image src={'/icons/search.svg'} alt='search' width={20} height={20} />
+                        <div className='w-1/4 bg-yellow-400 flex justify-center items-center py-[10px] rounded-lg border-[1px] border-black'>
+                            <Image src={'/icons/search-black.svg'} alt='search' width={20} height={20} />
                         </div>
                     </div>
-                    <div className='rounded-lg flex justify-center items-center my-3 py-3 px-6 w-11/12 gap-10 bg-white'>
+                    <div className='rounded-lg flex justify-center items-center my-3 py-3 px-2 w-full gap-10 bg-white'>
                         <table className='w-full rounded-lg'>
                             <thead className='text-center text-[12px] bg-yellow-400'>
                                 <tr className='text-black w-full'>
@@ -205,9 +205,9 @@ const page = async () => {
                                             <p className='md:text-[15px] md:font-bold'>{index + 1}</p>
                                         </td>
                                         <td className='flex justify-center items-center h-[35px] md:h-[60px]'>
-                                            <Link href={`/profile/${user?.User?.username}`} className='flex flex-row items-center justify-center gap-3 h-8 w-7/8 '>
-                                                <Image src={user?.User?.photo} alt='pfp' className='w-[20px] h-[20px] md:w-[45px] md:h-[45px] border-[2px] border-black rounded-full' width={100} height={100} />
-                                                <p className='truncate font-bold text-[10px] md:text-[13px] mr-auto'>{user?.User?.username}</p>
+                                            <Link href={`/profile/${user?.User?.username}`} className='flex flex-row items-center justify-center gap-2 h-8 w-7/8 '>
+                                                <Image src={user?.User?.photo} alt='pfp' className='w-[22px] h-[22px] md:w-[45px] md:h-[45px] border-[1px] border-black rounded-full' width={100} height={100} />
+                                                <p className='truncate font-bold text-[10px] md:text-[15px] mr-auto'>{user?.User?.username}</p>
                                             </Link>
                                         </td>
                                         <td>
@@ -215,7 +215,7 @@ const page = async () => {
                                                 {Array.from({ length: 5 }, (_, index) => (
                                                     <Image
                                                         key={index}
-                                                        className='h-[10px] w-[10px] md:h-[20px] md:w-[20px]'
+                                                        className='h-[11px] w-[11px] md:h-[20px] md:w-[20px]'
                                                         src={index < Math.ceil(user?.avgReview) ? '/icons/star-yellow.svg' : '/icons/star-grey.svg'}
                                                         alt='star'
                                                         width={100}

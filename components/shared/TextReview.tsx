@@ -43,13 +43,16 @@ const TextReview = ({ price, userId, reviewer }: { price: number, userId: string
     return (
         <AlertDialog>
             <AlertDialogTrigger>
-                <div className='border-[1px] border-slate-300 rounded-lg h-[150px] flex justify-center items-center gap-8' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
-                    <div className='flex flex-col items-center gap-2'>
-                        <Image src={'/icons/star-white.svg'} alt='video' width={200} height={200} className='bg-blue-500 w-[55px] h-[55px] p-2 rounded-full' />
-                        <p className='font-semibold'>Text Review</p>
+                <div className='flex flex-col justify-center items-center border-[1px] border-slate-300 rounded-lg h-[240px] md:h-[220px]' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
+                    <div className='flex justify-center items-center gap-8' >
+                        <div className='flex flex-col items-center gap-2'>
+                            <Image src={'/icons/star-white.svg'} alt='video' width={200} height={200} className='bg-blue-500 w-[55px] h-[55px] p-2 rounded-full' />
+                            <p className='font-semibold'>Text Review</p>
+                        </div>
+                        <div className='h-3/4 w-[2px] bg-black'></div>
+                        <p className='text-[25px] font-semibold'>${price}</p>
                     </div>
-                    <div className='h-3/4 w-[2px] bg-black'></div>
-                    <p className='text-[25px] font-semibold'>${price}</p>
+                    <p className='mt-2 mx-2 p-2 bg-blue-500 rounded-lg text-white font-semibold'>Upload a link to your TikTok, Reel or Short, and get an insight about the content, title and description, hashtags and more</p>
                 </div>
             </AlertDialogTrigger>
             <AlertDialogContent className="bg-blue-500 border-0">

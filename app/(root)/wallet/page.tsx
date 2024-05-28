@@ -7,6 +7,7 @@ import { IUserData } from '@/lib/database/models/userData.model'
 import { formatDate } from '@/lib/utils'
 import { auth } from '@clerk/nextjs/server'
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 
 const page = async () => {
@@ -36,7 +37,7 @@ const page = async () => {
                                 <p className='ml-7 text-[25px] font-semibold text-white'>${(user.creditBalance).toFixed(2)}</p>
                                 <div className='flex flex-row items-center gap-2 ml-auto bg-white px-2 py-1 rounded-lg h-[40px]'>
                                     <Image src={'/icons/plus.svg'} alt='dollar' height={20} width={20} />
-                                    <p className='font-semibold text-[13px]'>Recharge Below</p>
+                                    <Link href={'#recharge'} className='font-semibold text-[13px]'>Recharge Now</Link>
                                 </div>
                             </div>
                             <div className='flex flex-col bg-green-600 w-full p-4 rounded-lg'>
@@ -51,7 +52,7 @@ const page = async () => {
                                 </div>
                             </div>
                         </div>
-                        <div className='w-11/12 p-8 my-3 rounded-lg bg-blue-600 text-white'>
+                        <div id='recharge' className='w-11/12 p-8 my-3 rounded-lg bg-blue-600 text-white'>
                             <div className='flex flex-row gap-2 mb-4'>
                                 <Image src={'/icons/plus-white.svg'} alt='wallet' height={20} width={20} />
                                 <p className='font-semibold text-[20px]'>Recharge your wallet</p>

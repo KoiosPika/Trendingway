@@ -22,19 +22,19 @@ const TextProfileReview = ({ price, userId, reviewer }: { price: number, userId:
         setIsVisible(!isVisible);
     };
 
-    useEffect(()=> {
-        async function getUser(){
+    useEffect(() => {
+        async function getUser() {
             const userData = await getUserDataByUserId(userId);
 
             setUser(userData);
         }
 
         getUser();
-    },[])
+    }, [])
 
     const handleRequest = async () => {
         try {
-            await createRequest({ User: userId, Reviewer: reviewer, postLink: URL, description, platform, price, type:'TextProfileReview' })
+            await createRequest({ User: userId, Reviewer: reviewer, postLink: URL, description, platform, price, type: 'TextProfileReview' })
         } catch (error) {
             console.log(error);
         }
@@ -43,13 +43,16 @@ const TextProfileReview = ({ price, userId, reviewer }: { price: number, userId:
     return (
         <AlertDialog>
             <AlertDialogTrigger>
-                <div className='border-[1px] border-slate-300 rounded-lg h-[150px] flex justify-center items-center gap-8' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
-                    <div className='flex flex-col items-center gap-2'>
-                        <Image src={'/icons/account.svg'} alt='video' width={200} height={200} className='bg-orange-500 w-[55px] h-[55px] p-2 rounded-full' />
-                        <p className='font-semibold'>Text Profile Review</p>
+                <div className='flex flex-col justify-center items-center border-[1px] border-slate-300 rounded-lg h-[240px] md:h-[220px]' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
+                    <div className='flex justify-center items-center gap-8' >
+                        <div className='flex flex-col items-center gap-2'>
+                            <Image src={'/icons/account.svg'} alt='video' width={200} height={200} className='bg-orange-500 w-[55px] h-[55px] p-2 rounded-full' />
+                            <p className='font-semibold'>Text Profile Review</p>
+                        </div>
+                        <div className='h-3/4 w-[2px] bg-black'></div>
+                        <p className='text-[25px] font-semibold'>${price}</p>
                     </div>
-                    <div className='h-3/4 w-[2px] bg-black'></div>
-                    <p className='text-[25px] font-semibold'>${price}</p>
+                    <p className='mt-2 mx-2 p-2 bg-orange-500 rounded-lg text-white font-semibold'>Upload a link to your TikTok, Reel or Short, and get an insight about your account and what can be improved to get more audience</p>
                 </div>
             </AlertDialogTrigger>
             <AlertDialogContent className="bg-orange-500 border-0">

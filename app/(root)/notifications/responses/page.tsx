@@ -19,15 +19,15 @@ const page = async () => {
         <div className='my-3 justify-center items-center flex flex-col w-full rounded-lg mb-auto'>
           <div className='w-11/12 p-8 my-3 rounded-lg bg-white text-black'>
             <div className='flex flex-row justify-around items-center my-3 font-bold'>
-              <Link href={'/my-orders/orders'} className='flex flex-col md:flex-row justify-center items-center gap-3 px-4 py-3 text-center w-full'>
+              <Link href={'/notifications/orders'} className='flex flex-col md:flex-row justify-center items-center gap-3 px-4 py-3 text-center w-full'>
                 <Image src={'/icons/up.svg'} alt='up' height={20} width={20} />
                 <p className='text-[12px] md:text-[15px]'>Orders</p>
               </Link>
-              <Link href={'/my-orders/requests'} className='flex flex-col md:flex-row justify-center items-center gap-3 px-4 py-3 text-center w-full'>
+              <Link href={'/notifications/requests'} className='flex flex-col md:flex-row justify-center items-center gap-3 px-4 py-3 text-center w-full'>
                 <Image src={'/icons/hourglass.svg'} alt='up' height={15} width={15} className='rotate-180' />
                 <p className='text-[12px] md:text-[15px]'>Requests</p>
               </Link>
-              <Link href={'/my-orders/responses'} className='flex flex-col md:flex-row justify-center items-center gap-3 px-4 py-3 text-center w-full border-t-2 border-[#258FC7] text-[#258FC7]'>
+              <Link href={'/notifications/responses'} className='flex flex-col md:flex-row justify-center items-center gap-3 px-4 py-3 text-center w-full border-t-2 border-[#258FC7] text-[#258FC7]'>
                 <Image src={'/icons/up-blue.svg'} alt='up' height={20} width={20} className='rotate-180' />
                 <p className='text-[12px] md:text-[15px]'>Responses</p>
               </Link>
@@ -49,7 +49,7 @@ const page = async () => {
                     {review?.Request?.type === 'VideoProfileReview' && <Image src={'/icons/video-icon.svg'} alt='video' width={200} height={200} className='bg-green-500 w-[40px] h-[40px] p-1.5 rounded-full ml-auto' />}
                   </div>
                   <p className='ml-3 mt-2 mr-auto text-[12.5px] h-[50px] overflow-hidden'>{review?.Request?.description}</p>
-                  <Link href={`/my-orders/responses/${review?.Request?._id}`} className='bg-yellow-400 w-full flex flex-row items-center justify-center gap-2 py-1 rounded-lg mt-4 mb-2'>
+                  <Link href={`/notifications/responses/${review?.Request?._id}`} className='bg-yellow-400 w-full flex flex-row items-center justify-center gap-2 py-1 rounded-lg mt-4 mb-2'>
                     <Image src={'/icons/star-black.svg'} alt='star' height={15} width={15} />
                     <p className='text-[13px] md:text-[16px]'>Go to Review</p>
                   </Link>
@@ -59,7 +59,7 @@ const page = async () => {
           </div>
         </div>
         {reviews.length == 0 &&
-          <div className='w-full h-full bg-white flex justify-center items-center gap-3'>
+          <div className='w-full h-[250px] md:h-full bg-white flex justify-center items-center gap-3'>
             <Image src={'/icons/up.svg'} alt='up' height={30} width={30} className='rotate-180' />
             <p className='text-[22px] font-bold'>No Responses</p>
           </div>

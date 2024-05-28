@@ -8,6 +8,7 @@ import Image from 'next/image';
 import { ScrollArea } from '../ui/scroll-area';
 import RatingDialog from './RatingDialog';
 import { Button } from '../ui/button';
+import { timeAgo } from '@/lib/utils';
 
 const ResponsePage = ({ id }: { id: string }) => {
 
@@ -42,41 +43,87 @@ const ResponsePage = ({ id }: { id: string }) => {
         <div className='w-full flex justify-center items-center bg-white h-full'>
             <div className='w-full flex flex-col md:max-w-[1000px] justify-center items-center'>
                 <div className='my-3 justify-center items-center flex flex-col w-full'>
+                    <div className='w-full lg:w-4/5 py-2 px-4 bg-white flex items-center gap-2 rounded-b-lg'>
+                        {review && <Image src={review?.User?.photo} alt='pfp' className='h-[60px] w-[60px] border-2 border-green-400 rounded-full mb-auto' height={1000} width={1000} />}
+                        <div>
+                            <div className='font-semibold flex items-center gap-2'>
+                                <p className='text-[13px]'>{review?.User?.username}</p>
+                                {review && <p className='text-[12px] text-slate-400'>{timeAgo(review?.createdAt.toString())}</p>}
+                            </div>
+                            <div className='bg-gray-300 p-1 rounded-r-lg rounded-bl-lg'>
+                                <p className='text-[13px]'>{review?.Request?.description}</p>
+                            </div>
+                        </div>
+                    </div>
                     <div className='rounded-t-lg flex flex-col h-full md:h-[750px] md:flex-row justify-center items-center mt-3 p-3 w-full lg:w-4/5'>
-                        {review?.Request?.platform === 'TikTok' &&
-                            <div className='rounded-lg h-[750px] w-[360px]'>
-                                {review && <TikTokEmbed url={review?.Request?.postLink} width={350} />}
-                            </div>}
-                        {review?.Request?.platform === 'Instagram' &&
-                            <div className='rounded-lg h-[600px] w-[360px]'>
-                                {review && <InstagramEmbed url={review?.Request?.postLink} width={350} />}
-                            </div>}
-                        {review?.Request?.platform === 'Youtube' &&
-                            <div className='rounded-lg h-[700px] w-[360px]'>
-                                {review && <YouTubeEmbed url={review?.Request?.postLink} width={350} height={height} />}
-                            </div>}
-                        <ScrollArea className={`w-full md:w-[400px] h-full md:h-[${height}px] bg-white rounded-tr-lg rounded-br-lg flex-col flex justify-center items-center`}>
-                            <div className='mt-2 font-semibold text-center'>Review</div>
-                            {review?.contentNotes && <div className='w-full mt-2 mb-5 flex flex-col items-center justify-center'>
-                                <p className='bg-purple-500 text-white px-3 py-2 rounded-lg font-semibold mr-auto ml-5'>Content</p>
-                                <div className='flex flex-row justify-around my-3'>
-                                    <p className='mr-3 font-semibold my-2 bg-yellow-400 px-2 py-1 rounded-lg'>Rating</p>
-                                    <div className='flex flex-row items-center w-full justify-center gap-2'>
-                                        {Array.from({ length: 5 }, (_, index) => (
-                                            <Image
-                                                key={index}
-                                                className='w-[25px] h-[25px] lg:w-[30px] lg:h-[30px]'
-                                                src={index < review?.contentReview ? '/icons/star-yellow.svg' : '/icons/star-grey.svg'}
-                                                alt='star'
-                                                width={100}
-                                                height={100}
-                                            />
-                                        ))}
-                                    </div>
 
+                        {review?.Request?.platform === 'TikTok' &&
+                            <ScrollArea className={`rounded-lg h-full md:h-[${height}px] w-full md:w-[400px] bg-slate-200 md:mt-5 flex-col flex justify-center items-center`}>
+                                <div className='mt-2 font-semibold text-center w-full flex justify-center items-center mb-3'>
+                                    {review && <Image className='w-[50px] h-[50px] rounded-full ml-3 border-2 border-green-400' src={review?.User?.photo} alt='pfp' height={500} width={500} />}
+                                    <p className='ml-2 mr-auto'>{review?.User?.username}</p>
                                 </div>
-                                <p className='w-4/5 bg-slate-300 p-1.5 rounded-lg text-[16px] font-semibold'>{review?.contentNotes}</p>
-                            </div>}
+                                {review &&
+                                    <div className='rounded-lg h-[700px] flex justify-center items-center w-full'>
+                                        <TikTokEmbed url={review?.Request?.postLink} width={350} />
+                                    </div>}
+                            </ScrollArea>}
+
+
+                        {review?.Request?.platform === 'Instagram' &&
+                            <ScrollArea className={`rounded-lg h-full md:h-[${height}px] w-full md:w-[400px] bg-slate-200 md:mt-5 flex-col flex justify-center items-center`}>
+                                <div className='mt-2 font-semibold text-center w-full flex justify-center items-center mb-3'>
+                                    {review && <Image className='w-[50px] h-[50px] rounded-full ml-3 border-2 border-green-400' src={review?.User?.photo} alt='pfp' height={500} width={500} />}
+                                    <p className='ml-2 mr-auto'>{review?.User?.username}</p>
+                                </div>
+                                {review &&
+                                    <div className='rounded-lg h-[700px] flex justify-center items-center w-full'>
+                                        <InstagramEmbed url={review?.Request?.postLink} width={350} />
+                                    </div>}
+                            </ScrollArea>}
+
+
+                        {review?.Request?.platform === 'Youtube' &&
+                            <ScrollArea className={`rounded-lg h-full md:h-[${height}px] w-full md:w-[400px] bg-slate-200 md:mt-5 flex-col flex justify-center items-center`}>
+                                <div className='mt-2 font-semibold text-center w-full flex justify-center items-center mb-3'>
+                                    {review && <Image className='w-[50px] h-[50px] rounded-full ml-3 border-2 border-green-400' src={review?.User?.photo} alt='pfp' height={500} width={500} />}
+                                    <div className='flex flex-col mr-auto ml-2'>
+                                        <p className='mr-auto'>{review?.User?.username}</p>
+                                    </div>
+                                </div>
+                                {review &&
+                                    <div className='rounded-lg h-[700px] flex justify-center items-center w-full'>
+                                        <YouTubeEmbed url={review?.Request?.postLink} width={350} height={height} />
+                                    </div>}
+                            </ScrollArea>}
+
+
+                        <ScrollArea className={`w-full md:w-[400px] h-full md:h-[${height}px] bg-slate-200 rounded-lg flex-col flex justify-center items-center md:mt-5 md:ml-3`}>
+                            <div className='mt-2 font-semibold text-center w-full flex justify-center items-center mb-3'>
+                                {review && <Image className='w-[50px] h-[50px] rounded-full ml-3 border-2 border-green-400' src={review?.Reviewer?.photo} alt='pfp' height={500} width={500} />}
+                                <p className='ml-2 mr-auto'>{review?.Reviewer?.username}</p>
+                            </div>
+                            {review?.contentNotes &&
+                                <div className='w-full mt-2 mb-5 flex flex-col items-center justify-center'>
+                                    <p className='bg-purple-500 text-white px-3 py-2 rounded-lg font-semibold mr-auto ml-5'>Content</p>
+                                    <div className='flex flex-row justify-around my-3'>
+                                        <p className='mr-3 font-semibold my-2 bg-yellow-400 px-2 py-1 rounded-lg'>Rating</p>
+                                        <div className='flex flex-row items-center w-full justify-center gap-2'>
+                                            {Array.from({ length: 5 }, (_, index) => (
+                                                <Image
+                                                    key={index}
+                                                    className='w-[25px] h-[25px] lg:w-[30px] lg:h-[30px]'
+                                                    src={index < review?.contentReview ? '/icons/star-yellow.svg' : '/icons/star-grey.svg'}
+                                                    alt='star'
+                                                    width={100}
+                                                    height={100}
+                                                />
+                                            ))}
+                                        </div>
+
+                                    </div>
+                                    <p className='w-4/5 bg-slate-300 p-1.5 rounded-lg text-[16px] font-semibold'>{review?.contentNotes}</p>
+                                </div>}
                             {review?.brightnessNotes && <div className='w-full mt-2 mb-5 flex flex-col items-center justify-center'>
                                 <p className='bg-purple-500 text-white px-3 py-2 rounded-lg font-semibold mr-auto ml-5'>Brightness</p>
                                 <div className='flex flex-row justify-around  my-3'>
@@ -214,17 +261,17 @@ const ResponsePage = ({ id }: { id: string }) => {
                                 <p className='bg-purple-500 text-white px-3 py-2 rounded-lg font-semibold mr-auto ml-5 my-3'>Additional Notes</p>
                                 <p className='w-4/5 bg-slate-300 p-1.5 rounded-lg text-[16px] font-semibold'>{review?.additionalNotes}</p>
                             </div>}
-                            {review?.reviewURL && <div className='rounded-lg h-[700px] w-[360px] flex justify-center items-center'>
+                            {review?.reviewURL && <div className='rounded-lg h-[700px] flex justify-center items-center w-full'>
                                 {review && <YouTubeEmbed url={review?.reviewURL} width={350} height={height} />}
                             </div>}
                             <div className='w-full flex flex-row justify-center items-center text-center my-6'>
-                                {!review?.rated && <RatingDialog id={id}/>}
+                                {!review?.rated && <RatingDialog id={id} />}
                                 {review?.rated && <Button className='w-1/2 flex justify-center items-center bg-green-700'>Rated</Button>}
                             </div>
                         </ScrollArea>
                     </div>
                 </div>
-                
+
             </div>
         </div>
     )

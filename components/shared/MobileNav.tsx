@@ -19,8 +19,8 @@ const MobileNav = () => {
         <SheetContent className='flex flex-col gap-6 bg-white lg:hidden' side={'left'}>
           <div className='flex flex-row items-center pb-3 border-b-[2px] border-black'>
             <Image
-              className='rounded-full border-2 bg-black border-black'
-              src={'/images/logoIcon.png'}
+              className='rounded-full'
+              src={'/images/uncut.png'}
               alt='logo'
               width={50}
               height={50}

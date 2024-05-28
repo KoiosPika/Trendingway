@@ -30,7 +30,7 @@ const page = async ({ params: { username } }: { params: { username: string } }) 
                     <div className='rounded-lg flex flex-col justify-center items-center my-3 p-3 w-full md:w-2/3 bg-white'>
                         <div className='flex flex-col items-center gap-5'>
                             <div className='flex flex-row items-center gap-1'>
-                                <p className='text-[20px] font-semibold'>{user?.User?.username}</p>
+                                <p className='text-[20px] font-bold'>{user?.User?.username}</p>
                             </div>
                             <Image className='h-[200px] w-[200px] bg-white rounded-full border-2 border-slate-300' src={user?.User?.photo} alt='pfp' height={500} width={500} />
                             <div className='w-full flex flex-row'>
@@ -77,7 +77,7 @@ const page = async ({ params: { username } }: { params: { username: string } }) 
                         <VideoProfileReview price={user?.VideoProfileReview} userId={userId} reviewer={user.User._id} />
                     </div>
                     <div className='w-full my-3'>
-                        <p className='mr-auto my-3 font-semibold text-[18px] ml-3'>Connect with other influencers:</p>
+                        <p className='mr-auto my-3 font-semibold text-[18px] ml-3'>Connect with other insighters:</p>
                         <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
                             {users.map((user: IUserData) => (
                                 <Link href={`/profile/${user?.User?.username}`} key={user._id} className='bg-white border-2 border-slate-200 rounded-lg flex flex-row justify-center items-center p-1 m-3' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>

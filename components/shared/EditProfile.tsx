@@ -331,11 +331,11 @@ const EditProfile = ({ userId }: { userId: string }) => {
                                     </div>))}
                             </div>
                             {enableSaving &&
-                                <Button disabled={loading} className='my-3 bg-black p-3 rounded-lg' onClick={handleSubmit}>
+                                <Button disabled={loading} className='my-3 bg-green-700 p-3 rounded-lg hover:bg-green-700' onClick={handleSubmit}>
                                     <p className='font-semibold text-[15px] text-white'>Save Info</p>
                                 </Button>}
                             {!enableSaving &&
-                                <Button disabled={loading} className='my-3 bg-slate-500 p-3 rounded-lg disabled hover:cursor-default hover:bg-slate-500'>
+                                <Button disabled={loading} className='my-3 bg-green-400 p-3 rounded-lg disabled hover:cursor-default hover:bg-green-400'>
                                     <p className='font-semibold text-[15px] text-white'>Save Info</p>
                                 </Button>}
                         </div>
