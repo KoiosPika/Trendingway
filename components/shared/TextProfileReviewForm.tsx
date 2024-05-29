@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { Input } from '../ui/input'
 import { createTextProfileReview } from '@/lib/actions/review.actions'
 import { useRouter } from 'next/navigation'
+import { Textarea } from '../ui/textarea'
 
 const TextProfileReviewForm = ({ height, id, reviewer, user }: { height: number, id: string, reviewer: string, user:string }) => {
 
@@ -47,8 +48,7 @@ const TextProfileReviewForm = ({ height, id, reviewer, user }: { height: number,
     }
 
     return (
-        <ScrollArea className={`w-[400px] h-full md:h-[${height}px] bg-white rounded-tr-lg rounded-br-lg flex-col items-center`}>
-            <div className='mt-2 font-semibold text-center'>Review</div>
+        <ScrollArea className={`w-[400px] bg-white flex flex-col items-center h-[${height}px]`}>
             <div className='w-full mt-2 mb-5 flex flex-col items-center justify-center'>
                 <p className='bg-purple-500 text-white px-3 py-2 rounded-lg font-semibold mr-auto ml-5'>Bio</p>
                 <div className='flex flex-row justify-around my-3'>
@@ -67,7 +67,7 @@ const TextProfileReviewForm = ({ height, id, reviewer, user }: { height: number,
                         ))}
                     </div>
                 </div>
-                <Input value={bioNotes} onChange={(e) => setBioNotes(e.target.value)} placeholder='Notes about Bio' className='w-4/5 border-2 border-black text-[16px]' />
+                <Textarea value={bioNotes} onChange={(e) => setBioNotes(e.target.value)} placeholder='Notes about Bio' className='w-4/5 border-2 border-black text-[16px]' />
             </div>
             <div className='w-full mt-2 mb-5 flex flex-col items-center justify-center'>
                 <p className='bg-purple-500 text-white px-3 py-2 rounded-lg font-semibold mr-auto ml-5'>Highlights and Stories</p>
@@ -87,7 +87,7 @@ const TextProfileReviewForm = ({ height, id, reviewer, user }: { height: number,
                         ))}
                     </div>
                 </div>
-                <Input value={highlightsNotes} onChange={(e) => setHighlightsNotes(e.target.value)} placeholder='Notes about Highlights:' className='w-4/5 border-2 border-black' />
+                <Textarea value={highlightsNotes} onChange={(e) => setHighlightsNotes(e.target.value)} placeholder='Notes about Highlights:' className='w-4/5 border-2 border-black' />
             </div>
             <div className='w-full mt-2 mb-5 flex flex-col items-center justify-center'>
                 <p className='bg-purple-500 text-white px-3 py-2 rounded-lg font-semibold mr-auto ml-5'>Posts</p>
@@ -107,11 +107,11 @@ const TextProfileReviewForm = ({ height, id, reviewer, user }: { height: number,
                         ))}
                     </div>
                 </div>
-                <Input value={postsNotes} onChange={(e) => setPostsNotes(e.target.value)} placeholder='Notes about Posts:' className='w-4/5 border-2 border-black' />
+                <Textarea value={postsNotes} onChange={(e) => setPostsNotes(e.target.value)} placeholder='Notes about Posts:' className='w-4/5 border-2 border-black' />
             </div>
             <div className='w-full mt-2 mb-5 flex flex-col items-center justify-center'>
                 <p className='bg-purple-500 text-white px-3 py-2 rounded-lg font-semibold mr-auto ml-5 my-3'>Additional Notes</p>
-                <Input value={additionalNotes} onChange={(e) => setAdditionalNotes(e.target.value)} placeholder='Notes about hashtags:' className='w-4/5 border-2 border-black' />
+                <Textarea value={additionalNotes} onChange={(e) => setAdditionalNotes(e.target.value)} placeholder='Notes about hashtags:' className='w-4/5 border-2 border-black' />
             </div>
             <div className='w-full flex flex-row justify-center items-center text-center my-6'>
                 {!loading && <div onClick={submitTextProfileReview} className='w-1/3 bg-green-400 flex flex-row items-center justify-center gap-2 rounded-md hover:cursor-pointer'>

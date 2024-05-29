@@ -35,7 +35,7 @@ const ReviewPage = ({ id }: { id: string }) => {
             if (request.platform === 'TikTok') {
                 setHeight(750)
             } else if (request.platform === 'Instagram') {
-                setHeight(600)
+                setHeight(650)
             } else if (request.platform === 'Youtube') {
                 setHeight(700);
             }
@@ -58,20 +58,20 @@ const ReviewPage = ({ id }: { id: string }) => {
                             </div>
                         </div>
                     </div>
-                    <div className='rounded-t-lg flex h-[750px] md:flex-row p-3 w-full lg:w-4/5'>
+                    <div className={`rounded-t-lg flex flex-col md:flex-row h-full md:h-[${height}px] w-full lg:w-4/5 justify-center items-center`}>
                         {request?.platform === 'TikTok' &&
                             <div className='rounded-lg h-[750px] w-[360px]'>
                                 {request && <TikTokEmbed url={request?.postLink} width={350} />}
                             </div>}
                         {request?.platform === 'Instagram' &&
-                            <div className='rounded-lg h-[600px] w-[360px]'>
+                            <div className='rounded-lg h-[650px] w-[360px]'>
                                 {request && <InstagramEmbed url={request?.postLink} width={350} />}
                             </div>}
                         {request?.platform === 'Youtube' &&
                             <div className='rounded-lg h-[700px] w-[360px]'>
                                 {request && <YouTubeEmbed url={request?.postLink} width={350} height={height} />}
                             </div>}
-                        <div className={`hidden md:block h-[${height}px]`}>
+                        <div className={`h-full w-full flex justify-center items-center`}>
                             {request?.type === 'TextReview' &&
                                 <TextReviewForm height={height} id={id} reviewer={request?.Reviewer?._id} user={request?.User?._id} />}
                             {request?.type === 'VideoReview' &&
@@ -82,27 +82,6 @@ const ReviewPage = ({ id }: { id: string }) => {
                                 <VideoProfileReviewForm height={height} id={id} reviewer={request?.Reviewer?._id} user={request?.User?._id} />}
                         </div>
                     </div>
-                    <Drawer>
-                        <DrawerTrigger className="w-full flex justify-center items-center">
-                            <div className='w-3/5 bg-yellow-400 text-center font-semibold py-3 rounded-lg md:hidden'>
-                                Review
-                            </div>
-                        </DrawerTrigger>
-                        <DrawerContent className="h-5/6">
-                            <div className='h-full flex'>
-                                {request?.type === 'TextReview' &&
-                                    <TextReviewForm height={height} id={id} reviewer={request?.Reviewer?._id} user={request?.User?._id} />}
-                                {request?.type === 'VideoReview' &&
-                                    <VideoReviewForm height={height} id={id} reviewer={request?.Reviewer?._id} user={request?.User?._id} />}
-                                {request?.type === 'TextProfileReview' &&
-                                    <TextProfileReviewForm height={height} id={id} reviewer={request?.Reviewer?._id} user={request?.User?._id} />}
-                                {request?.type === 'VideoProfileReview' &&
-                                    <VideoProfileReviewForm height={height} id={id} reviewer={request?.Reviewer?._id} user={request?.User?._id} />}
-                            </div>
-                            <DrawerFooter>
-                            </DrawerFooter>
-                        </DrawerContent>
-                    </Drawer>
                 </div>
             </div>
         </div>

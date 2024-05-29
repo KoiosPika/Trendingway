@@ -4,6 +4,7 @@ import { Input } from '../ui/input'
 import { ScrollArea } from '../ui/scroll-area'
 import { createTextReview } from '@/lib/actions/review.actions'
 import { useRouter } from 'next/navigation'
+import { Textarea } from '../ui/textarea'
 
 const TextReviewForm = ({ height, id, reviewer, user }: { height: number, id: string, reviewer: string, user:string }) => {
     const [contentNotes, setContentNotes] = useState<string>('')
@@ -53,8 +54,7 @@ const TextReviewForm = ({ height, id, reviewer, user }: { height: number, id: st
     }
 
     return (
-        <ScrollArea className={`w-[400px] h-full md:h-[${height}px] bg-white rounded-tr-lg rounded-br-lg flex-col items-center`}>
-            <div className='mt-2 font-semibold text-center'>Review</div>
+        <ScrollArea className={`w-[400px] bg-white rounded-tr-lg rounded-br-lg flex flex-col items-center`} style={{height}}>
             <div className='w-full mt-2 mb-5 flex flex-col items-center justify-center'>
                 <p className='bg-purple-500 text-white px-3 py-2 rounded-lg font-semibold mr-auto ml-5'>Content</p>
                 <div className='flex flex-row justify-around my-3'>
@@ -73,7 +73,7 @@ const TextReviewForm = ({ height, id, reviewer, user }: { height: number, id: st
                         ))}
                     </div>
                 </div>
-                <Input value={contentNotes} onChange={(e) => setContentNotes(e.target.value)} placeholder='Notes about content' className='w-4/5 border-2 border-black text-[16px]' />
+                <Textarea value={contentNotes} onChange={(e) => setContentNotes(e.target.value)} placeholder='Notes about content' className='w-4/5 border-2 border-black text-[16px]' />
             </div>
             <div className='w-full mt-2 mb-5 flex flex-col items-center justify-center'>
                 <p className='bg-purple-500 text-white px-3 py-2 rounded-lg font-semibold mr-auto ml-5'>Brightness</p>
@@ -93,7 +93,7 @@ const TextReviewForm = ({ height, id, reviewer, user }: { height: number, id: st
                         ))}
                     </div>
                 </div>
-                <Input value={brightnessNotes} onChange={(e) => setBrightnessNotes(e.target.value)} placeholder='Notes about brightness:' className='w-4/5 border-2 border-black' />
+                <Textarea value={brightnessNotes} onChange={(e) => setBrightnessNotes(e.target.value)} placeholder='Notes about brightness:' className='w-4/5 border-2 border-black' />
             </div>
             <div className='w-full mt-2 mb-5 flex flex-col items-center justify-center'>
                 <p className='bg-purple-500 text-white px-3 py-2 rounded-lg font-semibold mr-auto ml-5'>Title & Description</p>
@@ -113,7 +113,7 @@ const TextReviewForm = ({ height, id, reviewer, user }: { height: number, id: st
                         ))}
                     </div>
                 </div>
-                <Input value={descriptionNotes} onChange={(e) => setDescriptionNotes(e.target.value)} placeholder='Notes about hashtags:' className='w-4/5 border-2 border-black' />
+                <Textarea value={descriptionNotes} onChange={(e) => setDescriptionNotes(e.target.value)} placeholder='Notes about hashtags:' className='w-4/5 border-2 border-black' />
             </div>
             <div className='w-full mt-2 mb-5 flex flex-col items-center justify-center'>
                 <p className='bg-purple-500 text-white px-3 py-2 rounded-lg font-semibold mr-auto ml-5'>Hashtags</p>
@@ -133,7 +133,7 @@ const TextReviewForm = ({ height, id, reviewer, user }: { height: number, id: st
                         ))}
                     </div>
                 </div>
-                <Input value={hashtagsNotes} onChange={(e) => setHashtagsNotes(e.target.value)} placeholder='Notes about hashtags:' className='w-4/5 border-2 border-black' />
+                <Textarea value={hashtagsNotes} onChange={(e) => setHashtagsNotes(e.target.value)} placeholder='Notes about hashtags:' className='w-4/5 border-2 border-black' />
             </div>
             <div className='w-full mt-2 mb-5 flex flex-col items-center justify-center'>
                 <p className='bg-purple-500 text-white px-3 py-2 rounded-lg font-semibold mr-auto ml-5'>Sound</p>
@@ -153,11 +153,11 @@ const TextReviewForm = ({ height, id, reviewer, user }: { height: number, id: st
                         ))}
                     </div>
                 </div>
-                <Input value={soundNotes} onChange={(e) => setSoundNotes(e.target.value)} placeholder='Notes about hashtags:' className='w-4/5 border-2 border-black' />
+                <Textarea value={soundNotes} onChange={(e) => setSoundNotes(e.target.value)} placeholder='Notes about hashtags:' className='w-4/5 border-2 border-black' />
             </div>
             <div className='w-full mt-2 mb-5 flex flex-col items-center justify-center'>
                 <p className='bg-purple-500 text-white px-3 py-2 rounded-lg font-semibold mr-auto ml-5 my-3'>Additional Notes</p>
-                <Input value={additionalNotes} onChange={(e) => setAdditionalNotes(e.target.value)} placeholder='Notes about hashtags:' className='w-4/5 border-2 border-black' />
+                <Textarea value={additionalNotes} onChange={(e) => setAdditionalNotes(e.target.value)} placeholder='Notes about hashtags:' className='w-4/5 border-2 border-black' />
             </div>
             <div className='w-full flex flex-row justify-center items-center text-center my-6'>
                 {!loading && <div onClick={submitReview} className='w-1/3 bg-green-400 flex flex-row items-center justify-center gap-2 rounded-md hover:cursor-pointer'>
