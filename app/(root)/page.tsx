@@ -41,7 +41,7 @@ const page = async () => {
                           height={100}
                         />
                       ))}
-                      <p className="text-[12px] mx-1 font-semibold">(27k)</p>
+                      <p className="text-[12px] mx-1 font-semibold">({user?.nofReviews})</p>
                     </div>
                   </div>
                   <div className='flex flex-col w-2/3 gap-3'>

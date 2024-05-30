@@ -9,6 +9,11 @@ const populateUsers = (query: any) => {
         .populate({ path: 'User', model: User, select: "_id photo username" })
 }
 
+type AggregationStage =
+    | { $match: any }
+    | { $addFields: any }
+    | { $limit: number };
+
 export async function getUserDataByUsername(username: string) {
     try {
         await connectToDatabase()
@@ -93,12 +98,46 @@ export async function getTopUsers() {
                 }
             },
             {
-                $sort: { compositeScore: -1 } // Sort by compositeScore in descending order
+                $sort: { compositeScore: 1 } // Sort by compositeScore in descending order
             }
         ]);
 
         const userIds = users.map(user => user._id);
 
+        const populatedUsers = await populateUsers(UserData.find({ User: { $in: userIds } }));
+
+        return JSON.parse(JSON.stringify(populatedUsers));
+
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export async function getTopUsersByConditions(matchConditions:any) {
+    try {
+        await connectToDatabase();
+
+        const pipeline: AggregationStage[] = [
+            {
+                $match: matchConditions
+            },
+            {
+                $addFields: {
+                    compositeScore: {
+                        $add: [
+                            { $multiply: ['$avgReview', 0.7] },
+                            { $multiply: ['$nofReviews', 0.3] }
+                        ]
+                    }
+                }
+            }
+        ];
+
+        pipeline.push({ $limit: 50 });
+
+        const usersData = await UserData.aggregate(pipeline);
+
+        const userIds = usersData.map((userData: IUserData) => userData.User);
         const populatedUsers = await populateUsers(UserData.find({ User: { $in: userIds } }));
 
         return JSON.parse(JSON.stringify(populatedUsers));

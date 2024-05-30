@@ -6,6 +6,7 @@ import { Textarea } from '../ui/textarea'
 import { createEmail } from '@/lib/actions/connect.actions'
 import { Button } from '../ui/button'
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
 
 const ContactPage = () => {
 
@@ -31,8 +32,10 @@ const ContactPage = () => {
         <div className='w-full h-full flex justify-center items-center bg-white'>
             <div className='w-full flex flex-col max-w-[900px] justify-center items-center'>
                 <div className='my-3 justify-center items-center flex flex-col w-full'>
-                    <div className='rounded-lg flex flex-col justify-center items-center my-[50px] p-3 w-full md:w-4/5 bg-white'>
-                        <p className='text-[20px] md:text-[30px] font-semibold my-2 md:my-5 bg-black text-yellow-400 px-[40px] py-2 rounded-[12px] w-3/4 md:w-1/2 text-center'>Contact Us</p>
+                    <div className='rounded-lg flex flex-col justify-center items-center my-[50px] md:p-3 w-full md:w-4/5 bg-white md:border-[2px] border-slate-300' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
+                        <div className='flex flex-row items-center text-black text-[35px] font-bold gap-1 py-2'>
+                            <p>Contact Us</p>
+                        </div>
                         <div className='flex flex-col justify-center items-center w-4/5 gap-3 my-3'>
                             <p className='font-semibold mr-auto'>Email:</p>
                             <Input value={email} onChange={(e) => setEmail(e.target.value)} className='w-full border-2 border-black text-[16px]' />

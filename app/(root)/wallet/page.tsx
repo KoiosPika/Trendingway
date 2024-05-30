@@ -24,11 +24,7 @@ const page = async () => {
             <div className='w-full flex flex-col max-w-[1100px] justify-center items-center'>
                 <div className='my-3 justify-center items-center flex flex-col w-full'>
                     <div className='rounded-lg flex flex-col justify-center items-center my-3 p-3 w-full md:w-4/5 bg-white'>
-                        <div className='flex flex-row items-center mr-auto ml-5'>
-                            <Image src={'/icons/sun.svg'} alt='wallet' height={20} width={20} />
-                            <p className='ml-3 my-5 text-[22px] font-semibold text-black'>Good Morning, Rami</p>
-                        </div>
-                        <div className='grid grid-cols-1 md:grid-cols-2 w-11/12 gap-2'>
+                        <div className='grid grid-cols-1 md:grid-cols-2 w-11/12 gap-2 md:mt-5'>
                             <div className='flex flex-col bg-red-500 w-full p-4 rounded-lg'>
                                 <div className='flex flex-row items-center gap-2'>
                                     <Image src={'/icons/wallet.svg'} alt='wallet' height={20} width={20} />
