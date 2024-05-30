@@ -13,11 +13,15 @@ const getDayName = (date: Date) => {
 // Function to format the date
 export const formatDate = (date: Date) => {
   const d = new Date(date);
-  const dayName = getDayName(d);
+  const monthNames = [
+    "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+  ];
+  const month = monthNames[d.getMonth()];
   const day = d.getDate();
   const year = d.getFullYear();
 
-  return `${dayName} ${day}, ${year}`;
+  return `${month} ${day}, ${year}`;
 };
 
 export function timeAgo(timestamp: string): string {
