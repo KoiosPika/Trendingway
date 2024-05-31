@@ -18,6 +18,7 @@ const RechargeOrders = ({ userId }: { userId: string }) => {
 
         getOrders()
     }, [])
+    
     return (
         <div className='w-full flex justify-center items-center bg-white'>
             <div className='w-full flex flex-col max-w-[950px] justify-center items-center'>
@@ -60,12 +61,11 @@ const RechargeOrders = ({ userId }: { userId: string }) => {
 
 export default RechargeOrders
 
-let page = 1;
-
 const LoadMoreRecharges = ({ userId }: { userId: string }) => {
 
     const [orders, setOrders] = useState<IOrder[]>([])
     const [loading, setloading] = useState<boolean>(false)
+    const [page, setPage] = useState(1)
 
     const getOrders = async () => {
         try {
@@ -73,7 +73,7 @@ const LoadMoreRecharges = ({ userId }: { userId: string }) => {
             const requestedOrders = await getPaginatedOrders(userId, page * 3)
             setOrders((prevOrders) => [...prevOrders, ...requestedOrders]);
             setloading(false)
-            page++;
+            setPage(page + 1);
         } catch (error) {
             console.log(error)
         }

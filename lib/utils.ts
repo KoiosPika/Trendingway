@@ -29,7 +29,7 @@ export const formatTime = (date:Date) => {
   hours = hours ? hours : 12; // the hour '0' should be '12'
   const minutesStr = minutes < 10 ? '0' + minutes : minutes;
 
-  return `${hours}:${minutesStr}${ampm}`;
+  return `${hours}:${minutesStr} ${ampm}`;
 }
 
 export function timeAgo(timestamp: string): string {

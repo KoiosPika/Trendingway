@@ -31,20 +31,20 @@ const RechargeDialog = ({ order }: { order: IOrder }) => {
                 <table className='w-full text-[13px] md:text-[16px]'>
                     <tbody>
                         <tr>
-                            <td className='font-bold pr-2'>Order ID:</td>
-                            <td className='font-semibold text-white'>{order?._id}</td>
+                            <td className='font-bold pr-2 bg-white rounded-tl-lg border-b-[3px] border-orange-500 p-2'>Order ID:</td>
+                            <td className='font-bold text-black bg-white border-b-[3px] border-l-[3px] border-orange-500 rounded-tr-lg p-2'>{order?._id}</td>
                         </tr>
                         <tr>
-                            <td className='font-bold pr-2'>Amount:</td>
-                            <td className='font-semibold text-white'>${(order?.amount).toFixed(2)}</td>
+                            <td className='font-bold pr-2 bg-white border-b-[3px] border-orange-500 p-2'>Amount:</td>
+                            <td className='font-bold text-black bg-white border-b-[3px] border-l-[3px] border-orange-500 p-2'>${(order?.amount).toFixed(2)}</td>
                         </tr>
                         <tr>
-                            <td className='font-bold pr-2'>Date:</td>
-                            <td className='font-semibold text-white'>{formatDate(order?.createdAt)}</td>
+                            <td className='font-bold pr-2 bg-white border-b-[2px] border-orange-500 p-2'>Date:</td>
+                            <td className='font-bold text-black bg-white border-b-[3px] border-l-[3px] border-orange-500 p-2'>{formatDate(order?.createdAt)}</td>
                         </tr>
                         <tr>
-                            <td className='font-bold pr-2'>Time:</td>
-                            <td className='font-semibold text-white'>{formatTime(order?.createdAt)}</td>
+                            <td className='font-bold pr-2 bg-white rounded-bl-lg p-2'>Time:</td>
+                            <td className='font-bold text-black bg-white rounded-br-lg border-l-[3px] border-orange-500 p-2'>{formatTime(order?.createdAt)}</td>
                         </tr>
                     </tbody>
                 </table>
