@@ -26,7 +26,9 @@ export interface IReview extends Document {
     postsReview: number,
     postsNotes: string,
     rated: boolean,
-    createdAt: Date
+    createdAt: Date,
+    insightful: string,
+    insightPeriod: Date
 }
 
 const ReviewSchema = new Schema({
@@ -52,7 +54,14 @@ const ReviewSchema = new Schema({
     postsNotes: { type: String },
     additionalNotes: { type: String },
     rated: { type: Boolean, default: false },
-    createdAt: { type: Date, default: Date.now }
+    insightful: { type: String, default: 'Awaiting' },
+    createdAt: { type: Date, default: Date.now },
+    insightPeriod: {
+        type: Date, default: () => {
+            const now = new Date();
+            return new Date(now.setDate(now.getDate() + 3));
+        }
+    }
 })
 
 const Review = models.Review || model('Review', ReviewSchema);

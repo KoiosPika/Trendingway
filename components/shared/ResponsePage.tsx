@@ -8,13 +8,16 @@ import Image from 'next/image';
 import { ScrollArea } from '../ui/scroll-area';
 import RatingDialog from './RatingDialog';
 import { Button } from '../ui/button';
-import { timeAgo } from '@/lib/utils';
+import { getTimeLeft, timeAgo } from '@/lib/utils';
+import { createEarning } from '@/lib/actions/earning.actions';
+import { useRouter } from 'next/navigation';
 
 const ResponsePage = ({ id }: { id: string }) => {
 
     const [review, setReview] = useState<IReview>()
     const [height, setHeight] = useState(0)
-    const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 0]
+    const [loading, setLoading] = useState<boolean>(false)
+    const router = useRouter();
 
     useEffect(() => {
         if (review) {
@@ -38,11 +41,46 @@ const ResponsePage = ({ id }: { id: string }) => {
         getReview()
     }, [])
 
+    const handleCreateEarning = async () => {
+        try {
+            setLoading(true);
+            await createEarning(review?._id || '');
+
+            router.push('/notifications/orders')
+
+            setLoading(false);
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
 
     return (
         <div className='w-full flex justify-center items-center bg-white h-full'>
             <div className='w-full flex flex-col md:max-w-[1000px] justify-center items-center'>
                 <div className='my-3 justify-center items-center flex flex-col w-full'>
+                    {(loading == false && review?.insightful == 'Awaiting') && <div className='w-full lg:w-4/6 py-[14px] px-[10px] bg-black flex flex-col justify-center items-center gap-2 rounded-lg m-2'>
+                        <p className='text-white font-semibold text-[12px] md:text-[14px]'>You have {getTimeLeft(review.insightPeriod)} days remaining to inform us if there are any issues with the service you received. </p>
+                        <div className='flex flex-row w-full items-center gap-3'>
+                            <Button className='bg-green-600 hover:bg-green-600 md:w-full w-1/2' onClick={handleCreateEarning}>
+                                {`It's good`}
+                            </Button>
+                            <Button className='bg-red-600 hover:bg-red-600 md:w-full w-1/2'>
+                                {`It's not good`}
+                            </Button>
+                        </div>
+                    </div>}
+                    {(loading == true && review?.insightful == 'Awaiting') && <div className='w-full lg:w-4/6 py-[14px] px-[10px] bg-black flex flex-col justify-center items-center gap-2 rounded-lg m-2'>
+                        <p className='text-white font-semibold text-[12px] md:text-[14px]'>You have 3 days remaining to inform us if there are any issues with the service you received. </p>
+                        <div className='flex flex-row w-full items-center gap-3'>
+                            <Button className='bg-green-300 hover:bg-green-300 md:w-full w-1/2'>
+                                {`It's good`}
+                            </Button>
+                            <Button className='bg-red-300 hover:bg-red-300 md:w-full w-1/2'>
+                                {`It's not good`}
+                            </Button>
+                        </div>
+                    </div>}
                     <div className='w-full lg:w-4/5 py-2 px-4 bg-white flex items-center gap-2 rounded-b-lg'>
                         {review && <Image src={review?.User?.photo} alt='pfp' className='h-[60px] w-[60px] border-2 border-green-400 rounded-full mb-auto' height={1000} width={1000} />}
                         <div>
@@ -63,7 +101,7 @@ const ResponsePage = ({ id }: { id: string }) => {
                                     <p className='ml-2 mr-auto'>{review?.User?.username}</p>
                                 </div>
                                 {review &&
-                                    <div className={`rounded-lg h-[${height-200}px] flex justify-center items-center w-full mt-7`}>
+                                    <div className={`rounded-lg h-[${height - 200}px] flex justify-center items-center w-full mt-7`}>
                                         <TikTokEmbed url={review?.Request?.postLink} width={350} />
                                     </div>}
                             </div>}
@@ -91,13 +129,13 @@ const ResponsePage = ({ id }: { id: string }) => {
                                     </div>
                                 </div>
                                 {review &&
-                                    <div className={`rounded-lg h-[${height-200}px] flex justify-center items-center w-full mt-7`}>
-                                        <YouTubeEmbed url={review?.Request?.postLink} width={350} height={height-200} />
+                                    <div className={`rounded-lg h-[${height - 200}px] flex justify-center items-center w-full mt-7`}>
+                                        <YouTubeEmbed url={review?.Request?.postLink} width={350} height={height - 200} />
                                     </div>}
                             </div>}
 
 
-                        <ScrollArea className={`w-full md:w-[400px] md:h-[${height-100}px] h-full bg-white rounded-lg flex-col flex justify-center items-center mt-5 md:ml-3 border-[2px] border-slate-300`} style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
+                        <ScrollArea className={`w-full md:w-[400px] md:h-[0px] h-full bg-white rounded-lg flex-col flex justify-center items-center mt-5 md:ml-3 border-[2px] border-slate-300`} style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray', height:height-100 }}>
                             <div className='mt-2 font-semibold text-center w-full flex justify-center items-center mb-3'>
                                 {review && <Image className='w-[50px] h-[50px] rounded-full ml-3 border-2 border-green-400' src={review?.Reviewer?.photo} alt='pfp' height={500} width={500} />}
                                 <p className='ml-2 mr-auto'>{review?.Reviewer?.username}</p>
@@ -260,8 +298,8 @@ const ResponsePage = ({ id }: { id: string }) => {
                                 <p className='bg-purple-500 text-white px-3 py-2 rounded-lg font-semibold mr-auto ml-5 my-3'>Additional Notes</p>
                                 <p className='w-4/5 bg-slate-200 p-1.5 rounded-lg text-[16px] font-semibold'>{review?.additionalNotes}</p>
                             </div>}
-                            {review?.reviewURL && <div className={`rounded-lg h-[${height-200}px] flex justify-center items-center w-full mt-7`}>
-                                {review && <YouTubeEmbed url={review?.reviewURL} width={350} height={height-200} />}
+                            {review?.reviewURL && <div className={`rounded-lg h-[${height - 200}px] flex justify-center items-center w-full mt-7`}>
+                                {review && <YouTubeEmbed url={review?.reviewURL} width={350} height={height - 200} />}
                             </div>}
                             <div className='w-full flex flex-row justify-center items-center text-center my-6'>
                                 {!review?.rated && <RatingDialog id={id} />}

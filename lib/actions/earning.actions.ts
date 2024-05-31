@@ -2,12 +2,51 @@
 
 import { connectToDatabase } from "../database"
 import Earning from "../database/models/earning.model";
+import Request from "../database/models/request.model";
+import Review from "../database/models/review.model";
+import UserData from "../database/models/userData.model";
 
-export async function getAllEarnings(userId:string){
+const populateReview = (query: any) => {
+    return query
+        .populate({ path: 'Request', model: Request, select: "type price" })
+}
+
+export async function createEarning(reviewId: string) {
+    try {
+
+        const review = await populateReview(Review.findById(reviewId));
+
+        await Review.findOneAndUpdate(
+            { _id: reviewId },
+            { '$set': { insightful: 'True' } }
+        )
+
+        await UserData.findOneAndUpdate(
+            { User: review.Reviewer },
+            {
+                '$inc': {
+                    withdrawBalance: review.Request.price * 0.8,
+                    nofVideoesReviewed: 1
+                }
+            }
+        )
+
+        await Earning.create({
+            User: review.Reviewer,
+            amount: review.Request.price * 0.8,
+            service: review.Request.type
+        })
+
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export async function getAllEarnings(userId: string) {
     try {
         await connectToDatabase();
 
-        const earnings = await Earning.find({User:userId}).limit(3).sort({createdAt:-1})
+        const earnings = await Earning.find({ User: userId }).limit(3).sort({ createdAt: -1 })
 
         return JSON.parse(JSON.stringify(earnings))
     } catch (error) {
@@ -15,7 +54,7 @@ export async function getAllEarnings(userId:string){
     }
 }
 
-export async function getPaginatedEarnings(userId:string, skip:number){
+export async function getPaginatedEarnings(userId: string, skip: number) {
     try {
         await connectToDatabase();
 

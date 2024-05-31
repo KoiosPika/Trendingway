@@ -19,7 +19,7 @@ export const formatDate = (date: Date) => {
   return `${month} ${day}, ${year}`;
 };
 
-export const formatTime = (date:Date) => {
+export const formatTime = (date: Date) => {
 
   const d = new Date(date);
   let hours = d.getHours();
@@ -52,3 +52,23 @@ export function timeAgo(timestamp: string): string {
     return `${days}d ago`;
   }
 }
+
+export const getTimeLeft = (futureDate: Date) => {
+  const now = new Date();
+  const endDate = new Date(futureDate);
+  const difference = endDate.getTime() - now.getTime(); // Difference in milliseconds
+
+  if (difference <= 0) {
+    return "Time is up";
+  }
+
+  const minutes = Math.floor(difference / (1000 * 60));
+  const hours = Math.floor(minutes / 60);
+  const remainingMinutes = minutes % 60;
+
+  if (hours >= 1) {
+    return `${hours} hour${hours > 1 ? 's' : ''} left`;
+  } else {
+    return `${remainingMinutes} minute${remainingMinutes !== 1 ? 's' : ''} left`;
+  }
+};

@@ -18,8 +18,6 @@ export async function createTextReview(review: { request: string, contentNotes: 
     try {
         await connectToDatabase()
 
-        console.log(review)
-
         const newReview: IReview = await Review.create({
             Request: review.request,
             Reviewer: review.Reviewer,
@@ -43,22 +41,6 @@ export async function createTextReview(review: { request: string, contentNotes: 
             { $set: { reviewed: true } }
         )
 
-        await UserData.findOneAndUpdate(
-            { User: review.Reviewer },
-            {
-                '$inc': {
-                    withdrawBalance: updatedRequest.price * 0.8,
-                    nofVideoesReviewed: 1
-                }
-            }
-        )
-
-        await Earning.create({
-            User: review.Reviewer,
-            amount: updatedRequest.price * 0.8,
-            service:'TextReview'
-        })
-
         return JSON.parse(JSON.stringify(newReview))
     } catch (error) {
         console.log(error)
@@ -81,22 +63,6 @@ export async function createVideoReview(review: { request: string, videoURL: str
             { $set: { reviewed: true } }
         )
 
-        await UserData.findOneAndUpdate(
-            { User: review.Reviewer },
-            {
-                '$inc': {
-                    withdrawBalance: updatedRequest.price * 0.8,
-                    nofVideoesReviewed: 1
-                }
-            }
-        )
-
-        await Earning.create({
-            User: review.Reviewer,
-            amount: updatedRequest.price * 0.8,
-            service:'VideoReview'
-        })
-
         return JSON.parse(JSON.stringify(newReview))
     } catch (error) {
         console.log(error)
@@ -118,22 +84,6 @@ export async function createVideoProfileReview(review: { request: string, videoU
             { _id: review.request },
             { $set: { reviewed: true } }
         )
-
-        await UserData.findOneAndUpdate(
-            { User: review.Reviewer },
-            {
-                '$inc': {
-                    withdrawBalance: updatedRequest.price * 0.8,
-                    nofVideoesReviewed: 1
-                }
-            }
-        )
-
-        await Earning.create({
-            User: review.Reviewer,
-            amount: updatedRequest.price * 0.8,
-            service:'VideoProfileReview'
-        })
 
         return JSON.parse(JSON.stringify(newReview))
     } catch (error) {
@@ -162,22 +112,6 @@ export async function createTextProfileReview(review: { request: string, bioNote
             { _id: review.request },
             { $set: { reviewed: true } }
         )
-
-        await UserData.findOneAndUpdate(
-            { User: review.Reviewer },
-            {
-                '$inc': {
-                    withdrawBalance: updatedRequest.price * 0.8,
-                    nofVideoesReviewed: 1
-                }
-            }
-        )
-
-        await Earning.create({
-            User: review.Reviewer,
-            amount: updatedRequest.price * 0.8,
-            service:'TextProfileReview'
-        })
 
         return JSON.parse(JSON.stringify(newReview))
     } catch (error) {
