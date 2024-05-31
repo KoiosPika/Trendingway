@@ -1,10 +1,11 @@
 'use client'
 
-import { getAllEarnings } from '@/lib/actions/earning.actions'
+import { getAllEarnings, getPaginatedEarnings } from '@/lib/actions/earning.actions'
 import { IEarning } from '@/lib/database/models/earning.model'
 import { formatDate } from '@/lib/utils'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
+import EarningDialog from './EarningDialog'
 
 const EarningOrders = ({ userId }: { userId: string }) => {
 
@@ -45,35 +46,11 @@ const EarningOrders = ({ userId }: { userId: string }) => {
                                     </div>
                                 </div>
                                 {earnings && earnings.map((earning: IEarning, index: number) => (
-                                    <div key={index} className='flex flex-row justify-center items-center px-2 py-3 gap-2 bg-white text-black rounded-lg relative'>
-                                        <div className='w-full flex flex-row items-center'>
-                                            <p className='font-semibold text-[12px] lg:text-[15px]'>${(earning?.amount).toFixed(2)}</p>
-                                        </div>
-                                        <div className='w-full flex flex-row items-center'>
-                                            <p className='font-semibold text-[12px] lg:text-[15px]'>{formatDate(earning?.createdAt)}</p>
-                                        </div>
-                                        {earning.service == 'TextReview' &&
-                                            <div className='w-full flex flex-col sm:flex-row items-center gap-2'>
-                                                <Image src={'/icons/star-white.svg'} alt='video' width={200} height={200} className='bg-blue-500 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
-                                                <p className='font-semibold text-[12px] lg:text-[14px] hidden sm:block'>Text Review</p>
-                                            </div>}
-                                        {earning.service == 'VideoReview' &&
-                                            <div className='w-full flex flex-col sm:flex-row items-center gap-2'>
-                                                <Image src={'/icons/video.svg'} alt='video' width={200} height={200} className='bg-red-500 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
-                                                <p className='font-semibold text-[12px] lg:text-[14px] hidden sm:block'>Video Review</p>
-                                            </div>}
-                                        {earning.service == 'TextProfileReview' &&
-                                            <div className='w-full flex flex-col sm:flex-row items-center gap-2'>
-                                                <Image src={'/icons/account.svg'} alt='video' width={200} height={200} className='bg-orange-500 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
-                                                <p className='font-semibold text-[12px] lg:text-[14px] hidden sm:block'>Text Profile Review</p>
-                                            </div>}
-                                        {earning.service == 'VideoProfileReview' &&
-                                            <div className='w-full flex flex-col sm:flex-row items-center gap-2'>
-                                                <Image src={'/icons/video-icon.svg'} alt='video' width={200} height={200} className='bg-green-600 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
-                                                <p className='font-semibold text-[12px] lg:text-[14px] hidden sm:block'>Video Profile Review</p>
-                                            </div>}
+                                    <div key={index} className='flex w-full'>
+                                        <EarningDialog earning={earning} />
                                     </div>
                                 ))}
+                                <LoadMoreEarnings userId={userId}/>
                             </div>
                         </div>
                     </div>
@@ -84,3 +61,38 @@ const EarningOrders = ({ userId }: { userId: string }) => {
 }
 
 export default EarningOrders
+
+const LoadMoreEarnings = ({ userId }: { userId: string }) => {
+
+    const [earnings, setEarnings] = useState<IEarning[]>([])
+    const [loading, setloading] = useState<boolean>(false)
+    const [page, setPage] = useState(1)
+
+    const getOrders = async () => {
+        try {
+            setloading(true)
+            const requestedEarnings = await getPaginatedEarnings(userId, page * 3)
+            setEarnings((prevEarnings) => [...prevEarnings, ...requestedEarnings]);
+            setloading(false)
+            setPage(page + 1);
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    return (
+        <>
+            {earnings && earnings.map((earning: IEarning, index: number) => (
+                <div key={index} className='flex w-full'>
+                    <EarningDialog earning={earning} />
+                </div>
+            ))}
+            {!loading && <div className='flex justify-center items-center mt-3 hover:cursor-pointer' onClick={getOrders}>
+                <p className='inline-flex bg-white text-[#1AAD7A] font-semibold px-2 py-1 rounded-lg text-[13px] md:text-[16px]'>Load More</p>
+            </div>}
+            {loading && <div className='flex justify-center items-center mt-3'>
+                <p className='inline-flex bg-white text-[#1AAD7A] font-semibold px-2 py-1 rounded-lg text-[13px] md:text-[16px]'>Loading...</p>
+            </div>}
+        </>
+    );
+};

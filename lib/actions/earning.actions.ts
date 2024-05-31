@@ -14,3 +14,16 @@ export async function getAllEarnings(userId:string){
         console.log(error)
     }
 }
+
+export async function getPaginatedEarnings(userId:string, skip:number){
+    try {
+        await connectToDatabase();
+
+        const earnings = await Earning.find({ User: userId }).sort({ createdAt: -1 }).skip(skip).limit(3)
+
+        return JSON.parse(JSON.stringify(earnings))
+
+    } catch (error) {
+        console.log(error);
+    }
+}
