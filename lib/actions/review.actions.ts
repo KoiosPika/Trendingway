@@ -5,12 +5,13 @@ import User, { IUser } from '@/lib/database/models/user.model'
 import UserData from '../database/models/userData.model'
 import Review, { IReview } from '../database/models/review.model'
 import Request from '../database/models/request.model'
+import Earning from '../database/models/earning.model'
 
 const populateReview = (query: any) => {
     return query
         .populate({ path: 'Request', model: Request, select: "User Reviewer postLink description platform type" })
-        .populate({ path: 'User', model:User, select: "username photo"})
-        .populate({ path: 'Reviewer', model:User, select: "username photo"})
+        .populate({ path: 'User', model: User, select: "username photo" })
+        .populate({ path: 'Reviewer', model: User, select: "username photo" })
 }
 
 export async function createTextReview(review: { request: string, contentNotes: string, contentReview: number, brightnessNotes: string, brightnessReview: number, descriptionNotes: string, descriptionReview: number, hashtagsNotes: string, hashtagsReview: number, soundNotes: string, soundReview: number, additionalNotes: string, Reviewer: string, User: string }) {
@@ -52,6 +53,12 @@ export async function createTextReview(review: { request: string, contentNotes: 
             }
         )
 
+        await Earning.create({
+            User: review.Reviewer,
+            amount: updatedRequest.price * 0.8,
+            service:'TextReview'
+        })
+
         return JSON.parse(JSON.stringify(newReview))
     } catch (error) {
         console.log(error)
@@ -84,6 +91,12 @@ export async function createVideoReview(review: { request: string, videoURL: str
             }
         )
 
+        await Earning.create({
+            User: review.Reviewer,
+            amount: updatedRequest.price * 0.8,
+            service:'VideoReview'
+        })
+
         return JSON.parse(JSON.stringify(newReview))
     } catch (error) {
         console.log(error)
@@ -115,6 +128,12 @@ export async function createVideoProfileReview(review: { request: string, videoU
                 }
             }
         )
+
+        await Earning.create({
+            User: review.Reviewer,
+            amount: updatedRequest.price * 0.8,
+            service:'VideoProfileReview'
+        })
 
         return JSON.parse(JSON.stringify(newReview))
     } catch (error) {
@@ -153,6 +172,12 @@ export async function createTextProfileReview(review: { request: string, bioNote
                 }
             }
         )
+
+        await Earning.create({
+            User: review.Reviewer,
+            amount: updatedRequest.price * 0.8,
+            service:'TextProfileReview'
+        })
 
         return JSON.parse(JSON.stringify(newReview))
     } catch (error) {
@@ -213,7 +238,7 @@ export async function getAllResponses(userId: string) {
     try {
         await connectToDatabase();
 
-        const requests = await populateReview(Review.find({ User: userId }).sort({createdAt:-1}))
+        const requests = await populateReview(Review.find({ User: userId }).sort({ createdAt: -1 }))
 
         return JSON.parse(JSON.stringify(requests));
     } catch (error) {

@@ -1,7 +1,9 @@
 import Checkout from '@/components/shared/Checkout'
 import StripeSetup from '@/components/shared/StripeSetup'
+import { getAllEarnings } from '@/lib/actions/earning.actions'
 import { getAllOrders } from '@/lib/actions/order.actions'
 import { getUserDataByUserId } from '@/lib/actions/userData.actions'
+import { IEarning } from '@/lib/database/models/earning.model'
 import { IOrder } from '@/lib/database/models/order.model'
 import { IUserData } from '@/lib/database/models/userData.model'
 import { formatDate } from '@/lib/utils'
@@ -18,6 +20,8 @@ const page = async () => {
     const user: IUserData = await getUserDataByUserId(userId)
 
     const orders = await getAllOrders(userId);
+
+    const earnings = await getAllEarnings(userId);
 
     return (
         <div className='w-full flex justify-center items-center bg-white'>
@@ -91,9 +95,9 @@ const page = async () => {
                                             </div>
                                         </div>
                                     ))}
-                                    <div className='ml-auto'>
-                                        <p className='bg-white px-4 py-2 rounded-lg inline-flex text-black text-[13px] font-semibold'>More Details {`->`}</p>
-                                    </div>
+                                    <Link href={'/wallet/recharges'} className='ml-auto'>
+                                        <p className='bg-white px-4 py-2 rounded-lg inline-flex text-black text-[13px] font-semibold hover:bg-yellow-400'>More Details {`->`}</p>
+                                    </Link>
                                 </div>
                             </div>
 
@@ -123,15 +127,15 @@ const page = async () => {
                                             </div>
                                         </div>
                                     ))}
-                                    <div className='ml-auto'>
-                                        <p className='bg-white px-4 py-2 rounded-lg inline-flex text-black text-[13px] font-semibold'>More Details {`->`}</p>
-                                    </div>
+                                    <Link href={'/wallet/payouts'} className='ml-auto'>
+                                        <p className='bg-white px-4 py-2 rounded-lg inline-flex text-black text-[13px] font-semibold hover:bg-yellow-400'>More Details {`->`}</p>
+                                    </Link>
                                 </div>
                             </div>
                         </div>
-                        <div id='recharge' className='w-11/12 p-4 md:p-8 my-3 rounded-lg bg-[#1AAD7A] text-white' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
+                        <div className='w-11/12 p-4 md:p-8 my-3 rounded-lg bg-[#1AAD7A] text-white' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                             <div className='flex flex-row gap-2 mb-4'>
-                            <Image src={'/icons/invoice.svg'} alt='wallet' height={20} width={20} />
+                                <Image src={'/icons/invoice.svg'} alt='wallet' height={20} width={20} />
                                 <p className='font-semibold text-[20px]'>Earnings</p>
                             </div>
                             <div className='grid grid-cols-1 gap-2'>
@@ -149,23 +153,39 @@ const page = async () => {
                                         <p className='text-[13px] lg:text-[15px]'>Service</p>
                                     </div>
                                 </div>
-                                {orders.map((order: IOrder, index: number) => (
+                                {earnings.map((earning: IEarning, index: number) => (
                                     <div key={index} className='flex flex-row justify-center items-center px-2 py-3 gap-2 bg-white text-black rounded-lg relative'>
                                         <div className='w-full flex flex-row items-center'>
-                                            <p className='font-semibold text-[12px] lg:text-[15px]'>${(order.amount).toFixed(2)}</p>
+                                            <p className='font-semibold text-[12px] lg:text-[15px]'>${(earning?.amount).toFixed(2)}</p>
                                         </div>
                                         <div className='w-full flex flex-row items-center'>
-                                            <p className='font-semibold text-[12px] lg:text-[15px]'>{formatDate(order.createdAt)}</p>
+                                            <p className='font-semibold text-[12px] lg:text-[15px]'>{formatDate(earning?.createdAt)}</p>
                                         </div>
-                                        <div className='w-full flex flex-col sm:flex-row items-center gap-2'>
-                                            <Image src={'/icons/video.svg'} alt='video' width={200} height={200} className='bg-red-500 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
-                                            <p className='font-semibold text-[12px] lg:text-[14px] hidden sm:block'>Video Profile Review</p>
-                                        </div>
+                                        {earning.service == 'TextReview' &&
+                                            <div className='w-full flex flex-col sm:flex-row items-center gap-2'>
+                                                <Image src={'/icons/star-white.svg'} alt='video' width={200} height={200} className='bg-blue-500 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
+                                                <p className='font-semibold text-[12px] lg:text-[14px] hidden sm:block'>Text Review</p>
+                                            </div>}
+                                        {earning.service == 'VideoReview' &&
+                                            <div className='w-full flex flex-col sm:flex-row items-center gap-2'>
+                                                <Image src={'/icons/video.svg'} alt='video' width={200} height={200} className='bg-red-500 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
+                                                <p className='font-semibold text-[12px] lg:text-[14px] hidden sm:block'>Video Review</p>
+                                            </div>}
+                                        {earning.service == 'TextProfileReview' &&
+                                            <div className='w-full flex flex-col sm:flex-row items-center gap-2'>
+                                                <Image src={'/icons/account.svg'} alt='video' width={200} height={200} className='bg-orange-500 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
+                                                <p className='font-semibold text-[12px] lg:text-[14px] hidden sm:block'>Text Profile Review</p>
+                                            </div>}
+                                        {earning.service == 'VideoProfileReview' &&
+                                            <div className='w-full flex flex-col sm:flex-row items-center gap-2'>
+                                                <Image src={'/icons/video-icon.svg'} alt='video' width={200} height={200} className='bg-green-600 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
+                                                <p className='font-semibold text-[12px] lg:text-[14px] hidden sm:block'>Video Profile Review</p>
+                                            </div>}
                                     </div>
                                 ))}
-                                <div className='ml-auto'>
-                                    <p className='bg-white px-4 py-2 rounded-lg inline-flex text-black text-[13px] font-semibold'>More Details {`->`}</p>
-                                </div>
+                                <Link href={'/wallet/earnings'} className='ml-auto'>
+                                    <p className='bg-white px-4 py-2 rounded-lg inline-flex text-black text-[13px] font-semibold hover:bg-yellow-400'>More Details {`->`}</p>
+                                </Link>
                             </div>
                         </div>
                     </div>

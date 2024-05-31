@@ -71,3 +71,16 @@ export async function getAllOrders(userId: string) {
         console.log(error)
     }
 }
+
+export async function getOrderById(id:string){
+    try {
+        await connectToDatabase();
+
+        const order = await Order.findById(id)
+
+        return JSON.parse(JSON.stringify(order))
+        
+    } catch (error) {
+        console.log(error);
+    }
+}
