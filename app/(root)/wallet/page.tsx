@@ -23,7 +23,7 @@ const page = async () => {
         <div className='w-full flex justify-center items-center bg-white'>
             <div className='w-full flex flex-col max-w-[1100px] justify-center items-center'>
                 <div className='my-3 justify-center items-center flex flex-col w-full'>
-                    <div className='rounded-lg flex flex-col justify-center items-center mt-3 mb-[100px] p-3 w-full lg:w-4/5 bg-white'>
+                    <div className='rounded-lg flex flex-col justify-center items-center mt-3 mb-[100px] p-3 w-full lg:w-5/6 bg-white'>
                         <div className='grid grid-cols-1 md:grid-cols-2 w-11/12 gap-3 md:mt-5'>
                             <div className='flex flex-col bg-red-500 w-full p-4 rounded-lg' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                                 <div className='flex flex-row items-center gap-2'>

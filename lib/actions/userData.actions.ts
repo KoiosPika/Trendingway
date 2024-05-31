@@ -42,27 +42,31 @@ export async function getUserDataByUserId(userId: string) {
     }
 }
 
-export async function editUserData({ userId, aboutMe, link, TextReview, VideoReview, TextProfileReview, VideoProfileReview, languages, categories }:
-    { userId: string, aboutMe: string, link: string, TextReview: number, VideoReview: number, TextProfileReview: number, VideoProfileReview: number, languages: string[], categories: string[] }) {
+export async function editUserData(userData:
+    { userId: string, aboutMe: string, link: string, TextReview: number, TextReviewAvailability: boolean, VideoReview: number, VideoReviewAvailability: boolean, TextProfileReview: number, TextProfileReviewAvailability: boolean, VideoProfileReview: number, VideoProfileReviewAvailability: boolean, languages: string[], categories: string[] }) {
     try {
         await connectToDatabase()
 
-        const userData = await UserData.findOneAndUpdate(
-            { User: userId },
+        const data = await UserData.findOneAndUpdate(
+            { User: userData.userId },
             {
                 '$set': {
-                    aboutMe,
-                    websiteLink: link,
-                    TextReview,
-                    VideoReview,
-                    TextProfileReview,
-                    VideoProfileReview,
-                    languages,
-                    categories
+                    aboutMe: userData.aboutMe,
+                    websiteLink: userData.link,
+                    TextReview: userData.TextReview,
+                    TextReviewAvailability: userData.TextReviewAvailability,
+                    VideoReview:userData.VideoReview,
+                    VideoReviewAvailability:userData.VideoReviewAvailability,
+                    TextProfileReview:userData.TextProfileReview,
+                    TextProfileReviewAvailability:userData.TextProfileReviewAvailability,
+                    VideoProfileReview:userData.VideoProfileReview,
+                    VideoProfileReviewAvailability:userData.VideoProfileReviewAvailability,
+                    languages:userData.languages,
+                    categories:userData.categories
                 }
             })
 
-        return JSON.parse(JSON.stringify(userData))
+        return JSON.parse(JSON.stringify(data))
 
     } catch (error) {
         console.log(error)
@@ -113,7 +117,7 @@ export async function getTopUsers() {
     }
 }
 
-export async function getTopUsersByConditions(matchConditions:any) {
+export async function getTopUsersByConditions(matchConditions: any) {
     try {
         await connectToDatabase();
 

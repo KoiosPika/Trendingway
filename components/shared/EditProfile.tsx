@@ -10,6 +10,7 @@ import { Button } from '../ui/button'
 import Image from 'next/image'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, } from "@/components/ui/select"
 import { useRouter } from 'next/navigation'
+import { Switch } from '../ui/switch'
 
 const EditProfile = ({ userId }: { userId: string }) => {
 
@@ -17,10 +18,19 @@ const EditProfile = ({ userId }: { userId: string }) => {
 
     const [aboutMe, setAboutMe] = useState<string>('')
     const [link, setLink] = useState<string>('')
+
     const [TextReview, setTextReview] = useState<number>(0)
+    const [TextReviewAvailability, setTextReviewAvailability] = useState<boolean>(true)
+
     const [VideoReview, setVideoReview] = useState<number>(0)
+    const [VideoReviewAvailability, setVideoReviewAvailability] = useState<boolean>(true)
+
     const [TextProfileReview, setTextProfileReview] = useState<number>(0)
+    const [TextProfileReviewAvailability, setTextProfileReviewAvailability] = useState<boolean>(true)
+
     const [VideoProfileReview, setVideoProfileReview] = useState<number>(0)
+    const [VideoProfileReviewAvailability, setVideoProfileReviewAvailability] = useState<boolean>(true)
+
     const [language, setLanguage] = useState('')
     const [category, setCategory] = useState('')
 
@@ -36,9 +46,13 @@ const EditProfile = ({ userId }: { userId: string }) => {
             setAboutMe(myUser.aboutMe);
             setLink(myUser.websiteLink);
             setTextReview(myUser.TextReview);
+            setTextReviewAvailability(myUser.TextReviewAvailability);
             setTextProfileReview(myUser.TextProfileReview);
+            setTextProfileReviewAvailability(myUser.TextProfileReviewAvailability);
             setVideoReview(myUser.VideoReview);
+            setVideoReviewAvailability(myUser.VideoReviewAvailability);
             setVideoProfileReview(myUser.VideoProfileReview);
+            setVideoProfileReviewAvailability(myUser.VideoProfileReviewAvailability);
             setSelectedCategory(myUser.categories);
             setSelectedLanguage(myUser.languages)
         }
@@ -59,7 +73,23 @@ const EditProfile = ({ userId }: { userId: string }) => {
 
         setLoading(true)
 
-        await editUserData({ userId, aboutMe, link, TextReview, VideoReview, TextProfileReview, VideoProfileReview, languages: selectedLanguage, categories: selectedCategory })
+        const userData = {
+            userId,
+            aboutMe, 
+            link, 
+            TextReview,
+            TextReviewAvailability,
+            VideoReview,
+            VideoReviewAvailability, 
+            TextProfileReview, 
+            TextProfileReviewAvailability, 
+            VideoProfileReview,
+            VideoProfileReviewAvailability,
+            languages: selectedLanguage, 
+            categories: selectedCategory
+        }
+
+        await editUserData(userData)
 
         setLoading(false)
 
@@ -88,73 +118,97 @@ const EditProfile = ({ userId }: { userId: string }) => {
                 <div className='my-3 justify-center items-center flex flex-col w-full'>
                     <div className='rounded-lg flex flex-col justify-center items-center my-3 p-3 w-full md:w-4/5 bg-white'>
                         <p className='text-[20px] font-bold px-4 py-2 rounded-lg text-black'>Edit Profile</p>
-                        <div className='flex flex-col justify-center items-center w-4/5 gap-3 my-3'>
+                        <div className='flex flex-col justify-center items-center w-full gap-3 my-3'>
                             <p className='font-semibold mr-auto bg-green-400 px-4 py-2 rounded-full text-[13px] md:text-[16px]'>About Me:</p>
                             <Textarea value={aboutMe} className='w-full border-2 border-black text-[14px] md:text-[16px] font-semibold' onChange={(e) => setAboutMe(e.target.value)} />
                         </div>
-                        <div className='flex flex-col justify-center items-center w-4/5 gap-3 my-3'>
+                        <div className='flex flex-col justify-center items-center w-full gap-3 my-3'>
                             <p className='font-semibold mr-auto bg-blue-400 px-4 py-2 rounded-full text-[13px] md:text-[16px]'>Personal Link:</p>
                             <Input value={link} className='w-full border-2 border-black text-[14px] md:text-[16px] font-semibold' onChange={(e) => setLink(e.target.value)} />
                         </div>
-                        <div className='flex flex-col justify-center items-center w-4/5 gap-3 my-3'>
+                        <div className='flex flex-col justify-center items-center w-full gap-3 my-3'>
                             <p className='font-bold mr-auto bg-orange-400 px-4 py-2 rounded-full text-[13px] md:text-[16px]'>Services:</p>
                             <div className='w-full flex flex-col gap-3'>
-                                <div className='border-[1px] border-slate-300 rounded-lg h-[150px] flex justify-center items-center gap-2' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
+                                <div className='border-[1px] border-slate-300 rounded-lg h-[150px] flex justify-center items-center gap-2 relative' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                                     <div className='flex flex-col items-center gap-2 flex-1'>
-                                        <Image src={'/icons/video.svg'} alt='video' width={200} height={200} className='bg-blue-500 w-[35px] h-[35px] md:w-[55px] md:h-[55px] p-1 md:p-2 rounded-full' />
+                                        <Image src={'/icons/video.svg'} alt='video' width={200} height={200} className='bg-blue-500 w-[40px] h-[40px] md:w-[55px] md:h-[55px] p-1 md:p-2 rounded-full' />
                                         <p className='font-semibold text-[13px] md:text-[16px]'>Text Review</p>
                                     </div>
-                                    <div className='h-3/4 w-[2px] bg-black'></div>
+                                    <div className='h-2/4 w-[2px] bg-black'></div>
                                     <div className='flex flex-col items-center justify-center flex-1 mr-auto'>
-                                        <div className='flex flex-row justify-center items-center w-full'>
+                                        <div className='flex flex-row justify-center items-center w-full relative'>
                                             <p className='text-[20px] md:text-[25px] font-semibold' style={{ color: TextReview < 0.99 ? 'red' : 'black' }}>$</p>
                                             <Input value={TextReview} className='text-[20px] md:text-[25px] font-semibold w-2/3 border-0' type='number' onChange={(e) => setTextReview(Number(e.target.value))} style={{ color: TextReview < 0.99 ? 'red' : 'black' }} />
                                         </div>
-                                        {TextReview < 0.99 && <p className='mt-[5px] mr-auto text-[10px] md:text-[12px]  font-semibold text-red-500'>{`Price Can't be Bellow 0.99`}</p>}
+                                        {TextReview < 0.99 && <p className='mt-[5px] md:mr-[100px] mr-auto text-[10px] md:text-[12px] font-semibold text-red-500'>{`Price Can't be Bellow 0.99`}</p>}
+                                    </div>
+                                    <div className='absolute bottom-1 right-2 flex flex-row items-center gap-2 text-blue-700'>
+                                        {TextReviewAvailability && <p className='font-bold text-[12px]'>Service Available</p>}
+                                        {!TextReviewAvailability && <p className='font-bold text-[12px]'>Service Unavailable</p>}
+                                        <Switch checked={TextReviewAvailability} onCheckedChange={setTextReviewAvailability} style={{ backgroundColor: 'blue' }} />
                                     </div>
                                 </div>
-                                <div className='border-[1px] border-slate-300 rounded-lg h-[150px] flex justify-center items-center gap-2' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
+
+                                <div className='border-[1px] border-slate-300 rounded-lg h-[150px] flex justify-center items-center gap-2 relative' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                                     <div className='flex flex-col items-center gap-2 flex-1'>
-                                        <Image src={'/icons/video-icon.svg'} alt='video' width={200} height={200} className='bg-red-500 w-[35px] h-[35px] md:w-[55px] md:h-[55px] p-1 md:p-2 rounded-full' />
+                                        <Image src={'/icons/video-icon.svg'} alt='video' width={200} height={200} className='bg-red-500 w-[40px] h-[40px] md:w-[55px] md:h-[55px] p-1 md:p-2 rounded-full' />
                                         <p className='font-semibold text-[13px] md:text-[16px]'>Video Review</p>
                                     </div>
-                                    <div className='h-3/4 w-[2px] bg-black'></div>
+                                    <div className='h-2/4 w-[2px] bg-black'></div>
                                     <div className='flex flex-col items-center justify-center flex-1 mr-auto'>
                                         <div className='flex flex-row justify-center items-center w-full'>
                                             <p className='text-[20px] md:text-[25px] font-semibold' style={{ color: VideoReview < 1.99 ? 'red' : 'black' }}>$</p>
                                             <Input value={VideoReview} className='text-[20px] md:text-[25px] font-semibold w-2/3 border-0' type='number' onChange={(e) => setVideoReview(Number(e.target.value))} style={{ color: VideoReview < 1.99 ? 'red' : 'black' }} />
                                         </div>
-                                        {VideoReview < 1.99 && <p className='mt-[5px] mr-auto text-[10px] md:text-[12px]  font-semibold text-red-500'>{`Price Can't be Bellow 1.99`}</p>}
+                                        {VideoReview < 1.99 && <p className='mt-[5px] md:mr-[100px] mr-auto text-[10px] md:text-[12px]  font-semibold text-red-500'>{`Price Can't be Bellow 1.99`}</p>}
+                                    </div>
+                                    <div className='absolute bottom-1 right-2 flex flex-row items-center gap-2 text-red-600'>
+                                        {VideoReviewAvailability && <p className='font-bold text-[12px]'>Service Available</p>}
+                                        {!VideoReviewAvailability && <p className='font-bold text-[12px]'>Service Unavailable</p>}
+                                        <Switch checked={VideoReviewAvailability} onCheckedChange={setVideoReviewAvailability} style={{ backgroundColor: 'red' }} />
                                     </div>
                                 </div>
-                                <div className='border-[1px] border-slate-300 rounded-lg h-[150px] flex justify-center items-center gap-2' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
+
+                                <div className='border-[1px] border-slate-300 rounded-lg h-[150px] flex justify-center items-center gap-2 relative' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                                     <div className='flex flex-col items-center gap-2 flex-1'>
-                                        <Image src={'/icons/account.svg'} alt='video' width={200} height={200} className='bg-orange-500 w-[35px] h-[35px] md:w-[55px] md:h-[55px] p-1 md:p-2 rounded-full' />
+                                        <Image src={'/icons/account.svg'} alt='video' width={200} height={200} className='bg-orange-500 w-[40px] h-[40px] md:w-[55px] md:h-[55px] p-1 md:p-2 rounded-full' />
                                         <p className='font-semibold text-[13px] md:text-[16px]'>Text Profile Review</p>
                                     </div>
-                                    <div className='h-3/4 w-[2px] bg-black'></div>
+                                    <div className='h-2/4 w-[2px] bg-black'></div>
                                     <div className='flex flex-col items-center justify-center flex-1 mr-auto'>
                                         <div className='flex flex-row justify-center items-center w-full'>
                                             <p className='text-[20px] md:text-[25px] font-semibold' style={{ color: TextProfileReview < 2.99 ? 'red' : 'black' }}>$</p>
-                                            <Input value={TextProfileReview} className='text-[20px] md:text-[25px] font-semibold w-2/3 border-0' type='number' onChange={(e) => setTextProfileReview(Number(e.target.value))} style={{ color: TextProfileReview < 1.99 ? 'red' : 'black' }} />
+                                            <Input value={TextProfileReview} className='text-[20px] md:text-[25px] font-semibold w-2/3 border-0' type='number' onChange={(e) => setTextProfileReview(Number(e.target.value))} style={{ color: TextProfileReview < 2.99 ? 'red' : 'black' }} />
                                         </div>
-                                        {TextProfileReview < 2.99 && <p className='mt-[5px] mr-auto text-[10px] md:text-[12px] font-semibold text-red-500'>{`Price Can't be Bellow 2.99`}</p>}
+                                        {TextProfileReview < 2.99 && <p className='mt-[5px] md:mr-[100px] mr-auto text-[10px] md:text-[12px] font-semibold text-red-500'>{`Price Can't be Bellow 2.99`}</p>}
+                                    </div>
+                                    <div className='absolute bottom-1 right-2 flex flex-row items-center gap-2 text-[#DF7110]'>
+                                        {TextProfileReviewAvailability && <p className='font-bold text-[12px]'>Service Available</p>}
+                                        {!TextProfileReviewAvailability && <p className='font-bold text-[12px]'>Service Unavailable</p>}
+                                        <Switch checked={TextProfileReviewAvailability} onCheckedChange={setTextProfileReviewAvailability} style={{ backgroundColor: '#DF7110' }} />
                                     </div>
                                 </div>
-                                <div className='border-[1px] border-slate-300 rounded-lg h-[150px] flex justify-center items-center gap-2' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
+
+                                <div className='border-[1px] border-slate-300 rounded-lg h-[150px] flex justify-center items-center gap-2 relative' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                                     <div className='flex flex-col items-center gap-2 flex-1'>
-                                        <Image src={'/icons/video-icon.svg'} alt='video' width={200} height={200} className='bg-green-600 w-[35px] h-[35px] md:w-[55px] md:h-[55px] p-1 md:p-2 rounded-full' />
+                                        <Image src={'/icons/video-icon.svg'} alt='video' width={200} height={200} className='bg-green-600 w-[40px] h-[40px] md:w-[55px] md:h-[55px] p-1 md:p-2 rounded-full' />
                                         <p className='font-semibold text-[13px] md:text-[16px]'>Video Profile Review</p>
                                     </div>
-                                    <div className='h-3/4 w-[2px] bg-black'></div>
+                                    <div className='h-2/4 w-[2px] bg-black'></div>
                                     <div className='flex flex-col items-center justify-center flex-1 mr-auto'>
                                         <div className='flex flex-row justify-center items-center w-full'>
                                             <p className='text-[20px] md:text-[25px] font-semibold' style={{ color: VideoProfileReview < 3.99 ? 'red' : 'black' }}>$</p>
                                             <Input value={VideoProfileReview} className='text-[20px] md:text-[25px] font-semibold w-2/3 border-0' type='number' onChange={(e) => setVideoProfileReview(Number(e.target.value))} style={{ color: VideoProfileReview < 3.99 ? 'red' : 'black' }} />
                                         </div>
-                                        {VideoProfileReview < 3.99 && <p className='mt-[5px] mr-auto text-[10px] md:text-[12px] font-semibold text-red-500'>{`Price Can't be Bellow 3.99`}</p>}
+                                        {VideoProfileReview < 3.99 && <p className='mt-[5px] md:mr-[100px] mr-auto text-[10px] md:text-[12px] font-semibold text-red-500'>{`Price Can't be Bellow 3.99`}</p>}
+                                    </div>
+                                    <div className='absolute bottom-1 right-2 flex flex-row items-center gap-2 text-green-700'>
+                                        {VideoProfileReviewAvailability && <p className='font-bold text-[12px]'>Service Available</p>}
+                                        {!VideoProfileReviewAvailability && <p className='font-bold text-[12px]'>Service Unavailable</p>}
+                                        <Switch checked={VideoProfileReviewAvailability} onCheckedChange={setVideoProfileReviewAvailability} style={{ backgroundColor: 'green' }} />
                                     </div>
                                 </div>
+
                             </div>
                             <p className='font-bold mr-auto mt-4 bg-yellow-400 px-4 py-2 rounded-full'>Tags:</p>
                             <div className='flex justify-around items-center py-2 px-3 w-full gap-3 text-black text-[12px] md:text-[16px]'>
@@ -335,7 +389,7 @@ const EditProfile = ({ userId }: { userId: string }) => {
                                     <p className='font-semibold text-[15px] text-white'>Save Info</p>
                                 </Button>}
                             {!enableSaving &&
-                                <Button disabled={loading} className='my-3 bg-green-400 p-3 rounded-lg disabled hover:cursor-default hover:bg-green-400'>
+                                <Button disabled={loading} className='my-3 bg-slate-400 p-3 rounded-lg disabled hover:cursor-default hover:bg-slate-400'>
                                     <p className='font-semibold text-[15px] text-white'>Save Info</p>
                                 </Button>}
                         </div>
