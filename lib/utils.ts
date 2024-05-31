@@ -5,12 +5,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-const getDayName = (date: Date) => {
-  const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-  return days[date.getDay()];
-};
 
-// Function to format the date
 export const formatDate = (date: Date) => {
   const d = new Date(date);
   const monthNames = [
@@ -23,6 +18,19 @@ export const formatDate = (date: Date) => {
 
   return `${month} ${day}, ${year}`;
 };
+
+export const formatTime = (date:Date) => {
+
+  const d = new Date(date);
+  let hours = d.getHours();
+  const minutes = d.getMinutes();
+  const ampm = hours >= 12 ? 'PM' : 'AM';
+  hours = hours % 12;
+  hours = hours ? hours : 12; // the hour '0' should be '12'
+  const minutesStr = minutes < 10 ? '0' + minutes : minutes;
+
+  return `${hours}:${minutesStr}${ampm}`;
+}
 
 export function timeAgo(timestamp: string): string {
   const date = new Date(timestamp);

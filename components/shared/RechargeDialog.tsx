@@ -2,9 +2,8 @@
 
 import React, { useEffect, useState } from 'react'
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '../ui/alert-dialog'
-import { formatDate } from '@/lib/utils'
+import { formatDate, formatTime } from '@/lib/utils'
 import { IOrder } from '@/lib/database/models/order.model'
-import { getOrderById } from '@/lib/actions/order.actions'
 
 const RechargeDialog = ({ order }: { order: IOrder }) => {
 
@@ -22,17 +21,33 @@ const RechargeDialog = ({ order }: { order: IOrder }) => {
                     <p className='font-semibold text-[12px] lg:text-[15px] text-white bg-black rounded-full px-1'>{'->'}</p>
                 </div>
             </AlertDialogTrigger>
-            <AlertDialogContent className="bg-white border-0">
+            <AlertDialogContent className="bg-orange-500 border-0">
                 <AlertDialogHeader>
                     <AlertDialogTitle className="flex flex-row items-center justify-between">
-                        <p className="text-black font-bold">Order Details:</p>
-                        <AlertDialogCancel className="rounded-full bg-black text-white hover:bg-black hover:text-white">X</AlertDialogCancel>
+                        <p className="text-white font-bold">Order Details:</p>
+                        <AlertDialogCancel className="rounded-full bg-white text-orange-500 hover:bg-black hover:text-white">X</AlertDialogCancel>
                     </AlertDialogTitle>
                 </AlertDialogHeader>
-                <p>Order ID: {order?._id}</p>
-                <p>Amount: {order?.amount}</p>
-                <p>Date: {formatDate(order?.createdAt)}</p>
-                <p>Time: {formatDate(order?.createdAt)}</p>
+                <table className='w-full text-[13px] md:text-[16px]'>
+                    <tbody>
+                        <tr>
+                            <td className='font-bold pr-2'>Order ID:</td>
+                            <td className='font-semibold text-white'>{order?._id}</td>
+                        </tr>
+                        <tr>
+                            <td className='font-bold pr-2'>Amount:</td>
+                            <td className='font-semibold text-white'>${(order?.amount).toFixed(2)}</td>
+                        </tr>
+                        <tr>
+                            <td className='font-bold pr-2'>Date:</td>
+                            <td className='font-semibold text-white'>{formatDate(order?.createdAt)}</td>
+                        </tr>
+                        <tr>
+                            <td className='font-bold pr-2'>Time:</td>
+                            <td className='font-semibold text-white'>{formatTime(order?.createdAt)}</td>
+                        </tr>
+                    </tbody>
+                </table>
             </AlertDialogContent>
         </AlertDialog>
     )

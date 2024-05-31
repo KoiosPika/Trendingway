@@ -64,7 +64,7 @@ export async function getAllOrders(userId: string) {
 
         const orders = await Order.find({
             User: userId
-        }).sort({createdAt: -1})
+        }).sort({ createdAt: -1 }).limit(3)
 
         return JSON.parse(JSON.stringify(orders))
     } catch (error) {
@@ -72,14 +72,14 @@ export async function getAllOrders(userId: string) {
     }
 }
 
-export async function getOrderById(id:string){
+export async function getPaginatedOrders(userId: string, skip: number) {
     try {
         await connectToDatabase();
 
-        const order = await Order.findById(id)
+        const order = await Order.find({ User: userId }).sort({ createdAt: -1 }).skip(skip).limit(3)
 
         return JSON.parse(JSON.stringify(order))
-        
+
     } catch (error) {
         console.log(error);
     }
