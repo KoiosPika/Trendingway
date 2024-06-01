@@ -10,8 +10,6 @@ import React from 'react'
 
 const page = async () => {
 
-  const users = await getTopUsers()
-
   return (
     <div className='w-full flex justify-center items-center bg-white'>
       <div className='w-full flex flex-col max-w-[900px] justify-center items-center'>

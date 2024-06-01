@@ -32,6 +32,10 @@ const page = async () => {
                 <Image src={'/icons/down.svg'} alt='up' height={20} width={20} className='rotate-180' />
                 <p className='text-[12px] md:text-[15px]'>Responses</p>
               </Link>
+              <Link href={'/notifications/responses'} className='flex flex-col md:flex-row justify-center items-center gap-3 px-4 py-3 text-center w-full rounded-r-lg'>
+                <Image src={'/icons/down.svg'} alt='up' height={20} width={20} className='rotate-180' />
+                <p className='text-[12px] md:text-[15px]'>Responses</p>
+              </Link>
             </div>
             <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 font-semibold'>
               {requests.map((request: IRequest) => (

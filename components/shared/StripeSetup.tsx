@@ -18,9 +18,9 @@ const StripeSetup = ({ userId }: { userId: string }) => {
         <div className='w-11/12 p-4 md:p-8 my-2 rounded-lg bg-[#6772e4] text-white' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
             <div className='flex flex-row items-center gap-2'>
                 <Image className='rounded-md border-2 border-white h-[30px] w-[30px]' src={'/icons/stripe.png'} alt='stripe' height={200} width={200} />
-                <p className='font-bold'>Stripe Connect Set up</p>
+                <p className='font-bold text-[20px]'>Stripe Connect Set up</p>
             </div>
-            <p className='ml-9 md:text-[16px] text-[13px]'>Set up your Stripe Connect Express account to receive the money</p>
+            <p className='ml-9 md:text-[16px] text-[13px] mt-3'>Set up your Stripe Connect Express account to receive the money</p>
             <div className='flex flex-row w-full mt-3'>
                 <p onClick={handleCreate} className='ml-auto bg-white text-[#6772e4] font-semibold py-2 px-4 cursor-pointer inline-block border-[2px] border-yellow-500 rounded-full text-[12px] md:text-[16px]'>Set Up Now!</p>
             </div>
