@@ -16,8 +16,8 @@ const RatingDialog = ({ id }: { id: string }) => {
 
     return (
         <AlertDialog>
-            <AlertDialogTrigger className='w-1/2 flex justify-center items-center'>
-                <div className='w-full bg-green-400 flex flex-row items-center justify-center gap-2 rounded-md hover:cursor-pointer'>
+            <AlertDialogTrigger className='w-full flex justify-center items-center h-[50px]'>
+                <div className='w-5/6 h-full bg-green-400 flex flex-row items-center justify-center gap-2 rounded-md hover:cursor-pointer'>
                     <Image src={'/icons/star-black.svg'} alt='star' height={15} width={15} />
                     <p className='py-1 rounded-md font-semibold'>Rate</p>
                 </div>
