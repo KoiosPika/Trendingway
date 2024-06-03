@@ -82,9 +82,9 @@ const ReviewPage = ({ id, userId }: { id: string, userId: string }) => {
                                     {request && <YouTubeEmbed url={request?.postLink} width={350} height={height} />}
                                 </div>}
                             <div className={`h-full w-full flex justify-center items-center`}>
-                                {request?.type === 'TextReview' &&
+                                {(request?.type === 'TextReview' || request?.type === 'LongTextReview') &&
                                     <TextReviewForm height={height} id={id} reviewer={request?.Reviewer?._id} user={request?.User?._id} />}
-                                {request?.type === 'VideoReview' &&
+                                {(request?.type === 'VideoReview' || request?.type === 'LongVideoReview') &&
                                     <VideoReviewForm height={height} id={id} reviewer={request?.Reviewer?._id} user={request?.User?._id} />}
                                 {request?.type === 'TextProfileReview' &&
                                     <TextProfileReviewForm height={height} id={id} reviewer={request?.Reviewer?._id} user={request?.User?._id} />}

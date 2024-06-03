@@ -22,8 +22,14 @@ const EditProfile = ({ userId }: { userId: string }) => {
     const [TextReview, setTextReview] = useState<number>(0)
     const [TextReviewAvailability, setTextReviewAvailability] = useState<boolean>(true)
 
+    const [LongTextReview, setLongTextReview] = useState<number>(0)
+    const [LongTextReviewAvailability, setLongTextReviewAvailability] = useState<boolean>(true)
+
     const [VideoReview, setVideoReview] = useState<number>(0)
     const [VideoReviewAvailability, setVideoReviewAvailability] = useState<boolean>(true)
+
+    const [LongVideoReview, setLongVideoReview] = useState<number>(0)
+    const [LongVideoReviewAvailability, setLongVideoReviewAvailability] = useState<boolean>(true)
 
     const [TextProfileReview, setTextProfileReview] = useState<number>(0)
     const [TextProfileReviewAvailability, setTextProfileReviewAvailability] = useState<boolean>(true)
@@ -45,14 +51,23 @@ const EditProfile = ({ userId }: { userId: string }) => {
             const myUser: IUserData = await getUserDataByUserId(userId)
             setAboutMe(myUser.aboutMe);
             setLink(myUser.websiteLink);
+
             setTextReview(myUser.TextReview);
             setTextReviewAvailability(myUser.TextReviewAvailability);
-            setTextProfileReview(myUser.TextProfileReview);
-            setTextProfileReviewAvailability(myUser.TextProfileReviewAvailability);
             setVideoReview(myUser.VideoReview);
             setVideoReviewAvailability(myUser.VideoReviewAvailability);
+
+            setLongTextReview(myUser.LongTextReview);
+            setLongTextReviewAvailability(myUser.LongTextReviewAvailability);
+            setLongVideoReview(myUser.LongVideoReview);
+            setLongVideoReviewAvailability(myUser.LongVideoReviewAvailability);
+
+
+            setTextProfileReview(myUser.TextProfileReview);
+            setTextProfileReviewAvailability(myUser.TextProfileReviewAvailability);
             setVideoProfileReview(myUser.VideoProfileReview);
             setVideoProfileReviewAvailability(myUser.VideoProfileReviewAvailability);
+
             setSelectedCategory(myUser.categories);
             setSelectedLanguage(myUser.languages)
         }
@@ -75,17 +90,21 @@ const EditProfile = ({ userId }: { userId: string }) => {
 
         const userData = {
             userId,
-            aboutMe, 
-            link, 
+            aboutMe,
+            link,
             TextReview,
             TextReviewAvailability,
+            LongTextReview,
+            LongTextReviewAvailability,
             VideoReview,
-            VideoReviewAvailability, 
-            TextProfileReview, 
-            TextProfileReviewAvailability, 
+            VideoReviewAvailability,
+            LongVideoReview,
+            LongVideoReviewAvailability,
+            TextProfileReview,
+            TextProfileReviewAvailability,
             VideoProfileReview,
             VideoProfileReviewAvailability,
-            languages: selectedLanguage, 
+            languages: selectedLanguage,
             categories: selectedCategory
         }
 
@@ -128,6 +147,8 @@ const EditProfile = ({ userId }: { userId: string }) => {
                         </div>
                         <div className='flex flex-col justify-center items-center w-full gap-3 my-3'>
                             <p className='font-bold mr-auto bg-orange-400 px-4 py-2 rounded-full text-[13px] md:text-[16px]'>Services:</p>
+                            <p className='font-bold text-[22px] text-slate-600 mt-5'>--- Short Content ---</p>
+                            <p className='font-bold text-[15px] text-slate-600 my-2'>(60 seconds and less)</p>
                             <div className='w-full flex flex-col gap-3'>
                                 <div className='border-[1px] border-slate-300 rounded-lg h-[150px] flex justify-center items-center gap-2 relative' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                                     <div className='flex flex-col items-center gap-2 flex-1'>
@@ -167,6 +188,55 @@ const EditProfile = ({ userId }: { userId: string }) => {
                                         {!VideoReviewAvailability && <p className='font-bold text-[12px]'>Service Unavailable</p>}
                                         <Switch checked={VideoReviewAvailability} onCheckedChange={setVideoReviewAvailability} style={{ backgroundColor: 'red' }} />
                                     </div>
+                                </div>
+
+                                <div className='flex flex-col justify-center items-center w-full'>
+                                    <p className='font-bold text-[22px] text-slate-600 mt-5'>--- Long Content ---</p>
+                                    <p className='font-bold text-[15px] text-slate-600 my-2'>(Over 60 seconds)</p>
+                                </div>
+
+                                <div className='border-[1px] border-slate-300 rounded-lg h-[150px] flex justify-center items-center gap-2 relative' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
+                                    <div className='flex flex-col items-center gap-2 flex-1'>
+                                        <Image src={'/icons/video.svg'} alt='video' width={200} height={200} className='bg-purple-500 w-[40px] h-[40px] md:w-[55px] md:h-[55px] p-1 md:p-2 rounded-full' />
+                                        <p className='font-semibold text-[13px] md:text-[16px]'>Long Text Review</p>
+                                    </div>
+                                    <div className='h-2/4 w-[2px] bg-black'></div>
+                                    <div className='flex flex-col items-center justify-center flex-1 mr-auto'>
+                                        <div className='flex flex-row justify-center items-center w-full relative'>
+                                            <p className='text-[20px] md:text-[25px] font-semibold' style={{ color: LongTextReview < 0.99 ? 'red' : 'black' }}>$</p>
+                                            <Input value={LongTextReview} className='text-[20px] md:text-[25px] font-semibold w-2/3 border-0' type='number' onChange={(e) => setLongTextReview(Number(e.target.value))} style={{ color: LongTextReview < 0.99 ? 'red' : 'black' }} />
+                                        </div>
+                                        {LongTextReview < 0.99 && <p className='mt-[5px] md:mr-[100px] mr-auto text-[10px] md:text-[12px] font-semibold text-red-500'>{`Price Can't be Bellow 0.99`}</p>}
+                                    </div>
+                                    <div className='absolute bottom-1 right-2 flex flex-row items-center gap-2 text-purple-700'>
+                                        {LongTextReviewAvailability && <p className='font-bold text-[12px]'>Service Available</p>}
+                                        {!LongTextReviewAvailability && <p className='font-bold text-[12px]'>Service Unavailable</p>}
+                                        <Switch checked={LongTextReviewAvailability} onCheckedChange={setLongTextReviewAvailability} style={{ backgroundColor: 'purple', opacity:0.75 }} />
+                                    </div>
+                                </div>
+
+                                <div className='border-[1px] border-slate-300 rounded-lg h-[150px] flex justify-center items-center gap-2 relative' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
+                                    <div className='flex flex-col items-center gap-2 flex-1'>
+                                        <Image src={'/icons/video-icon.svg'} alt='video' width={200} height={200} className='bg-[#DB1E49] w-[40px] h-[40px] md:w-[55px] md:h-[55px] p-1 md:p-2 rounded-full' />
+                                        <p className='font-semibold text-[13px] md:text-[16px]'>Long Video Review</p>
+                                    </div>
+                                    <div className='h-2/4 w-[2px] bg-black'></div>
+                                    <div className='flex flex-col items-center justify-center flex-1 mr-auto'>
+                                        <div className='flex flex-row justify-center items-center w-full'>
+                                            <p className='text-[20px] md:text-[25px] font-semibold' style={{ color: LongVideoReview < 1.99 ? 'red' : 'black' }}>$</p>
+                                            <Input value={LongVideoReview} className='text-[20px] md:text-[25px] font-semibold w-2/3 border-0' type='number' onChange={(e) => setLongVideoReview(Number(e.target.value))} style={{ color: LongVideoReview < 1.99 ? 'red' : 'black' }} />
+                                        </div>
+                                        {LongVideoReview < 1.99 && <p className='mt-[5px] md:mr-[100px] mr-auto text-[10px] md:text-[12px]  font-semibold text-red-500'>{`Price Can't be Bellow 1.99`}</p>}
+                                    </div>
+                                    <div className='absolute bottom-1 right-2 flex flex-row items-center gap-2 text-[#DB1E49]'>
+                                        {LongVideoReviewAvailability && <p className='font-bold text-[12px]'>Service Available</p>}
+                                        {!LongVideoReviewAvailability && <p className='font-bold text-[12px]'>Service Unavailable</p>}
+                                        <Switch checked={LongVideoReviewAvailability} onCheckedChange={setLongVideoReviewAvailability} style={{ backgroundColor: '#DB1E49' }} />
+                                    </div>
+                                </div>
+
+                                <div className='flex flex-col justify-center items-center w-full'>
+                                    <p className='font-bold text-[22px] text-slate-600 my-5'>--- Account Auditing ---</p>
                                 </div>
 
                                 <div className='border-[1px] border-slate-300 rounded-lg h-[150px] flex justify-center items-center gap-2 relative' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>

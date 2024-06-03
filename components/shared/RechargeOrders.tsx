@@ -49,7 +49,7 @@ const RechargeOrders = ({ userId }: { userId: string }) => {
                                         <RechargeDialog order={order} />
                                     </div>
                                 ))}
-                                <LoadMoreRecharges userId={userId} />
+                                {orders && <LoadMoreRecharges userId={userId} />}
                             </div>
                         </div>
                     </div>

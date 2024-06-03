@@ -7,12 +7,12 @@ import Image from 'next/image'
 import { Input } from '../ui/input'
 import { Textarea } from '../ui/textarea'
 import { createRequest } from '@/lib/actions/request.actions'
-import { IUserData } from '@/lib/database/models/userData.model'
 import { getUserDataByUserId } from '@/lib/actions/userData.actions'
-import Link from 'next/link'
+import { IUserData } from '@/lib/database/models/userData.model'
 import { SignedIn, SignedOut } from '@clerk/nextjs'
+import Link from 'next/link'
 
-const TextProfileReview = ({ price, userId, reviewer }: { price: number, userId: string, reviewer: string }) => {
+const LongTextReview = ({ price, userId, reviewer }: { price: number, userId: string, reviewer: string }) => {
 
     const [platform, setPlatform] = useState<string>('Instagram')
     const [URL, setURL] = useState<string>('')
@@ -35,8 +35,6 @@ const TextProfileReview = ({ price, userId, reviewer }: { price: number, userId:
         fetchUserData();
     }, []);
 
-
-
     const handleRequest = async () => {
         if (loading || finished) {
             return;
@@ -49,7 +47,7 @@ const TextProfileReview = ({ price, userId, reviewer }: { price: number, userId:
         }
 
         try {
-            await createRequest({ User: userId, Reviewer: reviewer, postLink: URL, description, platform, price, type: 'TextProfileReview' });
+            await createRequest({ User: userId, Reviewer: reviewer, postLink: URL, description, platform, price, type: 'LongTextReview' });
 
             setLoading(false);
             setFinished(true);
@@ -57,7 +55,7 @@ const TextProfileReview = ({ price, userId, reviewer }: { price: number, userId:
             console.log(error);
             setLoading(false);
         }
-    };
+    }
 
     return (
         <AlertDialog>
@@ -65,16 +63,16 @@ const TextProfileReview = ({ price, userId, reviewer }: { price: number, userId:
                 <div className='flex flex-col justify-center items-center border-[1px] border-slate-300 rounded-lg h-[240px] md:h-[220px]' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                     <div className='flex justify-center items-center gap-8' >
                         <div className='flex flex-col items-center gap-2'>
-                            <Image src={'/icons/account.svg'} alt='video' width={200} height={200} className='bg-orange-500 w-[55px] h-[55px] p-2 rounded-full' />
-                            <p className='font-semibold'>Text Profile Review</p>
+                            <Image src={'/icons/star-white.svg'} alt='video' width={200} height={200} className='bg-purple-500 w-[55px] h-[55px] p-2 rounded-full' />
+                            <p className='font-semibold'>Long Text Review</p>
                         </div>
                         <div className='h-3/4 w-[2px] bg-black'></div>
                         <p className='text-[25px] font-semibold'>${price}</p>
                     </div>
-                    <p className='mt-2 mx-2 p-2 bg-orange-500 rounded-lg text-white font-semibold'>Upload a link to your TikTok, Reel or Short, and get an insight about your account and what can be improved to get more audience</p>
+                    <p className='mt-2 mx-2 p-2 bg-purple-500 rounded-lg text-white font-semibold'>Upload a link to your TikTok, Reel or Short, and get an insight about the content, title and description, hashtags and more</p>
                 </div>
             </AlertDialogTrigger>
-            <AlertDialogContent className="bg-orange-500 border-0">
+            <AlertDialogContent className="bg-purple-500 border-0">
                 <AlertDialogHeader>
                     <AlertDialogTitle className="flex flex-row items-center justify-between">
                         <p className="text-black font-bold text-[18px] bg-yellow-300 px-3 rounded-md">Request Review</p>
@@ -115,7 +113,7 @@ const TextProfileReview = ({ price, userId, reviewer }: { price: number, userId:
                     <Textarea value={description} placeholder='Describe the problem' onChange={(e) => setDescription(e.target.value)} />
                 </AlertDialogHeader>
                 <SignedIn>
-                    <AlertDialogFooter>
+                <AlertDialogFooter>
                         {user && (user.creditBalance < price) && (
                             <Button className='bg-red-700 hover:bg-red-700 hover:cursor-default' disabled>
                                 Insufficient Funds
@@ -127,7 +125,7 @@ const TextProfileReview = ({ price, userId, reviewer }: { price: number, userId:
                                     {loading ? 'Processing...' : `Request for $${price}`}
                                 </Button>
                             ) : (
-                                <Button className='bg-green-500' disabled>
+                                <Button className='bg-green-600' disabled>
                                     Finished
                                 </Button>
                             )
@@ -146,4 +144,4 @@ const TextProfileReview = ({ price, userId, reviewer }: { price: number, userId:
     )
 }
 
-export default TextProfileReview
+export default LongTextReview

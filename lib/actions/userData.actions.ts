@@ -43,7 +43,14 @@ export async function getUserDataByUserId(userId: string) {
 }
 
 export async function editUserData(userData:
-    { userId: string, aboutMe: string, link: string, TextReview: number, TextReviewAvailability: boolean, VideoReview: number, VideoReviewAvailability: boolean, TextProfileReview: number, TextProfileReviewAvailability: boolean, VideoProfileReview: number, VideoProfileReviewAvailability: boolean, languages: string[], categories: string[] }) {
+    { userId: string, aboutMe: string, link: string, 
+    TextReview: number, TextReviewAvailability: boolean,
+    LongTextReview: number, LongTextReviewAvailability: boolean, 
+    VideoReview: number, VideoReviewAvailability: boolean, 
+    LongVideoReview: number, LongVideoReviewAvailability: boolean, 
+    TextProfileReview: number, TextProfileReviewAvailability: boolean, 
+    VideoProfileReview: number, VideoProfileReviewAvailability: boolean, 
+    languages: string[], categories: string[] }) {
     try {
         await connectToDatabase()
 
@@ -55,14 +62,18 @@ export async function editUserData(userData:
                     websiteLink: userData.link,
                     TextReview: userData.TextReview,
                     TextReviewAvailability: userData.TextReviewAvailability,
-                    VideoReview:userData.VideoReview,
-                    VideoReviewAvailability:userData.VideoReviewAvailability,
-                    TextProfileReview:userData.TextProfileReview,
-                    TextProfileReviewAvailability:userData.TextProfileReviewAvailability,
-                    VideoProfileReview:userData.VideoProfileReview,
-                    VideoProfileReviewAvailability:userData.VideoProfileReviewAvailability,
-                    languages:userData.languages,
-                    categories:userData.categories
+                    LongTextReview: userData.LongTextReview,
+                    LongTextReviewAvailability: userData.LongTextReviewAvailability,
+                    VideoReview: userData.VideoReview,
+                    VideoReviewAvailability: userData.VideoReviewAvailability,
+                    LongVideoReview: userData.LongVideoReview,
+                    LongVideoReviewAvailability: userData.LongVideoReviewAvailability,
+                    TextProfileReview: userData.TextProfileReview,
+                    TextProfileReviewAvailability: userData.TextProfileReviewAvailability,
+                    VideoProfileReview: userData.VideoProfileReview,
+                    VideoProfileReviewAvailability: userData.VideoProfileReviewAvailability,
+                    languages: userData.languages,
+                    categories: userData.categories
                 }
             })
 

@@ -38,7 +38,7 @@ export async function createTextReview(review: { request: string, contentNotes: 
 
         const updatedRequest = await Request.findOneAndUpdate(
             { _id: review.request },
-            { $set: { reviewed: true } }
+            { $set: { status: 'Reviewed' } }
         )
 
         return JSON.parse(JSON.stringify(newReview))
@@ -60,7 +60,7 @@ export async function createVideoReview(review: { request: string, videoURL: str
 
         const updatedRequest = await Request.findOneAndUpdate(
             { _id: review.request },
-            { $set: { reviewed: true } }
+            { $set: { status: 'Reviewed' } }
         )
 
         return JSON.parse(JSON.stringify(newReview))
@@ -82,7 +82,7 @@ export async function createVideoProfileReview(review: { request: string, videoU
 
         const updatedRequest = await Request.findOneAndUpdate(
             { _id: review.request },
-            { $set: { reviewed: true } }
+            { $set: { status: 'Reviewed' } }
         )
 
         return JSON.parse(JSON.stringify(newReview))
@@ -110,7 +110,7 @@ export async function createTextProfileReview(review: { request: string, bioNote
 
         const updatedRequest = await Request.findOneAndUpdate(
             { _id: review.request },
-            { $set: { reviewed: true } }
+            { $set: { status: 'Reviewed' } }
         )
 
         return JSON.parse(JSON.stringify(newReview))

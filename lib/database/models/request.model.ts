@@ -11,6 +11,8 @@ export interface IRequest extends Document {
     reviewed: boolean,
     type: string
     price: number,
+    status: string,
+    message: string,
     createdAt: Date
 }
 
@@ -20,9 +22,11 @@ const RequestSchema = new Schema({
     postLink: { type: String },
     description: { type: String },
     platform: { type: String },
-    reviewed: { type: Boolean, default: false },
+    reviewed: { type: Boolean },
+    status: { type: String, default: 'Awaiting' },
     price: { type: Number },
     type: { type: String },
+    message: { type: String },
     createdAt: { type: Date, default: Date.now }
 })
 

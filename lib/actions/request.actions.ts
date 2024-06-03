@@ -1,7 +1,9 @@
 'use server'
 
 import { connectToDatabase } from "../database"
+import Refund from "../database/models/refund.model"
 import Request from "../database/models/request.model"
+import Spending from "../database/models/spending.model"
 import User from "../database/models/user.model"
 import UserData from "../database/models/userData.model"
 
@@ -21,6 +23,13 @@ export async function createRequest({ User, Reviewer, postLink, description, pla
             { User },
             { '$inc': { creditBalance: (-1 * price) } }
         )
+
+        const spendings = await Spending.create({
+            User,
+            Reviewer,
+            amount: price,
+            service: type
+        })
 
         return JSON.parse(JSON.stringify(request))
 
@@ -45,9 +54,33 @@ export async function getAllOrders(userId: string) {
     try {
         await connectToDatabase();
 
-        const requests = await populateRequest(Request.find({ Reviewer: userId, reviewed: false }))
+        const requests = await populateRequest(Request.find({ Reviewer: userId, status: 'Awaiting' }))
 
         return JSON.parse(JSON.stringify(requests));
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export async function cancelOrder(id: string, message: string) {
+    try {
+        await connectToDatabase();
+
+        const request = await Request.findOneAndUpdate(
+            { _id: id },
+            { '$set': { status: 'Canceled', message } }
+        )
+
+        await UserData.findOneAndUpdate(
+            { User: request?.User },
+            { '$inc': { creditBalance: request?.price } }
+        )
+
+        await Refund.create({
+            User: request.User,
+            amount: request.price
+        })
+
     } catch (error) {
         console.log(error)
     }
@@ -57,7 +90,7 @@ export async function getAllRequests(userId: string) {
     try {
         await connectToDatabase();
 
-        const requests = await populateRequest(Request.find({ User: userId, reviewed: false }))
+        const requests = await populateRequest(Request.find({ User: userId, status: { $in: ['Awaiting', 'Canceled'] } }).sort({ createdAt: -1 }))
 
         return JSON.parse(JSON.stringify(requests));
     } catch (error) {

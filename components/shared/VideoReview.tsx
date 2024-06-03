@@ -19,26 +19,42 @@ const VideoReview = ({ price, userId, reviewer }: { price: number, userId: strin
     const [description, setDescription] = useState<string>('')
     const [user, setUser] = useState<IUserData>()
     const [isVisible, setIsVisible] = useState(false);
+    const [loading, setLoading] = useState<boolean>(false);
+    const [finished, setFinished] = useState<boolean>(false);
 
     const handleClick = () => {
         setIsVisible(!isVisible);
     };
 
+    const fetchUserData = async () => {
+        const userData = await getUserDataByUserId(userId);
+        setUser(userData);
+    };
+
     useEffect(() => {
-        async function getUser() {
-            const userData = await getUserDataByUserId(userId);
-
-            setUser(userData);
-        }
-
-        getUser();
-    }, [])
+        fetchUserData();
+    }, []);
 
     const handleRequest = async () => {
+        if (loading || finished) {
+            return;
+        }
+
+        setLoading(true);
+
+        await fetchUserData();
+        if(user && user?.creditBalance < price){
+            return;
+        }
+
         try {
-            await createRequest({ User: userId, Reviewer: reviewer, postLink: URL, description, platform, price, type: 'VideoReview' })
+            await createRequest({ User: userId, Reviewer: reviewer, postLink: URL, description, platform, price, type: 'VideoReview' });
+
+            setLoading(false);
+            setFinished(true);
         } catch (error) {
             console.log(error);
+            setLoading(false);
         }
     }
 
@@ -99,8 +115,22 @@ const VideoReview = ({ price, userId, reviewer }: { price: number, userId: strin
                 </AlertDialogHeader>
                 <SignedIn>
                     <AlertDialogFooter>
-                        {user && (user?.creditBalance < price) && <Button className='bg-red-700 hover:bg-red-700 hover:cursor-default'>Insuffient Funds</Button>}
-                        {user && (user?.creditBalance >= price) && <AlertDialogAction className="bg-white text-black font-semibold hover:bg-yellow-400" onClick={() => handleRequest()}>Request for ${price}</AlertDialogAction>}
+                    {user && (user.creditBalance < price) && (
+                            <Button className='bg-red-700 hover:bg-red-700 hover:cursor-default' disabled>
+                                Insufficient Funds
+                            </Button>
+                        )}
+                        {user && (user.creditBalance >= price) && (
+                            !finished ? (
+                                <Button className="bg-white text-black font-semibold hover:bg-yellow-400" onClick={handleRequest} disabled={loading}>
+                                    {loading ? 'Processing...' : `Request for $${price}`}
+                                </Button>
+                            ) : (
+                                <Button className='bg-green-600' disabled>
+                                    Finished
+                                </Button>
+                            )
+                        )}
                     </AlertDialogFooter>
                 </SignedIn>
                 <SignedOut>

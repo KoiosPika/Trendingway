@@ -10,6 +10,8 @@ import TextReview from '@/components/shared/TextReview';
 import VideoReview from '@/components/shared/VideoReview';
 import TextProfileReview from '@/components/shared/TextProfileReview';
 import VideoProfileReview from '@/components/shared/VideoProfileReview';
+import LongTextReview from '@/components/shared/LongTextReview';
+import LongVideoReview from '@/components/shared/LongVideoReview';
 
 const page = async () => {
 
@@ -17,12 +19,6 @@ const page = async () => {
     const userId = sessionClaims?.userId as string;
 
     const user: IUserData = await getUserDataByUserId(userId)
-
-    const rate = user?.avgReview;
-    const yellowStarsCount = Math.round(rate);
-    const greyStarsCount = 5 - yellowStarsCount;
-
-    const users = await getUsers();
 
     return (
         <div className='w-full flex justify-center items-center bg-white'>
@@ -71,6 +67,8 @@ const page = async () => {
                     <p className='mr-auto my-3 font-semibold text-[18px] ml-3'>About Me:</p>
                     <p className='mx-5'>{user?.aboutMe || `Hi I'm ${user?.User.username}`}</p>
                     <p className='mr-auto mt-10 mb-3 font-semibold text-[18px] ml-3'>Services by {user?.User?.username}: </p>
+                    <p className='font-bold text-[22px] text-slate-600 mt-5'>--- Short Content ---</p>
+                    <p className='font-bold text-[15px] text-slate-600 my-2'>(60 seconds and less)</p>
                     <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-5 px-3 w-full mb-[25px]'>
                         {user?.TextReviewAvailability && <TextReview price={user?.TextReview} userId={userId} reviewer={user.User._id} />}
                         {!user?.TextReviewAvailability &&
@@ -106,6 +104,47 @@ const page = async () => {
                                     <p className='text-red-500 font-bold'>Unavailable</p>
                                 </div>
                             </div>}
+                    </div>
+                    <p className='font-bold text-[22px] text-slate-600 mt-5'>--- Long Content ---</p>
+                    <p className='font-bold text-[15px] text-slate-600 my-2'>(Over 60 seconds)</p>
+                    <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-5 px-3 w-full mb-[25px]'>
+                        {user?.LongTextReviewAvailability && <LongTextReview price={user?.LongTextReview} userId={userId} reviewer={user.User._id} />}
+                        {!user?.LongTextReviewAvailability &&
+                            <div className='flex flex-col justify-center items-center border-[1px] border-slate-300 rounded-lg h-[240px] md:h-[220px] bg-slate-200 relative' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
+                                <div className='flex justify-center items-center gap-8' >
+                                    <div className='flex flex-col items-center gap-2'>
+                                        <Image src={'/icons/star-white.svg'} alt='video' width={200} height={200} className='bg-purple-500 w-[55px] h-[55px] p-2 rounded-full' />
+                                        <p className='font-semibold'>Long Text Review</p>
+                                    </div>
+                                    <div className='h-2/4 w-[2px] bg-black'></div>
+                                    <p className='text-[25px] font-semibold'>${user?.TextReview}</p>
+                                </div>
+                                <p className='mt-2 mx-2 p-2 bg-purple-500 rounded-lg text-white font-semibold'>Upload a link to your TikTok, Reel or Short, and get an insight about the content, title and description, hashtags and more</p>
+                                <div className='absolute top-1 right-2 flex flex-row items-center gap-2 bg-white px-2 border-[1px] border-red-500 rounded-lg'>
+                                    <Image src={'/icons/unavailable.svg'} alt='unavailable' height={15} width={15} />
+                                    <p className='text-red-500 font-bold'>Unavailable</p>
+                                </div>
+                            </div>}
+                        {user?.LongVideoReviewAvailability && <LongVideoReview price={user?.LongVideoReview} userId={userId} reviewer={user.User._id} />}
+                        {!user?.LongVideoReviewAvailability &&
+                            <div className='flex flex-col justify-center items-center border-[1px] border-slate-300 rounded-lg h-[240px] md:h-[220px] bg-slate-200 relative' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
+                                <div className='flex justify-center items-center gap-8' >
+                                    <div className='flex flex-col items-center gap-2'>
+                                        <Image src={'/icons/video.svg'} alt='video' width={200} height={200} className='bg-[#DB1E49] w-[55px] h-[55px] p-2 rounded-full' />
+                                        <p className='font-semibold'>Long Video Review</p>
+                                    </div>
+                                    <div className='h-2/4 w-[2px] bg-black'></div>
+                                    <p className='text-[25px] font-semibold'>${user?.VideoReview}</p>
+                                </div>
+                                <p className='mt-2 mx-2 p-2 bg-[#DB1E49] rounded-lg text-white font-semibold'>Upload a link to your TikTok, Reel or Short, and get a 60s video insight about the content, title and description, hashtags and more</p>
+                                <div className='absolute top-1 right-2 flex flex-row items-center gap-2 bg-white px-2 border-[1px] border-red-500 rounded-lg'>
+                                    <Image src={'/icons/unavailable.svg'} alt='unavailable' height={15} width={15} />
+                                    <p className='text-red-500 font-bold'>Unavailable</p>
+                                </div>
+                            </div>}
+                    </div>
+                    <p className='font-bold text-[22px] text-slate-600 my-5'>--- Account Auditing ---</p>
+                    <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-5 px-3 w-full mb-[25px]'>
                         {user?.TextProfileReviewAvailability && <TextProfileReview price={user?.TextProfileReview} userId={userId} reviewer={user.User._id} />}
                         {!user?.TextProfileReviewAvailability &&
                             <div className='flex flex-col justify-center items-center border-[1px] border-slate-300 rounded-lg h-[240px] md:h-[220px] bg-slate-200 relative' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>

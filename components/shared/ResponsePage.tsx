@@ -11,7 +11,6 @@ import { Button } from '../ui/button';
 import { getTimeLeft, timeAgo } from '@/lib/utils';
 import { createEarning } from '@/lib/actions/earning.actions';
 import { useRouter } from 'next/navigation';
-import TippingDialog from './TippingDialog';
 
 const ResponsePage = ({ id, userId }: { id: string, userId: string }) => {
 
@@ -313,7 +312,6 @@ const ResponsePage = ({ id, userId }: { id: string, userId: string }) => {
                                 <div className='w-full flex flex-col justify-center items-center text-center my-6 gap-2'>
                                     {!review?.rated && <RatingDialog id={id} />}
                                     {review?.rated && <Button className='w-1/2 flex justify-center items-center bg-green-700'>Rated</Button>}
-                                    {review && <TippingDialog userId={review?.User?._id} reviewer={review?.Reviewer}/>}
                                 </div>
                             </ScrollArea>
                         </div>

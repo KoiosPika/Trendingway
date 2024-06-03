@@ -44,7 +44,9 @@ const page = async () => {
                       <p className='text-[12px] text-slate-400'>{timeAgo(review?.createdAt.toString())}</p>
                     </div>
                     {review?.Request?.type === 'TextReview' && <Image src={'/icons/star-white.svg'} alt='video' width={200} height={200} className='bg-blue-500 w-[40px] h-[40px] p-1.5 rounded-full ml-auto' />}
+                    {review?.Request?.type === 'LongTextReview' && <Image src={'/icons/star-white.svg'} alt='video' width={200} height={200} className='bg-purple-500 w-[40px] h-[40px] p-1.5 rounded-full ml-auto' />}
                     {review?.Request?.type === 'VideoReview' && <Image src={'/icons/video.svg'} alt='video' width={200} height={200} className='bg-red-500 w-[40px] h-[40px] p-1.5 rounded-full ml-auto' />}
+                    {review?.Request?.type === 'LongVideoReview' && <Image src={'/icons/video.svg'} alt='video' width={200} height={200} className='bg-[#DB1E49] w-[40px] h-[40px] p-1.5 rounded-full ml-auto' />}
                     {review?.Request?.type === 'TextProfileReview' && <Image src={'/icons/account.svg'} alt='video' width={200} height={200} className='bg-orange-500 w-[40px] h-[40px] p-1.5 rounded-full ml-auto' />}
                     {review?.Request?.type === 'VideoProfileReview' && <Image src={'/icons/video-icon.svg'} alt='video' width={200} height={200} className='bg-green-500 w-[40px] h-[40px] p-1.5 rounded-full ml-auto' />}
                   </div>
