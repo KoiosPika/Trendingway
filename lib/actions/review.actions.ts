@@ -172,9 +172,27 @@ export async function getAllResponses(userId: string) {
     try {
         await connectToDatabase();
 
-        const requests = await populateReview(Review.find({ User: userId }).sort({ createdAt: -1 }))
+        const requests = await populateReview(Review.find({ User: userId }).sort({ createdAt: -1 }).limit(6))
 
         return JSON.parse(JSON.stringify(requests));
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export async function getPaginatedResponses(userId: string, lastOrderId: string) {
+    try {
+        await connectToDatabase();
+
+        const responses = await populateReview(Review.find({ User: userId }).sort({ createdAt: -1 }))
+
+        let startIndex = responses.findIndex((order: IReview) => order._id.toString() === lastOrderId)
+
+        startIndex += 1
+
+        const paginatedResponses = responses.slice(startIndex, startIndex + 6);
+
+        return JSON.parse(JSON.stringify(paginatedResponses));
     } catch (error) {
         console.log(error)
     }

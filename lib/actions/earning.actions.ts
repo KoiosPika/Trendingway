@@ -1,14 +1,14 @@
 'use server'
 
 import { connectToDatabase } from "../database"
-import Earning from "../database/models/earning.model";
+import Earning, { IEarning } from "../database/models/earning.model";
 import Request from "../database/models/request.model";
 import Review from "../database/models/review.model";
 import UserData from "../database/models/userData.model";
 
 const populateReview = (query: any) => {
     return query
-        .populate({ path: 'Request', model: Request, select: "type price" })
+        .populate({ path: 'Request', model: Request, select: "_id type price" })
 }
 
 export async function createEarning(reviewId: string) {
@@ -29,6 +29,11 @@ export async function createEarning(reviewId: string) {
                     nofVideoesReviewed: 1
                 }
             }
+        )
+
+        await Request.findOneAndUpdate(
+            { _id: review?.Request?._id },
+            { '$set': { status: 'Completed' } }
         )
 
         await Earning.create({
@@ -54,13 +59,19 @@ export async function getAllEarnings(userId: string) {
     }
 }
 
-export async function getPaginatedEarnings(userId: string, skip: number) {
+export async function getPaginatedEarnings(userId: string, lastOrderId: string) {
     try {
         await connectToDatabase();
 
-        const earnings = await Earning.find({ User: userId }).sort({ createdAt: -1 }).skip(skip).limit(3)
+        const earnings = await Earning.find({ User: userId }).sort({ createdAt: -1 })
 
-        return JSON.parse(JSON.stringify(earnings))
+        let startIndex = earnings.findIndex((earning: IEarning) => earning._id.toString() === lastOrderId)
+
+        startIndex += 1
+
+        const paginatedEarnings = earnings.slice(startIndex, startIndex + 9);
+
+        return JSON.parse(JSON.stringify(paginatedEarnings))
 
     } catch (error) {
         console.log(error);

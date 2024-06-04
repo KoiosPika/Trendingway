@@ -64,16 +64,16 @@ const LongVideoReview = ({ price, userId, reviewer }: { price: number, userId: s
                 <div className='flex flex-col justify-center items-center border-[1px] border-slate-300 rounded-lg h-[240px] md:h-[220px]' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                     <div className='flex justify-center items-center gap-8' >
                         <div className='flex flex-col items-center gap-2'>
-                            <Image src={'/icons/video.svg'} alt='video' width={200} height={200} className='bg-[#DB1E49] w-[55px] h-[55px] p-2 rounded-full' />
+                            <Image src={'/icons/video.svg'} alt='video' width={200} height={200} className='bg-[#B69615] w-[55px] h-[55px] p-2 rounded-full' />
                             <p className='font-semibold'>Long Video Review</p>
                         </div>
                         <div className='h-3/4 w-[2px] bg-black'></div>
                         <p className='text-[25px] font-semibold'>${price}</p>
                     </div>
-                    <p className='mt-2 mx-2 p-2 bg-[#DB1E49] rounded-lg text-white font-semibold'>Upload a link to your TikTok, Reel or Short, and get a 60s video insight about the content, title and description, hashtags and more</p>
+                    <p className='mt-2 mx-2 p-2 bg-[#B69615] rounded-lg text-white font-semibold'>Upload a link to your TikTok, Reel or Short, and get a 60s video insight about the content, title and description, hashtags and more</p>
                 </div>
             </AlertDialogTrigger>
-            <AlertDialogContent className="bg-[#DB1E49] border-0">
+            <AlertDialogContent className="bg-[#B69615] border-0">
                 <AlertDialogHeader>
                     <AlertDialogTitle className="flex flex-row items-center justify-between">
                         <p className="text-black font-bold text-[18px] bg-yellow-300 px-3 rounded-md">Request Review</p>

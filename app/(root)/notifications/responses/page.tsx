@@ -1,3 +1,4 @@
+import LoadMoreResponses from '@/components/shared/LoadMoreResponses'
 import { getAllResponses } from '@/lib/actions/review.actions'
 import { IReview } from '@/lib/database/models/review.model'
 import { timeAgo } from '@/lib/utils'
@@ -31,6 +32,10 @@ const page = async () => {
                 <Image src={'/icons/up-blue.svg'} alt='up' height={20} width={20} className='rotate-180' />
                 <p className='text-[12px] md:text-[15px]'>Responses</p>
               </Link>
+              <Link href={'/notifications/history'} className='flex flex-col md:flex-row justify-center items-center gap-3 px-4 py-3 text-center w-full rounded-r-lg'>
+                <Image src={'/icons/clock-black.svg'} alt='up' height={20} width={20}/>
+                <p className='text-[12px] md:text-[15px]'>History</p>
+              </Link>
             </div>
             <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 font-semibold'>
               {reviews.map((review: IReview) => (
@@ -46,7 +51,7 @@ const page = async () => {
                     {review?.Request?.type === 'TextReview' && <Image src={'/icons/star-white.svg'} alt='video' width={200} height={200} className='bg-blue-500 w-[40px] h-[40px] p-1.5 rounded-full ml-auto' />}
                     {review?.Request?.type === 'LongTextReview' && <Image src={'/icons/star-white.svg'} alt='video' width={200} height={200} className='bg-purple-500 w-[40px] h-[40px] p-1.5 rounded-full ml-auto' />}
                     {review?.Request?.type === 'VideoReview' && <Image src={'/icons/video.svg'} alt='video' width={200} height={200} className='bg-red-500 w-[40px] h-[40px] p-1.5 rounded-full ml-auto' />}
-                    {review?.Request?.type === 'LongVideoReview' && <Image src={'/icons/video.svg'} alt='video' width={200} height={200} className='bg-[#DB1E49] w-[40px] h-[40px] p-1.5 rounded-full ml-auto' />}
+                    {review?.Request?.type === 'LongVideoReview' && <Image src={'/icons/video.svg'} alt='video' width={200} height={200} className='bg-[#B69615] w-[40px] h-[40px] p-1.5 rounded-full ml-auto' />}
                     {review?.Request?.type === 'TextProfileReview' && <Image src={'/icons/account.svg'} alt='video' width={200} height={200} className='bg-orange-500 w-[40px] h-[40px] p-1.5 rounded-full ml-auto' />}
                     {review?.Request?.type === 'VideoProfileReview' && <Image src={'/icons/video-icon.svg'} alt='video' width={200} height={200} className='bg-green-500 w-[40px] h-[40px] p-1.5 rounded-full ml-auto' />}
                   </div>
@@ -58,6 +63,7 @@ const page = async () => {
                 </div>
               ))}
             </div>
+            <LoadMoreResponses userId={userId} id={reviews[reviews.length - 1]._id}/>
           </div>
         </div>
         {reviews.length == 0 &&

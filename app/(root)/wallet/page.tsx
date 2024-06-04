@@ -130,7 +130,7 @@ const page = async () => {
                                             <p className='text-[13px] lg:text-[15px]'>When</p>
                                         </div>
                                         <div className='w-full flex flex-row items-center gap-2'>
-                                            <Image src={'/icons/clock-black.svg'} alt='dollar' height={14} width={14} />
+                                            <Image src={'/icons/wrench.svg'} alt='dollar' height={14} width={14} />
                                             <p className='text-[13px] lg:text-[15px]'>Service</p>
                                         </div>
                                     </div>
@@ -156,7 +156,7 @@ const page = async () => {
                                                 </div>}
                                             {spending.service == 'LongVideoReview' &&
                                                 <div className='w-full flex flex-col sm:flex-row items-center justify-center gap-2'>
-                                                    <Image src={'/icons/video.svg'} alt='video' width={200} height={200} className='bg-[#DB1E49] w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
+                                                    <Image src={'/icons/video.svg'} alt='video' width={200} height={200} className='bg-[#B69615] w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
                                                 </div>}
                                             {spending.service == 'TextProfileReview' &&
                                                 <div className='w-full flex flex-col sm:flex-row items-center justify-center gap-2'>
@@ -170,7 +170,7 @@ const page = async () => {
                                         </div>
                                     ))}
                                     
-                                    <Link href={'/wallet/recharges'} className='ml-auto'>
+                                    <Link href={'/wallet/spendings'} className='ml-auto'>
                                         <p className='bg-white px-4 py-2 rounded-lg inline-flex text-black text-[13px] font-semibold hover:bg-yellow-400'>More Details {`->`}</p>
                                     </Link>
                                 </div>
@@ -191,7 +191,7 @@ const page = async () => {
                                             <p className='text-[13px] lg:text-[15px]'>When</p>
                                         </div>
                                         <div className='w-full flex flex-row items-center gap-2'>
-                                            <Image src={'/icons/clock-black.svg'} alt='dollar' height={14} width={14} />
+                                            <Image src={'/icons/wrench.svg'} alt='dollar' height={14} width={14} />
                                             <p className='text-[13px] lg:text-[15px]'>Service</p>
                                         </div>
                                     </div>
@@ -207,10 +207,17 @@ const page = async () => {
                                                 <div className='w-full flex flex-col sm:flex-row items-center justify-center gap-2'>
                                                     <Image src={'/icons/star-white.svg'} alt='video' width={200} height={200} className='bg-blue-500 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
                                                 </div>}
+                                            {earning.service == 'LongTextReview' &&
+                                                <div className='w-full flex flex-col sm:flex-row items-center justify-center gap-2'>
+                                                    <Image src={'/icons/star-white.svg'} alt='video' width={200} height={200} className='bg-purple-500 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
+                                                </div>}
                                             {earning.service == 'VideoReview' &&
                                                 <div className='w-full flex flex-col sm:flex-row items-center justify-center gap-2'>
                                                     <Image src={'/icons/video.svg'} alt='video' width={200} height={200} className='bg-red-500 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
-
+                                                </div>}
+                                            {earning.service == 'LongVideoReview' &&
+                                                <div className='w-full flex flex-col sm:flex-row items-center justify-center gap-2'>
+                                                    <Image src={'/icons/video.svg'} alt='video' width={200} height={200} className='bg-[#B69615] w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
                                                 </div>}
                                             {earning.service == 'TextProfileReview' &&
                                                 <div className='w-full flex flex-col sm:flex-row items-center justify-center gap-2'>

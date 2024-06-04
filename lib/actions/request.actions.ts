@@ -2,7 +2,7 @@
 
 import { connectToDatabase } from "../database"
 import Refund from "../database/models/refund.model"
-import Request from "../database/models/request.model"
+import Request, { IRequest } from "../database/models/request.model"
 import Spending from "../database/models/spending.model"
 import User from "../database/models/user.model"
 import UserData from "../database/models/userData.model"
@@ -54,9 +54,27 @@ export async function getAllOrders(userId: string) {
     try {
         await connectToDatabase();
 
-        const requests = await populateRequest(Request.find({ Reviewer: userId, status: 'Awaiting' }))
+        const requests = await populateRequest(Request.find({ Reviewer: userId, status: 'Awaiting' }).sort({ createdAt: 1 }).limit(6))
 
         return JSON.parse(JSON.stringify(requests));
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export async function getPaginatedOrders(userId: string, lastOrderId: string) {
+    try {
+        await connectToDatabase();
+
+        const requests = await populateRequest(Request.find({ Reviewer: userId, status: 'Awaiting' }).sort({ createdAt: 1 }))
+
+        let startIndex = requests.findIndex((order: IRequest) => order._id.toString() === lastOrderId)
+
+        startIndex += 1
+
+        const paginatedOrders = requests.slice(startIndex, startIndex + 6);
+
+        return JSON.parse(JSON.stringify(paginatedOrders));
     } catch (error) {
         console.log(error)
     }
@@ -90,9 +108,57 @@ export async function getAllRequests(userId: string) {
     try {
         await connectToDatabase();
 
-        const requests = await populateRequest(Request.find({ User: userId, status: { $in: ['Awaiting', 'Canceled'] } }).sort({ createdAt: -1 }))
+        const requests = await populateRequest(Request.find({ User: userId, status: { $in: ['Awaiting', 'Canceled'] } }).sort({ createdAt: -1 }).limit(6))
 
         return JSON.parse(JSON.stringify(requests));
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export async function getPaginatedRequests(userId: string, lastOrderId: string) {
+    try {
+        await connectToDatabase();
+
+        const requests = await populateRequest(Request.find({ User: userId, status: { $in: ['Awaiting', 'Canceled'] } }).sort({ createdAt: -1 }))
+
+        let startIndex = requests.findIndex((order: IRequest) => order._id.toString() === lastOrderId)
+
+        startIndex += 1
+
+        const paginatedRequests = requests.slice(startIndex, startIndex + 6);
+
+        return JSON.parse(JSON.stringify(paginatedRequests));
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export async function getAllHistory(userId: string) {
+    try {
+        await connectToDatabase();
+
+        const requests = await populateRequest(Request.find({ Reviewer: userId }).sort({ createdAt: -1 }).limit(6))
+
+        return JSON.parse(JSON.stringify(requests));
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export async function getPaginatedHistory(userId: string, lastOrderId: string) {
+    try {
+        await connectToDatabase();
+
+        const requests = await populateRequest(Request.find({ Reviewer: userId }).sort({ createdAt: -1 }))
+
+        let startIndex = requests.findIndex((order: IRequest) => order._id.toString() === lastOrderId)
+
+        startIndex += 1
+
+        const paginatedRequests = requests.slice(startIndex, startIndex + 6);
+
+        return JSON.parse(JSON.stringify(paginatedRequests));
     } catch (error) {
         console.log(error)
     }
