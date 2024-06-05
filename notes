@@ -1,5 +1,7 @@
-1. refunds page
-2. Payouts
+1. Payouts
+2. Review Process flow
+3. emails
+4. Backstation
 
 Review Types:
 TextReview
@@ -8,6 +10,7 @@ TextProfileReview
 VideoProfileReview
 
 npm install --save-dev @types/nodemailer
+npm install postmark
 
 Request status:
 Awaiting

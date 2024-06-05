@@ -5,8 +5,10 @@ import {
 
 const isProtectedRoute = createRouteMatcher([
   '/wallet(.*)',
+  '/edit-profile',
   '/profile',
   '/notifications(.*)',
+  '/review'
 ]);
 
 export default clerkMiddleware((auth, req) => {
