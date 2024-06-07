@@ -77,11 +77,43 @@ export async function getPaginatedOrders(userId: string, skip: number) {
     try {
         await connectToDatabase();
 
-        const order = await Order.find({ User: userId }).sort({ createdAt: -1 }).skip(skip).limit(3)
+        const order = await Order.find({ User: userId }).sort({ createdAt: -1 }).skip(skip).limit(9)
 
         return JSON.parse(JSON.stringify(order))
 
     } catch (error) {
         console.log(error);
+    }
+}
+
+export async function getOrdersData(userId: string, year: number) {
+    try {
+        await connectToDatabase();
+
+        const start = new Date(year, 0, 1);
+        const end = new Date(year + 1, 0, 1);
+
+        const orders = await Order.find({
+            User: userId,
+            createdAt: { $gte: start, $lt: end }
+        }).sort({ createdAt: -1 });
+
+        const months = Array.from({ length: 12 }, (_, i) => new Date(0, i).toLocaleString('default', { month: 'long' }));
+        const groupedOrders = months.map(month => ({
+            month,
+            total: 0,
+            orderCount: 0
+        }));
+
+        orders.forEach(order => {
+            const monthIndex = new Date(order.createdAt).getMonth();
+            groupedOrders[monthIndex].total += order.amount;
+            groupedOrders[monthIndex].orderCount += 1;
+        });
+
+        return JSON.parse(JSON.stringify(groupedOrders));
+
+    } catch (error) {
+        console.log(error)
     }
 }

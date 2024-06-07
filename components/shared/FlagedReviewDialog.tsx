@@ -32,7 +32,7 @@ const FlagedReviewDialog = ({ id }: { id: string }) => {
     return (
         <AlertDialog>
             <AlertDialogTrigger className='flex w-full'>
-                <div className='bg-red-600 text-white md:w-full w-1/2 py-2 rounded-lg font-semibold'>
+                <div className='bg-red-600 text-white w-full py-2 rounded-lg font-semibold'>
                     {`It's not good`}
                 </div>
             </AlertDialogTrigger>

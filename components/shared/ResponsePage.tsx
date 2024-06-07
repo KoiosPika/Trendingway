@@ -71,7 +71,7 @@ const ResponsePage = ({ id, userId }: { id: string, userId: string }) => {
                         {(loading == false && review?.insightful == 'Awaiting' && new Date(review?.insightPeriod).getTime() > now.getTime()) && <div className='w-full lg:w-4/6 py-[14px] px-[10px] bg-black flex flex-col justify-center items-center gap-2 rounded-lg m-2'>
                             <p className='text-white font-semibold text-[12px] md:text-[14px]'>You have {getTimeLeft(review.insightPeriod)} days remaining to inform us if there are any issues with the service you received. </p>
                             <div className='flex flex-row w-full items-center gap-3'>
-                                <Button className='bg-green-600 hover:bg-green-600 md:w-full w-1/2 text-[16px]' onClick={handleCreateEarning}>
+                                <Button className='bg-green-600 hover:bg-green-600 w-full text-[16px]' onClick={handleCreateEarning}>
                                     {`It's good`}
                                 </Button>
                                 <FlagedReviewDialog id={review?._id || ''} />
