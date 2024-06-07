@@ -45,6 +45,6 @@ async function createOrder(){
 }
 
 export async function GET() {
-    await createOrder();
+    await createBulkEarnings();
     return Response.json({ message: 'Bulk earnings created' });
 }
