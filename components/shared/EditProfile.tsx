@@ -139,18 +139,18 @@ const EditProfile = ({ userId }: { userId: string }) => {
                         <p className='text-[20px] font-bold px-4 py-2 rounded-lg text-black'>Edit Profile</p>
                         <div className='flex flex-col justify-center items-center w-full gap-3 my-3'>
                             <p className='font-semibold mr-auto bg-green-400 px-4 py-2 rounded-full text-[13px] md:text-[16px]'>About Me:</p>
-                            <Textarea value={aboutMe} className='w-full border-2 border-black text-[14px] md:text-[16px] font-semibold' onChange={(e) => setAboutMe(e.target.value)} />
+                            <Textarea placeholder='Tell your customers about yourself' value={aboutMe} className='w-full border-2 border-black text-[14px] md:text-[16px] font-semibold' onChange={(e) => setAboutMe(e.target.value)} />
                         </div>
                         <div className='flex flex-col justify-center items-center w-full gap-3 my-3'>
                             <p className='font-semibold mr-auto bg-blue-400 px-4 py-2 rounded-full text-[13px] md:text-[16px]'>Personal Link:</p>
-                            <Input value={link} className='w-full border-2 border-black text-[14px] md:text-[16px] font-semibold' onChange={(e) => setLink(e.target.value)} />
+                            <Input placeholder='Paste your personal link here' value={link} className='w-full border-2 border-black text-[14px] md:text-[16px] font-semibold' onChange={(e) => setLink(e.target.value)} />
                         </div>
                         <div className='flex flex-col justify-center items-center w-full gap-3 my-3'>
                             <p className='font-bold mr-auto bg-orange-400 px-4 py-2 rounded-full text-[13px] md:text-[16px]'>Services:</p>
                             <p className='font-bold text-[22px] text-slate-600 mt-5'>--- Short Content ---</p>
                             <p className='font-bold text-[15px] text-slate-600 my-2'>(60 seconds and less)</p>
                             <div className='w-full flex flex-col gap-3'>
-                                <div className='border-[1px] border-slate-300 rounded-lg h-[150px] md:h-[180px] flex justify-center items-center gap-2 relative' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
+                                <div className='border-[1px] border-slate-400 rounded-lg h-[150px] md:h-[180px] flex justify-center items-center gap-2 relative' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                                     <div className='flex flex-col items-center gap-2 flex-1'>
                                         <Image src={'/icons/star-white.svg'} alt='video' width={200} height={200} className='bg-blue-500 w-[40px] h-[40px] md:w-[55px] md:h-[55px] p-1 md:p-2 rounded-full' />
                                         <p className='font-semibold text-[13px] md:text-[16px]'>Text Review</p>
@@ -169,17 +169,17 @@ const EditProfile = ({ userId }: { userId: string }) => {
                                         <Switch checked={TextReviewAvailability} onCheckedChange={setTextReviewAvailability} style={{ backgroundColor: 'blue' }} />
                                     </div>
                                     <div className='absolute bottom-0 flex flex-row w-full'>
-                                        <div className='flex w-1/2 h-[30px] bg-blue-500 rounded-bl-lg justify-center items-center'>
+                                        <div className='flex w-1/2 h-[30px] bg-blue-500 rounded-bl-md justify-center items-center'>
                                             <p className='font-bold text-white text-[11px] md:text-[18px]'>Expected Earning Per 1 Order = </p>
                                         </div>
-                                        <div className='flex w-1/2 h-[30px] bg-blue-500 rounded-br-lg justify-center items-center'>
+                                        <div className='flex w-1/2 h-[30px] bg-blue-500 rounded-br-md justify-center items-center'>
                                             <p className='font-bold text-white text-[13px] md:text-[18px]'>${TextReview} x 80% = ${(TextReview*0.80).toFixed(2)} </p>
                                         </div>
                                     </div>
 
                                 </div>
 
-                                <div className='border-[1px] border-slate-300 rounded-lg h-[150px] md:h-[180px] flex justify-center items-center gap-2 relative' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
+                                <div className='border-[1px] border-slate-400 rounded-lg h-[150px] md:h-[180px] flex justify-center items-center gap-2 relative' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                                     <div className='flex flex-col items-center gap-2 flex-1'>
                                         <Image src={'/icons/video.svg'} alt='video' width={200} height={200} className='bg-red-500 w-[40px] h-[40px] md:w-[55px] md:h-[55px] p-1 md:p-2 rounded-full' />
                                         <p className='font-semibold text-[13px] md:text-[16px]'>Video Review</p>
@@ -198,10 +198,10 @@ const EditProfile = ({ userId }: { userId: string }) => {
                                         <Switch checked={VideoReviewAvailability} onCheckedChange={setVideoReviewAvailability} style={{ backgroundColor: 'red' }} />
                                     </div>
                                     <div className='absolute bottom-0 flex flex-row w-full'>
-                                        <div className='flex w-1/2 h-[30px] bg-red-500 rounded-bl-lg justify-center items-center'>
+                                        <div className='flex w-1/2 h-[30px] bg-red-500 rounded-bl-md justify-center items-center'>
                                             <p className='font-bold text-white text-[11px] md:text-[18px]'>Expected Earning Per 1 Order = </p>
                                         </div>
-                                        <div className='flex w-1/2 h-[30px] bg-red-500 rounded-br-lg justify-center items-center'>
+                                        <div className='flex w-1/2 h-[30px] bg-red-500 rounded-br-md justify-center items-center'>
                                             <p className='font-bold text-white text-[13px] md:text-[18px]'>${VideoReview} x 80% = ${(VideoReview*0.80).toFixed(2)} </p>
                                         </div>
                                     </div>
@@ -212,7 +212,7 @@ const EditProfile = ({ userId }: { userId: string }) => {
                                     <p className='font-bold text-[15px] text-slate-600 my-2'>(Over 60 seconds)</p>
                                 </div>
 
-                                <div className='border-[1px] border-slate-300 rounded-lg h-[150px] md:h-[180px] flex justify-center items-center gap-2 relative' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
+                                <div className='border-[1px] border-slate-400 rounded-lg h-[150px] md:h-[180px] flex justify-center items-center gap-2 relative' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                                     <div className='flex flex-col items-center gap-2 flex-1'>
                                         <Image src={'/icons/star-white.svg'} alt='video' width={200} height={200} className='bg-purple-500 w-[40px] h-[40px] md:w-[55px] md:h-[55px] p-1 md:p-2 rounded-full' />
                                         <p className='font-semibold text-[13px] md:text-[16px]'>Long Text Review</p>
@@ -231,16 +231,16 @@ const EditProfile = ({ userId }: { userId: string }) => {
                                         <Switch checked={LongTextReviewAvailability} onCheckedChange={setLongTextReviewAvailability} style={{ backgroundColor: 'purple', opacity:0.75 }} />
                                     </div>
                                     <div className='absolute bottom-0 flex flex-row w-full'>
-                                        <div className='flex w-1/2 h-[30px] bg-purple-500 rounded-bl-lg justify-center items-center'>
+                                        <div className='flex w-1/2 h-[30px] bg-purple-500 rounded-bl-md justify-center items-center'>
                                             <p className='font-bold text-white text-[11px] md:text-[18px]'>Expected Earning Per 1 Order = </p>
                                         </div>
-                                        <div className='flex w-1/2 h-[30px] bg-purple-500 rounded-br-lg justify-center items-center'>
+                                        <div className='flex w-1/2 h-[30px] bg-purple-500 rounded-br-md justify-center items-center'>
                                             <p className='font-bold text-white text-[13px] md:text-[18px]'>${LongTextReview} x 80% = ${(LongTextReview*0.80).toFixed(2)} </p>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div className='border-[1px] border-slate-300 rounded-lg h-[150px] md:h-[180px] flex justify-center items-center gap-2 relative' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
+                                <div className='border-[1px] border-slate-400 rounded-lg h-[150px] md:h-[180px] flex justify-center items-center gap-2 relative' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                                     <div className='flex flex-col items-center gap-2 flex-1'>
                                         <Image src={'/icons/video.svg'} alt='video' width={200} height={200} className='bg-[#B69615] w-[40px] h-[40px] md:w-[55px] md:h-[55px] p-1 md:p-2 rounded-full' />
                                         <p className='font-semibold text-[13px] md:text-[16px]'>Long Video Review</p>
@@ -259,10 +259,10 @@ const EditProfile = ({ userId }: { userId: string }) => {
                                         <Switch checked={LongVideoReviewAvailability} onCheckedChange={setLongVideoReviewAvailability} style={{ backgroundColor: '#B69615' }} />
                                     </div>
                                     <div className='absolute bottom-0 flex flex-row w-full'>
-                                        <div className='flex w-1/2 h-[30px] bg-[#B69615] rounded-bl-lg justify-center items-center'>
+                                        <div className='flex w-1/2 h-[30px] bg-[#B69615] rounded-bl-md justify-center items-center'>
                                             <p className='font-bold text-white text-[11px] md:text-[18px]'>Expected Earning Per 1 Order = </p>
                                         </div>
-                                        <div className='flex w-1/2 h-[30px] bg-[#B69615] rounded-br-lg justify-center items-center'>
+                                        <div className='flex w-1/2 h-[30px] bg-[#B69615] rounded-br-md justify-center items-center'>
                                             <p className='font-bold text-white text-[13px] md:text-[18px]'>${LongVideoReview} x 80% = ${(LongVideoReview*0.80).toFixed(2)} </p>
                                         </div>
                                     </div>
@@ -272,7 +272,7 @@ const EditProfile = ({ userId }: { userId: string }) => {
                                     <p className='font-bold text-[22px] text-slate-600 my-5'>--- Account Auditing ---</p>
                                 </div>
 
-                                <div className='border-[1px] border-slate-300 rounded-lg h-[150px] md:h-[180px] flex justify-center items-center gap-2 relative' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
+                                <div className='border-[1px] border-slate-400 rounded-lg h-[150px] md:h-[180px] flex justify-center items-center gap-2 relative' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                                     <div className='flex flex-col items-center gap-2 flex-1'>
                                         <Image src={'/icons/account.svg'} alt='video' width={200} height={200} className='bg-orange-500 w-[40px] h-[40px] md:w-[55px] md:h-[55px] p-1 md:p-2 rounded-full' />
                                         <p className='font-semibold text-[13px] md:text-[16px]'>Text Profile Review</p>
@@ -291,18 +291,18 @@ const EditProfile = ({ userId }: { userId: string }) => {
                                         <Switch checked={TextProfileReviewAvailability} onCheckedChange={setTextProfileReviewAvailability} style={{ backgroundColor: '#DF7110' }} />
                                     </div>
                                     <div className='absolute bottom-0 flex flex-row w-full'>
-                                        <div className='flex w-1/2 h-[30px] bg-orange-500 rounded-bl-lg justify-center items-center'>
+                                        <div className='flex w-1/2 h-[30px] bg-orange-500 rounded-bl-md justify-center items-center'>
                                             <p className='font-bold text-white text-[11px] md:text-[18px]'>Expected Earning Per 1 Order = </p>
                                         </div>
-                                        <div className='flex w-1/2 h-[30px] bg-orange-500 rounded-br-lg justify-center items-center'>
+                                        <div className='flex w-1/2 h-[30px] bg-orange-500 rounded-br-md justify-center items-center'>
                                             <p className='font-bold text-white text-[13px] md:text-[18px]'>${TextProfileReview} x 80% = ${(TextProfileReview*0.80).toFixed(2)} </p>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div className='border-[1px] border-slate-300 rounded-lg h-[150px] md:h-[180px] flex justify-center items-center gap-2 relative' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
+                                <div className='border-[1px] border-slate-400 rounded-lg h-[150px] md:h-[180px] flex justify-center items-center gap-2 relative' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                                     <div className='flex flex-col items-center gap-2 flex-1'>
-                                        <Image src={'/icons/video-icon.svg'} alt='video' width={200} height={200} className='bg-green-600 w-[40px] h-[40px] md:w-[55px] md:h-[55px] p-1 md:p-2 rounded-full' />
+                                        <Image src={'/icons/video-icon.svg'} alt='video' width={200} height={200} className='bg-green-700 w-[40px] h-[40px] md:w-[55px] md:h-[55px] p-1 md:p-2 rounded-full' />
                                         <p className='font-semibold text-[13px] md:text-[16px]'>Video Profile Review</p>
                                     </div>
                                     <div className='h-2/4 w-[2px] bg-black'></div>
@@ -319,10 +319,10 @@ const EditProfile = ({ userId }: { userId: string }) => {
                                         <Switch checked={VideoProfileReviewAvailability} onCheckedChange={setVideoProfileReviewAvailability} style={{ backgroundColor: 'green' }} />
                                     </div>
                                     <div className='absolute bottom-0 flex flex-row w-full'>
-                                        <div className='flex w-1/2 h-[30px] bg-green-700 rounded-bl-lg justify-center items-center'>
+                                        <div className='flex w-1/2 h-[30px] bg-green-700 rounded-bl-md justify-center items-center'>
                                             <p className='font-bold text-white text-[11px] md:text-[18px]'>Expected Earning Per 1 Order = </p>
                                         </div>
-                                        <div className='flex w-1/2 h-[30px] bg-green-700 rounded-br-lg justify-center items-center'>
+                                        <div className='flex w-1/2 h-[30px] bg-green-700 rounded-br-md justify-center items-center'>
                                             <p className='font-bold text-white text-[13px] md:text-[18px]'>${VideoProfileReview} x 80% = ${(VideoProfileReview*0.80).toFixed(2)} </p>
                                         </div>
                                     </div>

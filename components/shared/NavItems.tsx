@@ -19,11 +19,6 @@ const NavItems = () => {
       route: `/profile`
     },
     {
-      label: 'Insighters',
-      icon: '/icons/rank.svg',
-      route: '/insighters'
-    },
-    {
       label: 'Notifications',
       icon: '/icons/bell.svg',
       route: '/notifications/orders'

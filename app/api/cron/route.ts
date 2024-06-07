@@ -2,8 +2,6 @@ import { createEarning } from '@/lib/actions/earning.actions';
 import { connectToDatabase } from '@/lib/database';
 import Order from '@/lib/database/models/order.model';
 import Review from '@/lib/database/models/review.model';
-import { NextApiRequest, NextApiResponse } from 'next';
-import { NextResponse } from 'next/server';
 
 const BATCH_SIZE = 100;
 
@@ -12,12 +10,12 @@ async function createBulkEarnings() {
         await connectToDatabase();
 
         const now = new Date();
-        const query = { insightfulDate: { $lt: now } };
+        const query = { insightfulDate: { $lt: now }, insightful: "Awaiting" };
 
         let reviews;
 
         do {
-            
+
             reviews = await Review.find(query).limit(BATCH_SIZE);
 
             for (const review of reviews) {
@@ -30,7 +28,7 @@ async function createBulkEarnings() {
     }
 }
 
-async function createOrder(){
+async function createOrder() {
     try {
         await connectToDatabase();
 

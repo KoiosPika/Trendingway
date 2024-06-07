@@ -63,7 +63,7 @@ const page = async () => {
                 </div>
               ))}
             </div>
-            <LoadMoreResponses userId={userId} id={reviews[reviews.length - 1]._id}/>
+            {reviews.length > 0 && <LoadMoreResponses userId={userId} id={reviews[reviews.length - 1]._id}/>}
           </div>
         </div>
         {reviews.length == 0 &&

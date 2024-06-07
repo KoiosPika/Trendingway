@@ -73,7 +73,7 @@ const page = async () => {
                                 </div>
                             ))}
                         </div>
-                        <LoadMoreHistory userId={userId} id={history[history.length - 1]._id}/>
+                        {history.length > 0 && <LoadMoreHistory userId={userId} id={history[history.length - 1]._id}/>}
                     </div>
                 </div>
             </div>

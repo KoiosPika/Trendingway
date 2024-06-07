@@ -51,25 +51,27 @@ const page = async () => {
                             </div>
                             <div className='flex flex-row items-center gap-2'>
                                 <Image src={'/icons/link.svg'} alt='link' height={25} width={25}/>
-                                <a href={user?.websiteLink} target='_blank' className='text-blue-600 hover:underline font-semibold'>{user?.websiteLink}</a>
+                                {user?.websiteLink && <a href={user?.websiteLink} target='_blank' className='text-blue-600 hover:underline font-semibold'>{user?.websiteLink}</a>}
+                                {!user?.websiteLink && <p className='text-blue-600 hover:underline font-semibold'>No Link Added</p>}
                             </div>
                         </div>
                         <div className='flex flex-col justify-center items-center md:flex-row w-full gap-2 my-3 text-black'>
                             <Link href={'/edit-profile'} className='bg-yellow-400 w-3/4 self-center flex justify-center items-center py-2 rounded-[10px] font-bold'>Edit Profile</Link>
                         </div>
                     </div>
-                    <p className='mr-auto my-3 font-semibold text-[18px] ml-3'>Tags:</p>
-                    <div className='mx-5 flex flex-row gap-3 w-full flex-wrap my-3 px-5'>
+                    <p className='mr-auto my-3 font-semibold text-[18px] ml-3 bg-yellow-400 px-3 py-1 rounded-full'>Tags:</p>
+                    {(user?.languages.length > 0 || user?.categories.length > 0) && <div className='mx-5 flex flex-row gap-3 w-full flex-wrap my-3 px-5'>
                         {user?.languages.map((language: any) => (
                             language && <p key={language} className='bg-orange-200 text-orange-600 px-3 py-2 rounded-lg font-semibold border-[2px] border-orange-600'>{language}</p>
                         ))}
                         {user?.categories.map((category: any) => (
                             category && <p key={category} className='bg-green-200 text-green-600 px-3 py-2 rounded-lg font-semibold border-[2px] border-green-600'>{category}</p>
                         ))}
-                    </div>
-                    <p className='mr-auto my-3 font-semibold text-[18px] ml-3'>About Me:</p>
-                    <p className='mx-5'>{user?.aboutMe || `Hi I'm ${user?.User.username}`}</p>
-                    <p className='mr-auto mt-10 mb-3 font-semibold text-[18px] ml-3'>Services by {user?.User?.username}: </p>
+                    </div>}
+                    {(user?.languages.length == 0 && user?.categories.length == 0) && <p className='font-semibold'>No Tags yet</p>}
+                    <p className='mr-auto my-3 font-semibold text-[18px] ml-3 bg-green-500 px-3 py-1 rounded-full'>About Me:</p>
+                    <p className='mx-5 font-semibold'>{user?.aboutMe || `Hi I'm ${user?.User.username}`}</p>
+                    <p className='mr-auto mt-10 mb-3 font-semibold text-[18px] ml-3 bg-orange-400 px-3 py-1 rounded-full'>Services by {user?.User?.username}: </p>
                     <p className='font-bold text-[22px] text-slate-600 mt-5'>--- Short Content ---</p>
                     <p className='font-bold text-[15px] text-slate-600 my-2'>(60 seconds and less)</p>
                     <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-5 px-3 w-full mb-[25px]'>
@@ -180,7 +182,7 @@ const page = async () => {
                                         <p className='text-red-500 font-bold'>Unavailable</p>
                                     </div>
                                 </div>
-                                <p className='mt-2 mx-2 p-2 bg-green-600 rounded-lg text-white font-semibold'>Upload a link to your TikTok, Reel or Short, and get a 60s video insight about your account and what can be improved to get more audience</p>
+                                <p className='mt-2 mx-2 p-2 bg-green-700 rounded-lg text-white font-semibold'>Upload a link to your TikTok, Reel or Short, and get a 60s video insight about your account and what can be improved to get more audience</p>
                             </div>}
                     </div>
                 </div>
