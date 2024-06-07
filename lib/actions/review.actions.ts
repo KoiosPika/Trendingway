@@ -10,7 +10,7 @@ import { ServerClient } from 'postmark';
 
 const populateReview = (query: any) => {
     return query
-        .populate({ path: 'Request', model: Request, select: "User Reviewer postLink description platform type" })
+        .populate({ path: 'Request', model: Request, select: "User Reviewer postLink description platform type price" })
         .populate({ path: 'User', model: User, select: "username photo" })
         .populate({ path: 'Reviewer', model: User, select: "username photo" })
 }
@@ -79,9 +79,9 @@ export async function createTextReview(review: { request: string, contentNotes: 
 }
 
 export async function createVideoReview(review: { request: string, videoURL: string, Reviewer: string, User: string }) {
-    
+
     const client = new ServerClient(process.env.POSTMARK_API_TOKEN!);
-    
+
     try {
         await connectToDatabase()
 
@@ -125,9 +125,9 @@ export async function createVideoReview(review: { request: string, videoURL: str
 }
 
 export async function createVideoProfileReview(review: { request: string, videoURL: string, Reviewer: string, User: string }) {
-    
+
     const client = new ServerClient(process.env.POSTMARK_API_TOKEN!);
-    
+
     try {
         await connectToDatabase()
 
@@ -171,9 +171,9 @@ export async function createVideoProfileReview(review: { request: string, videoU
 }
 
 export async function createTextProfileReview(review: { request: string, bioNotes: string, bioReview: number, highlightsNotes: string, highlightsReview: number, postsNotes: string, postsReview: number, additionalNotes: string, Reviewer: string, User: string }) {
-    
+
     const client = new ServerClient(process.env.POSTMARK_API_TOKEN!);
-    
+
     try {
         await connectToDatabase()
 
@@ -298,5 +298,32 @@ export async function getPaginatedResponses(userId: string, lastOrderId: string)
         return JSON.parse(JSON.stringify(paginatedResponses));
     } catch (error) {
         console.log(error)
+    }
+}
+
+export async function flagReview(id: string, message:string) {
+    try {
+        await connectToDatabase();
+
+        const flaggedReview = await Review.findOneAndUpdate(
+            { _id: id },
+            { '$set': {insightful: "False", reportMessage: message} }
+        )
+        
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export async function getFlaggedReviews() {
+    try {
+        await connectToDatabase();
+
+        const reviews = await populateReview(Review.find({ insightful: 'False' }).sort({ createdAt: 1 }))
+
+        return JSON.parse(JSON.stringify(reviews))
+
+    } catch (error) {
+        console.log(error);
     }
 }

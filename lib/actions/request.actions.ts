@@ -1,5 +1,6 @@
 'use server'
 
+import { ServerClient } from "postmark"
 import { connectToDatabase } from "../database"
 import Refund from "../database/models/refund.model"
 import Request, { IRequest } from "../database/models/request.model"
@@ -81,13 +82,16 @@ export async function getPaginatedOrders(userId: string, lastOrderId: string) {
 }
 
 export async function cancelOrder(id: string, message: string) {
+
+    const client = new ServerClient(process.env.POSTMARK_API_TOKEN!);
+
     try {
         await connectToDatabase();
 
-        const request = await Request.findOneAndUpdate(
+        const request = await populateRequest(Request.findOneAndUpdate(
             { _id: id },
             { '$set': { status: 'Canceled', message } }
-        )
+        ))
 
         await UserData.findOneAndUpdate(
             { User: request?.User },
@@ -98,6 +102,29 @@ export async function cancelOrder(id: string, message: string) {
             User: request.User,
             amount: request.price
         })
+        
+        const emailOptions = {
+            From: 'automated@insightend.com',
+            To: 'admin@insightend.com',
+            Subject: 'Order Canceled',
+            HtmlBody:
+                `
+                <div style="max-width: 600px; margin: auto; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); font-family: Arial, sans-serif; text-align: center;">
+                <h2 style="color: #333;">${request?.Reviewer?.username} has canceled your order!</h2>
+                <div style="margin: 20px 0;">
+                    <img src="${request?.Reviewer?.photo}" alt="User Image" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin-bottom: 20px;" />
+                </div>
+                <p style="font-size: 16px; color: #555;">${request?.Reviewer?.username} has canceled your order, and $${(request.price).toFixed(2)} were refunded to your credit balance</p>
+                <p style="font-size: 16px; color: #555;">${request?.Reviewer?.username} says: ${message}</p>
+                <p style="font-size: 16px; color: #555;">You can check your refunds in the Refunds section in your wallet page</p>
+                <div style="margin-top: 20px;">
+                    <a href="https://www.insightend.com/wallet" style="display: inline-block; padding: 10px 20px; font-size: 16px; color: #FFFFFF; background-color: #EC1A0D; border-radius: 5px; text-decoration: none;">Go to Wallet</a>
+                </div>
+            </div>
+            `,
+        };
+
+        await client.sendEmail(emailOptions);
 
     } catch (error) {
         console.log(error)

@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
-import { getReviewByRequestId } from '@/lib/actions/review.actions'
+import { flagReview, getReviewByRequestId } from '@/lib/actions/review.actions'
 import { IReview } from '@/lib/database/models/review.model';
 import { InstagramEmbed, TikTokEmbed, YouTubeEmbed } from 'react-social-media-embed';
 import Image from 'next/image';
@@ -11,6 +11,7 @@ import { Button } from '../ui/button';
 import { getTimeLeft, timeAgo } from '@/lib/utils';
 import { createEarning } from '@/lib/actions/earning.actions';
 import { useRouter } from 'next/navigation';
+import FlagedReviewDialog from './FlagedReviewDialog';
 
 const ResponsePage = ({ id, userId }: { id: string, userId: string }) => {
 
@@ -55,7 +56,6 @@ const ResponsePage = ({ id, userId }: { id: string, userId: string }) => {
 
             router.push('/notifications/orders')
 
-            setLoading(false);
         } catch (error) {
             console.log(error)
         }
@@ -70,12 +70,10 @@ const ResponsePage = ({ id, userId }: { id: string, userId: string }) => {
                         {(loading == false && review?.insightful == 'Awaiting') && <div className='w-full lg:w-4/6 py-[14px] px-[10px] bg-black flex flex-col justify-center items-center gap-2 rounded-lg m-2'>
                             <p className='text-white font-semibold text-[12px] md:text-[14px]'>You have {getTimeLeft(review.insightPeriod)} days remaining to inform us if there are any issues with the service you received. </p>
                             <div className='flex flex-row w-full items-center gap-3'>
-                                <Button className='bg-green-600 hover:bg-green-600 md:w-full w-1/2' onClick={handleCreateEarning}>
+                                <Button className='bg-green-600 hover:bg-green-600 md:w-full w-1/2 text-[16px]' onClick={handleCreateEarning}>
                                     {`It's good`}
                                 </Button>
-                                <Button className='bg-red-600 hover:bg-red-600 md:w-full w-1/2'>
-                                    {`It's not good`}
-                                </Button>
+                                <FlagedReviewDialog id={review?._id || ''} />
                             </div>
                         </div>}
                         {(loading == true && review?.insightful == 'Awaiting') && <div className='w-full lg:w-4/6 py-[14px] px-[10px] bg-black flex flex-col justify-center items-center gap-2 rounded-lg m-2'>

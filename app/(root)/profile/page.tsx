@@ -45,11 +45,14 @@ const page = async () => {
                                     <div className='h-[25px] w-[2px] bg-black mx-5' />
                                     <div className='flex flex-row items-center gap-2'>
                                         <p className='text-yellow-600 font-bold'>{user?.nofVideoesReviewed}</p>
-                                        <p className='text-black font-bold'>Reviews</p>
+                                        <p className='text-black font-bold'>Insights</p>
                                     </div>
                                 </div>
                             </div>
-                            <a href={user?.websiteLink} target='_blank' className='text-blue-600 hover:underline font-semibold'>{user?.websiteLink}</a>
+                            <div className='flex flex-row items-center gap-2'>
+                                <Image src={'/icons/link.svg'} alt='link' height={25} width={25}/>
+                                <a href={user?.websiteLink} target='_blank' className='text-blue-600 hover:underline font-semibold'>{user?.websiteLink}</a>
+                            </div>
                         </div>
                         <div className='flex flex-col justify-center items-center md:flex-row w-full gap-2 my-3 text-black'>
                             <Link href={'/edit-profile'} className='bg-yellow-400 w-3/4 self-center flex justify-center items-center py-2 rounded-[10px] font-bold'>Edit Profile</Link>

@@ -72,3 +72,18 @@ export const getTimeLeft = (futureDate: Date) => {
     return `${remainingMinutes} minute${remainingMinutes !== 1 ? 's' : ''} left`;
   }
 };
+
+export function formatDateUS(inputDate: Date) {
+  // Parse the input date
+  const date = new Date(inputDate);
+
+  // Get the month, day, and year
+  const month = date.getMonth() + 1; // Months are zero-based
+  const day = date.getDate();
+  const year = date.getFullYear();
+
+  // Format the date as mm/dd/yyyy
+  const formattedDate = `${month}/${day}/${year}`;
+
+  return formattedDate;
+}
