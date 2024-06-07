@@ -26,7 +26,14 @@ const Header = () => {
         </nav>
 
           <SignedIn>
-            <UserButton />
+            <UserButton appearance={{
+              elements: {
+                userButtonAvatarBox: {
+                  width: '35px',
+                  height: '35px',
+                },
+              },
+            }} />
           </SignedIn>
           <SignedOut>
             <Button asChild className='rounded-md bg-white border-2 border-black hover:bg-yellow-400' size={'icon'}>
