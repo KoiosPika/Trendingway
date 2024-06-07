@@ -3,6 +3,7 @@ import { connectToDatabase } from '@/lib/database';
 import Order from '@/lib/database/models/order.model';
 import Review from '@/lib/database/models/review.model';
 import { NextApiRequest, NextApiResponse } from 'next';
+import { NextResponse } from 'next/server';
 
 const BATCH_SIZE = 100;
 
@@ -43,11 +44,7 @@ async function createOrder(){
     }
 }
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-    if (req.method === 'POST') {
-        await createOrder();
-        res.status(200).json({ message: 'Bulk earnings created' });
-    } else {
-        res.status(405).json({ message: 'Method not allowed' });
-    }
+export async function GET() {
+    await createBulkEarnings();
+    return NextResponse.json({ message: 'Bulk earnings created' });
 }
