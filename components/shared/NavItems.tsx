@@ -24,6 +24,11 @@ const NavItems = () => {
       route: '/notifications/orders'
     },
     {
+      label: 'Insighters',
+      icon: '/icons/bell.svg',
+      route: '/insighters'
+    },
+    {
       label: 'Wallet',
       icon: '/icons/wallet-black.svg',
       route: '/wallet'
