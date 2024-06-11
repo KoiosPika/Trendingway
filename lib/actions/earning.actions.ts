@@ -41,9 +41,10 @@ export async function createEarning(reviewId: string) {
             amount: review.Request.price * 0.8,
             service: review.Request.type
         })
-
     } catch (error) {
         console.log(error);
+
+        
     }
 }
 
