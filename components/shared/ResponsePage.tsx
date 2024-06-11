@@ -40,7 +40,7 @@ const ResponsePage = ({ id, userId }: { id: string, userId: string }) => {
 
             if (thisReview?.User?._id != userId) {
                 router.push('/profile')
-            } else{
+            } else {
                 setRenderPage(true);
             }
 
@@ -53,7 +53,9 @@ const ResponsePage = ({ id, userId }: { id: string, userId: string }) => {
     const handleCreateEarning = async () => {
         try {
             setLoading(true);
-            await createEarning(review?._id || '');
+            if (review) {
+                await createEarning(review?._id);
+            }
 
             router.push('/notifications/orders')
 
