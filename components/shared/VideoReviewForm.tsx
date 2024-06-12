@@ -1,49 +1,62 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ScrollArea } from '../ui/scroll-area'
 import { Input } from '../ui/input'
 import Image from 'next/image'
 import { createVideoReview } from '@/lib/actions/review.actions'
 import { useRouter } from 'next/navigation'
+import { getUploadUrl } from '@/lib/actions/mux.actions'
+import MuxUploader, { MuxUploaderDrop, MuxUploaderFileSelect, MuxUploaderProgress } from '@mux/mux-uploader-react';
 
-const VideoReviewForm = ({ height, id, reviewer, user }: { height: number, id: string, reviewer: string, user:string }) => {
-    const [URL, setURL] = useState('')
+const VideoReviewForm = ({ height, id, reviewer, user }: { height: number, id: string, reviewer: string, user: string }) => {
+    const [URL, setURL] = useState<string>('')
+    const [uploadURL, setUploadURL] = useState<string>()
     const [loading, setLoading] = useState<boolean>(false)
     const router = useRouter();
 
-    const submitVideoReview = async () => {
+    useEffect(() => {
+        async function getURL() {
+            const thisURL = await getUploadUrl(id, user, reviewer, 'VideoReview')
 
-        setLoading(true);
-
-        const review = {
-            request: id,
-            videoURL: URL, 
-            User:user,
-            Reviewer: reviewer
+            setUploadURL(thisURL)
         }
 
-        await createVideoReview(review)
+        getURL();
+    }, [])
 
-        router.push('/wallet')
-
-        setLoading(false);
+    const submitVideoReview = async (event: any) => {
+        router.push('/notifications/orders')
     }
 
     return (
         <ScrollArea className={`w-[400px] h-full md:h-[${height}px] bg-white rounded-tr-lg rounded-br-lg flex-col items-center`}>
-            <div className='mt-2 font-semibold text-center'>Review</div>
-            <div className='w-full mt-2 mb-5 flex flex-col items-center justify-center'>
-                <p className='bg-purple-500 text-white px-3 py-2 rounded-lg font-semibold mr-auto ml-5 my-3'>Video Link:</p>
-                <Input value={URL} onChange={(e) => setURL(e.target.value)} placeholder='Paste URL Here:' className='w-4/5 border-2 border-black' />
-            </div>
-            <div className='w-full flex flex-row justify-center items-center text-center my-6'>
-            {!loading && <div onClick={submitVideoReview} className='w-1/3 bg-green-400 flex flex-row items-center justify-center gap-2 rounded-md hover:cursor-pointer'>
-                    <Image src={'/icons/star-black.svg'} alt='star' height={15} width={15} />
-                    <p className='py-1 rounded-md font-semibold'>Submit</p>
-                </div>}
-                {loading && <div className='w-1/3 bg-green-200 flex flex-row items-center justify-center gap-2 rounded-md hover:cursor-pointer'>
-                    <Image src={'/icons/star-black.svg'} alt='star' height={15} width={15} />
-                    <p className='py-1 rounded-md font-semibold'>Submitting</p>
-                </div>}
+            <div className='max-w-[600px]'>
+                <div className="p-4">
+                    <h2 className="text-lg text-slate-800 mb-2 font-bold"></h2>
+                    <MuxUploader onChunkSuccess={(event) => submitVideoReview(event)} id="my-uploader" className="hidden" endpoint={uploadURL} />
+
+                    <MuxUploaderDrop
+                        id="my-uploader"
+                        className="border-4 border-slate-200 rounded shadow mb-4"
+                        overlay
+                        overlayText="Let it go"
+                    >
+                        <span slot="heading" className="text-slate-600 text-xl mb-2">Drop your response video</span>
+                        <span slot="separator" className="text-slate-400 text-sm italic">— or —</span>
+
+                        <MuxUploaderFileSelect muxUploader="my-uploader">
+                            <button
+                                className="bg-yellow-400 hover:bg-yellow-400 my-2 px-4 py-2 rounded text-black font-semibold text-sm"
+                            >
+                                Select from a folder
+                            </button>
+                        </MuxUploaderFileSelect>
+                    </MuxUploaderDrop>
+                    <MuxUploaderProgress
+                        type="bar"
+                        muxUploader="my-uploader"
+                        className="text-3xl text-orange-600 underline"
+                    />
+                </div>
             </div>
         </ScrollArea>
     )
