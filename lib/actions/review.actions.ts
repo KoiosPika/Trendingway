@@ -7,12 +7,13 @@ import Review, { IReview } from '../database/models/review.model'
 import Request from '../database/models/request.model'
 import Earning from '../database/models/earning.model'
 import { ServerClient } from 'postmark';
+import { createEarning } from './earning.actions'
 
 const populateReview = (query: any) => {
     return query
         .populate({ path: 'Request', model: Request, select: "User Reviewer postLink description platform type price" })
-        .populate({ path: 'User', model: User, select: "username photo" })
-        .populate({ path: 'Reviewer', model: User, select: "username photo" })
+        .populate({ path: 'User', model: User, select: "_id username photo" })
+        .populate({ path: 'Reviewer', model: User, select: "_id username photo" })
 }
 
 const populateRequest = (query: any) => {
@@ -46,10 +47,31 @@ export async function createTextReview(review: { request: string, contentNotes: 
             overallReview: 3,
         })
 
-        const updatedRequest = await populateRequest(Request.findOneAndUpdate(
-            { _id: review.request },
-            { $set: { status: 'Reviewed', reviewed: true } }
-        ))
+        const ThisReview = await populateReview(Review.findById(newReview._id));
+
+        console.log(ThisReview)
+
+        let updatedRequest;
+
+        if (ThisReview.Request.price > 4.99) {
+            updatedRequest = await populateRequest(Request.findOneAndUpdate(
+                { _id: review.request },
+                { $set: { status: 'Reviewed', reviewed: true } }
+            ))
+
+        } else {
+            updatedRequest = await populateRequest(Request.findOneAndUpdate(
+                { _id: review.request },
+                { $set: { status: 'Completed', reviewed: true } }
+            ))
+
+            await Review.updateOne(
+                { _id: ThisReview._id },
+                { '$set': { insightful: 'True' } }
+            )
+
+            await createEarning(ThisReview._id)
+        }
 
         const emailOptions = {
             From: 'automated@insightend.com',
@@ -92,10 +114,28 @@ export async function createVideoReview(review: { request: string, videoURL: str
             reviewURL: review.videoURL
         })
 
-        const updatedRequest = await populateRequest(Request.findOneAndUpdate(
-            { _id: review.request },
-            { $set: { status: 'Reviewed', reviewed: true } }
-        ))
+        const ThisReview = await populateReview(Review.findById(newReview._id));
+
+        let updatedRequest;
+
+        if (ThisReview.Request.price > 4.99) {
+            updatedRequest = await populateRequest(Request.findOneAndUpdate(
+                { _id: review.request },
+                { $set: { status: 'Completed', reviewed: true } }
+            ))
+
+            await Review.updateOne(
+                { _id: ThisReview._id },
+                { '$set': { insightful: 'True' } }
+            )
+        } else {
+            updatedRequest = await populateRequest(Request.findOneAndUpdate(
+                { _id: review.request },
+                { $set: { status: 'Reviewed', reviewed: true } }
+            ))
+
+            await createEarning(ThisReview.Reviewer._id)
+        }
 
         const emailOptions = {
             From: 'automated@insightend.com',
@@ -138,10 +178,28 @@ export async function createVideoProfileReview(review: { request: string, videoU
             reviewURL: review.videoURL
         })
 
-        const updatedRequest = await populateRequest(Request.findOneAndUpdate(
-            { _id: review.request },
-            { $set: { status: 'Reviewed', reviewed: true } }
-        ))
+        const ThisReview = await populateReview(Review.findById(newReview._id));
+
+        let updatedRequest;
+
+        if (ThisReview.Request.price > 4.99) {
+            updatedRequest = await populateRequest(Request.findOneAndUpdate(
+                { _id: review.request },
+                { $set: { status: 'Completed', reviewed: true } }
+            ))
+
+            await Review.updateOne(
+                { _id: ThisReview._id },
+                { '$set': { insightful: 'True' } }
+            )
+        } else {
+            updatedRequest = await populateRequest(Request.findOneAndUpdate(
+                { _id: review.request },
+                { $set: { status: 'Reviewed', reviewed: true } }
+            ))
+
+            await createEarning(ThisReview.Reviewer._id)
+        }
 
         const emailOptions = {
             From: 'automated@insightend.com',
@@ -190,10 +248,29 @@ export async function createTextProfileReview(review: { request: string, bioNote
             additionalNotes: review.additionalNotes
         })
 
-        const updatedRequest = await populateRequest(Request.findOneAndUpdate(
-            { _id: review.request },
-            { $set: { status: 'Reviewed', reviewed: true } }
-        ))
+        const ThisReview = await populateReview(Review.findById(newReview._id));
+
+        let updatedRequest;
+
+        if (ThisReview.Request.price > 4.99) {
+            updatedRequest = await populateRequest(Request.findOneAndUpdate(
+                { _id: review.request },
+                { $set: { status: 'Completed', reviewed: true } }
+            ))
+
+            await Review.updateOne(
+                { _id: ThisReview._id },
+                { '$set': { insightful: 'True' } }
+            )
+        } else {
+            updatedRequest = await populateRequest(Request.findOneAndUpdate(
+                { _id: review.request },
+                { $set: { status: 'Reviewed', reviewed: true } }
+            ))
+
+            await createEarning(ThisReview.Reviewer._id)
+        }
+
 
         const emailOptions = {
             From: 'automated@insightend.com',
@@ -301,15 +378,15 @@ export async function getPaginatedResponses(userId: string, lastOrderId: string)
     }
 }
 
-export async function flagReview(id: string, message:string) {
+export async function flagReview(id: string, message: string) {
     try {
         await connectToDatabase();
 
         const flaggedReview = await Review.findOneAndUpdate(
             { _id: id },
-            { '$set': {insightful: "False", reportMessage: message} }
+            { '$set': { insightful: "False", reportMessage: message } }
         )
-        
+
     } catch (error) {
         console.log(error);
     }
