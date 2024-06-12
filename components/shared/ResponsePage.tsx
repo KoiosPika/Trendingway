@@ -12,6 +12,8 @@ import { getTimeLeft, timeAgo } from '@/lib/utils';
 import { createEarning } from '@/lib/actions/earning.actions';
 import { useRouter } from 'next/navigation';
 import FlagedReviewDialog from './FlagedReviewDialog';
+import { getPlaybackId } from '@/lib/actions/mux.actions';
+import MuxPlayer from '@mux/mux-player-react';
 
 const ResponsePage = ({ id, userId }: { id: string, userId: string }) => {
 
@@ -19,6 +21,7 @@ const ResponsePage = ({ id, userId }: { id: string, userId: string }) => {
     const [height, setHeight] = useState(0)
     const [loading, setLoading] = useState<boolean>(false)
     const [renderPage, setRenderPage] = useState<boolean>(false)
+    const [playbackId, setPlaybackId] = useState<string>('')
     const router = useRouter();
     const now = new Date();
 
@@ -41,6 +44,10 @@ const ResponsePage = ({ id, userId }: { id: string, userId: string }) => {
             if (thisReview?.User?._id != userId) {
                 router.push('/profile')
             } else {
+                if (thisReview.reviewURL) {
+                    const thisPlaybackId = await getPlaybackId(thisReview.reviewURL)
+                    setPlaybackId(thisPlaybackId as string)
+                }
                 setRenderPage(true);
             }
 
@@ -308,7 +315,17 @@ const ResponsePage = ({ id, userId }: { id: string, userId: string }) => {
                                     <p className='w-4/5 bg-slate-200 p-1.5 rounded-lg text-[16px] font-semibold'>{review?.additionalNotes}</p>
                                 </div>}
                                 {review?.reviewURL && <div className={`rounded-lg h-[${height - 200}px] flex justify-center items-center w-full mt-7`}>
-                                    {review && <YouTubeEmbed url={review?.reviewURL} width={350} height={height - 200} />}
+                                    {review &&
+                                        <MuxPlayer
+                                            playbackId={playbackId}
+                                            metadata={{
+                                                video_id: 'video-id-123456',
+                                                video_title: 'Bick Buck Bunny',
+                                                viewer_user_id: 'user-id-bc-789',
+                                            }}
+                                            streamType="on-demand"
+                                        />
+                                    }
                                 </div>}
                                 <div className='w-full flex flex-col justify-center items-center text-center my-6 gap-2'>
                                     {!review?.rated && <RatingDialog id={id} />}

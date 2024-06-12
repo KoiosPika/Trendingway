@@ -24,3 +24,14 @@ export async function getUploadUrl(request: string, user: string, reviewer: stri
         console.log(error)
     }
 }
+
+export async function getPlaybackId(assetId:string){
+    try {
+        const asset = await mux.video.assets.retrieve(assetId)
+        const playbackId = asset.playback_ids![0].id
+
+        return (playbackId as string)
+    } catch (error) {
+        console.log(error)
+    }
+}
