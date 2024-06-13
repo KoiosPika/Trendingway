@@ -8,6 +8,7 @@ import { IMessage } from '@/lib/database/models/message.model';
 import { getMessagesByRequestID } from '@/lib/actions/message.actions';
 import { getChatByRequestID } from '@/lib/actions/chat.actions';
 import { IChat } from '@/lib/database/models/chat.model';
+import { Textarea } from '../ui/textarea';
 
 const PersonalInsightPage = ({ id, userId }: { id: string, userId: string }) => {
 
@@ -45,7 +46,7 @@ const PersonalInsightPage = ({ id, userId }: { id: string, userId: string }) => 
                     {chat && <Image src={chat.User1._id == userId ? chat.User2.photo :chat.User1.photo} alt='pfp' height={50} width={50} className='rounded-full'/>}
                     {chat && <p className='font-semibold'>{chat.User1._id == userId ? chat.User2.username :chat.User1.username}</p>}
                 </div>
-                <ScrollArea className='w-full overflow-auto flex' style={{ height: height - 300 }}>
+                <ScrollArea className='w-full overflow-auto flex' style={{ height: height - 220 }}>
                     <div className="flex flex-col-reverse w-full p-3 mt-auto" style={{ minHeight: height - 300 }}>
                         {messages && messages.map((message: IMessage, index) => (
                             <div key={index} className='w-full'>
@@ -79,7 +80,7 @@ const PersonalInsightPage = ({ id, userId }: { id: string, userId: string }) => 
                     </div>
                 </ScrollArea>
                 <div className='flex flex-row items-center justify-center gap-2 w-full my-2'>
-                    <Input className='w-4/5 border-2 border-black' />
+                    <Input className='w-4/5 border-2 border-black h-[60px] text-[16px]' />
                     <Image src={'/icons/up.svg'} alt='send' height={40} width={40} className='rotate-90' />
                 </div>
             </div>
