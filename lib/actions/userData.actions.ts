@@ -61,7 +61,7 @@ export async function editUserData(userData:
             {
                 '$set': {
                     aboutMe: userData.aboutMe,
-                    websiteLink: userData.link,
+                    personalLink: userData.link,
                     TextInsight: userData.TextInsight,
                     TextInsightAvailability: userData.TextInsightAvailability,
                     TextPersonalInsight: userData.TextPersonalInsight,

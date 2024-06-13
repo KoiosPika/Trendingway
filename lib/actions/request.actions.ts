@@ -14,7 +14,7 @@ const populateRequest = (query: any) => {
         .populate({ path: 'Insighter', model: User, select: "_id photo username" })
 }
 
-export async function createRequest({ User, Insighter, postLink, description, platform, price, type }: { User: string, Insighter: string, postLink: string, description: string, platform: string, price: number, type: string }) {
+export async function createRequest({ User, Insighter, postLink, description, platform, price, type }: { User: string, Insighter: string, postLink: string | undefined, description: string, platform: string | undefined, price: number, type: string }) {
     try {
         await connectToDatabase()
 

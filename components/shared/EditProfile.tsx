@@ -25,11 +25,17 @@ const EditProfile = ({ userId }: { userId: string }) => {
     const [LongTextInsight, setLongTextInsight] = useState<number>(0)
     const [LongTextInsightAvailability, setLongTextInsightAvailability] = useState<boolean>(true)
 
+    const [TextPersonalInsight, setTextPersonalInsight] = useState<number>(0)
+    const [TextPersonalInsightAvailability, setTextPersonalInsightAvailability] = useState<boolean>(true)
+
     const [VideoInsight, setVideoInsight] = useState<number>(0)
     const [VideoInsightAvailability, setVideoInsightAvailability] = useState<boolean>(true)
 
     const [LongVideoInsight, setLongVideoInsight] = useState<number>(0)
     const [LongVideoInsightAvailability, setLongVideoInsightAvailability] = useState<boolean>(true)
+
+    const [VideoPersonalInsight, setVideoPersonalInsight] = useState<number>(0)
+    const [VideoPersonalInsightAvailability, setVideoPersonalInsightAvailability] = useState<boolean>(true)
 
     const [TextProfileInsight, setTextProfileInsight] = useState<number>(0)
     const [TextProfileInsightAvailability, setTextProfileInsightAvailability] = useState<boolean>(true)
@@ -56,6 +62,11 @@ const EditProfile = ({ userId }: { userId: string }) => {
             setTextInsightAvailability(myUser.TextInsightAvailability);
             setVideoInsight(myUser.VideoInsight);
             setVideoInsightAvailability(myUser.VideoInsightAvailability);
+
+            setTextPersonalInsight(myUser.TextPersonalInsight);
+            setTextPersonalInsightAvailability(myUser.TextPersonalInsightAvailability);
+            setVideoPersonalInsight(myUser.VideoPersonalInsight);
+            setVideoPersonalInsightAvailability(myUser.VideoPersonalInsightAvailability);
 
             setLongTextInsight(myUser.LongTextInsight);
             setLongTextInsightAvailability(myUser.LongTextInsightAvailability);
@@ -94,13 +105,13 @@ const EditProfile = ({ userId }: { userId: string }) => {
             link,
             TextInsight,
             TextInsightAvailability,
-            TextPersonalInsight: 0.99,
+            TextPersonalInsight,
             TextPersonalInsightAvailability: true,
             LongTextInsight,
             LongTextInsightAvailability,
             VideoInsight,
             VideoInsightAvailability,
-            VideoPersonalInsight: 2.99,
+            VideoPersonalInsight,
             VideoPersonalInsightAvailability: true,
             LongVideoInsight,
             LongVideoInsightAvailability,
@@ -340,27 +351,27 @@ const EditProfile = ({ userId }: { userId: string }) => {
                                 <div className='border-[1px] border-slate-400 rounded-lg h-[150px] md:h-[180px] flex justify-center items-center gap-2 relative' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                                     <div className='flex flex-col items-center gap-2 flex-1'>
                                         <Image src={'/icons/people.svg'} alt='video' width={200} height={200} className='bg-pink-500 w-[40px] h-[40px] md:w-[55px] md:h-[55px] p-1 md:p-2 rounded-full' />
-                                        <p className='font-semibold text-[13px] md:text-[16px]'>Text Profile IInsight</p>
+                                        <p className='font-semibold text-[13px] md:text-[16px]'>Text Personal Insight</p>
                                     </div>
                                     <div className='h-2/4 w-[2px] bg-black'></div>
                                     <div className='flex flex-col items-center justify-center flex-1 mr-auto'>
                                         <div className='flex flex-row justify-center items-center w-full'>
                                             <p className='text-[20px] md:text-[25px] font-semibold' style={{ color: TextProfileInsight < 2.99 ? 'red' : 'black' }}>$</p>
-                                            <Input value={TextProfileInsight} className='text-[20px] md:text-[25px] font-semibold w-2/3 border-0' type='number' onChange={(e) => setTextProfileInsight(Number(e.target.value))} style={{ color: TextProfileInsight < 2.99 ? 'red' : 'black' }} />
+                                            <Input value={TextPersonalInsight} className='text-[20px] md:text-[25px] font-semibold w-2/3 border-0' type='number' onChange={(e) => setTextPersonalInsight(Number(e.target.value))} style={{ color: TextPersonalInsight < 2.99 ? 'red' : 'black' }} />
                                         </div>
-                                        {TextProfileInsight < 2.99 && <p className='mt-[5px] md:mr-[100px] mr-auto text-[10px] md:text-[12px] font-semibold text-red-500'>{`Price Can't be Bellow 2.99`}</p>}
+                                        {TextPersonalInsight < 2.99 && <p className='mt-[5px] md:mr-[100px] mr-auto text-[10px] md:text-[12px] font-semibold text-red-500'>{`Price Can't be Bellow 2.99`}</p>}
                                     </div>
                                     <div className='absolute top-1 right-2 flex flex-row items-center gap-2 text-pink-500'>
-                                        {TextProfileInsightAvailability && <p className='font-bold text-[12px]'>Service Available</p>}
-                                        {!TextProfileInsightAvailability && <p className='font-bold text-[12px]'>Service Unavailable</p>}
-                                        <Switch checked={TextProfileInsightAvailability} onCheckedChange={setTextProfileInsightAvailability} style={{ backgroundColor: '#DD4EC9' }} />
+                                        {TextPersonalInsightAvailability && <p className='font-bold text-[12px]'>Service Available</p>}
+                                        {!TextPersonalInsightAvailability && <p className='font-bold text-[12px]'>Service Unavailable</p>}
+                                        <Switch checked={TextPersonalInsightAvailability} onCheckedChange={setTextPersonalInsightAvailability} style={{ backgroundColor: '#DD4EC9' }} />
                                     </div>
                                     <div className='absolute bottom-0 flex flex-row w-full'>
                                         <div className='flex w-1/2 h-[30px] bg-pink-500 rounded-bl-md justify-center items-center'>
                                             <p className='font-bold text-white text-[11px] md:text-[18px]'>Expected Earning Per 1 Order = </p>
                                         </div>
                                         <div className='flex w-1/2 h-[30px] bg-pink-500 rounded-br-md justify-center items-center'>
-                                            <p className='font-bold text-white text-[13px] md:text-[18px]'>${TextProfileInsight} x 80% = ${(TextProfileInsight * 0.80).toFixed(2)} </p>
+                                            <p className='font-bold text-white text-[13px] md:text-[18px]'>${TextPersonalInsight} x 80% = ${(TextPersonalInsight * 0.80).toFixed(2)} </p>
                                         </div>
                                     </div>
                                 </div>
@@ -368,27 +379,27 @@ const EditProfile = ({ userId }: { userId: string }) => {
                                 <div className='border-[1px] border-slate-400 rounded-lg h-[150px] md:h-[180px] flex justify-center items-center gap-2 relative' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                                     <div className='flex flex-col items-center gap-2 flex-1'>
                                         <Image src={'/icons/selfie.svg'} alt='video' width={200} height={200} className='bg-[#b83c4c] w-[40px] h-[40px] md:w-[55px] md:h-[55px] p-1 md:p-2 rounded-full' />
-                                        <p className='font-semibold text-[13px] md:text-[16px]'>Video Profile Insight</p>
+                                        <p className='font-semibold text-[13px] md:text-[16px]'>Video Personal Insight</p>
                                     </div>
                                     <div className='h-2/4 w-[2px] bg-black'></div>
                                     <div className='flex flex-col items-center justify-center flex-1 mr-auto'>
                                         <div className='flex flex-row justify-center items-center w-full'>
-                                            <p className='text-[20px] md:text-[25px] font-semibold' style={{ color: VideoProfileInsight < 3.99 ? 'red' : 'black' }}>$</p>
-                                            <Input value={VideoProfileInsight} className='text-[20px] md:text-[25px] font-semibold w-2/3 border-0' type='number' onChange={(e) => setVideoProfileInsight(Number(e.target.value))} style={{ color: VideoProfileInsight < 3.99 ? 'red' : 'black' }} />
+                                            <p className='text-[20px] md:text-[25px] font-semibold' style={{ color: VideoPersonalInsight < 3.99 ? 'red' : 'black' }}>$</p>
+                                            <Input value={VideoPersonalInsight} className='text-[20px] md:text-[25px] font-semibold w-2/3 border-0' type='number' onChange={(e) => setVideoPersonalInsight(Number(e.target.value))} style={{ color: VideoPersonalInsight < 3.99 ? 'red' : 'black' }} />
                                         </div>
-                                        {VideoProfileInsight < 3.99 && <p className='mt-[5px] md:mr-[100px] mr-auto text-[10px] md:text-[12px] font-semibold text-red-500'>{`Price Can't be Bellow 3.99`}</p>}
+                                        {VideoPersonalInsight < 3.99 && <p className='mt-[5px] md:mr-[100px] mr-auto text-[10px] md:text-[12px] font-semibold text-red-500'>{`Price Can't be Bellow 3.99`}</p>}
                                     </div>
                                     <div className='absolute top-1 right-2 flex flex-row items-center gap-2 text-[#b83c4c]'>
-                                        {VideoProfileInsightAvailability && <p className='font-bold text-[12px]'>Service Available</p>}
-                                        {!VideoProfileInsightAvailability && <p className='font-bold text-[12px]'>Service Unavailable</p>}
-                                        <Switch checked={VideoProfileInsightAvailability} onCheckedChange={setVideoProfileInsightAvailability} style={{ backgroundColor: '#b83c4c' }} />
+                                        {VideoPersonalInsightAvailability && <p className='font-bold text-[12px]'>Service Available</p>}
+                                        {!VideoPersonalInsightAvailability && <p className='font-bold text-[12px]'>Service Unavailable</p>}
+                                        <Switch checked={VideoPersonalInsightAvailability} onCheckedChange={setVideoPersonalInsightAvailability} style={{ backgroundColor: '#b83c4c' }} />
                                     </div>
                                     <div className='absolute bottom-0 flex flex-row w-full'>
                                         <div className='flex w-1/2 h-[30px] bg-[#b83c4c] rounded-bl-md justify-center items-center'>
                                             <p className='font-bold text-white text-[11px] md:text-[18px]'>Expected Earning Per 1 Order = </p>
                                         </div>
                                         <div className='flex w-1/2 h-[30px] bg-[#b83c4c] rounded-br-md justify-center items-center'>
-                                            <p className='font-bold text-white text-[13px] md:text-[18px]'>${VideoProfileInsight} x 80% = ${(VideoProfileInsight * 0.80).toFixed(2)} </p>
+                                            <p className='font-bold text-white text-[13px] md:text-[18px]'>${VideoPersonalInsight} x 80% = ${(VideoPersonalInsight * 0.80).toFixed(2)} </p>
                                         </div>
                                     </div>
                                 </div>

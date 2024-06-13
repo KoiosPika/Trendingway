@@ -61,7 +61,7 @@ const page = async () => {
                             </div>
                         </div>
                         <div className='grid grid-cols-1 sm:grid-cols-2 w-11/12 gap-4'>
-                            <div id='recharge' className='w-full p-4 md:p-8 my-3 rounded-lg bg-blue-600 text-white' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
+                            <div id='recharge' className='w-full p-4 md:p-8 my-3 rounded-lg bg-blue-600 text-white h-[400px]' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                                 <div className='flex flex-row gap-2 mb-4'>
                                     <Image src={'/icons/plus-white.svg'} alt='wallet' height={20} width={20} />
                                     <p className='font-semibold text-[20px]'>Recharge your wallet</p>
@@ -79,7 +79,7 @@ const page = async () => {
                                     <Checkout userId={userId} amount={50} />
                                 </div>
                             </div>
-                            <div className='w-full px-2 py-4 lg:p-8 my-3 rounded-lg bg-orange-500 text-white' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
+                            <div className='w-full px-2 py-4 lg:p-8 my-3 rounded-lg bg-orange-500 text-white h-[400px]' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                                 <div className='flex flex-row gap-2 mb-4'>
                                     <Image src={'/icons/invoice.svg'} alt='wallet' height={20} width={20} />
                                     <p className='font-semibold text-[20px]'>Recharge Orders</p>
@@ -95,7 +95,7 @@ const page = async () => {
                                             <p className='text-[13px] lg:text-[15px]'>When</p>
                                         </div>
                                     </div>
-                                    {orders.map((order: IOrder, index: number) => (
+                                    {orders.length > 0 && orders.map((order: IOrder, index: number) => (
                                         <div key={index} className='flex flex-row justify-center items-center p-5 gap-2 bg-white text-black rounded-lg'>
                                             <div className='w-full flex flex-row items-center gap-5'>
 
@@ -107,16 +107,21 @@ const page = async () => {
                                             </div>
                                         </div>
                                     ))}
-                                    <Link href={'/wallet/recharges'} className='ml-auto'>
+                                    {orders.length > 0 && <Link href={'/wallet/recharges'} className='ml-auto'>
                                         <p className='bg-white px-4 py-2 rounded-lg inline-flex text-black text-[13px] font-semibold hover:bg-yellow-400'>More Details {`->`}</p>
-                                    </Link>
+                                    </Link>}
                                 </div>
+                                {orders.length == 0 &&
+                                    <div className='flex justify-center items-center h-3/4'>
+                                        <p className='text-[18px] font-bold'>No Orders Yet</p>
+                                    </div>
+                                }
                             </div>
                         </div>
                         <StripeSetup userId={userId} />
 
                         <div className='grid grid-cols-1 sm:grid-cols-2 w-11/12 gap-4'>
-                        <div className='w-full px-2 py-4 lg:p-8 my-2 rounded-lg bg-[#178EA0] text-white' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
+                            <div className='w-full px-2 py-4 lg:p-8 my-2 rounded-lg bg-[#178EA0] text-white h-[400px]' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                                 <div className='flex flex-row gap-2 mb-4'>
                                     <Image src={'/icons/invoice.svg'} alt='wallet' height={20} width={20} />
                                     <p className='font-semibold text-[20px]'>Spendings</p>
@@ -136,7 +141,7 @@ const page = async () => {
                                             <p className='text-[13px] lg:text-[15px]'>Service</p>
                                         </div>
                                     </div>
-                                    {spendings.map((spending: ISpending, index: number) => (
+                                    {spendings.length > 0 && spendings.map((spending: ISpending, index: number) => (
                                         <div key={index} className='flex flex-row justify-center items-center px-2 py-4 gap-2 bg-white text-black rounded-lg relative'>
                                             <div className='w-full flex flex-row items-center'>
                                                 <p className='font-semibold text-[12px] lg:text-[15px]'>${(spending?.amount).toFixed(2)}</p>
@@ -171,13 +176,18 @@ const page = async () => {
                                                 </div>}
                                         </div>
                                     ))}
-                                    
-                                    <Link href={'/wallet/spendings'} className='ml-auto'>
+
+                                    {spendings.length > 0 && <Link href={'/wallet/spendings'} className='ml-auto'>
                                         <p className='bg-white px-4 py-2 rounded-lg inline-flex text-black text-[13px] font-semibold hover:bg-yellow-400'>More Details {`->`}</p>
-                                    </Link>
+                                    </Link>}
                                 </div>
+                                {spendings.length == 0 &&
+                                    <div className='flex justify-center items-center h-3/4'>
+                                        <p className='text-[18px] font-bold'>No Spendings Yet</p>
+                                    </div>
+                                }
                             </div>
-                            <div className='w-full px-2 py-4 lg:p-8 my-2 rounded-lg bg-[#1AAD7A] text-white' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
+                            <div className='w-full px-2 py-4 lg:p-8 my-2 rounded-lg bg-[#1AAD7A] text-white h-[400px]' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                                 <div className='flex flex-row gap-2 mb-4'>
                                     <Image src={'/icons/invoice.svg'} alt='wallet' height={20} width={20} />
                                     <p className='font-semibold text-[20px]'>Earnings</p>
@@ -197,7 +207,7 @@ const page = async () => {
                                             <p className='text-[13px] lg:text-[15px]'>Service</p>
                                         </div>
                                     </div>
-                                    {earnings.map((earning: IEarning, index: number) => (
+                                    {earnings.length > 0 && earnings.map((earning: IEarning, index: number) => (
                                         <div key={index} className='flex flex-row justify-center items-center px-2 py-4 gap-2 bg-white text-black rounded-lg relative'>
                                             <div className='w-full flex flex-row items-center'>
                                                 <p className='font-semibold text-[12px] lg:text-[15px]'>${(earning?.amount).toFixed(2)}</p>
@@ -232,16 +242,21 @@ const page = async () => {
                                                 </div>}
                                         </div>
                                     ))}
-                                    <Link href={'/wallet/earnings'} className='ml-auto'>
+                                    {earnings.length > 0 && <Link href={'/wallet/earnings'} className='ml-auto'>
                                         <p className='bg-white px-4 py-2 rounded-lg inline-flex text-black text-[13px] font-semibold hover:bg-yellow-400'>More Details {`->`}</p>
-                                    </Link>
+                                    </Link>}
                                 </div>
+                                {earnings.length == 0 &&
+                                    <div className='flex justify-center items-center h-3/4'>
+                                        <p className='text-[18px] font-bold'>No Earnings Yet</p>
+                                    </div>
+                                }
                             </div>
                         </div>
 
 
                         <div className='grid grid-cols-1 sm:grid-cols-2 w-11/12 gap-4'>
-                            <div className='w-full px-2 py-4 lg:p-8 my-2 rounded-lg bg-[#D62055] text-white' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
+                            <div className='w-full px-2 py-4 lg:p-8 my-2 rounded-lg bg-[#D62055] text-white h-[400px]' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                                 <div className='flex flex-row gap-2 mb-4'>
                                     <Image src={'/icons/invoice.svg'} alt='wallet' height={20} width={20} />
                                     <p className='font-semibold text-[20px]'>Payout Orders</p>
@@ -272,7 +287,7 @@ const page = async () => {
                                     </Link>
                                 </div>
                             </div>
-                            <div className='w-full px-2 py-4 lg:p-8 my-2 rounded-lg bg-[#A81EE8] text-white' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
+                            <div className='w-full px-2 py-4 lg:p-8 my-2 rounded-lg bg-[#A81EE8] text-white h-[400px]' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                                 <div className='flex flex-row gap-2 mb-4'>
                                     <Image src={'/icons/invoice.svg'} alt='wallet' height={20} width={20} />
                                     <p className='font-semibold text-[20px]'>Refunds</p>
@@ -288,7 +303,7 @@ const page = async () => {
                                             <p className='text-[13px] lg:text-[15px]'>When</p>
                                         </div>
                                     </div>
-                                    {refunds.map((refund: IRefund, index: number) => (
+                                    {refunds.length > 0 && refunds.map((refund: IRefund, index: number) => (
                                         <div key={index} className='flex flex-row justify-center items-center p-5 gap-2 bg-white text-black rounded-lg relative'>
                                             <div className='w-full flex flex-row items-center gap-5'>
                                                 <p className='font-semibold text-[13px] lg:text-[15px]'>${(refund?.amount).toFixed(2)}</p>
@@ -298,10 +313,15 @@ const page = async () => {
                                             </div>
                                         </div>
                                     ))}
-                                    <Link href={'/wallet/refunds'} className='ml-auto'>
+                                    {refunds.length > 0 && <Link href={'/wallet/refunds'} className='ml-auto'>
                                         <p className='bg-white px-4 py-2 rounded-lg inline-flex text-black text-[13px] font-semibold hover:bg-yellow-400'>More Details {`->`}</p>
-                                    </Link>
+                                    </Link>}
                                 </div>
+                                {refunds.length == 0 &&
+                                    <div className='flex justify-center items-center h-3/4'>
+                                        <p className='text-[18px] font-bold'>No Refunds Yet</p>
+                                    </div>
+                                }
                             </div>
                         </div>
                     </div>
