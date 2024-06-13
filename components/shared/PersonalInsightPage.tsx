@@ -47,40 +47,24 @@ const PersonalInsightPage = ({ id, userId }: { id: string, userId: string }) => 
                     {chat && <p className='font-semibold'>{chat.User1._id == userId ? chat.User2.username :chat.User1.username}</p>}
                 </div>
                 <ScrollArea className='w-full overflow-auto flex' style={{ height: height - 220 }}>
-                    <div className="flex flex-col-reverse w-full p-3 mt-auto" style={{ minHeight: height - 300 }}>
+                    <div className="flex flex-col-reverse w-full mt-auto" style={{ minHeight: height - 220 }}>
                         {messages && messages.map((message: IMessage, index) => (
                             <div key={index} className='w-full'>
                                 {message.User?._id == userId && <div className='p-3 ml-auto md:w-2/4 w-3/4 flex flex-row items-center gap-2'>
                                     <p className='md:text-[15px] text-[13px] bg-slate-200 p-2 rounded-md'>{message.text}</p>
                                     <Image src={message.User?.photo} alt='pfp' height={40} width={40} className='mt-auto rounded-full' />
                                 </div>}
-                                {message.User?._id != userId && <div className='p-3 rounded w-2/4 flex flex-row items-center gap-2'>
+                                {message.User?._id != userId && <div className='p-3 md:w-2/4 w-3/4 flex flex-row items-center gap-2'>
                                     <Image src={message.User?.photo} alt='pfp' height={40} width={40} />
-                                    <p>{message.text}</p>
-                                </div>}
-                                {message.User?._id == userId && <div className='p-3 ml-auto md:w-2/4 w-3/4 flex flex-row items-center gap-2'>
                                     <p className='md:text-[15px] text-[13px] bg-slate-200 p-2 rounded-md'>{message.text}</p>
-                                    <Image src={message.User?.photo} alt='pfp' height={40} width={40} className='mt-auto rounded-full' />
-                                </div>}
-                                {message.User?._id != userId && <div className='p-3 rounded w-2/4 flex flex-row items-center gap-2'>
-                                    <Image src={message.User?.photo} alt='pfp' height={40} width={40} />
-                                    <p>{message.text}</p>
-                                </div>}
-                                {message.User?._id == userId && <div className='p-3 ml-auto md:w-2/4 w-3/4 flex flex-row items-center gap-2'>
-                                    <p className='md:text-[15px] text-[13px] bg-slate-200 p-2 rounded-md'>{message.text}</p>
-                                    <Image src={message.User?.photo} alt='pfp' height={40} width={40} className='mt-auto rounded-full' />
-                                </div>}
-                                {message.User?._id != userId && <div className='p-3 rounded w-2/4 flex flex-row items-center gap-2'>
-                                    <Image src={message.User?.photo} alt='pfp' height={40} width={40} />
-                                    <p>{message.text}</p>
-                                </div>}
-                                
+                                </div>}                               
+                                                             
                             </div>
                         ))}
                     </div>
                 </ScrollArea>
                 <div className='flex flex-row items-center justify-center gap-2 w-full my-2'>
-                    <Input className='w-4/5 border-2 border-black h-[60px] text-[16px]' />
+                    <Input placeholder='Your insight' className='w-4/5 border-2 border-black h-[60px] text-[16px]' />
                     <Image src={'/icons/up.svg'} alt='send' height={40} width={40} className='rotate-90' />
                 </div>
             </div>
