@@ -7,7 +7,6 @@ import { auth } from '@clerk/nextjs/server'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
-import { InstagramEmbed, TikTokEmbed, YouTubeEmbed } from 'react-social-media-embed'
 
 const page = async () => {
 
@@ -35,7 +34,7 @@ const page = async () => {
                 <p className='text-[12px] md:text-[15px]'>Responses</p>
               </Link>
               <Link href={'/notifications/history'} className='flex flex-col md:flex-row justify-center items-center gap-3 px-4 py-3 text-center w-full rounded-r-lg'>
-                <Image src={'/icons/clock-black.svg'} alt='up' height={20} width={20}/>
+                <Image src={'/icons/clock-black.svg'} alt='up' height={20} width={20} />
                 <p className='text-[12px] md:text-[15px]'>History</p>
               </Link>
             </div>
@@ -56,10 +55,16 @@ const page = async () => {
                     {request.type === 'VideoProfileInsight' && <Image src={'/icons/video-icon.svg'} alt='video' width={200} height={200} className='bg-green-500 w-[40px] h-[40px] p-1.5 rounded-full ml-auto' />}
                   </div>
                   <p className='ml-3 mt-2 mr-auto text-[12.5px] h-[50px] overflow-hidden'>{request.description}</p>
-                  <Link href={`/insight/${request._id}`} className='bg-yellow-400 w-full flex flex-row items-center justify-center gap-2 py-1 rounded-lg mt-4 mb-2'>
-                    <Image src={'/icons/star-black.svg'} alt='star' height={15} width={15} />
-                    <p className='text-[13px] md:text-[16px]'>Start Insight</p>
-                  </Link>
+                  {(request.type != 'TextPersonalInsight' && request.type != "VideoPersonalInsight") &&
+                    <Link href={`/insight/${request._id}`} className='bg-yellow-400 w-full flex flex-row items-center justify-center gap-2 py-1 rounded-lg mt-4 mb-2'>
+                      <Image src={'/icons/star-black.svg'} alt='star' height={15} width={15} />
+                      <p className='text-[13px] md:text-[16px]'>Start Insight</p>
+                    </Link>}
+                  {(request.type === 'TextPersonalInsight' || request.type === "VideoPersonalInsight") &&
+                    <Link href={`/personal-insight/${request._id}`} className='bg-yellow-400 w-full flex flex-row items-center justify-center gap-2 py-1 rounded-lg mt-4 mb-2'>
+                      <Image src={'/icons/star-black.svg'} alt='star' height={15} width={15} />
+                      <p className='text-[13px] md:text-[16px]'>Start Insight</p>
+                    </Link>}
                   <CancelOrder request={request} />
                 </div>
               ))}

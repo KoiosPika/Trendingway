@@ -7,6 +7,8 @@ import Request, { IRequest } from "../database/models/request.model"
 import Spending from "../database/models/spending.model"
 import User from "../database/models/user.model"
 import UserData from "../database/models/userData.model"
+import Chat from "../database/models/chat.model"
+import Message from "../database/models/message.model"
 
 const populateRequest = (query: any) => {
     return query
@@ -19,6 +21,49 @@ export async function createRequest({ User, Insighter, postLink, description, pl
         await connectToDatabase()
 
         const request = await Request.create({ User, Insighter, postLink, description, platform, insighted: false, price, type })
+
+        await UserData.findOneAndUpdate(
+            { User },
+            { '$inc': { creditBalance: (-1 * price) } }
+        )
+
+        const spendings = await Spending.create({
+            User,
+            Insighter,
+            amount: price,
+            service: type
+        })
+
+        return JSON.parse(JSON.stringify(request))
+
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export async function createPersonalRequest(User: string, Insighter: string, description: string, price: number, type: string) {
+    try {
+        await connectToDatabase();
+
+        let chat = await Chat.findOne({
+            $or: [
+                { User1: User, User2: Insighter },
+                { User1: Insighter, User2: User }
+            ]
+        })
+
+        if (!chat) {
+            chat = await Chat.create({ User1: User, User2: Insighter })
+        }
+
+        const message = await Message.create({
+            Chat: chat._id,
+            User,
+            type,
+            text: description,
+        })
+
+        const request = await Request.create({ User, Insighter, description, insighted: false, price, type, chatId: chat._id, messageId: message._id })
 
         await UserData.findOneAndUpdate(
             { User },
@@ -102,7 +147,7 @@ export async function cancelOrder(id: string, message: string) {
             User: request.User,
             amount: request.price
         })
-        
+
         const emailOptions = {
             From: 'automated@insightend.com',
             To: 'admin@insightend.com',

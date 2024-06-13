@@ -4,9 +4,8 @@ import React, { useEffect, useState } from 'react'
 import { AlertDialog, AlertDialogCancel, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '../ui/alert-dialog'
 import { Button } from '../ui/button'
 import Image from 'next/image'
-import { Input } from '../ui/input'
 import { Textarea } from '../ui/textarea'
-import { createRequest } from '@/lib/actions/request.actions'
+import { createPersonalRequest } from '@/lib/actions/request.actions'
 import { IUserData } from '@/lib/database/models/userData.model'
 import { getUserDataByUserId } from '@/lib/actions/userData.actions'
 import Link from 'next/link'
@@ -16,13 +15,8 @@ const TextPersonalInsight = ({ price, userId, insighter }: { price: number, user
 
     const [description, setDescription] = useState<string>('')
     const [user, setUser] = useState<IUserData>()
-    const [isVisible, setIsVisible] = useState(false);
     const [loading, setLoading] = useState<boolean>(false);
     const [finished, setFinished] = useState<boolean>(false);
-
-    const handleClick = () => {
-        setIsVisible(!isVisible);
-    };
 
     const fetchUserData = async () => {
         const userData = await getUserDataByUserId(userId);
@@ -42,12 +36,12 @@ const TextPersonalInsight = ({ price, userId, insighter }: { price: number, user
 
         setLoading(true);
         await fetchUserData();
-        if(user && user?.creditBalance < price){
+        if (user && user?.creditBalance < price) {
             return;
         }
 
         try {
-            await createRequest({ User: userId, Insighter: insighter, postLink: undefined, description, platform: undefined, price, type: 'TextPersonalInsight' });
+            await createPersonalRequest(userId, insighter, description, price, 'TextPersonalInsight');
 
             setLoading(false);
             setFinished(true);

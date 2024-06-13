@@ -13,6 +13,8 @@ export interface IRequest extends Document {
     price: number,
     status: string,
     message: string,
+    chatId: string,
+    messageId: string,
     createdAt: Date
 }
 
@@ -27,6 +29,8 @@ const RequestSchema = new Schema({
     price: { type: Number },
     type: { type: String },
     message: { type: String },
+    chatId: { type: String },
+    messageId: { type: String },
     createdAt: { type: Date, default: Date.now }
 })
 
