@@ -1,22 +1,20 @@
 'use client'
 
-import { Input } from '@/components/ui/input'
-import { ScrollArea } from '@/components/ui/scroll-area'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import { InstagramEmbed, TikTokEmbed, YouTubeEmbed } from 'react-social-media-embed';
-import { Drawer, DrawerContent, DrawerFooter, DrawerHeader, DrawerTitle, DrawerTrigger, } from "@/components/ui/drawer"
 import { getRequestById } from '@/lib/actions/request.actions'
 import { IRequest } from '@/lib/database/models/request.model'
-import TextReviewForm from './TextReviewForm'
-import VideoReviewForm from './VideoReviewForm'
-import TextProfileReviewForm from './TextProfileReviewForm'
-import VideoProfileReviewForm from './VideoProfileReviewForm'
+
 import { timeAgo } from '@/lib/utils'
 import { useRouter } from 'next/navigation'
+import TextInsightForm from './TextInsightForm';
+import VideoInsightForm from './VideoInsightForm';
+import TextProfileInsightForm from './TextProfileInsightForm';
+import VideoProfileInsightForm from './VideoProfileInsightForm';
 
 
-const ReviewPage = ({ id, userId }: { id: string, userId: string }) => {
+const InsightPage = ({ id, userId }: { id: string, userId: string }) => {
 
     const [request, setRequest] = useState<IRequest>()
     const [height, setHeight] = useState(0)
@@ -27,7 +25,7 @@ const ReviewPage = ({ id, userId }: { id: string, userId: string }) => {
         async function getRequest() {
             const thisRequest = await getRequestById(id)
 
-            if (thisRequest?.Reviewer?._id != userId || thisRequest?.reviewed == true) {
+            if (thisRequest?.Insighter?._id != userId || thisRequest?.insighted == true) {
                 router.push('/profile')
             } else {
                 setRenderPage(true);
@@ -82,14 +80,14 @@ const ReviewPage = ({ id, userId }: { id: string, userId: string }) => {
                                     {request && <YouTubeEmbed url={request?.postLink} width={350} height={height} />}
                                 </div>}
                             <div className={`h-full w-full flex justify-center items-center`}>
-                                {(request?.type === 'TextReview' || request?.type === 'LongTextReview') &&
-                                    <TextReviewForm height={height} id={id} reviewer={request?.Reviewer?._id} user={request?.User?._id} />}
-                                {(request?.type === 'VideoReview' || request?.type === 'LongVideoReview') &&
-                                    <VideoReviewForm height={height} id={id} reviewer={request?.Reviewer?._id} user={request?.User?._id} />}
-                                {request?.type === 'TextProfileReview' &&
-                                    <TextProfileReviewForm height={height} id={id} reviewer={request?.Reviewer?._id} user={request?.User?._id} />}
-                                {request?.type === 'VideoProfileReview' &&
-                                    <VideoProfileReviewForm height={height} id={id} reviewer={request?.Reviewer?._id} user={request?.User?._id} />}
+                                {(request?.type === 'TextInsight' || request?.type === 'LongTextInsight') &&
+                                    <TextInsightForm height={height} id={id} insighter={request?.Insighter?._id} user={request?.User?._id} />}
+                                {(request?.type === 'VideoInsight' || request?.type === 'LongVideoInsight') &&
+                                    <VideoInsightForm height={height} id={id} insighter={request?.Insighter?._id} user={request?.User?._id} />}
+                                {request?.type === 'TextProfileInsight' &&
+                                    <TextProfileInsightForm height={height} id={id} insighter={request?.Insighter?._id} user={request?.User?._id} />}
+                                {request?.type === 'VideoProfileInsight' &&
+                                    <VideoProfileInsightForm height={height} id={id} insighter={request?.Insighter?._id} user={request?.User?._id} />}
                             </div>
                         </div>
                     </div>
@@ -99,4 +97,4 @@ const ReviewPage = ({ id, userId }: { id: string, userId: string }) => {
     )
 }
 
-export default ReviewPage
+export default InsightPage

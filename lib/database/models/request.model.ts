@@ -4,11 +4,11 @@ import { IUser } from "./user.model";
 export interface IRequest extends Document {
     _id: string
     User: IUser,
-    Reviewer: IUser,
+    Insighter: IUser,
     postLink: string,
     description: string,
     platform: string,
-    reviewed: boolean,
+    insighted: boolean,
     type: string
     price: number,
     status: string,
@@ -18,11 +18,11 @@ export interface IRequest extends Document {
 
 const RequestSchema = new Schema({
     User: { type: Schema.Types.ObjectId, ref: "User" },
-    Reviewer: { type: Schema.Types.ObjectId, ref: "User" },
+    Insighter: { type: Schema.Types.ObjectId, ref: "User" },
     postLink: { type: String },
     description: { type: String },
     platform: { type: String },
-    reviewed: { type: Boolean },
+    insighted: { type: Boolean },
     status: { type: String, default: 'Awaiting' },
     price: { type: Number },
     type: { type: String },

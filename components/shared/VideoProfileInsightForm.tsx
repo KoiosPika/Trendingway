@@ -1,21 +1,19 @@
+'use client'
+
 import React, { useEffect, useState } from 'react'
 import { ScrollArea } from '../ui/scroll-area'
-import { Input } from '../ui/input'
-import Image from 'next/image'
-import { createVideoReview } from '@/lib/actions/review.actions'
 import { useRouter } from 'next/navigation'
 import { getUploadUrl } from '@/lib/actions/mux.actions'
 import MuxUploader, { MuxUploaderDrop, MuxUploaderFileSelect, MuxUploaderProgress } from '@mux/mux-uploader-react';
 
-const VideoReviewForm = ({ height, id, reviewer, user }: { height: number, id: string, reviewer: string, user: string }) => {
-    const [URL, setURL] = useState<string>('')
+const VideoProfileInsightForm = ({ height, id, insighter, user }: { height: number, id: string, insighter: string, user: string }) => {
+
     const [uploadURL, setUploadURL] = useState<string>()
-    const [loading, setLoading] = useState<boolean>(false)
     const router = useRouter();
 
     useEffect(() => {
         async function getURL() {
-            const thisURL = await getUploadUrl(id, user, reviewer, 'VideoReview')
+            const thisURL = await getUploadUrl(id, user, insighter, 'VideoProfileInsight')
 
             setUploadURL(thisURL)
         }
@@ -23,8 +21,8 @@ const VideoReviewForm = ({ height, id, reviewer, user }: { height: number, id: s
         getURL();
     }, [])
 
-    const submitVideoReview = async (event: any) => {
-        router.push('/notifications/orders')
+    const submitVideoProfileInsight = async (event: any) => {
+        router.push('/wallet')
     }
 
     return (
@@ -32,7 +30,7 @@ const VideoReviewForm = ({ height, id, reviewer, user }: { height: number, id: s
             <div className='max-w-[600px]'>
                 <div className="p-4">
                     <h2 className="text-lg text-slate-800 mb-2 font-bold"></h2>
-                    <MuxUploader onChunkSuccess={(event) => submitVideoReview(event)} id="my-uploader" className="hidden" endpoint={uploadURL} />
+                    <MuxUploader onChunkSuccess={(event) => submitVideoProfileInsight(event)} id="my-uploader" className="hidden" endpoint={uploadURL} />
 
                     <MuxUploaderDrop
                         id="my-uploader"
@@ -62,4 +60,4 @@ const VideoReviewForm = ({ height, id, reviewer, user }: { height: number, id: s
     )
 }
 
-export default VideoReviewForm
+export default VideoProfileInsightForm

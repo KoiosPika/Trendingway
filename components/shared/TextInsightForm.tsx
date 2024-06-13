@@ -2,51 +2,51 @@ import React, { useState } from 'react'
 import Image from 'next/image'
 import { Input } from '../ui/input'
 import { ScrollArea } from '../ui/scroll-area'
-import { createTextReview } from '@/lib/actions/review.actions'
+import { createTextInsight } from '@/lib/actions/insight.actions'
 import { useRouter } from 'next/navigation'
 import { Textarea } from '../ui/textarea'
 
-const TextReviewForm = ({ height, id, reviewer, user }: { height: number, id: string, reviewer: string, user:string }) => {
+const TextInsightForm = ({ height, id, insighter, user }: { height: number, id: string, insighter: string, user:string }) => {
     const [contentNotes, setContentNotes] = useState<string>('')
-    const [contentReview, setContentReview] = useState<number>(1)
+    const [contentRate, setContentRate] = useState<number>(1)
 
     const [brightnessNotes, setBrightnessNotes] = useState<string>('')
-    const [brightnessReview, setBrightnessReview] = useState<number>(1)
+    const [brightnessRate, setBrightnessRate] = useState<number>(1)
 
     const [descriptionNotes, setDescriptionNotes] = useState<string>('')
-    const [descriptionReview, setDescriptionReview] = useState<number>(1)
+    const [descriptionRate, setDescriptionRate] = useState<number>(1)
 
     const [hashtagsNotes, setHashtagsNotes] = useState<string>('')
-    const [hashtagsReview, setHashtagsReview] = useState<number>(1)
+    const [hashtagsRate, setHashtagsRate] = useState<number>(1)
 
     const [soundNotes, setSoundNotes] = useState<string>('')
-    const [soundReview, setSoundReview] = useState<number>(1)
+    const [soundRate, setSoundRate] = useState<number>(1)
 
     const [additionalNotes, setAdditionalNotes] = useState<string>('')
     const [loading, setLoading] = useState<boolean>(false)
     const router = useRouter();
 
-    const submitReview = async () => {
+    const submitInsight = async () => {
 
         setLoading(true);
 
-        const review = {
+        const insight = {
             request: id,
             User:user,
-            Reviewer: reviewer || '',
+            Insighter: insighter || '',
             contentNotes: contentNotes || '',
-            contentReview,
+            contentRate,
             brightnessNotes: brightnessNotes || '',
-            brightnessReview,
+            brightnessRate,
             descriptionNotes: descriptionNotes || '',
-            descriptionReview,
+            descriptionRate,
             hashtagsNotes: hashtagsNotes || '',
-            hashtagsReview,
+            hashtagsRate,
             soundNotes: soundNotes || '',
-            soundReview,
+            soundRate,
             additionalNotes: descriptionNotes || ''
         }
-        await createTextReview(review)
+        await createTextInsight(insight)
 
         router.push('/wallet')
 
@@ -64,11 +64,11 @@ const TextReviewForm = ({ height, id, reviewer, user }: { height: number, id: st
                             <Image
                                 key={index}
                                 className='w-[25px] h-[25px] lg:w-[30px] lg:h-[30px]'
-                                src={index < contentReview ? '/icons/star-yellow.svg' : '/icons/star-grey.svg'}
+                                src={index < contentRate ? '/icons/star-yellow.svg' : '/icons/star-grey.svg'}
                                 alt='star'
                                 width={100}
                                 height={100}
-                                onClick={() => setContentReview(index + 1)}
+                                onClick={() => setContentRate(index + 1)}
                             />
                         ))}
                     </div>
@@ -84,11 +84,11 @@ const TextReviewForm = ({ height, id, reviewer, user }: { height: number, id: st
                             <Image
                                 key={index}
                                 className='w-[25px] h-[25px] lg:w-[30px] lg:h-[30px]'
-                                src={index < brightnessReview ? '/icons/star-yellow.svg' : '/icons/star-grey.svg'}
+                                src={index < brightnessRate ? '/icons/star-yellow.svg' : '/icons/star-grey.svg'}
                                 alt='star'
                                 width={100}
                                 height={100}
-                                onClick={() => setBrightnessReview(index + 1)}
+                                onClick={() => setBrightnessRate(index + 1)}
                             />
                         ))}
                     </div>
@@ -104,11 +104,11 @@ const TextReviewForm = ({ height, id, reviewer, user }: { height: number, id: st
                             <Image
                                 key={index}
                                 className='w-[25px] h-[25px] lg:w-[30px] lg:h-[30px]'
-                                src={index < descriptionReview ? '/icons/star-yellow.svg' : '/icons/star-grey.svg'}
+                                src={index < descriptionRate ? '/icons/star-yellow.svg' : '/icons/star-grey.svg'}
                                 alt='star'
                                 width={100}
                                 height={100}
-                                onClick={() => setDescriptionReview(index + 1)}
+                                onClick={() => setDescriptionRate(index + 1)}
                             />
                         ))}
                     </div>
@@ -124,11 +124,11 @@ const TextReviewForm = ({ height, id, reviewer, user }: { height: number, id: st
                             <Image
                                 key={index}
                                 className='w-[25px] h-[25px] lg:w-[30px] lg:h-[30px]'
-                                src={index < hashtagsReview ? '/icons/star-yellow.svg' : '/icons/star-grey.svg'}
+                                src={index < hashtagsRate ? '/icons/star-yellow.svg' : '/icons/star-grey.svg'}
                                 alt='star'
                                 width={100}
                                 height={100}
-                                onClick={() => setHashtagsReview(index + 1)}
+                                onClick={() => setHashtagsRate(index + 1)}
                             />
                         ))}
                     </div>
@@ -144,11 +144,11 @@ const TextReviewForm = ({ height, id, reviewer, user }: { height: number, id: st
                             <Image
                                 key={index}
                                 className='w-[25px] h-[25px] lg:w-[30px] lg:h-[30px]'
-                                src={index < soundReview ? '/icons/star-yellow.svg' : '/icons/star-grey.svg'}
+                                src={index < soundRate ? '/icons/star-yellow.svg' : '/icons/star-grey.svg'}
                                 alt='star'
                                 width={100}
                                 height={100}
-                                onClick={() => setSoundReview(index + 1)}
+                                onClick={() => setSoundRate(index + 1)}
                             />
                         ))}
                     </div>
@@ -160,7 +160,7 @@ const TextReviewForm = ({ height, id, reviewer, user }: { height: number, id: st
                 <Textarea value={additionalNotes} onChange={(e) => setAdditionalNotes(e.target.value)} placeholder='Notes about hashtags:' className='w-4/5 border-2 border-black' />
             </div>
             <div className='w-full flex flex-row justify-center items-center text-center my-6'>
-                {!loading && <div onClick={submitReview} className='w-1/3 bg-green-400 flex flex-row items-center justify-center gap-2 rounded-md hover:cursor-pointer'>
+                {!loading && <div onClick={submitInsight} className='w-1/3 bg-green-400 flex flex-row items-center justify-center gap-2 rounded-md hover:cursor-pointer'>
                     <Image src={'/icons/star-black.svg'} alt='star' height={15} width={15} />
                     <p className='py-1 rounded-md font-semibold'>Submit</p>
                 </div>}
@@ -173,4 +173,4 @@ const TextReviewForm = ({ height, id, reviewer, user }: { height: number, id: st
     )
 }
 
-export default TextReviewForm
+export default TextInsightForm

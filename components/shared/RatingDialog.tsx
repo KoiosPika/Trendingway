@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '../ui/alert-dialog'
 import Image from 'next/image'
-import { submitReviewRate } from '@/lib/actions/review.actions'
+import { submitInsightRate } from '@/lib/actions/insight.actions'
 import { useRouter } from 'next/navigation'
 
 const RatingDialog = ({ id }: { id: string }) => {
@@ -10,7 +10,7 @@ const RatingDialog = ({ id }: { id: string }) => {
     const router = useRouter()
 
     const handleRating = async () => {
-        await submitReviewRate(id, rating);
+        await submitInsightRate(id, rating);
         router.push('/profile')
     }
 
@@ -25,7 +25,7 @@ const RatingDialog = ({ id }: { id: string }) => {
             <AlertDialogContent className="bg-white border-0">
                 <AlertDialogHeader>
                     <AlertDialogTitle className="flex flex-row items-center justify-between">
-                        <p className="text-black font-bold">Rate Review</p>
+                        <p className="text-black font-bold">Rate Insight</p>
                         <AlertDialogCancel className="rounded-full bg-black text-white hover:bg-black hover:text-white">X</AlertDialogCancel>
                     </AlertDialogTitle>
                 </AlertDialogHeader>

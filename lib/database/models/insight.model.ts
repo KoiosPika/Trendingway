@@ -2,28 +2,28 @@ import { Schema, model, models, Document } from "mongoose";
 import { IRequest } from "./request.model";
 import { IUser } from "./user.model";
 
-export interface IReview extends Document {
+export interface IInsight extends Document {
     _id: string
     Request: IRequest,
-    Reviewer: IUser,
+    Insighter: IUser,
     User: IUser,
-    reviewURL: string
-    contentReview: number,
+    insightID: string
+    contentRate: number,
     contentNotes: string,
-    brightnessReview: number,
+    brightnessRate: number,
     brightnessNotes: string,
-    descriptionReview: number,
+    descriptionRate: number,
     descriptionNotes: string,
-    hashtagsReview: number,
+    hashtagsRate: number,
     hashtagsNotes: string,
-    soundReview: number,
+    soundRate: number,
     soundNotes: string,
     additionalNotes: string,
-    bioReview: number,
+    bioRate: number,
     bioNotes: string,
-    highlightsReview: number,
+    highlightsRate: number,
     highlightsNotes: string,
-    postsReview: number,
+    postsRate: number,
     postsNotes: string,
     rated: boolean,
     createdAt: Date,
@@ -32,26 +32,26 @@ export interface IReview extends Document {
     reportMessage: string
 }
 
-const ReviewSchema = new Schema({
+const InsightSchema = new Schema({
     Request: { type: Schema.Types.ObjectId, ref: "Request" },
-    Reviewer: { type: Schema.Types.ObjectId, ref: "User" },
+    Insighter: { type: Schema.Types.ObjectId, ref: "User" },
     User: { type: Schema.Types.ObjectId, ref: "User" },
-    reviewURL: { type: String },
-    contentReview: { type: Number },
+    insightID: { type: String },
+    contentRate: { type: Number },
     contentNotes: { type: String },
-    brightnessReview: { type: Number },
+    brightnessRate: { type: Number },
     brightnessNotes: { type: String },
-    descriptionReview: { type: Number },
+    descriptionRate: { type: Number },
     descriptionNotes: { type: String },
-    hashtagsReview: { type: Number },
+    hashtagsRate: { type: Number },
     hashtagsNotes: { type: String },
-    soundReview: { type: Number },
+    soundRate: { type: Number },
     soundNotes: { type: String },
-    bioReview: { type: Number },
+    bioRate: { type: Number },
     bioNotes: { type: String },
-    highlightsReview: { type: Number },
+    highlightsRate: { type: Number },
     highlightsNotes: { type: String },
-    postsReview: { type: Number },
+    postsRate: { type: Number },
     postsNotes: { type: String },
     additionalNotes: { type: String },
     rated: { type: Boolean, default: false },
@@ -66,6 +66,6 @@ const ReviewSchema = new Schema({
     reportMessage: { type: String }
 })
 
-const Review = models.Review || model('Review', ReviewSchema);
+const Insight = models.Insight || model('Insight', InsightSchema);
 
-export default Review;
+export default Insight;

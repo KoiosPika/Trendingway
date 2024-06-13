@@ -12,16 +12,8 @@ export async function createUser(user: { clerkId: string, username: string, emai
 
         const newUserData = await UserData.create({
             User: newUser?._id,
-            websiteLink: null,
-            oneVideoPrice: 0.99,
-            threeVideoPrice: 2.99,
-            accountAuditPrice: 4.99,
-            aboutMe: null,
-            creditBalance: 0,
-            withdrawBalance: 0,
-            nofreviews: 0,
-            avgReview: 0,
-            nofVideoesReviewed: 0,
+            personalLink: null,
+            aboutMe: `Hi I'm ${user?.username}`,
         })
 
         return JSON.parse(JSON.stringify(newUser))

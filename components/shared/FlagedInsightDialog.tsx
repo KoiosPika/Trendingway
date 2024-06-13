@@ -3,16 +3,16 @@
 import React, { useState } from 'react'
 import { AlertDialog, AlertDialogCancel, AlertDialogContent, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '../ui/alert-dialog'
 import { Textarea } from '../ui/textarea'
-import { flagReview } from '@/lib/actions/review.actions'
+import { flagInsight } from '@/lib/actions/insight.actions'
 import { useRouter } from 'next/navigation'
 
-const FlagedReviewDialog = ({ id }: { id: string }) => {
+const FlagedInsightDialog = ({ id }: { id: string }) => {
 
     const [message, setMessage] = useState<string>('')
     const [loading, setLoading] = useState<boolean>(false)
     const router = useRouter();
 
-    const handleFlagingReview = async () => {
+    const handleFlagingInsight = async () => {
         if(loading){
             return;
         }
@@ -20,7 +20,7 @@ const FlagedReviewDialog = ({ id }: { id: string }) => {
         try {
             setLoading(true);
 
-            await flagReview(id, message);
+            await flagInsight(id, message);
 
             router.push('/notifications/orders')
 
@@ -39,13 +39,13 @@ const FlagedReviewDialog = ({ id }: { id: string }) => {
             <AlertDialogContent className="bg-red-600 border-0">
                 <AlertDialogHeader>
                     <AlertDialogTitle className="flex flex-row items-center justify-between">
-                        <p className="text-white font-bold">Report a Review:</p>
+                        <p className="text-white font-bold">Report a Insight:</p>
                         <AlertDialogCancel className="rounded-full bg-white text-red-600 hover:bg-black hover:text-white">X</AlertDialogCancel>
                     </AlertDialogTitle>
                 </AlertDialogHeader>
                 <p className='text-white font-bold'>{`Tell us what's wrong`}</p>
-                <Textarea value={message} onChange={(e) => setMessage(e.target.value)} placeholder='Describe the issue with the review' />
-                <div onClick={handleFlagingReview} className='flex w-full rounded-lg bg-white py-2 justify-center items-center text-red-600 font-semibold hover:cursor-pointer'>
+                <Textarea value={message} onChange={(e) => setMessage(e.target.value)} placeholder='Describe the issue with the insight' />
+                <div onClick={handleFlagingInsight} className='flex w-full rounded-lg bg-white py-2 justify-center items-center text-red-600 font-semibold hover:cursor-pointer'>
                     <p>{loading ? 'Submitting...' : 'Submit Report'}</p>
                 </div>
             </AlertDialogContent>
@@ -53,4 +53,4 @@ const FlagedReviewDialog = ({ id }: { id: string }) => {
     )
 }
 
-export default FlagedReviewDialog
+export default FlagedInsightDialog

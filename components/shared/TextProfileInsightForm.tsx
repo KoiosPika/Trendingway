@@ -3,44 +3,43 @@
 import React, { useState } from 'react'
 import { ScrollArea } from '../ui/scroll-area'
 import Image from 'next/image'
-import { Input } from '../ui/input'
-import { createTextProfileReview } from '@/lib/actions/review.actions'
+import { createTextProfileInsight } from '@/lib/actions/insight.actions'
 import { useRouter } from 'next/navigation'
 import { Textarea } from '../ui/textarea'
 
-const TextProfileReviewForm = ({ height, id, reviewer, user }: { height: number, id: string, reviewer: string, user:string }) => {
+const TextProfileInsightForm = ({ height, id, insighter, user }: { height: number, id: string, insighter: string, user:string }) => {
 
     const [bioNotes, setBioNotes] = useState<string>('')
-    const [bioReview, setBioReview] = useState<number>(1)
+    const [bioRate, setBioRate] = useState<number>(1)
 
     const [highlightsNotes, setHighlightsNotes] = useState<string>('')
-    const [highlightsReview, setHighlightsReview] = useState<number>(1)
+    const [highlightsRate, setHighlightsRate] = useState<number>(1)
 
     const [postsNotes, setPostsNotes] = useState<string>('')
-    const [postsReview, setPostsReview] = useState<number>(1)
+    const [postsRate, setPostsRate] = useState<number>(1)
 
     const [additionalNotes, setAdditionalNotes] = useState<string>('')
     const [loading, setLoading] = useState<boolean>(false)
     const router = useRouter();
 
-    const submitTextProfileReview = async () => {
+    const submitTextProfileInsight = async () => {
 
         setLoading(true);
 
-        const review = {
+        const insight = {
             request: id,
             bioNotes,
-            bioReview,
+            bioRate,
             highlightsNotes,
-            highlightsReview,
+            highlightsRate,
             postsNotes,
-            postsReview,
+            postsRate,
             additionalNotes,
             User:user,
-            Reviewer: reviewer
+            Insighter: insighter
         }
 
-        await createTextProfileReview(review)
+        await createTextProfileInsight(insight)
 
         router.push('/wallet')
 
@@ -58,11 +57,11 @@ const TextProfileReviewForm = ({ height, id, reviewer, user }: { height: number,
                             <Image
                                 key={index}
                                 className='w-[25px] h-[25px] lg:w-[30px] lg:h-[30px]'
-                                src={index < bioReview ? '/icons/star-yellow.svg' : '/icons/star-grey.svg'}
+                                src={index < bioRate ? '/icons/star-yellow.svg' : '/icons/star-grey.svg'}
                                 alt='star'
                                 width={100}
                                 height={100}
-                                onClick={() => setBioReview(index + 1)}
+                                onClick={() => setBioRate(index + 1)}
                             />
                         ))}
                     </div>
@@ -78,11 +77,11 @@ const TextProfileReviewForm = ({ height, id, reviewer, user }: { height: number,
                             <Image
                                 key={index}
                                 className='w-[25px] h-[25px] lg:w-[30px] lg:h-[30px]'
-                                src={index < highlightsReview ? '/icons/star-yellow.svg' : '/icons/star-grey.svg'}
+                                src={index < highlightsRate ? '/icons/star-yellow.svg' : '/icons/star-grey.svg'}
                                 alt='star'
                                 width={100}
                                 height={100}
-                                onClick={() => setHighlightsReview(index + 1)}
+                                onClick={() => setHighlightsRate(index + 1)}
                             />
                         ))}
                     </div>
@@ -98,11 +97,11 @@ const TextProfileReviewForm = ({ height, id, reviewer, user }: { height: number,
                             <Image
                                 key={index}
                                 className='w-[25px] h-[25px] lg:w-[30px] lg:h-[30px]'
-                                src={index < postsReview ? '/icons/star-yellow.svg' : '/icons/star-grey.svg'}
+                                src={index < postsRate ? '/icons/star-yellow.svg' : '/icons/star-grey.svg'}
                                 alt='star'
                                 width={100}
                                 height={100}
-                                onClick={() => setPostsReview(index + 1)}
+                                onClick={() => setPostsRate(index + 1)}
                             />
                         ))}
                     </div>
@@ -114,7 +113,7 @@ const TextProfileReviewForm = ({ height, id, reviewer, user }: { height: number,
                 <Textarea value={additionalNotes} onChange={(e) => setAdditionalNotes(e.target.value)} placeholder='Notes about hashtags:' className='w-4/5 border-2 border-black' />
             </div>
             <div className='w-full flex flex-row justify-center items-center text-center my-6'>
-                {!loading && <div onClick={submitTextProfileReview} className='w-1/3 bg-green-400 flex flex-row items-center justify-center gap-2 rounded-md hover:cursor-pointer'>
+                {!loading && <div onClick={submitTextProfileInsight} className='w-1/3 bg-green-400 flex flex-row items-center justify-center gap-2 rounded-md hover:cursor-pointer'>
                     <Image src={'/icons/star-black.svg'} alt='star' height={15} width={15} />
                     <p className='py-1 rounded-md font-semibold'>Submit</p>
                 </div>}
@@ -127,4 +126,4 @@ const TextProfileReviewForm = ({ height, id, reviewer, user }: { height: number,
     )
 }
 
-export default TextProfileReviewForm
+export default TextProfileInsightForm

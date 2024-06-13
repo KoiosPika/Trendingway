@@ -8,14 +8,14 @@ const mux = new Mux({
     tokenSecret: process.env.MUX_TOKEN_SECRET,
 });
 
-export async function getUploadUrl(request: string, user: string, reviewer: string, type: string) {
+export async function getUploadUrl(request: string, user: string, insighter: string, type: string) {
 
     try {
         const upload = await mux.video.uploads.create({
             cors_origin: '*',
             new_asset_settings: {
                 playback_policy: ["public"],
-                passthrough: JSON.stringify({ request, user, reviewer, type })
+                passthrough: JSON.stringify({ request, user, insighter, type })
             },
         })
 

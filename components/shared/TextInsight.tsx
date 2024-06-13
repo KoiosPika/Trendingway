@@ -12,7 +12,7 @@ import { IUserData } from '@/lib/database/models/userData.model'
 import { SignedIn, SignedOut } from '@clerk/nextjs'
 import Link from 'next/link'
 
-const TextReview = ({ price, userId, reviewer }: { price: number, userId: string, reviewer: string }) => {
+const TextInsight = ({ price, userId, insighter }: { price: number, userId: string, insighter: string }) => {
 
     const [platform, setPlatform] = useState<string>('Instagram')
     const [URL, setURL] = useState<string>('')
@@ -47,7 +47,7 @@ const TextReview = ({ price, userId, reviewer }: { price: number, userId: string
         }
 
         try {
-            await createRequest({ User: userId, Reviewer: reviewer, postLink: URL, description, platform, price, type: 'TextReview' });
+            await createRequest({ User: userId, Insighter: insighter, postLink: URL, description, platform, price, type: 'TextInsight' });
 
             setLoading(false);
             setFinished(true);
@@ -64,7 +64,7 @@ const TextReview = ({ price, userId, reviewer }: { price: number, userId: string
                     <div className='flex justify-center items-center gap-8' >
                         <div className='flex flex-col items-center gap-2'>
                             <Image src={'/icons/star-white.svg'} alt='video' width={200} height={200} className='bg-blue-500 w-[55px] h-[55px] p-2 rounded-full' />
-                            <p className='font-semibold'>Text Review</p>
+                            <p className='font-semibold'>Text Insight</p>
                         </div>
                         <div className='h-3/4 w-[2px] bg-black'></div>
                         <p className='text-[25px] font-semibold'>${price}</p>
@@ -75,7 +75,7 @@ const TextReview = ({ price, userId, reviewer }: { price: number, userId: string
             <AlertDialogContent className="bg-blue-500 border-0">
                 <AlertDialogHeader>
                     <AlertDialogTitle className="flex flex-row items-center justify-between">
-                        <p className="text-black font-bold text-[18px] bg-yellow-300 px-3 rounded-md">Request Review</p>
+                        <p className="text-black font-bold text-[18px] bg-yellow-300 px-3 rounded-md">Request Insight</p>
                         <AlertDialogCancel className="rounded-full bg-white text-black">X</AlertDialogCancel>
                     </AlertDialogTitle>
                     <p className='font-semibold text-white text-[16px]'>Video URL</p>
@@ -144,4 +144,4 @@ const TextReview = ({ price, userId, reviewer }: { price: number, userId: string
     )
 }
 
-export default TextReview
+export default TextInsight

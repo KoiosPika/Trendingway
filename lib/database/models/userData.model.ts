@@ -4,25 +4,29 @@ import { IUser } from "./user.model";
 export interface IUserData extends Document {
     _id: string,
     User: IUser
-    websiteLink: string,
-    TextReview: number,
-    TextReviewAvailability: boolean,
-    LongTextReview: number,
-    LongTextReviewAvailability: boolean,
-    VideoReview: number,
-    VideoReviewAvailability: boolean,
-    LongVideoReview: number,
-    LongVideoReviewAvailability: boolean,
-    VideoProfileReview: number,
-    VideoProfileReviewAvailability: boolean,
-    TextProfileReview: number,
-    TextProfileReviewAvailability: boolean,
+    personalLink: string,
+    TextInsight: number,
+    TextInsightAvailability: boolean,
+    LongTextInsight: number,
+    LongTextInsightAvailability: boolean,
+    VideoInsight: number,
+    VideoInsightAvailability: boolean,
+    LongVideoInsight: number,
+    LongVideoInsightAvailability: boolean,
+    VideoProfileInsight: number,
+    VideoProfileInsightAvailability: boolean,
+    TextProfileInsight: number,
+    TextProfileInsightAvailability: boolean,
+    VideoPersonalInsight: number,
+    VideoPersonalInsightAvailability: boolean,
+    TextPersonalInsight: number,
+    TextPersonalInsightAvailability: boolean,
     aboutMe: string
     creditBalance: number
     withdrawBalance: number
-    nofReviews: number
-    avgReview: number
-    nofVideoesReviewed: number,
+    nofInsights: number
+    avgRating: number
+    nofVideoesInsighted: number,
     expressAccountID: string,
     languages: string[],
     categories: string[],
@@ -30,25 +34,38 @@ export interface IUserData extends Document {
 
 const UserDataSchema = new Schema({
     User: { type: Schema.Types.ObjectId, ref: "User" },
-    websiteLink: { type: String },
-    TextReview: { type: Number, default: 0.99 },
-    TextReviewAvailability: { type: Boolean, default: true },
-    LongTextReview: { type: Number, default: 1.99 },
-    LongTextReviewAvailability: { type: Boolean, default: true },
-    VideoReview: { type: Number, default: 2.99 },
-    VideoReviewAvailability: { type: Boolean, default: true },
-    LongVideoReview: { type: Number, default: 3.99 },
-    LongVideoReviewAvailability: { type: Boolean, default: true },
-    VideoProfileReview: { type: Number, default: 4.99 },
-    VideoProfileReviewAvailability: { type: Boolean, default: true },
-    TextProfileReview: { type: Number, default: 3.99 },
-    TextProfileReviewAvailability: { type: Boolean, default: true },
+    personalLink: { type: String },
+
+    TextInsight: { type: Number, default: 0.99 },
+    TextInsightAvailability: { type: Boolean, default: true },
+
+    LongTextInsight: { type: Number, default: 1.99 },
+    LongTextInsightAvailability: { type: Boolean, default: true },
+
+    VideoInsight: { type: Number, default: 2.99 },
+    VideoInsightAvailability: { type: Boolean, default: true },
+
+    LongVideoInsight: { type: Number, default: 3.99 },
+    LongVideoInsightAvailability: { type: Boolean, default: true },
+
+    VideoProfileInsight: { type: Number, default: 4.99 },
+    VideoProfileInsightAvailability: { type: Boolean, default: true },
+
+    TextProfileInsight: { type: Number, default: 3.99 },
+    TextProfileInsightAvailability: { type: Boolean, default: true },
+    
+    VideoPersonalInsight: { type: Number, default: 4.99 },
+    VideoPersonalInsightAvailability: { type: Boolean, default: true },
+
+    TextPersonalInsight: { type: Number, default: 3.99 },
+    TextPersonalInsightAvailability: { type: Boolean, default: true },
+    
     aboutMe: { type: String },
     creditBalance: { type: Number, default: 0 },
     withdrawBalance: { type: Number, default: 0 },
-    nofReviews: { type: Number, default: 0 },
-    avgReview: { type: Number, default: 0 },
-    nofVideoesReviewed: { type: Number, default: 0 },
+    nofInsights: { type: Number, default: 0 },
+    avgRating: { type: Number, default: 0 },
+    nofVideoesInsighted: { type: Number, default: 0 },
     expressAccountID: { type: String },
     languages: { type: [String], required: true },
     categories: { type: [String], required: true },

@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { createHmac } from 'crypto';
-import { createVideoProfileReview, createVideoReview } from '@/lib/actions/review.actions';
+import { createVideoProfileInsight, createVideoInsight } from '@/lib/actions/insight.actions';
 
 export async function POST(request: Request) {
     const body = await request.text();
@@ -39,19 +39,19 @@ export async function POST(request: Request) {
         const { id: assetId, passthrough } = event.data;
         const metadata = JSON.parse(passthrough);
 
-        const { request, user, reviewer, type } = metadata;
+        const { request, user, insighter, type } = metadata;
 
-        const review = {
+        const insight = {
             request,
             User: user,
-            Reviewer: reviewer,
-            videoURL: assetId
+            Insighter: insighter,
+            videoID: assetId
         }
 
-        if (type === 'VideoReview') {
-            await createVideoReview(review)
-        } else if (type === 'VideoProfileReview'){
-            await createVideoProfileReview(review)
+        if (type === 'VideoInsight') {
+            await createVideoInsight(insight)
+        } else if (type === 'VideoProfileInsight'){
+            await createVideoProfileInsight(insight)
         }
 
         return NextResponse.json({ message: 'OK', assetId });

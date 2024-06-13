@@ -44,12 +44,14 @@ export async function getUserDataByUserId(userId: string) {
 
 export async function editUserData(userData:
     { userId: string, aboutMe: string, link: string, 
-    TextReview: number, TextReviewAvailability: boolean,
-    LongTextReview: number, LongTextReviewAvailability: boolean, 
-    VideoReview: number, VideoReviewAvailability: boolean, 
-    LongVideoReview: number, LongVideoReviewAvailability: boolean, 
-    TextProfileReview: number, TextProfileReviewAvailability: boolean, 
-    VideoProfileReview: number, VideoProfileReviewAvailability: boolean, 
+    TextInsight: number, TextInsightAvailability: boolean,
+    TextPersonalInsight: number, TextPersonalInsightAvailability: boolean,
+    LongTextInsight: number, LongTextInsightAvailability: boolean, 
+    VideoInsight: number, VideoInsightAvailability: boolean, 
+    VideoPersonalInsight: number, VideoPersonalInsightAvailability: boolean, 
+    LongVideoInsight: number, LongVideoInsightAvailability: boolean, 
+    TextProfileInsight: number, TextProfileInsightAvailability: boolean, 
+    VideoProfileInsight: number, VideoProfileInsightAvailability: boolean,
     languages: string[], categories: string[] }) {
     try {
         await connectToDatabase()
@@ -60,18 +62,22 @@ export async function editUserData(userData:
                 '$set': {
                     aboutMe: userData.aboutMe,
                     websiteLink: userData.link,
-                    TextReview: userData.TextReview,
-                    TextReviewAvailability: userData.TextReviewAvailability,
-                    LongTextReview: userData.LongTextReview,
-                    LongTextReviewAvailability: userData.LongTextReviewAvailability,
-                    VideoReview: userData.VideoReview,
-                    VideoReviewAvailability: userData.VideoReviewAvailability,
-                    LongVideoReview: userData.LongVideoReview,
-                    LongVideoReviewAvailability: userData.LongVideoReviewAvailability,
-                    TextProfileReview: userData.TextProfileReview,
-                    TextProfileReviewAvailability: userData.TextProfileReviewAvailability,
-                    VideoProfileReview: userData.VideoProfileReview,
-                    VideoProfileReviewAvailability: userData.VideoProfileReviewAvailability,
+                    TextInsight: userData.TextInsight,
+                    TextInsightAvailability: userData.TextInsightAvailability,
+                    TextPersonalInsight: userData.TextPersonalInsight,
+                    TextPersonalInsightAvailability: userData.TextPersonalInsightAvailability,
+                    LongTextInsight: userData.LongTextInsight,
+                    LongTextInsightAvailability: userData.LongTextInsightAvailability,
+                    VideoInsight: userData.VideoInsight,
+                    VideoInsightAvailability: userData.VideoInsightAvailability,
+                    VideoPersonalInsight: userData.VideoPersonalInsight,
+                    VideoPersonalInsightAvailability: userData.VideoPersonalInsightAvailability,
+                    LongVideoInsight: userData.LongVideoInsight,
+                    LongVideoInsightAvailability: userData.LongVideoInsightAvailability,
+                    TextProfileInsight: userData.TextProfileInsight,
+                    TextProfileInsightAvailability: userData.TextProfileInsightAvailability,
+                    VideoProfileInsight: userData.VideoProfileInsight,
+                    VideoProfileInsightAvailability: userData.VideoProfileInsightAvailability,
                     languages: userData.languages,
                     categories: userData.categories
                 }
@@ -106,8 +112,8 @@ export async function getTopUsers() {
                 $addFields: {
                     compositeScore: {
                         $add: [
-                            { $multiply: ['$avgReview', 0.7] }, // Weighted avgReview (e.g., 70%)
-                            { $multiply: ['$nofReviews', 0.3] } // Weighted nofReviews (e.g., 30%)
+                            { $multiply: ['$avgRating', 0.7] }, 
+                            { $multiply: ['$nofInsights', 0.3] }
                         ]
                     }
                 }
@@ -140,8 +146,8 @@ export async function getTopUsersByConditions(matchConditions: any) {
                 $addFields: {
                     compositeScore: {
                         $add: [
-                            { $multiply: ['$avgReview', 0.7] },
-                            { $multiply: ['$nofReviews', 0.3] }
+                            { $multiply: ['$avgRating', 0.7] },
+                            { $multiply: ['$nofInsights', 0.3] }
                         ]
                     }
                 }

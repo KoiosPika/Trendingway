@@ -16,35 +16,35 @@ const EarningDialog = ({ earning }: { earning: IEarning }) => {
                 <div className='w-full flex flex-row items-center'>
                     <p className='font-semibold text-[12px] lg:text-[15px]'>{formatDate(earning?.createdAt)}</p>
                 </div>
-                {earning.service == 'TextReview' &&
+                {earning.service == 'TextInsight' &&
                     <div className='w-full flex flex-col sm:flex-row items-center gap-2'>
                         <Image src={'/icons/star-white.svg'} alt='video' width={200} height={200} className='bg-blue-500 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
-                        <p className='font-semibold text-[12px] lg:text-[14px] hidden sm:block'>Text Review</p>
+                        <p className='font-semibold text-[12px] lg:text-[14px] hidden sm:block'>Text Insight</p>
                     </div>}
-                {earning.service == 'LongTextReview' &&
+                {earning.service == 'LongTextInsight' &&
                     <div className='w-full flex flex-col sm:flex-row items-center gap-2'>
                         <Image src={'/icons/star-white.svg'} alt='video' width={200} height={200} className='bg-purple-500 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
-                        <p className='font-semibold text-[12px] lg:text-[14px] hidden sm:block'>Long Text Review</p>
+                        <p className='font-semibold text-[12px] lg:text-[14px] hidden sm:block'>Long Text Insight</p>
                     </div>}
-                {earning.service == 'VideoReview' &&
+                {earning.service == 'VideoInsight' &&
                     <div className='w-full flex flex-col sm:flex-row items-center gap-2'>
                         <Image src={'/icons/video.svg'} alt='video' width={200} height={200} className='bg-red-500 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
-                        <p className='font-semibold text-[12px] lg:text-[14px] hidden sm:block'>Video Review</p>
+                        <p className='font-semibold text-[12px] lg:text-[14px] hidden sm:block'>Video Insight</p>
                     </div>}
-                {earning.service == 'LongVideoReview' &&
+                {earning.service == 'LongVideoInsight' &&
                     <div className='w-full flex flex-col sm:flex-row items-center gap-2'>
                         <Image src={'/icons/video.svg'} alt='video' width={200} height={200} className='bg-[#B69615] w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
-                        <p className='font-semibold text-[12px] lg:text-[14px] hidden sm:block'>Long Video Review</p>
+                        <p className='font-semibold text-[12px] lg:text-[14px] hidden sm:block'>Long Video Insight</p>
                     </div>}
-                {earning.service == 'TextProfileReview' &&
+                {earning.service == 'TextProfileInsight' &&
                     <div className='w-full flex flex-col sm:flex-row items-center gap-2'>
                         <Image src={'/icons/account.svg'} alt='video' width={200} height={200} className='bg-orange-500 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
-                        <p className='font-semibold text-[12px] lg:text-[14px] hidden sm:block'>Text Profile Review</p>
+                        <p className='font-semibold text-[12px] lg:text-[14px] hidden sm:block'>Text Profile Insight</p>
                     </div>}
-                {earning.service == 'VideoProfileReview' &&
+                {earning.service == 'VideoProfileInsight' &&
                     <div className='w-full flex flex-col sm:flex-row items-center gap-2'>
                         <Image src={'/icons/video-icon.svg'} alt='video' width={200} height={200} className='bg-green-600 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
-                        <p className='font-semibold text-[12px] lg:text-[14px] hidden sm:block'>Video Profile Review</p>
+                        <p className='font-semibold text-[12px] lg:text-[14px] hidden sm:block'>Video Profile Insight</p>
                     </div>}
             </AlertDialogTrigger>
             <AlertDialogContent className="bg-[#1AAD7A] border-0">
@@ -63,40 +63,40 @@ const EarningDialog = ({ earning }: { earning: IEarning }) => {
                         <tr>
                             <td className='font-bold pr-2 bg-white border-[#1AAD7A] border p-2 border-b-[3px] border-r-[3px]'>Service:</td>
                             <td className='font-bold text-black bg-white border-[#1AAD7A] border p-2 border-b-[3px]'>
-                                {earning.service === 'TextReview' && (
+                                {earning.service === 'TextInsight' && (
                                     <div className='flex flex-row items-center gap-2'>
-                                        <Image src={'/icons/star-white.svg'} alt='text review' width={25} height={25} className='bg-blue-500 p-[3px] rounded-full' />
-                                        <p className='font-bold text-[12px] lg:text-[14px]'>Text Review</p>
+                                        <Image src={'/icons/star-white.svg'} alt='text Insight' width={25} height={25} className='bg-blue-500 p-[3px] rounded-full' />
+                                        <p className='font-bold text-[12px] lg:text-[14px]'>Text Insight</p>
                                     </div>
                                 )}
-                                {earning.service === 'LongTextReview' && (
+                                {earning.service === 'LongTextInsight' && (
                                     <div className='flex flex-row items-center gap-2'>
-                                        <Image src={'/icons/star-white.svg'} alt='text review' width={25} height={25} className='bg-purple-500 p-[3px] rounded-full' />
-                                        <p className='font-bold text-[12px] lg:text-[14px]'>Long Text Review</p>
+                                        <Image src={'/icons/star-white.svg'} alt='text insight' width={25} height={25} className='bg-purple-500 p-[3px] rounded-full' />
+                                        <p className='font-bold text-[12px] lg:text-[14px]'>Long Text Insight</p>
                                     </div>
                                 )}
-                                {earning.service === 'VideoReview' && (
+                                {earning.service === 'VideoInsight' && (
                                     <div className='flex flex-row items-center gap-2'>
-                                        <Image src={'/icons/video.svg'} alt='video review' width={25} height={25} className='bg-red-500 p-[3px] rounded-full' />
-                                        <p className='font-bold text-[12px] lg:text-[14px]'>Video Review</p>
+                                        <Image src={'/icons/video.svg'} alt='video insight' width={25} height={25} className='bg-red-500 p-[3px] rounded-full' />
+                                        <p className='font-bold text-[12px] lg:text-[14px]'>Video Insight</p>
                                     </div>
                                 )}
-                                {earning.service === 'LongVideoReview' && (
+                                {earning.service === 'LongVideoInsight' && (
                                     <div className='flex flex-row items-center gap-2'>
-                                        <Image src={'/icons/video.svg'} alt='video review' width={25} height={25} className='bg-[#B69615] p-[3px] rounded-full' />
-                                        <p className='font-bold text-[12px] lg:text-[14px]'>Long Video Review</p>
+                                        <Image src={'/icons/video.svg'} alt='video insight' width={25} height={25} className='bg-[#B69615] p-[3px] rounded-full' />
+                                        <p className='font-bold text-[12px] lg:text-[14px]'>Long Video Insight</p>
                                     </div>
                                 )}
-                                {earning.service === 'TextProfileReview' && (
+                                {earning.service === 'TextProfileInsight' && (
                                     <div className='flex flex-row items-center gap-2'>
-                                        <Image src={'/icons/account.svg'} alt='text profile review' width={25} height={25} className='bg-orange-500 p-[3px] rounded-full' />
-                                        <p className='font-bold text-[12px] lg:text-[14px]'>Text Profile Review</p>
+                                        <Image src={'/icons/account.svg'} alt='text profile insight' width={25} height={25} className='bg-orange-500 p-[3px] rounded-full' />
+                                        <p className='font-bold text-[12px] lg:text-[14px]'>Text Profile Insight</p>
                                     </div>
                                 )}
-                                {earning.service === 'VideoProfileReview' && (
+                                {earning.service === 'VideoProfileInsight' && (
                                     <div className='flex flex-row items-center gap-2'>
-                                        <Image src={'/icons/video-icon.svg'} alt='video profile review' width={25} height={25} className='bg-green-600 p-[3px] rounded-full' />
-                                        <p className='font-bold text-[12px] lg:text-[14px]'>Video Profile Review</p>
+                                        <Image src={'/icons/video-icon.svg'} alt='video profile insight' width={25} height={25} className='bg-green-600 p-[3px] rounded-full' />
+                                        <p className='font-bold text-[12px] lg:text-[14px]'>Video Profile Insight</p>
                                     </div>
                                 )}
                             </td>

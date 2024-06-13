@@ -1,21 +1,21 @@
 'use client'
 
-import { getFlaggedReviews } from '@/lib/actions/review.actions';
-import { IReview } from '@/lib/database/models/review.model';
+import { getFlaggedInsights } from '@/lib/actions/insight.actions';
+import { IInsight } from '@/lib/database/models/insight.model';
 import React, { useEffect, useState } from 'react'
 import BackstationFlagedDialog from './BackstationFlagedDialog';
 
 const Backstation = () => {
 
-    const [reviews, setReviews] = useState<IReview[]>()
+    const [insights, setInsights] = useState<IInsight[]>()
 
-    const getReviews = async () => {
-        const requestedReviews = await getFlaggedReviews();
-        setReviews(requestedReviews);
+    const getInsights = async () => {
+        const requestedInsights = await getFlaggedInsights();
+        setInsights(requestedInsights);
     }
 
     useEffect(()=>{
-        getReviews();
+        getInsights();
     },[])
 
     
@@ -42,9 +42,9 @@ const Backstation = () => {
                         </div>
                     </div>
                 </div>
-                {reviews && reviews.map((review:IReview,index) => (
+                {insights && insights.map((insight:IInsight,index) => (
                     <div key={index} className='flex flex-row justify-center items-center bg-white text-black'>
-                        <BackstationFlagedDialog review={review}/>
+                        <BackstationFlagedDialog insight={insight}/>
                     </div>
                 ))}
             </div>

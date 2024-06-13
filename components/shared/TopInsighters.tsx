@@ -229,13 +229,13 @@ const TopInsighters = () => {
                                                     <Image
                                                         key={index}
                                                         className='h-[11px] w-[11px] md:h-[20px] md:w-[20px]'
-                                                        src={index < Math.ceil(user?.avgReview) ? '/icons/star-yellow.svg' : '/icons/star-grey.svg'}
+                                                        src={index < Math.ceil(user?.avgRating) ? '/icons/star-yellow.svg' : '/icons/star-grey.svg'}
                                                         alt='star'
                                                         width={100}
                                                         height={100}
                                                     />
                                                 ))}
-                                                <p className='ml-2 text-black font-semibold text-[9px] md:text-[15px]'>({user?.nofReviews})</p>
+                                                <p className='ml-2 text-black font-semibold text-[9px] md:text-[15px]'>({user?.nofInsights})</p>
                                             </div>
                                         </td>
                                     </tr>))}

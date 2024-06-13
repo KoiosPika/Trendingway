@@ -4,15 +4,15 @@ import { ServerClient } from "postmark";
 import { connectToDatabase } from "../database"
 import Refund, { IRefund } from "../database/models/refund.model";
 import Request from "../database/models/request.model";
-import Review from "../database/models/review.model";
+import Insight from "../database/models/insight.model";
 import User from "../database/models/user.model";
 import UserData from "../database/models/userData.model";
 
-const populateReview = (query: any) => {
+const populateInsight = (query: any) => {
     return query
-        .populate({ path: 'Request', model: Request, select: "User Reviewer postLink description platform type price" })
+        .populate({ path: 'Request', model: Request, select: "User Insighter postLink description platform type price" })
         .populate({ path: 'User', model: User, select: "username photo" })
-        .populate({ path: 'Reviewer', model: User, select: "username photo" })
+        .populate({ path: 'Insighter', model: User, select: "username photo" })
 }
 
 export async function getAllRefunds(userId: string) {
@@ -52,7 +52,7 @@ export async function refundOrder(requestId: string) {
     const client = new ServerClient(process.env.POSTMARK_API_TOKEN!);
 
     try {
-        const review = await populateReview(Review.findOneAndUpdate(
+        const insight = await populateInsight(Insight.findOneAndUpdate(
             { Request: requestId },
             { insightful: 'True' }
         ))
@@ -63,13 +63,13 @@ export async function refundOrder(requestId: string) {
         )
 
         await UserData.findOneAndUpdate(
-            { User: review?.User },
-            { '$inc': { creditBalance: review?.Request?.price } }
+            { User: insight?.User },
+            { '$inc': { creditBalance: insight?.Request?.price } }
         )
 
         await Refund.create({
-            User: review?.User,
-            amount: review?.Request?.price
+            User: insight?.User,
+            amount: insight?.Request?.price
         })
 
         const UserEmailOptions = {
@@ -79,11 +79,11 @@ export async function refundOrder(requestId: string) {
             HtmlBody:
                 `
                 <div style="max-width: 600px; margin: auto; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); font-family: Arial, sans-serif; text-align: center;">
-                <h2 style="color: #333;">Hi ${review?.User?.username}, We have refunded your order successfully</h2>
+                <h2 style="color: #333;">Hi ${insight?.User?.username}, We have refunded your order successfully</h2>
                 <div style="margin: 20px 0;">
-                    <img src="${review?.Reviewer?.photo}" alt="User Image" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin-bottom: 20px;" />
+                    <img src="${insight?.Insighter?.photo}" alt="User Image" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin-bottom: 20px;" />
                 </div>
-                <p style="font-size: 16px; color: #555;">After reviewing the insight you received from ${review?.Reviewer?.username}, we decided to cancel the order and refund $${(review?.Request?.price).toFixed(2)} to your credit balance as the insight violates the terms and conditions of insightend.com</p>
+                <p style="font-size: 16px; color: #555;">After reviewing the insight you received from ${insight?.Insighter?.username}, we decided to cancel the order and refund $${(insight?.Request?.price).toFixed(2)} to your credit balance as the insight violates the terms and conditions of insightend.com</p>
                 <p style="font-size: 16px; color: #555;">You can check your refunds in the Refunds section in your wallet page</p>
                 <div style="margin-top: 20px;">
                     <a href="https://www.insightend.com/wallet" style="display: inline-block; padding: 10px 20px; font-size: 16px; color: #FFFFFF; background-color: #EC1A0D; border-radius: 5px; text-decoration: none;">Go to Wallet</a>

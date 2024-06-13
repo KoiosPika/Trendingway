@@ -3,43 +3,43 @@
 import { connectToDatabase } from "../database"
 import Earning, { IEarning } from "../database/models/earning.model";
 import Request from "../database/models/request.model";
-import Review from "../database/models/review.model";
+import Insight from "../database/models/insight.model";
 import UserData from "../database/models/userData.model";
 
-const populateReview = (query: any) => {
+const populateInsight = (query: any) => {
     return query
         .populate({ path: 'Request', model: Request, select: "_id type price" })
 }
 
-export async function createEarning(reviewId: string) {
+export async function createEarning(insightId: string) {
     try {
 
-        const review = await populateReview(Review.findById(reviewId));
+        const insight = await populateInsight(Insight.findById(insightId));
 
-        await Review.findOneAndUpdate(
-            { _id: reviewId },
+        await Insight.findOneAndUpdate(
+            { _id: insightId },
             { '$set': { insightful: 'True' } }
         )
 
         await UserData.findOneAndUpdate(
-            { User: review.Reviewer },
+            { User: insight.Insighter },
             {
                 '$inc': {
-                    withdrawBalance: review.Request.price * 0.8,
-                    nofVideoesReviewed: 1
+                    withdrawBalance: insight.Request.price * 0.8,
+                    nofVideoesInsighted: 1
                 }
             }
         )
 
         await Request.findOneAndUpdate(
-            { _id: review?.Request?._id },
+            { _id: insight?.Request?._id },
             { '$set': { status: 'Completed' } }
         )
 
         await Earning.create({
-            User: review.Reviewer,
-            amount: review.Request.price * 0.8,
-            service: review.Request.type
+            User: insight.Insighter,
+            amount: insight.Request.price * 0.8,
+            service: insight.Request.type
         })
     } catch (error) {
         console.log(error);
