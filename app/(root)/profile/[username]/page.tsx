@@ -41,7 +41,7 @@ const page = async ({ params: { username } }: { params: { username: string } }) 
                                             height={24}
                                         />
                                     ))}
-                                    <p className='ml-2 text-black font-semibold'>({user?.nofInsights})</p>
+                                    <p className='ml-2 text-black font-semibold'>({user?.nofRatings})</p>
                                     <div className='h-[25px] w-[2px] bg-black mx-5' />
                                     <div className='flex flex-row items-center gap-2'>
                                         <p className='text-yellow-600 font-bold'>{user?.nofVideoesInsighted}</p>
