@@ -318,11 +318,6 @@ const ResponsePage = ({ id, userId }: { id: string, userId: string }) => {
                                     {insight &&
                                         <MuxPlayer
                                             playbackId={playbackId}
-                                            metadata={{
-                                                video_id: 'video-id-123456',
-                                                video_title: 'Bick Buck Bunny',
-                                                viewer_user_id: 'user-id-bc-789',
-                                            }}
                                             streamType="on-demand"
                                         />
                                     }

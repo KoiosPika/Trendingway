@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { createHmac } from 'crypto';
-import { createVideoProfileInsight, createVideoInsight } from '@/lib/actions/insight.actions';
+import { createVideoProfileInsight, createVideoInsight, createVideoPersonalInsight } from '@/lib/actions/insight.actions';
 
 export async function POST(request: Request) {
     const body = await request.text();
@@ -52,6 +52,8 @@ export async function POST(request: Request) {
             await createVideoInsight(insight)
         } else if (type === 'VideoProfileInsight'){
             await createVideoProfileInsight(insight)
+        } else if (type === 'VideoPersonalInsight'){
+            await createVideoPersonalInsight(insight)
         }
 
         return NextResponse.json({ message: 'OK', assetId });

@@ -1,8 +1,10 @@
 import LongTextInsight from '@/components/shared/LongTextInsight';
 import LongVideoInsight from '@/components/shared/LongVideoInsight';
 import TextInsight from '@/components/shared/TextInsight';
+import TextPersonalInsight from '@/components/shared/TextPersonalInsight';
 import TextProfileInsight from '@/components/shared/TextProfileInsight';
 import VideoInsight from '@/components/shared/VideoInsight';
+import VideoPersonalInsight from '@/components/shared/VideoPersonalInsight';
 import VideoProfileInsight from '@/components/shared/VideoProfileInsight';
 import { getUserDataByUsername, getUsers } from '@/lib/actions/userData.actions';
 import { IUserData } from '@/lib/database/models/userData.model';
@@ -200,16 +202,16 @@ const page = async ({ params: { username } }: { params: { username: string } }) 
                     </div>
                     <p id='personal' className='font-bold text-[22px] text-slate-600 my-5'>--- Personal Insight ---</p>
                     <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-5 px-3 w-full mb-[25px]'>
-                        {user?.TextProfileInsightAvailability && <TextProfileInsight price={user?.TextProfileInsight} userId={userId} insighter={user.User._id} />}
-                        {!user?.TextProfileInsightAvailability &&
+                        {user?.TextPersonalInsightAvailability && <TextPersonalInsight price={user?.TextPersonalInsight} userId={userId} insighter={user.User._id} />}
+                        {!user?.TextPersonalInsightAvailability &&
                             <div className='flex flex-col justify-center items-center border-[1px] border-slate-300 rounded-lg h-[240px] md:h-[220px] bg-slate-200 relative' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                                 <div className='flex justify-center items-center gap-8' >
                                     <div className='flex flex-col items-center gap-2'>
                                         <Image src={'/icons/people.svg'} alt='video' width={200} height={200} className='bg-pink-500 w-[55px] h-[55px] p-2 rounded-full' />
-                                        <p className='font-semibold'>Text Profile Insight</p>
+                                        <p className='font-semibold'>Text Personal Insight</p>
                                     </div>
                                     <div className='h-2/4 w-[2px] bg-black'></div>
-                                    <p className='text-[25px] font-semibold'>${user?.TextProfileInsight}</p>
+                                    <p className='text-[25px] font-semibold'>${user?.TextPersonalInsight}</p>
                                     <div className='absolute top-1 right-2 flex flex-row items-center gap-2 bg-white px-2 border-[1px] border-red-500 rounded-lg'>
                                         <Image src={'/icons/unavailable.svg'} alt='unavailable' height={15} width={15} />
                                         <p className='text-red-500 font-bold'>Unavailable</p>
@@ -217,16 +219,16 @@ const page = async ({ params: { username } }: { params: { username: string } }) 
                                 </div>
                                 <p className='mt-2 mx-2 p-2 bg-pink-500 rounded-lg text-white font-semibold'>Upload a link to your TikTok, Reel or Short, and get an insight about your account and what can be improved to get more audience</p>
                             </div>}
-                        {user?.VideoProfileInsightAvailability && <VideoProfileInsight price={user?.VideoProfileInsight} userId={userId} insighter={user.User._id} />}
-                        {!user?.VideoProfileInsightAvailability &&
+                        {user?.VideoPersonalInsightAvailability && <VideoPersonalInsight price={user?.VideoPersonalInsight} userId={userId} insighter={user.User._id} />}
+                        {!user?.VideoPersonalInsightAvailability &&
                             <div className='flex flex-col justify-center items-center border-[1px] border-slate-300 rounded-lg h-[240px] md:h-[220px] bg-slate-200 relative' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                                 <div className='flex justify-center items-center gap-8' >
                                     <div className='flex flex-col items-center gap-2'>
                                         <Image src={'/icons/selfie.svg'} alt='video' width={200} height={200} className='bg-[#b83c4c] w-[55px] h-[55px] p-[7px] rounded-full' />
-                                        <p className='font-semibold'>Video Profile Insight</p>
+                                        <p className='font-semibold'>Video Personal Insight</p>
                                     </div>
                                     <div className='h-2/4 w-[2px] bg-black'></div>
-                                    <p className='text-[25px] font-semibold'>${user?.VideoProfileInsight}</p>
+                                    <p className='text-[25px] font-semibold'>${user?.VideoPersonalInsight}</p>
                                     <div className='absolute top-1 right-2 flex flex-row items-center gap-2 bg-white px-2 border-[1px] border-red-500 rounded-lg'>
                                         <Image src={'/icons/unavailable.svg'} alt='unavailable' height={15} width={15} />
                                         <p className='text-red-500 font-bold'>Unavailable</p>

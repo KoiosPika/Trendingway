@@ -11,7 +11,7 @@ const populateChat = (query: any) => {
         .populate({ path: 'User2', model: User, select: "_id photo username" })
 }
 
-export async function getChatByRequestID(id:string) {
+export async function getChatByRequestID(id: string) {
     try {
         await connectToDatabase();
 
@@ -19,7 +19,9 @@ export async function getChatByRequestID(id:string) {
 
         const chat = await populateChat(Chat.findById(request.chatId))
 
-        return JSON.parse(JSON.stringify(chat));
+        const thisChat = { ...chat.toObject(), type: request.type }
+
+        return JSON.parse(JSON.stringify(thisChat));
     } catch (error) {
         console.log(error)
     }

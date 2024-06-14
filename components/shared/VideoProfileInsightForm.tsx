@@ -21,7 +21,7 @@ const VideoProfileInsightForm = ({ height, id, insighter, user }: { height: numb
         getURL();
     }, [])
 
-    const submitVideoProfileInsight = async (event: any) => {
+    const submitVideoProfileInsight = (event: any) => {
         router.push('/wallet')
     }
 

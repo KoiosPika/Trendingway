@@ -59,7 +59,7 @@ export async function createPersonalRequest(User: string, Insighter: string, des
         const message = await Message.create({
             Chat: chat._id,
             User,
-            type,
+            type:"text",
             text: description,
         })
 

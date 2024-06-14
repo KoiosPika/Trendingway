@@ -8,6 +8,7 @@ import Request from '../database/models/request.model'
 import Earning from '../database/models/earning.model'
 import { ServerClient } from 'postmark';
 import { createEarning } from './earning.actions'
+import Message from '../database/models/message.model'
 
 const populateInsight = (query: any) => {
     return query
@@ -291,6 +292,32 @@ export async function createTextProfileInsight(insight: { request: string, bioNo
         await client.sendEmail(emailOptions);
 
         return JSON.parse(JSON.stringify(newInsight))
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export async function createVideoPersonalInsight(insight: { request: string, videoID: string, Insighter: string, User: string }) {
+    try {
+        await connectToDatabase();
+
+        const req = await Request.findById(insight.request)
+
+        const message = await Message.create({
+            Chat: req.chatId,
+            User: insight.Insighter,
+            type: "video",
+            videoID: insight.videoID
+        })
+
+        const thisInsight = await Insight.create({
+            Request: insight.request,
+            Insighter: insight.Insighter,
+            User: insight.User,
+            insightful:'Completed',
+        })
+
+
     } catch (error) {
         console.log(error)
     }

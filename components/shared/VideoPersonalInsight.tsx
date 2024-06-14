@@ -6,7 +6,7 @@ import { Button } from '../ui/button'
 import Image from 'next/image'
 import { Input } from '../ui/input'
 import { Textarea } from '../ui/textarea'
-import { createRequest } from '@/lib/actions/request.actions'
+import { createPersonalRequest, createRequest } from '@/lib/actions/request.actions'
 import { IUserData } from '@/lib/database/models/userData.model'
 import { getUserDataByUserId } from '@/lib/actions/userData.actions'
 import Link from 'next/link'
@@ -42,7 +42,7 @@ const VideoPersonalInsight = ({ price, userId, insighter }: { price: number, use
         }
 
         try {
-            await createRequest({ User: userId, Insighter: insighter, postLink: undefined, description, platform: undefined, price, type: 'TextPersonalInsight' });
+            await createPersonalRequest(userId, insighter, description, price, 'VideoPersonalInsight');
 
             setLoading(false);
             setFinished(true);
