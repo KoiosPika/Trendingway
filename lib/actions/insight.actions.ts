@@ -12,7 +12,7 @@ import Message from '../database/models/message.model'
 
 const populateInsight = (query: any) => {
     return query
-        .populate({ path: 'Request', model: Request, select: "User Insighter postLink description platform type price" })
+        .populate({ path: 'Request', model: Request, select: "User Insighter postLink description platform type price chatId" })
         .populate({ path: 'User', model: User, select: "_id username photo" })
         .populate({ path: 'Insighter', model: User, select: "_id username photo" })
 }
