@@ -413,30 +413,3 @@ export async function getPaginatedResponses(userId: string, lastOrderId: string)
         console.log(error)
     }
 }
-
-export async function flagInsight(id: string, message: string) {
-    try {
-        await connectToDatabase();
-
-        const flaggedInsight = await Insight.findOneAndUpdate(
-            { _id: id },
-            { '$set': { insightful: "False", reportMessage: message } }
-        )
-
-    } catch (error) {
-        console.log(error);
-    }
-}
-
-export async function getFlaggedInsights() {
-    try {
-        await connectToDatabase();
-
-        const insights = await populateInsight(Insight.find({ insightful: 'False' }).sort({ createdAt: 1 }))
-
-        return JSON.parse(JSON.stringify(insights))
-
-    } catch (error) {
-        console.log(error);
-    }
-}

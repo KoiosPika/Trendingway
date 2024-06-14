@@ -59,7 +59,7 @@ export async function createPersonalRequest(User: string, Insighter: string, des
         const message = await Message.create({
             Chat: chat._id,
             User,
-            type:"text",
+            type: "text",
             text: description,
         })
 
@@ -137,6 +137,10 @@ export async function cancelOrder(id: string, message: string) {
             { _id: id },
             { '$set': { status: 'Canceled', message } }
         ))
+
+        if (request.type === 'TextPersonalInsight' || request.type === 'VideoPersonalInsight') {
+            await Message.findByIdAndDelete(request.messageId)
+        }
 
         await UserData.findOneAndUpdate(
             { User: request?.User },

@@ -1,7 +1,7 @@
 import Checkout from '@/components/shared/Checkout'
 import StripeSetup from '@/components/shared/StripeSetup'
 import { getAllEarnings } from '@/lib/actions/earning.actions'
-import { getAllOrders, getOrdersData } from '@/lib/actions/order.actions'
+import { getAllOrders } from '@/lib/actions/order.actions'
 import { getAllRefunds } from '@/lib/actions/refund.actions'
 import { getAllSpendings } from '@/lib/actions/spending.actions'
 import { getUserDataByUserId } from '@/lib/actions/userData.actions'
@@ -173,6 +173,14 @@ const page = async () => {
                                             {spending.service == 'VideoProfileInsight' &&
                                                 <div className='w-full flex flex-col sm:flex-row items-center justify-center gap-2'>
                                                     <Image src={'/icons/video-icon.svg'} alt='video' width={200} height={200} className='bg-green-600 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
+                                                </div>}
+                                            {spending.service == 'TextPersonalInsight' &&
+                                                <div className='w-full flex flex-col sm:flex-row items-center justify-center gap-2'>
+                                                    <Image src={'/icons/people.svg'} alt='video' width={200} height={200} className='bg-pink-500 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
+                                                </div>}
+                                            {spending.service == 'VideoPersonalInsight' &&
+                                                <div className='w-full flex flex-col sm:flex-row items-center justify-center gap-2'>
+                                                    <Image src={'/icons/selfie.svg'} alt='video' width={200} height={200} className='bg-red-700 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
                                                 </div>}
                                         </div>
                                     ))}

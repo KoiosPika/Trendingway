@@ -42,7 +42,9 @@ const page = async () => {
                             {history.map((request: IRequest) => (
                                 <div key={request._id} className='flex flex-col justify-center items-center p-5 bg-white text-black rounded-lg border-[0.5px] border-gray-400' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                                     <div className='flex flex-row items-center gap-2 mr-auto md:ml-2 w-full'>
-                                        <Image src={request.User.photo} alt='pfp' className='h-[40px] w-[40px] border-2 border-green-400 rounded-full' height={1000} width={1000} />
+                                        <Link href={`/profile/${request.User.username}`}>
+                                            <Image src={request.User.photo} alt='pfp' className='h-[40px] w-[40px] border-2 border-green-400 rounded-full' height={1000} width={1000} />
+                                        </Link>
                                         <div>
                                             <p className='text-[13px]'>{request.User.username}</p>
                                             <p className='text-[12px] text-slate-400'>{timeAgo(request.createdAt.toString())}</p>
@@ -62,18 +64,15 @@ const page = async () => {
                                     {request.status === 'Canceled' && <Button className='bg-red-500 w-full flex flex-row items-center justify-center gap-2 py-1 rounded-lg mt-4 mb-2 hover:cursor-default hover:bg-red-500'>
                                         <p className='text-[13px] md:text-[16px] text-white font-bold'>X Order Canceled</p>
                                     </Button>}
-                                    {request.status === 'Insighted' && <Button className='bg-blue-500 w-full flex flex-row items-center justify-center gap-2 py-1 rounded-lg mt-4 mb-2 hover:cursor-default hover:bg-blue-500'>
-                                    <Image src={'/icons/star-white.svg'} alt='star' height={15} width={15} />
-                                        <p className='text-[13px] md:text-[16px] text-white font-bold'>Insighted</p>
-                                    </Button>}
-                                    {request.status === 'Completed' && <Button className='bg-green-700 w-full flex flex-row items-center justify-center gap-2 py-1 rounded-lg mt-4 mb-2 hover:cursor-default hover:bg-green-700'>
-                                    <Image src={'/icons/star-white.svg'} alt='star' height={15} width={15} />
-                                        <p className='text-[13px] md:text-[16px] text-white font-bold'>Completed</p>
-                                    </Button>}
+                                    {request.status === 'Completed' &&
+                                        <Button className='bg-green-700 w-full flex flex-row items-center justify-center gap-2 py-1 rounded-lg mt-4 mb-2 hover:cursor-default hover:bg-green-700'>
+                                            <Image src={'/icons/star-white.svg'} alt='star' height={15} width={15} />
+                                            <p className='text-[13px] md:text-[16px] text-white font-bold'>Completed</p>
+                                        </Button>}
                                 </div>
                             ))}
                         </div>
-                        {history.length > 0 && <LoadMoreHistory userId={userId} id={history[history.length - 1]._id}/>}
+                        {history.length > 0 && <LoadMoreHistory userId={userId} id={history[history.length - 1]._id} />}
                     </div>
                 </div>
             </div>

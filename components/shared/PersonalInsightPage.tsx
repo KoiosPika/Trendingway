@@ -116,7 +116,7 @@ const PersonalInsightPage = ({ id, userId, user }: { id: string, userId: string,
                 {chat && chat.type === 'TextPersonalInsight' &&
                     <div className='flex flex-row items-center justify-center gap-2 w-full my-2'>
                         <Input onChange={(e) => setText(e.target.value)} placeholder='Your insight' className='w-4/5 border-2 border-black h-[50px] text-[16px]' />
-                        {!loading && <Image src={'/icons/up.svg'} alt='send' height={40} width={40} className='rotate-90' onClick={submitTextPersonalInsight} />}
+                        {!loading && <Image src={'/icons/up.svg'} alt='send' height={40} width={40} className='rotate-90 hover:cursor-pointer' onClick={submitTextPersonalInsight} />}
                         {loading && <Image src={'/icons/spinner.svg'} alt='send' height={40} width={40} className='rotate-90 animate-spin' />}
                     </div>}
                 {chat && chat.type === 'VideoPersonalInsight' &&

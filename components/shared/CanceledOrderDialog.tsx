@@ -17,7 +17,7 @@ const CanceledOrderDialog = ({ request }: { request: IRequest }) => {
             <AlertDialogContent className="bg-white border-0">
                 <AlertDialogHeader>
                     <AlertDialogTitle className="flex flex-row items-center justify-between">
-                        <p className="text-black font-bold">Order Details:</p>
+                        <p className="text-black font-bold">Cancelation Details:</p>
                         <AlertDialogCancel className="rounded-full bg-white text-black hover:bg-black hover:text-white border-[1px] border-black">X</AlertDialogCancel>
                     </AlertDialogTitle>
                 </AlertDialogHeader>
@@ -25,7 +25,7 @@ const CanceledOrderDialog = ({ request }: { request: IRequest }) => {
                 <p className='font-semibold'>Reason for canceling:</p>
                 <div className='w-full bg-white flex items-center gap-2 rounded-b-lg'>
                     <Link href={`/profile/${request?.Insighter?.username}`} className='h-[45px] w-[45px]'>
-                        <Image src={request?.User?.photo} alt='pfp' className='h-[45px] w-[45px] border-2 border-green-400 rounded-full mb-auto' height={200} width={200} />
+                        <Image src={request?.Insighter?.photo} alt='pfp' className='h-[45px] w-[45px] border-2 border-green-400 rounded-full mb-auto' height={200} width={200} />
                     </Link>
                     <div className='bg-gray-300 p-1 rounded-r-lg rounded-bl-lg flex-1'>
                         <p className='text-[15px]'>{request?.message}</p>
