@@ -17,7 +17,7 @@ export async function getMessagesByRequestID(id: string) {
 
         const request = await Request.findById(id)
 
-        const messages = await populateMessages(Message.find({ Chat: request.chatId }).sort({createdAt:-1}))
+        const messages = await populateMessages(Message.find({ Chat: request.chatId }).sort({createdAt:-1}).limit(5))
 
         return JSON.parse(JSON.stringify(messages))
     } catch (error) {
