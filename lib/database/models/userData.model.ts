@@ -24,7 +24,7 @@ export interface IUserData extends Document {
     aboutMe: string
     creditBalance: number
     withdrawBalance: number
-    nofInsights: number
+    nofRatings: number
     avgRating: number
     nofVideoesInsighted: number,
     expressAccountID: string,
@@ -63,7 +63,7 @@ const UserDataSchema = new Schema({
     aboutMe: { type: String },
     creditBalance: { type: Number, default: 0 },
     withdrawBalance: { type: Number, default: 0 },
-    nofInsights: { type: Number, default: 0 },
+    nofRatings: { type: Number, default: 0 },
     avgRating: { type: Number, default: 0 },
     nofVideoesInsighted: { type: Number, default: 0 },
     expressAccountID: { type: String },

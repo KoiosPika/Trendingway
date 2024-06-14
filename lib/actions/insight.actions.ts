@@ -363,14 +363,14 @@ export async function submitInsightRate(id: string, rating: number) {
             [
                 {
                     $set: {
-                        nofInsights: { $add: ["$nofInsights", 1] },
+                        nofRatings: { $add: ["$nofRatings", 1] },
                         avgRating: {
                             $let: {
                                 vars: {
-                                    totalInsights: { $add: ["$nofInsights", 1] },
-                                    newTotalRating: { $add: [{ $multiply: ["$avgRating", "$nofInsights"] }, rating] }
+                                    totalRatings: { $add: ["$nofRatings", 1] },
+                                    newTotalRating: { $add: [{ $multiply: ["$avgRating", "$nofRatings"] }, rating] }
                                 },
-                                in: { $divide: ["$$newTotalRating", "$$totalInsights"] }
+                                in: { $divide: ["$$newTotalRating", "$$totalRatings"] }
                             }
                         }
                     }

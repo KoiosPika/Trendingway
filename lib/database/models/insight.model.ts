@@ -27,9 +27,6 @@ export interface IInsight extends Document {
     postsNotes: string,
     rated: boolean,
     createdAt: Date,
-    insightful: string,
-    insightPeriod: Date,
-    reportMessage: string
 }
 
 const InsightSchema = new Schema({
@@ -55,15 +52,7 @@ const InsightSchema = new Schema({
     postsNotes: { type: String },
     additionalNotes: { type: String },
     rated: { type: Boolean, default: false },
-    insightful: { type: String, default: 'Awaiting' },
     createdAt: { type: Date, default: Date.now },
-    insightPeriod: {
-        type: Date, default: () => {
-            const now = new Date();
-            return new Date(now.setDate(now.getDate() + 1));
-        }
-    },
-    reportMessage: { type: String }
 })
 
 const Insight = models.Insight || model('Insight', InsightSchema);
