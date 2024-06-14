@@ -46,6 +46,16 @@ const SpendingDialog = ({ spending }: { spending: ISpending }) => {
                         <Image src={'/icons/video-icon.svg'} alt='video' width={200} height={200} className='bg-green-600 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
                         <p className='font-semibold text-[12px] lg:text-[14px] hidden sm:block'>Video Profile Insight</p>
                     </div>}
+                {spending.service == 'TextPersonalInsight' &&
+                    <div className='w-full flex flex-col sm:flex-row items-center gap-2'>
+                        <Image src={'/icons/people.svg'} alt='video' width={200} height={200} className='bg-pink-500 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
+                        <p className='font-semibold text-[12px] lg:text-[14px] hidden sm:block'>Text Personal Insight</p>
+                    </div>}
+                {spending.service == 'VideoPersonalInsight' &&
+                    <div className='w-full flex flex-col sm:flex-row items-center gap-2'>
+                        <Image src={'/icons/selfie.svg'} alt='video' width={200} height={200} className='bg-[#b83c4c] w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
+                        <p className='font-semibold text-[12px] lg:text-[14px] hidden sm:block'>Video Personal Insight</p>
+                    </div>}
             </AlertDialogTrigger>
             <AlertDialogContent className="bg-[#178EA0] border-0">
                 <AlertDialogHeader>
@@ -99,12 +109,22 @@ const SpendingDialog = ({ spending }: { spending: ISpending }) => {
                                         <p className='font-bold text-[12px] lg:text-[14px]'>Video Profile Insight</p>
                                     </div>
                                 )}
+                                {spending.service == 'TextPersonalInsight' &&
+                                    <div className='w-full flex flex-col sm:flex-row items-center gap-2'>
+                                        <Image src={'/icons/people.svg'} alt='video' width={200} height={200} className='bg-pink-500 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
+                                        <p className='font-semibold text-[12px] lg:text-[14px] hidden sm:block'>Text Personal Insight</p>
+                                    </div>}
+                                {spending.service == 'VideoPersonalInsight' &&
+                                    <div className='w-full flex flex-col sm:flex-row items-center gap-2'>
+                                        <Image src={'/icons/selfie.svg'} alt='video' width={200} height={200} className='bg-[#b83c4c] w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
+                                        <p className='font-semibold text-[12px] lg:text-[14px] hidden sm:block'>Video Personal Insight</p>
+                                    </div>}
                             </td>
                         </tr>
                         <tr>
                             <td className='font-bold pr-2 bg-white border-[#178EA0] border p-2 border-b-[3px] border-r-[3px]'>Amount:</td>
                             <td className='text-black bg-white border-[#178EA0] border p-2 border-b-[3px] font-bold'>
-                            ${(spending?.amount).toFixed(2)}
+                                ${(spending?.amount).toFixed(2)}
                             </td>
                         </tr>
                         <tr>

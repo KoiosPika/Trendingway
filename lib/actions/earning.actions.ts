@@ -16,11 +16,6 @@ export async function createEarning(insightId: string) {
 
         const insight = await populateInsight(Insight.findById(insightId));
 
-        await Insight.findOneAndUpdate(
-            { _id: insightId },
-            { '$set': { insightful: 'True' } }
-        )
-
         await UserData.findOneAndUpdate(
             { User: insight.Insighter },
             {
@@ -31,11 +26,6 @@ export async function createEarning(insightId: string) {
             }
         )
 
-        await Request.findOneAndUpdate(
-            { _id: insight?.Request?._id },
-            { '$set': { status: 'Completed' } }
-        )
-
         await Earning.create({
             User: insight.Insighter,
             amount: insight.Request.price * 0.8,
@@ -43,8 +33,6 @@ export async function createEarning(insightId: string) {
         })
     } catch (error) {
         console.log(error);
-
-        
     }
 }
 

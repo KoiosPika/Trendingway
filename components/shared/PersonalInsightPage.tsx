@@ -11,6 +11,7 @@ import { getPlaybackId, getUploadUrl } from '@/lib/actions/mux.actions';
 import MuxUploader, { MuxUploaderDrop, MuxUploaderFileSelect, MuxUploaderProgress } from '@mux/mux-uploader-react';
 import { useRouter } from 'next/navigation';
 import VideoMessage from './VideoMessage';
+import { createTextPersonalInsight } from '@/lib/actions/insight.actions';
 
 const PersonalInsightPage = ({ id, userId, user }: { id: string, userId: string, user: string }) => {
 
@@ -18,6 +19,8 @@ const PersonalInsightPage = ({ id, userId, user }: { id: string, userId: string,
     const [height, setHeight] = useState<number>(window.innerHeight)
     const [chat, setChat] = useState<any>()
     const [uploadURL, setUploadURL] = useState<string>()
+    const [text, setText] = useState<string>('')
+    const [loading, setLoading] = useState<boolean>(false)
     const router = useRouter();
 
     const updateDimensions = () => {
@@ -54,6 +57,27 @@ const PersonalInsightPage = ({ id, userId, user }: { id: string, userId: string,
     const submitVideoPersonalInsight = (event: any) => {
         router.push('/wallet')
     }
+
+    const submitTextPersonalInsight = async () => {
+
+        if (loading) {
+            return;
+        }
+
+        setLoading(true)
+
+        const insight = {
+            request: id,
+            text,
+            Insighter: userId,
+            User: user
+        }
+        await createTextPersonalInsight(insight)
+
+        router.push('/wallet')
+    }
+
+
     return (
         <div className='w-full flex justify-center items-center bg-white h-full'>
             <div className='w-full flex flex-col md:max-w-[1000px] h-full'>
@@ -82,8 +106,9 @@ const PersonalInsightPage = ({ id, userId, user }: { id: string, userId: string,
                 </ScrollArea>
                 {chat && chat.type === 'TextPersonalInsight' &&
                     <div className='flex flex-row items-center justify-center gap-2 w-full my-2'>
-                        <Input placeholder='Your insight' className='w-4/5 border-2 border-black h-[60px] text-[16px]' />
-                        <Image src={'/icons/up.svg'} alt='send' height={40} width={40} className='rotate-90' />
+                        <Input onChange={(e) => setText(e.target.value)} placeholder='Your insight' className='w-4/5 border-2 border-black h-[60px] text-[16px]' />
+                        {!loading && <Image src={'/icons/up.svg'} alt='send' height={40} width={40} className='rotate-90' onClick={submitTextPersonalInsight} />}
+                        {loading && <Image src={'/icons/spinner.svg'} alt='send' height={40} width={40} className='rotate-90 animate-spin' />}
                     </div>}
                 {chat && chat.type === 'VideoPersonalInsight' &&
                     <div className='flex flex-col items-center justify-center w-full my-2'>
