@@ -31,7 +31,6 @@ const RechargeOrders = ({ userId }: { userId: string }) => {
 
         async function getData() {
             const requestedOrders = await getOrdersData(userId, year)
-            console.log(requestedOrders)
             setOrdersData(requestedOrders)
         }
 

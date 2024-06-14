@@ -24,3 +24,16 @@ export async function getMessagesByRequestID(id: string) {
         console.log(error)
     }
 }
+
+export async function getMessagesByChatID(id: string) {
+    try {
+
+        await connectToDatabase();
+
+        const messages = await populateMessages(Message.find({ Chat: id }).sort({createdAt:-1}))
+
+        return JSON.parse(JSON.stringify(messages))
+    } catch (error) {
+        console.log(error)
+    }
+}

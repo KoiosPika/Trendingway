@@ -111,13 +111,13 @@ const SpendingDialog = ({ spending }: { spending: ISpending }) => {
                                 )}
                                 {spending.service == 'TextPersonalInsight' &&
                                     <div className='w-full flex flex-col sm:flex-row items-center gap-2'>
-                                        <Image src={'/icons/people.svg'} alt='video' width={200} height={200} className='bg-pink-500 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
-                                        <p className='font-semibold text-[12px] lg:text-[14px] hidden sm:block'>Text Personal Insight</p>
+                                        <Image src={'/icons/people.svg'} alt='video' width={25} height={25} className='bg-pink-500 p-[3px] rounded-full' />
+                                        <p className='font-bold text-[12px] lg:text-[14px]'>Text Personal Insight</p>
                                     </div>}
                                 {spending.service == 'VideoPersonalInsight' &&
                                     <div className='w-full flex flex-col sm:flex-row items-center gap-2'>
-                                        <Image src={'/icons/selfie.svg'} alt='video' width={200} height={200} className='bg-[#b83c4c] w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
-                                        <p className='font-semibold text-[12px] lg:text-[14px] hidden sm:block'>Video Personal Insight</p>
+                                        <Image src={'/icons/selfie.svg'} alt='video' width={25} height={25} className='bg-[#b83c4c] p-[3px] rounded-full' />
+                                        <p className='font-bold text-[12px] lg:text-[14px]'>Video Personal Insight</p>
                                     </div>}
                             </td>
                         </tr>

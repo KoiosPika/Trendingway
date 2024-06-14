@@ -92,7 +92,6 @@ const EditProfile = ({ userId }: { userId: string }) => {
 
     useEffect(() => {
         handleAddCategory(category)
-        console.log(selectedCategory)
     }, [category])
 
     const handleSubmit = async () => {

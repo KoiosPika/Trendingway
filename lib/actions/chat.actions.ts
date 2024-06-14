@@ -26,3 +26,15 @@ export async function getChatByRequestID(id: string) {
         console.log(error)
     }
 }
+
+export async function getChatByID(id:string){
+    try {
+        await connectToDatabase();
+
+        const chat = await populateChat(Chat.findById(id));
+
+        return JSON.parse(JSON.stringify(chat));
+    } catch (error) {
+        console.log(error)
+    }
+}

@@ -12,6 +12,7 @@ import MuxUploader, { MuxUploaderDrop, MuxUploaderFileSelect, MuxUploaderProgres
 import { useRouter } from 'next/navigation';
 import VideoMessage from './VideoMessage';
 import { createTextPersonalInsight } from '@/lib/actions/insight.actions';
+import Link from 'next/link';
 
 const PersonalInsightPage = ({ id, userId, user }: { id: string, userId: string, user: string }) => {
 
@@ -81,24 +82,32 @@ const PersonalInsightPage = ({ id, userId, user }: { id: string, userId: string,
     return (
         <div className='w-full flex justify-center items-center bg-white h-full'>
             <div className='w-full flex flex-col md:max-w-[900px] h-full'>
-                <div className='w-full flex justify-center items-center bg-blue-500 rounded-lg py-2 gap-2'>
+                <div className='w-full flex justify-center items-center bg-blue-500 md:rounded-lg py-2 gap-2'>
                     {chat && <Image src={chat.User1._id == userId ? chat.User2.photo : chat.User1.photo} alt='pfp' height={50} width={50} className='rounded-full border-[2px] border-white' />}
-                    {chat && <p className='font-semibold text-white'>{chat.User1._id == userId ? chat.User2.username : chat.User1.username}</p>}
+                    {chat &&
+                        <div className='flex flex-col pag-2'>
+                            <p className='font-semibold text-white'>{chat.User1._id == userId ? chat.User2.username : chat.User1.username}</p>
+                            <Link href={`/profile/${chat.User1._id == userId ? chat.User2.username : chat.User1.username}`} className='flex flex-row items-center gap-1'>
+                                <Image src={'/icons/arrow-up.svg'} alt='link' height={15} width={15}/>
+                                <p className='font-semibold text-white underline text-[14px]'>Visit Profile</p>
+                            </Link>
+                        </div>
+                    }
                 </div>
-                <ScrollArea className='w-full overflow-auto flex' style={{ height: height - 220 }}>
-                    <div className="flex flex-col-reverse w-full mt-auto" style={{ minHeight: height - 220 }}>
+                <ScrollArea className='w-full overflow-auto flex' style={{ height: height - 205 }}>
+                    <div className="flex flex-col-reverse w-full mt-auto" style={{ minHeight: height - 205 }}>
                         {messages && messages.map((message: IMessage, index) => (
                             <div key={index} className='w-full'>
                                 {message.User?._id == userId &&
                                     <div className='p-3 ml-auto md:w-2/4 w-3/4 flex flex-row items-center gap-2'>
-                                        {message.type === "text" && <p className='md:text-[15px] text-[13px] bg-slate-200 p-2 rounded-md ml-auto'>{message.text}</p>}
+                                        {message.type === "text" && <p className='md:text-[15px] text-[13px] bg-slate-200 p-2 rounded-md ml-auto font-semibold'>{message.text}</p>}
                                         {message.type === "video" && <VideoMessage videoID={message.videoID} />}
                                         <Image src={message.User?.photo} alt='pfp' height={40} width={40} className='mt-auto rounded-full' />
                                     </div>}
                                 {message.User?._id != userId &&
                                     <div className='p-3 md:w-2/4 w-3/4 flex flex-row items-center gap-2'>
                                         <Image src={message.User?.photo} alt='pfp' height={40} width={40} className='mt-auto rounded-full' />
-                                        <p className='md:text-[15px] text-[13px] bg-slate-200 p-2 rounded-md'>{message.text}</p>
+                                        <p className='md:text-[15px] text-[13px] bg-slate-200 p-2 rounded-md font-semibold'>{message.text}</p>
                                     </div>}
                             </div>
                         ))}
@@ -106,7 +115,7 @@ const PersonalInsightPage = ({ id, userId, user }: { id: string, userId: string,
                 </ScrollArea>
                 {chat && chat.type === 'TextPersonalInsight' &&
                     <div className='flex flex-row items-center justify-center gap-2 w-full my-2'>
-                        <Input onChange={(e) => setText(e.target.value)} placeholder='Your insight' className='w-4/5 border-2 border-black h-[60px] text-[16px]' />
+                        <Input onChange={(e) => setText(e.target.value)} placeholder='Your insight' className='w-4/5 border-2 border-black h-[50px] text-[16px]' />
                         {!loading && <Image src={'/icons/up.svg'} alt='send' height={40} width={40} className='rotate-90' onClick={submitTextPersonalInsight} />}
                         {loading && <Image src={'/icons/spinner.svg'} alt='send' height={40} width={40} className='rotate-90 animate-spin' />}
                     </div>}
