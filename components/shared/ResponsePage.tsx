@@ -1,17 +1,15 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
-import { flagInsight, getInsightByRequestId } from '@/lib/actions/insight.actions'
+import { getInsightByRequestId } from '@/lib/actions/insight.actions'
 import { IInsight } from '@/lib/database/models/insight.model';
 import { InstagramEmbed, TikTokEmbed, YouTubeEmbed } from 'react-social-media-embed';
 import Image from 'next/image';
 import { ScrollArea } from '../ui/scroll-area';
 import RatingDialog from './RatingDialog';
 import { Button } from '../ui/button';
-import { getTimeLeft, timeAgo } from '@/lib/utils';
-import { createEarning } from '@/lib/actions/earning.actions';
+import { timeAgo } from '@/lib/utils';
 import { useRouter } from 'next/navigation';
-import FlagedInsightDialog from './FlagedInsightDialog';
 import { getPlaybackId } from '@/lib/actions/mux.actions';
 import MuxPlayer from '@mux/mux-player-react';
 
@@ -19,11 +17,9 @@ const ResponsePage = ({ id, userId }: { id: string, userId: string }) => {
 
     const [insight, setInsight] = useState<IInsight>()
     const [height, setHeight] = useState(0)
-    const [loading, setLoading] = useState<boolean>(false)
     const [renderPage, setRenderPage] = useState<boolean>(false)
     const [playbackId, setPlaybackId] = useState<string>('')
     const router = useRouter();
-    const now = new Date();
 
     useEffect(() => {
         if (insight) {
@@ -57,46 +53,12 @@ const ResponsePage = ({ id, userId }: { id: string, userId: string }) => {
         getInsight()
     }, [])
 
-    const handleCreateEarning = async () => {
-        try {
-            setLoading(true);
-            if (insight) {
-                await createEarning(insight?._id);
-            }
-
-            router.push('/notifications/orders')
-
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
 
     return (
         <>
             {renderPage && <div className='w-full flex justify-center items-center bg-white h-full'>
                 <div className='w-full flex flex-col md:max-w-[1000px] justify-center items-center'>
                     <div className='my-3 justify-center items-center flex flex-col w-full'>
-                        {(loading == false && insight?.insightful == 'Awaiting' && new Date(insight?.insightPeriod).getTime() > now.getTime()) && <div className='w-full lg:w-4/6 py-[14px] px-[10px] bg-black flex flex-col justify-center items-center gap-2 rounded-lg m-2'>
-                            <p className='text-white font-semibold text-[12px] md:text-[14px]'>You have {getTimeLeft(insight.insightPeriod)} days remaining to inform us if there are any issues with the service you received. </p>
-                            <div className='flex flex-row w-full items-center gap-3'>
-                                <Button className='bg-green-600 hover:bg-green-600 w-full text-[16px]' onClick={handleCreateEarning}>
-                                    {`It's good`}
-                                </Button>
-                                <FlagedInsightDialog id={insight?._id || ''} />
-                            </div>
-                        </div>}
-                        {(loading == true && insight?.insightful == 'Awaiting') && <div className='w-full lg:w-4/6 py-[14px] px-[10px] bg-black flex flex-col justify-center items-center gap-2 rounded-lg m-2'>
-                            <p className='text-white font-semibold text-[12px] md:text-[14px]'>You have 3 days remaining to inform us if there are any issues with the service you received. </p>
-                            <div className='flex flex-row w-full items-center gap-3'>
-                                <Button className='bg-green-300 hover:bg-green-300 md:w-full w-1/2'>
-                                    {`It's good`}
-                                </Button>
-                                <Button className='bg-red-300 hover:bg-red-300 md:w-full w-1/2'>
-                                    {`It's not good`}
-                                </Button>
-                            </div>
-                        </div>}
                         <div className='w-full lg:w-4/5 py-2 px-4 bg-white flex items-center gap-2 rounded-b-lg'>
                             {insight && <Image src={insight?.User?.photo} alt='pfp' className='h-[60px] w-[60px] border-2 border-green-400 rounded-full mb-auto' height={1000} width={1000} />}
                             <div>
