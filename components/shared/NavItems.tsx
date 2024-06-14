@@ -19,9 +19,9 @@ const NavItems = () => {
       route: `/profile`
     },
     {
-      label: 'Notifications',
+      label: 'Activity',
       icon: '/icons/bell.svg',
-      route: '/notifications/orders'
+      route: '/activity/orders'
     },
     {
       label: 'Wallet',
