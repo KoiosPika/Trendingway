@@ -113,7 +113,7 @@ export async function getTopUsers() {
                     compositeScore: {
                         $add: [
                             { $multiply: ['$avgRating', 0.7] }, 
-                            { $multiply: ['$nofInsights', 0.3] }
+                            { $multiply: ['$nofRatings', 0.3] }
                         ]
                     }
                 }
@@ -147,7 +147,7 @@ export async function getTopUsersByConditions(matchConditions: any) {
                     compositeScore: {
                         $add: [
                             { $multiply: ['$avgRating', 0.7] },
-                            { $multiply: ['$nofInsights', 0.3] }
+                            { $multiply: ['$nofRatings', 0.3] }
                         ]
                     }
                 }

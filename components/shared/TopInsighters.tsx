@@ -235,7 +235,7 @@ const TopInsighters = () => {
                                                         height={100}
                                                     />
                                                 ))}
-                                                <p className='ml-2 text-black font-semibold text-[9px] md:text-[15px]'>({user?.nofInsights})</p>
+                                                <p className='ml-2 text-black font-semibold text-[9px] md:text-[15px]'>({user?.nofRatings})</p>
                                             </div>
                                         </td>
                                     </tr>))}
