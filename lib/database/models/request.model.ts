@@ -1,6 +1,12 @@
 import { Schema, model, models, Document } from "mongoose";
 import { IUser } from "./user.model";
 
+const addDays = (date: Date, days: number) => {
+    const result = new Date(date);
+    result.setDate(result.getDate() + days);
+    return result;
+};
+
 export interface IRequest extends Document {
     _id: string
     User: IUser,
@@ -31,6 +37,7 @@ const RequestSchema = new Schema({
     message: { type: String },
     chatId: { type: String },
     messageId: { type: String },
+    endDate: { type: Date, default: () => addDays(new Date(), 5) },
     createdAt: { type: Date, default: Date.now }
 })
 
