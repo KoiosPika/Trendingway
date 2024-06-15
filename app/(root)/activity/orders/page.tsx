@@ -22,7 +22,7 @@ const page = async () => {
         <div className='my-3 justify-center items-center flex flex-col w-full rounded-lg mb-auto'>
           <div className='w-11/12 p-2 md:p-8 my-3 rounded-lg bg-white text-black'>
             <DetailsDialog page='Orders' />
-            <div className='flex flex-row justify-around items-center my-3 font-bold'>
+            <div className='flex flex-row justify-around items-center my-3 font-bold w-full'>
               <Link href={'/activity/orders'} className='flex flex-col md:flex-row justify-center items-center gap-3 px-4 py-3 text-center w-full border-t-2 border-[#258FC7] text-[#258FC7]'>
                 <Image src={'/icons/up-blue.svg'} alt='up' height={20} width={20} />
                 <p className='text-[12px] md:text-[15px]'>Orders</p>
