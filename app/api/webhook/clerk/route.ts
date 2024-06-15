@@ -1,13 +1,14 @@
 import { Webhook } from 'svix'
 import { headers } from 'next/headers'
-import { WebhookEvent, clerkClient } from '@clerk/nextjs/server'
+import { WebhookEvent } from '@clerk/nextjs/server'
 import { createUser, updateUser } from '@/lib/actions/user.actions'
 import { NextResponse } from 'next/server'
 import Clerk from '@clerk/clerk-sdk-node';
 import Session, { ISession } from '@/lib/database/models/session.model'
 
-export async function POST(req: Request) {
 
+export async function POST(req: Request) {
+  
   const clerkClient = Clerk.createClerkClient({ secretKey: process.env.CLERK_SECRET_KEY! })
 
   // You can find this in the Clerk Dashboard -> Webhooks -> choose the endpoint
