@@ -135,7 +135,8 @@ const PersonalInsightPage = ({ id, userId, user }: { id: string, userId: string,
                                     {message.User?._id != userId &&
                                         <div className='p-3 md:w-2/4 w-3/4 flex flex-row items-center gap-2'>
                                             <Image src={message.User?.photo} alt='pfp' height={40} width={40} className='mt-auto rounded-full' />
-                                            <p className='md:text-[15px] text-[13px] bg-slate-200 p-2 rounded-md font-semibold'>{message.text}</p>
+                                            {message.type === "text" && <p className='md:text-[15px] text-[13px] bg-slate-200 p-2 rounded-md font-semibold'>{message.text}</p>}
+                                            {message.type === "video" && <VideoMessage videoID={message.videoID} />}
                                         </div>}
                                 </div>
                             ))}
