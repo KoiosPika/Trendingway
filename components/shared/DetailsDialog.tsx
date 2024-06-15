@@ -8,22 +8,22 @@ const DetailsDialog = ({ page }: { page: string }) => {
         <AlertDialog>
             <AlertDialogTrigger className='flex w-full justify-center items-center'>
                 {page === 'Orders' && 
-                <div className='bg-yellow-400 w-full md:w-3/4 flex flex-row items-center rounded-lg px-7 py-2 border-[2px] border-black'>
+                <div className='bg-yellow-400 w-full md:w-3/4 flex flex-row items-center rounded-lg md:px-7 px-4 py-2 my-1' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                     <p className='text-[18px] md:text-[22px] font-bold text-black my-2'>Orders Page</p>
                     <p className='ml-auto bg-black text-white px-2 py-1 rounded-full font-bold'>Details {`->`}</p>
                 </div>}
                 {page === 'Requests' && 
-                <div className='bg-yellow-400 w-full md:w-3/4 flex flex-row items-center rounded-lg px-7 py-2 border-[2px] border-black'>
+                <div className='bg-yellow-400 w-full md:w-3/4 flex flex-row items-center rounded-lg md:px-7 px-4 py-2 my-1' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                     <p className='text-[18px] md:text-[22px] font-bold text-black my-2'>Requests Page</p>
                     <p className='ml-auto bg-black text-white px-2 py-1 rounded-full font-bold'>Details {`->`}</p>
                 </div>}
                 {page === 'Insights' && 
-                <div className='bg-yellow-400 w-full md:w-3/4 flex flex-row items-center rounded-lg px-7 py-2 border-[2px] border-black'>
+                <div className='bg-yellow-400 w-full md:w-3/4 flex flex-row items-center rounded-lg md:px-7 px-4 py-2 my-1' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                     <p className='text-[18px] md:text-[22px] font-bold text-black my-2'>Insights Page</p>
                     <p className='ml-auto bg-black text-white px-2 py-1 rounded-full font-bold'>Details {`->`}</p>
                 </div>}
                 {page === 'History' && 
-                <div className='bg-yellow-400 w-full md:w-3/4 flex flex-row items-center rounded-lg px-7 py-2 border-[2px] border-black'>
+                <div className='bg-yellow-400 w-full md:w-3/4 flex flex-row items-center rounded-lg md:px-7 px-4 py-2 my-1' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                     <p className='text-[18px] md:text-[22px] font-bold text-black my-2'>History Page</p>
                     <p className='ml-auto bg-black text-white px-2 py-1 rounded-full font-bold'>Details {`->`}</p>
                 </div>}

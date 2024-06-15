@@ -49,7 +49,7 @@ const EditProfile = ({ userId }: { userId: string }) => {
     const [selectedCategory, setSelectedCategory] = useState<string[]>(['']);
     const [loading, setLoading] = useState(false)
 
-    const enableSaving = TextInsight >= 0.99 && VideoInsight >= 1.99 && TextProfileInsight >= 2.99 && VideoProfileInsight >= 3.99;
+    const enableSaving = TextInsight >= 0.99 && VideoInsight >= 1.99 && LongTextInsight >= 1.99 && LongVideoInsight >= 2.99 && TextProfileInsight >= 2.99 && VideoProfileInsight >= 3.99 && TextPersonalInsight >= 0.99 && VideoPersonalInsight >= 2.99;
 
     useEffect(() => {
         async function getUser() {
@@ -94,6 +94,10 @@ const EditProfile = ({ userId }: { userId: string }) => {
     }, [category])
 
     const handleSubmit = async () => {
+
+        if(!enableSaving){
+            return;
+        }
 
         setLoading(true)
 
@@ -233,10 +237,10 @@ const EditProfile = ({ userId }: { userId: string }) => {
                                     <div className='h-2/4 w-[2px] bg-black'></div>
                                     <div className='flex flex-col items-center justify-center flex-1 mr-auto'>
                                         <div className='flex flex-row justify-center items-center w-full relative'>
-                                            <p className='text-[20px] md:text-[25px] font-semibold' style={{ color: LongTextInsight < 0.99 ? 'red' : 'black' }}>$</p>
-                                            <Input value={LongTextInsight} className='text-[20px] md:text-[25px] font-semibold w-2/3 border-0' type='number' onChange={(e) => setLongTextInsight(Number(e.target.value))} style={{ color: LongTextInsight < 0.99 ? 'red' : 'black' }} />
+                                            <p className='text-[20px] md:text-[25px] font-semibold' style={{ color: LongTextInsight < 1.99 ? 'red' : 'black' }}>$</p>
+                                            <Input value={LongTextInsight} className='text-[20px] md:text-[25px] font-semibold w-2/3 border-0' type='number' onChange={(e) => setLongTextInsight(Number(e.target.value))} style={{ color: LongTextInsight < 1.99 ? 'red' : 'black' }} />
                                         </div>
-                                        {LongTextInsight < 0.99 && <p className='mt-[5px] md:mr-[100px] mr-auto text-[10px] md:text-[12px] font-semibold text-red-500'>{`Price Can't be Bellow 0.99`}</p>}
+                                        {LongTextInsight < 1.99 && <p className='mt-[5px] md:mr-[100px] mr-auto text-[10px] md:text-[12px] font-semibold text-red-500'>{`Price Can't be Bellow 1.99`}</p>}
                                     </div>
                                     <div className='absolute top-1 right-2 flex flex-row items-center gap-2 text-purple-700'>
                                         {LongTextInsightAvailability && <p className='font-bold text-[12px]'>Service Available</p>}
@@ -261,10 +265,10 @@ const EditProfile = ({ userId }: { userId: string }) => {
                                     <div className='h-2/4 w-[2px] bg-black'></div>
                                     <div className='flex flex-col items-center justify-center flex-1 mr-auto'>
                                         <div className='flex flex-row justify-center items-center w-full'>
-                                            <p className='text-[20px] md:text-[25px] font-semibold' style={{ color: LongVideoInsight < 1.99 ? 'red' : 'black' }}>$</p>
-                                            <Input value={LongVideoInsight} className='text-[20px] md:text-[25px] font-semibold w-2/3 border-0' type='number' onChange={(e) => setLongVideoInsight(Number(e.target.value))} style={{ color: LongVideoInsight < 1.99 ? 'red' : 'black' }} />
+                                            <p className='text-[20px] md:text-[25px] font-semibold' style={{ color: LongVideoInsight < 2.99 ? 'red' : 'black' }}>$</p>
+                                            <Input value={LongVideoInsight} className='text-[20px] md:text-[25px] font-semibold w-2/3 border-0' type='number' onChange={(e) => setLongVideoInsight(Number(e.target.value))} style={{ color: LongVideoInsight < 2.99 ? 'red' : 'black' }} />
                                         </div>
-                                        {LongVideoInsight < 1.99 && <p className='mt-[5px] md:mr-[100px] mr-auto text-[10px] md:text-[12px]  font-semibold text-red-500'>{`Price Can't be Bellow 1.99`}</p>}
+                                        {LongVideoInsight < 2.99 && <p className='mt-[5px] md:mr-[100px] mr-auto text-[10px] md:text-[12px]  font-semibold text-red-500'>{`Price Can't be Bellow 2.99`}</p>}
                                     </div>
                                     <div className='absolute top-1 right-2 flex flex-row items-center gap-2 text-[#B69615]'>
                                         {LongVideoInsightAvailability && <p className='font-bold text-[12px]'>Service Available</p>}
@@ -354,10 +358,10 @@ const EditProfile = ({ userId }: { userId: string }) => {
                                     <div className='h-2/4 w-[2px] bg-black'></div>
                                     <div className='flex flex-col items-center justify-center flex-1 mr-auto'>
                                         <div className='flex flex-row justify-center items-center w-full'>
-                                            <p className='text-[20px] md:text-[25px] font-semibold' style={{ color: TextProfileInsight < 2.99 ? 'red' : 'black' }}>$</p>
-                                            <Input value={TextPersonalInsight} className='text-[20px] md:text-[25px] font-semibold w-2/3 border-0' type='number' onChange={(e) => setTextPersonalInsight(Number(e.target.value))} style={{ color: TextPersonalInsight < 2.99 ? 'red' : 'black' }} />
+                                            <p className='text-[20px] md:text-[25px] font-semibold' style={{ color: TextProfileInsight < 0.99 ? 'red' : 'black' }}>$</p>
+                                            <Input value={TextPersonalInsight} className='text-[20px] md:text-[25px] font-semibold w-2/3 border-0' type='number' onChange={(e) => setTextPersonalInsight(Number(e.target.value))} style={{ color: TextPersonalInsight < 0.99 ? 'red' : 'black' }} />
                                         </div>
-                                        {TextPersonalInsight < 2.99 && <p className='mt-[5px] md:mr-[100px] mr-auto text-[10px] md:text-[12px] font-semibold text-red-500'>{`Price Can't be Bellow 2.99`}</p>}
+                                        {TextPersonalInsight < 0.99 && <p className='mt-[5px] md:mr-[100px] mr-auto text-[10px] md:text-[12px] font-semibold text-red-500'>{`Price Can't be Bellow 0.99`}</p>}
                                     </div>
                                     <div className='absolute top-1 right-2 flex flex-row items-center gap-2 text-pink-500'>
                                         {TextPersonalInsightAvailability && <p className='font-bold text-[12px]'>Service Available</p>}
@@ -382,10 +386,10 @@ const EditProfile = ({ userId }: { userId: string }) => {
                                     <div className='h-2/4 w-[2px] bg-black'></div>
                                     <div className='flex flex-col items-center justify-center flex-1 mr-auto'>
                                         <div className='flex flex-row justify-center items-center w-full'>
-                                            <p className='text-[20px] md:text-[25px] font-semibold' style={{ color: VideoPersonalInsight < 3.99 ? 'red' : 'black' }}>$</p>
-                                            <Input value={VideoPersonalInsight} className='text-[20px] md:text-[25px] font-semibold w-2/3 border-0' type='number' onChange={(e) => setVideoPersonalInsight(Number(e.target.value))} style={{ color: VideoPersonalInsight < 3.99 ? 'red' : 'black' }} />
+                                            <p className='text-[20px] md:text-[25px] font-semibold' style={{ color: VideoPersonalInsight < 2.99 ? 'red' : 'black' }}>$</p>
+                                            <Input value={VideoPersonalInsight} className='text-[20px] md:text-[25px] font-semibold w-2/3 border-0' type='number' onChange={(e) => setVideoPersonalInsight(Number(e.target.value))} style={{ color: VideoPersonalInsight < 2.99 ? 'red' : 'black' }} />
                                         </div>
-                                        {VideoPersonalInsight < 3.99 && <p className='mt-[5px] md:mr-[100px] mr-auto text-[10px] md:text-[12px] font-semibold text-red-500'>{`Price Can't be Bellow 3.99`}</p>}
+                                        {VideoPersonalInsight < 2.99 && <p className='mt-[5px] md:mr-[100px] mr-auto text-[10px] md:text-[12px] font-semibold text-red-500'>{`Price Can't be Bellow 2.99`}</p>}
                                     </div>
                                     <div className='absolute top-1 right-2 flex flex-row items-center gap-2 text-[#b83c4c]'>
                                         {VideoPersonalInsightAvailability && <p className='font-bold text-[12px]'>Service Available</p>}

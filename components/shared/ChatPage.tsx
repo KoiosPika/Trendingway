@@ -76,7 +76,7 @@ const ChatPage = ({ id, userId }: { id: string, userId: string }) => {
                         {chat &&
                             <div className='flex flex-col pag-2'>
                                 <p className='font-semibold text-white text-[14px] md:text-[16px]'>{chat.User1._id == userId ? chat.User2.username : chat.User1.username}</p>
-                                <Link href={`/profile/${chat.User1._id == userId ? chat.User2.username : chat.User1.username}`} className='flex flex-row items-center gap-1'>
+                                <Link target='_blank' href={`/profile/${chat.User1._id == userId ? chat.User2.username : chat.User1.username}`} className='flex flex-row items-center gap-1'>
                                     <Image src={'/icons/arrow-up.svg'} alt='link' height={15} width={15} className='h-[13px] w-[13px] md:[15px] md:h-[15px]' />
                                     <p className='font-semibold text-white underline text-[14px]'>Visit Profile</p>
                                 </Link>

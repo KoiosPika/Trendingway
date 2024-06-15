@@ -115,7 +115,7 @@ const PersonalInsightPage = ({ id, userId, user }: { id: string, userId: string,
                         {chat &&
                             <div className='flex flex-col pag-2'>
                                 <p className='font-semibold text-white'>{chat.User1._id == userId ? chat.User2.username : chat.User1.username}</p>
-                                <Link href={`/profile/${chat.User1._id == userId ? chat.User2.username : chat.User1.username}`} className='flex flex-row items-center gap-1'>
+                                <Link target='_blank' href={`/profile/${chat.User1._id == userId ? chat.User2.username : chat.User1.username}`} className='flex flex-row items-center gap-1'>
                                     <Image src={'/icons/arrow-up.svg'} alt='link' height={15} width={15} />
                                     <p className='font-semibold text-white underline text-[14px]'>Visit Profile</p>
                                 </Link>
