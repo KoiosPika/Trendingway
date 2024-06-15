@@ -3,10 +3,10 @@ import { headers } from 'next/headers'
 import { WebhookEvent } from '@clerk/nextjs/server'
 import { createUser, updateUser } from '@/lib/actions/user.actions'
 import { NextResponse } from 'next/server'
-import Clerk from '@clerk/clerk-sdk-node';
+import { createClerkClient } from '@clerk/clerk-sdk-node';
 import Session, { ISession } from '@/lib/database/models/session.model'
 
-const clerkClient = Clerk.createClerkClient({ secretKey: process.env.CLERK_SECRET_KEY! })
+const clerkClient = createClerkClient({ secretKey: process.env.CLERK_SECRET_KEY! })
 
 export async function POST(req: Request) {
 
