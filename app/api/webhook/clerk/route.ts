@@ -6,10 +6,10 @@ import { NextResponse } from 'next/server'
 import { createClerkClient } from '@clerk/clerk-sdk-node';
 import Session, { ISession } from '@/lib/database/models/session.model'
 
-const clerkClient = createClerkClient({ secretKey: process.env.CLERK_SECRET_KEY! })
 
 export async function POST(req: Request) {
-
+  
+  const clerkClient = createClerkClient({ secretKey: process.env.CLERK_SECRET_KEY! })
 
   // You can find this in the Clerk Dashboard -> Webhooks -> choose the endpoint
   const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET
