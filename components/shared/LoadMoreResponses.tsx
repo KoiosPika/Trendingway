@@ -44,7 +44,7 @@ const LoadMoreResponses = ({ id, userId }: { id: string, userId: string }) => {
               {insight?.Request?.type === 'VideoProfileInsight' && <Image src={'/icons/video-icon.svg'} alt='video' width={200} height={200} className='bg-green-500 w-[40px] h-[40px] p-1.5 rounded-full ml-auto' />}
             </div>
             <p className='ml-3 mt-2 mr-auto text-[12.5px] h-[50px] overflow-hidden'>{insight?.Request?.description}</p>
-            <Link href={`/notifications/responses/${insight?.Request?._id}`} className='bg-yellow-400 w-full flex flex-row items-center justify-center gap-2 py-1 rounded-lg mt-4 mb-2'>
+            <Link href={`/activity/insights/${insight?.Request?._id}`} className='bg-yellow-400 w-full flex flex-row items-center justify-center gap-2 py-1 rounded-lg mt-4 mb-2'>
               <Image src={'/icons/star-black.svg'} alt='star' height={15} width={15} />
               <p className='text-[13px] md:text-[16px]'>Go to Insight</p>
             </Link>

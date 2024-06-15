@@ -28,7 +28,9 @@ export const createOrder = async (order: { User: string, amount: number, created
 }
 
 export const checkoutOrder = async (order: { amount: number, User: string }) => {
-    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
+    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+        apiVersion: '2024-04-10'
+    });
 
     try {
         const session = await stripe.checkout.sessions.create({

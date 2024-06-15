@@ -6,7 +6,9 @@ import { connectToDatabase } from "../database";
 import nodemailer from 'nodemailer';
 
 async function createAccount(userId: string) {
-    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
+    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+        apiVersion: '2024-04-10'
+    });
 
     try {
 
@@ -30,7 +32,9 @@ async function createAccount(userId: string) {
 
 async function createAccountLink(userId: string) {
 
-    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
+    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+        apiVersion: '2024-04-10'
+    });
 
     try {
         await connectToDatabase();

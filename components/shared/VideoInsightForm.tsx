@@ -20,7 +20,7 @@ const VideoInsightForm = ({ height, id, insighter, user }: { height: number, id:
     }, [])
 
     const submitVideoInsight = async (event: any) => {
-        router.push('/notifications/orders')
+        router.push('/activity/orders')
     }
 
     return (

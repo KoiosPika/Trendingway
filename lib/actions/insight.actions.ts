@@ -61,12 +61,12 @@ export async function createTextInsight(insight: { request: string, contentNotes
             HtmlBody:
                 `
                 <div style="max-width: 600px; margin: auto; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); font-family: Arial, sans-serif; text-align: center;">
-                <h2 style="color: #333;">A new response by ${updatedRequest?.Insighter?.username} is available!</h2>
+                <h2 style="color: #333;">A new insight by ${updatedRequest?.Insighter?.username} is available!</h2>
                 <div style="margin: 20px 0;">
                     <img src="${updatedRequest?.Insighter?.photo}" alt="User Image" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin-bottom: 20px;" />
                 </div>
                 <div style="margin-top: 20px;">
-                    <a href="https://www.insightend.com/notifications/responses" style="display: inline-block; padding: 10px 20px; font-size: 16px; color: #FFFFFF; background-color: #4299E1; border-radius: 5px; text-decoration: none;">Go to Text Insight</a>
+                    <a href="https://www.insightend.com/activity/insights" style="display: inline-block; padding: 10px 20px; font-size: 16px; color: #FFFFFF; background-color: #4299E1; border-radius: 5px; text-decoration: none;">Go to Text Insight</a>
                 </div>
             </div>
             `,
@@ -108,12 +108,12 @@ export async function createVideoInsight(insight: { request: string, videoID: st
             HtmlBody:
                 `
                 <div style="max-width: 600px; margin: auto; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); font-family: Arial, sans-serif; text-align: center;">
-                <h2 style="color: #333;">A new response by ${updatedRequest?.Insighter?.username} is available!</h2>
+                <h2 style="color: #333;">A new insight by ${updatedRequest?.Insighter?.username} is available!</h2>
                 <div style="margin: 20px 0;">
                     <img src="${updatedRequest?.Insighter?.photo}" alt="User Image" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin-bottom: 20px;" />
                 </div>
                 <div style="margin-top: 20px;">
-                    <a href="https://www.insightend.com/notifications/responses" style="display: inline-block; padding: 10px 20px; font-size: 16px; color: #FFFFFF; background-color: #EC1A0D; border-radius: 5px; text-decoration: none;">Go to Video Insight</a>
+                    <a href="https://www.insightend.com/activity/insights" style="display: inline-block; padding: 10px 20px; font-size: 16px; color: #FFFFFF; background-color: #EC1A0D; border-radius: 5px; text-decoration: none;">Go to Video Insight</a>
                 </div>
             </div>
             `,
@@ -155,12 +155,12 @@ export async function createVideoProfileInsight(insight: { request: string, vide
             HtmlBody:
                 `
                 <div style="max-width: 600px; margin: auto; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); font-family: Arial, sans-serif; text-align: center;">
-                <h2 style="color: #333;">A new response by ${updatedRequest?.Insighter?.username} is available!</h2>
+                <h2 style="color: #333;">A new insight by ${updatedRequest?.Insighter?.username} is available!</h2>
                 <div style="margin: 20px 0;">
                     <img src="${updatedRequest?.Insighter?.photo}" alt="User Image" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin-bottom: 20px;" />
                 </div>
                 <div style="margin-top: 20px;">
-                    <a href="https://www.insightend.com/notifications/responses" style="display: inline-block; padding: 10px 20px; font-size: 16px; color: #FFFFFF; background-color: #3AA213; border-radius: 5px; text-decoration: none;">Go to Video Profile Insight</a>
+                    <a href="https://www.insightend.com/activity/insights" style="display: inline-block; padding: 10px 20px; font-size: 16px; color: #FFFFFF; background-color: #3AA213; border-radius: 5px; text-decoration: none;">Go to Video Profile Insight</a>
                 </div>
             </div>
             `,
@@ -213,7 +213,7 @@ export async function createTextProfileInsight(insight: { request: string, bioNo
                     <img src="${updatedRequest?.Insighter?.photo}" alt="User Image" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin-bottom: 20px;" />
                 </div>
                 <div style="margin-top: 20px;">
-                    <a href="https://www.insightend.com/notifications/responses" style="display: inline-block; padding: 10px 20px; font-size: 16px; color: #FFFFFF; background-color: #E86510; border-radius: 5px; text-decoration: none;">Go to Profile Text Insight</a>
+                    <a href="https://www.insightend.com/activity/insights" style="display: inline-block; padding: 10px 20px; font-size: 16px; color: #FFFFFF; background-color: #E86510; border-radius: 5px; text-decoration: none;">Go to Profile Text Insight</a>
                 </div>
             </div>
             `,
@@ -269,7 +269,7 @@ export async function createVideoPersonalInsight(insight: { request: string, vid
                     <img src="${updatedRequest?.Insighter?.photo}" alt="User Image" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin-bottom: 20px;" />
                 </div>
                 <div style="margin-top: 20px;">
-                    <a href="https://www.insightend.com/notifications/responses" style="display: inline-block; padding: 10px 20px; font-size: 16px; color: #FFFFFF; background-color: #E86510; border-radius: 5px; text-decoration: none;">Go to Personal Text Insight</a>
+                    <a href="https://www.insightend.com/activity/insights" style="display: inline-block; padding: 10px 20px; font-size: 16px; color: #FFFFFF; background-color: #E86510; border-radius: 5px; text-decoration: none;">Go to Personal Text Insight</a>
                 </div>
             </div>
             `,
@@ -324,7 +324,7 @@ export async function createTextPersonalInsight(insight: { request: string, text
                     <img src="${updatedRequest?.Insighter?.photo}" alt="User Image" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin-bottom: 20px;" />
                 </div>
                 <div style="margin-top: 20px;">
-                    <a href="https://www.insightend.com/notifications/responses" style="display: inline-block; padding: 10px 20px; font-size: 16px; color: #FFFFFF; background-color: #E86510; border-radius: 5px; text-decoration: none;">Go to Personal Text Insight</a>
+                    <a href="https://www.insightend.com/activity/insights" style="display: inline-block; padding: 10px 20px; font-size: 16px; color: #FFFFFF; background-color: #E86510; border-radius: 5px; text-decoration: none;">Go to Personal Text Insight</a>
                 </div>
             </div>
             `,

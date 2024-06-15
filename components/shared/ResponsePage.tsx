@@ -28,7 +28,7 @@ const ResponsePage = ({ id, userId }: { id: string, userId: string }) => {
             } else if (insight?.Request.platform === 'Instagram') {
                 setHeight(750)
             } else if (insight?.Request.platform === 'Youtube') {
-                setHeight(950);
+                setHeight(900);
             }
         }
     }, [insight])
@@ -40,8 +40,8 @@ const ResponsePage = ({ id, userId }: { id: string, userId: string }) => {
             if (thisInsight?.User?._id != userId) {
                 router.push('/profile')
             } else {
-                if (thisInsight.videoID) {
-                    const thisPlaybackId = await getPlaybackId(thisInsight.videoID)
+                if (thisInsight.insightID) {
+                    const thisPlaybackId = await getPlaybackId(thisInsight.insightID)
                     setPlaybackId(thisPlaybackId as string)
                 }
                 setRenderPage(true);
@@ -86,7 +86,7 @@ const ResponsePage = ({ id, userId }: { id: string, userId: string }) => {
 
 
                             {insight?.Request?.platform === 'Instagram' &&
-                                <ScrollArea className={`rounded-lg h-full w-full md:w-[400px] bg-white md:mt-5 flex-col flex justify-center items-center border-[2px] border-slate-300`} style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
+                                <ScrollArea className={`rounded-lg h-full w-full md:w-[400px] bg-white md:mt-5 flex-col flex justify-center items-center border-[2px] border-slate-300`} style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' , height}}>
                                     <div className='mt-2 font-semibold text-center w-full flex justify-center items-center mb-3'>
                                         {insight && <Image className='w-[50px] h-[50px] rounded-full ml-3 border-2 border-green-400' src={insight?.User?.photo} alt='pfp' height={500} width={500} />}
                                         <p className='ml-2 mr-auto'>{insight?.User?.username}</p>
@@ -99,7 +99,7 @@ const ResponsePage = ({ id, userId }: { id: string, userId: string }) => {
 
 
                             {insight?.Request?.platform === 'Youtube' &&
-                                <div className={`rounded-lg h-full w-full md:w-[400px] bg-white md:mt-5 flex-col flex justify-center items-center border-[2px] border-slate-300`} style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
+                                <div className={`rounded-lg h-full w-full md:w-[400px] bg-white md:mt-5 flex-col flex justify-center items-center border-[2px] border-slate-300`} style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray', height }}>
                                     <div className='mt-2 font-semibold text-center w-full flex justify-center items-center mb-2'>
                                         {insight && <Image className='w-[50px] h-[50px] rounded-full ml-3 border-2 border-green-400' src={insight?.User?.photo} alt='pfp' height={500} width={500} />}
                                         <div className='flex flex-col mr-auto ml-2'>
@@ -113,7 +113,7 @@ const ResponsePage = ({ id, userId }: { id: string, userId: string }) => {
                                 </div>}
 
 
-                            <ScrollArea className={`w-full md:w-[400px] md:h-[0px] h-full bg-white rounded-lg flex-col flex justify-center items-center mt-5 md:ml-3 border-[2px] border-slate-300`} style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray', height: height - 100 }}>
+                            <ScrollArea className={`w-full md:w-[400px] md:h-[0px] h-full bg-white rounded-lg flex-col flex justify-center items-center mt-5 md:ml-3 border-[2px] border-slate-300`} style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray', height: height }}>
                                 <div className='mt-2 font-semibold text-center w-full flex justify-center items-center mb-3'>
                                     {insight && <Image className='w-[50px] h-[50px] rounded-full ml-3 border-2 border-green-400' src={insight?.Insighter?.photo} alt='pfp' height={500} width={500} />}
                                     <p className='ml-2 mr-auto'>{insight?.Insighter?.username}</p>
