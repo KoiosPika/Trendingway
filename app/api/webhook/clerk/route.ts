@@ -3,8 +3,12 @@ import { headers } from 'next/headers'
 import { WebhookEvent, clerkClient } from '@clerk/nextjs/server'
 import { createUser, updateUser } from '@/lib/actions/user.actions'
 import { NextResponse } from 'next/server'
+import Clerk from '@clerk/clerk-sdk-node';
+import Session, { ISession } from '@/lib/database/models/session.model'
 
 export async function POST(req: Request) {
+
+  const clerkClient = Clerk.createClerkClient({ secretKey: process.env.CLERK_SECRET_KEY! })
 
   // You can find this in the Clerk Dashboard -> Webhooks -> choose the endpoint
   const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET
@@ -88,6 +92,22 @@ export async function POST(req: Request) {
     const updatedUser = await updateUser({ id, user })
 
     return NextResponse.json({ message: 'OK', user: updatedUser })
+  }
+
+  if (eventType === 'session.created') {
+    const { id, user_id } = evt.data;
+
+    const existingSession = await Session.findOne({ user: user_id })
+
+    if (existingSession) {
+      await clerkClient.sessions.revokeSession(existingSession.sessionId)
+
+      await Session.findOneAndDelete({ user: user_id })
+    }
+
+    const newSession = await Session.create({ user: user_id, sessionId: id })
+
+    return NextResponse.json({ message: 'OK' })
   }
 
   return new Response('', { status: 200 })
