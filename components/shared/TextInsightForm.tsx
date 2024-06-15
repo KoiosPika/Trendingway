@@ -1,12 +1,15 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { Input } from '../ui/input'
 import { ScrollArea } from '../ui/scroll-area'
 import { createTextInsight } from '@/lib/actions/insight.actions'
 import { useRouter } from 'next/navigation'
 import { Textarea } from '../ui/textarea'
+import useSessionCheck from '@/lib/hooks/useSessionCheck'
+import { getAuth } from '@clerk/nextjs/server'
+import { useSession } from '@clerk/nextjs'
 
-const TextInsightForm = ({ height, id, insighter, user }: { height: number, id: string, insighter: string, user:string }) => {
+const TextInsightForm = ({ height, id, insighter, user }: { height: number, id: string, insighter: string, user: string }) => {
     const [contentNotes, setContentNotes] = useState<string>('')
     const [contentRate, setContentRate] = useState<number>(1)
 
@@ -26,13 +29,34 @@ const TextInsightForm = ({ height, id, insighter, user }: { height: number, id: 
     const [loading, setLoading] = useState<boolean>(false)
     const router = useRouter();
 
+    const { session } = useSession();
+
+    useEffect(() => {
+        const checkSession = async () => {
+            if (!session?.status) {
+                router.replace('/session-revoked');
+            }
+        };
+
+        const intervalId = setInterval(checkSession, 1000); // Check every second
+
+        return () => clearInterval(intervalId);
+    }, [session]);
+
     const submitInsight = async () => {
 
         setLoading(true);
 
+        await new Promise(resolve => setTimeout(resolve, 5000));
+
+        if (!session?.status) {
+            router.push('/session-revoked');
+            return;
+        }
+
         const insight = {
             request: id,
-            User:user,
+            User: user,
             Insighter: insighter || '',
             contentNotes: contentNotes || '',
             contentRate,
@@ -54,7 +78,7 @@ const TextInsightForm = ({ height, id, insighter, user }: { height: number, id: 
     }
 
     return (
-        <ScrollArea className={`w-[400px] bg-white rounded-tr-lg rounded-br-lg flex flex-col items-center`} style={{height}}>
+        <ScrollArea className={`w-[400px] bg-white rounded-tr-lg rounded-br-lg flex flex-col items-center`} style={{ height }}>
             <div className='w-full mt-2 mb-5 flex flex-col items-center justify-center'>
                 <p className='bg-purple-500 text-white px-3 py-2 rounded-lg font-semibold mr-auto ml-5'>Content</p>
                 <div className='flex flex-row justify-around my-3'>

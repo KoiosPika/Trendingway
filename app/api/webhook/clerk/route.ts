@@ -4,7 +4,7 @@ import { WebhookEvent } from '@clerk/nextjs/server'
 import { createUser, updateUser } from '@/lib/actions/user.actions'
 import { NextResponse } from 'next/server'
 import { createClerkClient } from '@clerk/clerk-sdk-node';
-import Session, { ISession } from '@/lib/database/models/session.model'
+import Session from '@/lib/database/models/session.model'
 import { connectToDatabase } from '@/lib/database'
 
 
@@ -104,9 +104,10 @@ export async function POST(req: Request) {
     const existingSession = await Session.findOne({ user: user_id })
 
     if (existingSession) {
-      await clerkClient.sessions.revokeSession(existingSession.sessionId)
-
-      await Session.findOneAndDelete({ user: user_id })
+      await Promise.all([
+        clerkClient.sessions.revokeSession(existingSession.sessionId),
+        Session.findOneAndDelete({ user: user_id })
+      ]);
     }
 
     const newSession = await Session.create({ user: user_id, sessionId: id })
