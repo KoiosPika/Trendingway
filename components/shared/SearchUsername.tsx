@@ -21,7 +21,6 @@ const SearchUsername = () => {
 
             setUsers(searchedUsers)
             setLoading(false)
-            console.log(users)
         }
 
         if (search.length >= 3) {

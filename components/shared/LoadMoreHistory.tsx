@@ -1,12 +1,10 @@
 'use client'
 
-import { getPaginatedHistory, getPaginatedOrders } from '@/lib/actions/request.actions'
+import { getPaginatedHistory } from '@/lib/actions/request.actions'
 import { IRequest } from '@/lib/database/models/request.model'
 import { timeAgo } from '@/lib/utils'
 import Image from 'next/image'
-import Link from 'next/link'
 import React, { useState } from 'react'
-import CancelOrder from './CancelOrder'
 import { Button } from '../ui/button'
 
 const LoadMoreHistory = ({ id, userId }: { id: string, userId: string }) => {

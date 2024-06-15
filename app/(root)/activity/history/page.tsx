@@ -1,3 +1,4 @@
+import DetailsDialog from '@/components/shared/DetailsDialog'
 import LoadMoreHistory from '@/components/shared/LoadMoreHistory'
 import { Button } from '@/components/ui/button'
 import { getAllHistory } from '@/lib/actions/request.actions'
@@ -20,6 +21,7 @@ const page = async () => {
             <div className='w-full flex flex-col max-w-[1200px] justify-center items-center'>
                 <div className='my-3 justify-center items-center flex flex-col w-full rounded-lg mb-auto'>
                     <div className='w-11/12 p-2 md:p-8 my-3 rounded-lg bg-white text-black'>
+                    <DetailsDialog page='History' />
                         <div className='flex flex-row justify-around items-center my-3 font-bold'>
                             <Link href={'/activity/orders'} className='flex flex-col md:flex-row justify-center items-center gap-3 px-4 py-3 text-center w-full'>
                                 <Image src={'/icons/up.svg'} alt='up' height={20} width={20} />
@@ -55,6 +57,8 @@ const page = async () => {
                                         {request.type === 'LongVideoInsight' && <Image src={'/icons/video.svg'} alt='video' width={200} height={200} className='bg-[#B69615] w-[40px] h-[40px] p-1.5 rounded-full ml-auto' />}
                                         {request.type === 'TextProfileInsight' && <Image src={'/icons/account.svg'} alt='video' width={200} height={200} className='bg-orange-500 w-[40px] h-[40px] p-1.5 rounded-full ml-auto' />}
                                         {request.type === 'VideoProfileInsight' && <Image src={'/icons/video-icon.svg'} alt='video' width={200} height={200} className='bg-green-500 w-[40px] h-[40px] p-1.5 rounded-full ml-auto' />}
+                                        {request.type === 'TextPersonalInsight' && <Image src={'/icons/people.svg'} alt='video' width={200} height={200} className='bg-pink-500 w-[40px] h-[40px] p-1.5 rounded-full ml-auto' />}
+                                        {request.type === 'VideoPersonalInsight' && <Image src={'/icons/selfie.svg'} alt='video' width={200} height={200} className='bg-red-700 w-[40px] h-[40px] p-1.5 rounded-full ml-auto' />}
                                     </div>
                                     <p className='ml-3 mt-2 mr-auto text-[12.5px] h-[50px] overflow-hidden'>{request.description}</p>
                                     {request.status === 'Awaiting' && <Button className='bg-yellow-400 w-full flex flex-row items-center justify-center gap-2 py-1 rounded-lg mt-4 mb-2 hover:cursor-default hover:bg-yellow-400'>

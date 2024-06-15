@@ -2,7 +2,6 @@
 
 import { getAllEarnings, getEarningsData, getPaginatedEarnings } from '@/lib/actions/earning.actions'
 import { IEarning } from '@/lib/database/models/earning.model'
-import { formatDate } from '@/lib/utils'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import EarningDialog from './EarningDialog'
@@ -32,7 +31,6 @@ const EarningOrders = ({ userId }: { userId: string }) => {
 
         async function getData() {
             const requestedOrders = await getEarningsData(userId, year)
-            console.log(requestedOrders)
             setEarningsData(requestedOrders)
         }
 
@@ -129,17 +127,14 @@ const LoadMoreEarnings = ({ userId, id }: { userId: string, id: string }) => {
     const [lastOrderId, setLastOrderId] = useState(id)
 
     const getOrders = async () => {
-        try {
-            setloading(true)
-            const requestedEarnings = await getPaginatedEarnings(userId, lastOrderId)
-            setEarnings((prevEarnings) => [...prevEarnings, ...requestedEarnings]);
-            if (requestedEarnings.length > 0) {
-                setLastOrderId(requestedEarnings[requestedEarnings.length - 1]._id)
-            }
-            setloading(false)
-        } catch (error) {
-            console.log(error)
+
+        setloading(true)
+        const requestedEarnings = await getPaginatedEarnings(userId, lastOrderId)
+        setEarnings((prevEarnings) => [...prevEarnings, ...requestedEarnings]);
+        if (requestedEarnings.length > 0) {
+            setLastOrderId(requestedEarnings[requestedEarnings.length - 1]._id)
         }
+        setloading(false)
     }
 
     return (

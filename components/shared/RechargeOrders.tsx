@@ -121,15 +121,13 @@ const LoadMoreRecharges = ({ userId }: { userId: string }) => {
     const [page, setPage] = useState(1)
 
     const getOrders = async () => {
-        try {
-            setloading(true)
-            const requestedOrders = await getPaginatedOrders(userId, page * 3)
-            setOrders((prevOrders) => [...prevOrders, ...requestedOrders]);
-            setloading(false)
-            setPage(page + 1);
-        } catch (error) {
-            console.log(error)
-        }
+
+        setloading(true)
+        const requestedOrders = await getPaginatedOrders(userId, page * 3)
+        setOrders((prevOrders) => [...prevOrders, ...requestedOrders]);
+        setloading(false)
+        setPage(page + 1);
+
     }
 
     return (

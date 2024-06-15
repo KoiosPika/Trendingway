@@ -42,19 +42,14 @@ const LongTextInsight = ({ price, userId, insighter }: { price: number, userId: 
 
         setLoading(true);
         await fetchUserData();
-        if(user && user?.creditBalance < price){
+        if (user && user?.creditBalance < price) {
             return;
         }
 
-        try {
-            await createRequest({ User: userId, Insighter: insighter, postLink: URL, description, platform, price, type: 'LongTextInsight' });
+        await createRequest({ User: userId, Insighter: insighter, postLink: URL, description, platform, price, type: 'LongTextInsight' });
 
-            setLoading(false);
-            setFinished(true);
-        } catch (error) {
-            console.log(error);
-            setLoading(false);
-        }
+        setLoading(false);
+        setFinished(true);
     }
 
     return (
@@ -113,7 +108,7 @@ const LongTextInsight = ({ price, userId, insighter }: { price: number, userId: 
                     <Textarea value={description} placeholder='Describe the problem' onChange={(e) => setDescription(e.target.value)} />
                 </AlertDialogHeader>
                 <SignedIn>
-                <AlertDialogFooter>
+                    <AlertDialogFooter>
                         {user && (user.creditBalance < price) && (
                             <Button className='bg-red-700 hover:bg-red-700 hover:cursor-default' disabled>
                                 Insufficient Funds

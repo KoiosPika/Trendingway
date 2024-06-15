@@ -56,7 +56,7 @@ const page = async ({ params: { username } }: { params: { username: string } }) 
                             </div>
                         </div>
                         <div className='flex flex-col justify-center items-center md:flex-row w-full gap-2 my-3 text-black'>
-                            <Link href={'/edit-profile'} className='bg-yellow-400 w-3/4 self-center flex justify-center items-center py-2 rounded-[10px] font-bold'>Edit Profile</Link>
+                            <Link href={'#short'} className='bg-yellow-400 w-3/4 self-center flex justify-center items-center py-2 rounded-[10px] font-bold'>Explore Services</Link>
                         </div>
                     </div>
                     <p className='mr-auto my-3 font-semibold text-[14px] md:text-[18px] ml-3'>Tags:</p>

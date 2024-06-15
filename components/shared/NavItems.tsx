@@ -1,8 +1,5 @@
 'use client'
 
-import { Links } from '@/constants'
-import { getUserbyUserId } from '@/lib/actions/user.actions'
-import { auth } from '@clerk/nextjs/server'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'

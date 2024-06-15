@@ -6,9 +6,6 @@ import NavItems from './NavItems'
 import MobileNav from './MobileNav'
 import { Button } from '../ui/button'
 import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
-import { auth } from '@clerk/nextjs/server'
-import { getUserbyUserId } from '@/lib/actions/user.actions'
-import { useRouter } from 'next/router'
 
 const Header = () => {
 

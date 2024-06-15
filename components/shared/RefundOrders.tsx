@@ -71,17 +71,15 @@ const LoadMoreRefunds = ({ userId, id }: { userId: string, id: string }) => {
     const [lastOrderId, setLastOrderId] = useState<string>(id)
 
     const getOrders = async () => {
-        try {
-            setloading(true)
-            const requestedRefunds = await getPaginatedRefunds(userId, lastOrderId)
-            setRefunds((prevOrders) => [...prevOrders, ...requestedRefunds]);
-            if (requestedRefunds.length > 0) {
-                setLastOrderId(requestedRefunds[requestedRefunds.length - 1]._id)
-            }
-            setloading(false)
-        } catch (error) {
-            console.log(error)
+
+        setloading(true)
+        const requestedRefunds = await getPaginatedRefunds(userId, lastOrderId)
+        setRefunds((prevOrders) => [...prevOrders, ...requestedRefunds]);
+        if (requestedRefunds.length > 0) {
+            setLastOrderId(requestedRefunds[requestedRefunds.length - 1]._id)
         }
+        setloading(false)
+
     }
 
     return (

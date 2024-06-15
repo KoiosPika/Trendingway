@@ -42,19 +42,15 @@ const VideoProfileInsight = ({ price, userId, insighter }: { price: number, user
 
         setLoading(true);
         await fetchUserData();
-        if(user && user?.creditBalance < price){
+        if (user && user?.creditBalance < price) {
             return;
         }
 
-        try {
-            await createRequest({ User: userId, Insighter: insighter, postLink: URL, description, platform, price, type: 'VideoProfileInsight' });
+        await createRequest({ User: userId, Insighter: insighter, postLink: URL, description, platform, price, type: 'VideoProfileInsight' });
 
-            setLoading(false);
-            setFinished(true);
-        } catch (error) {
-            console.log(error);
-            setLoading(false);
-        }
+        setLoading(false);
+        setFinished(true);
+
     }
 
     return (

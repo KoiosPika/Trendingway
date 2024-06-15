@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { ScrollArea } from '../ui/scroll-area'
-import { Input } from '../ui/input'
-import Image from 'next/image'
-import { createVideoInsight } from '@/lib/actions/insight.actions'
 import { useRouter } from 'next/navigation'
 import { getUploadUrl } from '@/lib/actions/mux.actions'
 import MuxUploader, { MuxUploaderDrop, MuxUploaderFileSelect, MuxUploaderProgress } from '@mux/mux-uploader-react';

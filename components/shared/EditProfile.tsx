@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from 'react'
 import { Textarea } from '../ui/textarea'
 import { Input } from '../ui/input'
-import { getUserbyUserId } from '@/lib/actions/user.actions'
 import { editUserData, getUserDataByUserId } from '@/lib/actions/userData.actions'
 import { IUserData } from '@/lib/database/models/userData.model'
 import { Button } from '../ui/button'

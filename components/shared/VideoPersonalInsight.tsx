@@ -4,9 +4,8 @@ import React, { useEffect, useState } from 'react'
 import { AlertDialog, AlertDialogCancel, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '../ui/alert-dialog'
 import { Button } from '../ui/button'
 import Image from 'next/image'
-import { Input } from '../ui/input'
 import { Textarea } from '../ui/textarea'
-import { createPersonalRequest, createRequest } from '@/lib/actions/request.actions'
+import { createPersonalRequest } from '@/lib/actions/request.actions'
 import { IUserData } from '@/lib/database/models/userData.model'
 import { getUserDataByUserId } from '@/lib/actions/userData.actions'
 import Link from 'next/link'
@@ -37,19 +36,14 @@ const VideoPersonalInsight = ({ price, userId, insighter }: { price: number, use
 
         setLoading(true);
         await fetchUserData();
-        if(user && user?.creditBalance < price){
+        if (user && user?.creditBalance < price) {
             return;
         }
 
-        try {
-            await createPersonalRequest(userId, insighter, description, price, 'VideoPersonalInsight');
+        await createPersonalRequest(userId, insighter, description, price, 'VideoPersonalInsight');
+        setLoading(false);
+        setFinished(true);
 
-            setLoading(false);
-            setFinished(true);
-        } catch (error) {
-            console.log(error);
-            setLoading(false);
-        }
     };
 
     return (

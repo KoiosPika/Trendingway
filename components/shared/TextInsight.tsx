@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
-import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '../ui/alert-dialog'
+import { AlertDialog, AlertDialogCancel, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '../ui/alert-dialog'
 import { Button } from '../ui/button'
 import Image from 'next/image'
 import { Input } from '../ui/input'
@@ -42,19 +42,15 @@ const TextInsight = ({ price, userId, insighter }: { price: number, userId: stri
 
         setLoading(true);
         await fetchUserData();
-        if(user && user?.creditBalance < price){
+        if (user && user?.creditBalance < price) {
             return;
         }
 
-        try {
-            await createRequest({ User: userId, Insighter: insighter, postLink: URL, description, platform, price, type: 'TextInsight' });
+        await createRequest({ User: userId, Insighter: insighter, postLink: URL, description, platform, price, type: 'TextInsight' });
 
-            setLoading(false);
-            setFinished(true);
-        } catch (error) {
-            console.log(error);
-            setLoading(false);
-        }
+        setLoading(false);
+        setFinished(true);
+
     }
 
     return (
@@ -113,7 +109,7 @@ const TextInsight = ({ price, userId, insighter }: { price: number, userId: stri
                     <Textarea value={description} placeholder='Describe the problem' onChange={(e) => setDescription(e.target.value)} />
                 </AlertDialogHeader>
                 <SignedIn>
-                <AlertDialogFooter>
+                    <AlertDialogFooter>
                         {user && (user.creditBalance < price) && (
                             <Button className='bg-red-700 hover:bg-red-700 hover:cursor-default' disabled>
                                 Insufficient Funds

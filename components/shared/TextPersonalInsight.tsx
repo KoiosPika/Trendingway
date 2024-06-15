@@ -40,15 +40,11 @@ const TextPersonalInsight = ({ price, userId, insighter }: { price: number, user
             return;
         }
 
-        try {
-            await createPersonalRequest(userId, insighter, description, price, 'TextPersonalInsight');
+        await createPersonalRequest(userId, insighter, description, price, 'TextPersonalInsight');
 
-            setLoading(false);
-            setFinished(true);
-        } catch (error) {
-            console.log(error);
-            setLoading(false);
-        }
+        setLoading(false);
+        setFinished(true);
+
     };
 
     return (

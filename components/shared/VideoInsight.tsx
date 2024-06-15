@@ -43,19 +43,15 @@ const VideoInsight = ({ price, userId, insighter }: { price: number, userId: str
         setLoading(true);
 
         await fetchUserData();
-        if(user && user?.creditBalance < price){
+        if (user && user?.creditBalance < price) {
             return;
         }
 
-        try {
-            await createRequest({ User: userId, Insighter: insighter, postLink: URL, description, platform, price, type: 'VideoInsight' });
+        await createRequest({ User: userId, Insighter: insighter, postLink: URL, description, platform, price, type: 'VideoInsight' });
 
-            setLoading(false);
-            setFinished(true);
-        } catch (error) {
-            console.log(error);
-            setLoading(false);
-        }
+        setLoading(false);
+        setFinished(true);
+
     }
 
     return (
@@ -115,7 +111,7 @@ const VideoInsight = ({ price, userId, insighter }: { price: number, userId: str
                 </AlertDialogHeader>
                 <SignedIn>
                     <AlertDialogFooter>
-                    {user && (user.creditBalance < price) && (
+                        {user && (user.creditBalance < price) && (
                             <Button className='bg-red-700 hover:bg-red-700 hover:cursor-default' disabled>
                                 Insufficient Funds
                             </Button>
