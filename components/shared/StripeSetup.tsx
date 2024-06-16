@@ -9,7 +9,7 @@ const StripeSetup = ({ userId }: { userId: string }) => {
         const link = await handleCreatingAccount(userId);
 
         if (link) {
-            window.location.href = link; // Redirect to the Stripe onboarding link
+            window.location.href = link;
           } else {
             console.error('Error creating account link');
           }

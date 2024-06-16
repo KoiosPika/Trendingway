@@ -13,7 +13,21 @@ async function createAccount(userId: string) {
     try {
 
         const account = await stripe.accounts.create({
-            type: 'express'
+            type: 'express',
+            capabilities: {
+                transfers: { requested: true },
+            },
+            controller: {
+                fees: {
+                    payer: 'application',
+                },
+                losses: {
+                    payments: 'application',
+                },
+                stripe_dashboard: {
+                    type: 'express',
+                },
+            },
         })
 
         await connectToDatabase();
