@@ -43,16 +43,16 @@ const DetailsDialog = ({ page }: { page: string }) => {
                 </AlertDialogHeader>
                 {page === 'Orders' &&
                     <>
-                        <p className='font-semibold bg-slate-200 p-2 rounded-lg'>1. On this page, you can check out all the services your customers have requested from you</p>
-                        <p className='font-semibold bg-slate-200 p-2 rounded-lg'>2. You can also cancel an order and provide a message to the customer explianing why</p>
-                        <p className='font-semibold bg-slate-200 p-2 rounded-lg'>3. Any services that last over 5 days will be refunded automatically</p>
+                        <p className='font-semibold bg-slate-200 p-2 rounded-lg'>On this page, you can check out all the services your customers have requested from you</p>
+                        <p className='font-semibold bg-slate-200 p-2 rounded-lg'>You can also cancel an order and provide a message to the customer explianing why</p>
+                        <p className='font-semibold bg-slate-200 p-2 rounded-lg'>Any services that last over 5 days will be refunded automatically</p>
                     </>}
                 {page === 'Requests' &&
                     <>
-                        <p className='font-semibold bg-slate-200 p-2 rounded-lg'>1. On this page, you can check the status of the requests you submitted</p>
-                        <p className='font-semibold bg-slate-200 p-2 rounded-lg'>2. {`'Awaiting'`} means the insighter {`hasn't`} insighted your order yet </p>
-                        <p className='font-semibold bg-slate-200 p-2 rounded-lg'>3. {`'Canceled'`} means the insighter has canceled your order</p>
-                        <p className='font-semibold bg-slate-200 p-2 rounded-lg'>3. You can click on {`'Canceled'`} to see the details of cancelation</p>
+                        <p className='font-semibold bg-slate-200 p-2 rounded-lg'>On this page, you can check the status of the requests you submitted</p>
+                        <p className='font-semibold bg-slate-200 p-2 rounded-lg'>{`'Awaiting'`} means the insighter {`hasn't`} insighted your order yet </p>
+                        <p className='font-semibold bg-slate-200 p-2 rounded-lg'>{`'Canceled'`} means the insighter has canceled your order</p>
+                        <p className='font-semibold bg-slate-200 p-2 rounded-lg'>You can click on {`'Canceled'`} to see the details of cancelation</p>
                     </>}
                 {page === 'Insights' &&
                     <>
@@ -60,10 +60,10 @@ const DetailsDialog = ({ page }: { page: string }) => {
                     </>}
                 {page === 'History' &&
                     <>
-                        <p className='font-semibold bg-slate-200 p-2 rounded-lg'>1. On this page, you can check out all the orders you have received</p>
-                        <p className='font-semibold bg-slate-200 p-2 rounded-lg'>2. {`'Awaiting'`} means the you {`haven't`} insighted the order yet </p>
-                        <p className='font-semibold bg-slate-200 p-2 rounded-lg'>3. {`'Canceled'`} means the you have canceled the order</p>
-                        <p className='font-semibold bg-slate-200 p-2 rounded-lg'>4. {`'Completed'`} means the you already insighted the order</p>
+                        <p className='font-semibold bg-slate-200 p-2 rounded-lg'> On this page, you can check out all the orders you have received</p>
+                        <p className='font-semibold bg-slate-200 p-2 rounded-lg'> {`'Awaiting'`} means the you {`haven't`} insighted the order yet </p>
+                        <p className='font-semibold bg-slate-200 p-2 rounded-lg'> {`'Canceled'`} means the you have canceled the order</p>
+                        <p className='font-semibold bg-slate-200 p-2 rounded-lg'> {`'Completed'`} means the you already insighted the order</p>
                     </>}
             </AlertDialogContent>
         </AlertDialog>

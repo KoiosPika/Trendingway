@@ -1,9 +1,8 @@
 'use server'
 
 import Stripe from "stripe";
-import UserData, { IUserData } from "../database/models/userData.model";
+import UserData from "../database/models/userData.model";
 import { connectToDatabase } from "../database";
-import nodemailer from 'nodemailer';
 import { ServerClient } from "postmark";
 
 async function createAccount(userId: string) {
