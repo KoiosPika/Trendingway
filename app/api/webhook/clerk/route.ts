@@ -6,10 +6,11 @@ import { NextResponse } from 'next/server'
 import { createClerkClient } from '@clerk/clerk-sdk-node';
 import Session from '@/lib/database/models/session.model'
 import { connectToDatabase } from '@/lib/database'
+import User from '@/lib/database/models/user.model'
 
 
 export async function POST(req: Request) {
-  
+
   const clerkClient = createClerkClient({ secretKey: process.env.CLERK_SECRET_KEY! })
 
   // You can find this in the Clerk Dashboard -> Webhooks -> choose the endpoint
@@ -104,13 +105,15 @@ export async function POST(req: Request) {
     const existingSession = await Session.findOne({ user: user_id })
 
     if (existingSession) {
-      await Promise.all([
-        clerkClient.sessions.revokeSession(existingSession.sessionId),
-        Session.findOneAndDelete({ user: user_id })
-      ]);
+
+      await clerkClient.sessions.revokeSession(existingSession.sessionId)
+      await Session.findOneAndUpdate({ user: user_id }, { sessionId: id })
+
+    } else {
+      const user = await User.findOne({ clerkId: user_id })
+      const newSession = await Session.create({ user: user_id, sessionId: id, User: user._id })
     }
 
-    const newSession = await Session.create({ user: user_id, sessionId: id })
 
     return NextResponse.json({ message: 'OK' })
   }
