@@ -13,6 +13,8 @@ import { useRouter } from 'next/navigation';
 import VideoMessage from './VideoMessage';
 import { createTextPersonalInsight } from '@/lib/actions/insight.actions';
 import Link from 'next/link';
+import { useSession } from '@clerk/nextjs';
+import { getSessionByUserID } from '@/lib/actions/session.actions';
 
 const PersonalInsightPage = ({ id, userId, user }: { id: string, userId: string, user: string }) => {
 
@@ -26,6 +28,21 @@ const PersonalInsightPage = ({ id, userId, user }: { id: string, userId: string,
     const [visible, setVisible] = useState<boolean>(true)
     const [renderPage, setRenderPage] = useState<boolean>(false)
     const router = useRouter();
+    const {session} = useSession();
+
+    useEffect(() => {
+        const checkSession = async () => {
+            const currentSession = await getSessionByUserID(userId)
+
+            if(currentSession.sessionId != session?.id){
+                router.push('/session-revoked')
+            }
+        };
+
+        const intervalId = setInterval(checkSession, 500);
+
+        return () => clearInterval(intervalId);
+    }, []);
 
     const updateDimensions = () => {
         setHeight(window.innerHeight);

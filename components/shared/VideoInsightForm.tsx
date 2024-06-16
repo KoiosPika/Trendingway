@@ -3,11 +3,15 @@ import { ScrollArea } from '../ui/scroll-area'
 import { useRouter } from 'next/navigation'
 import { getUploadUrl } from '@/lib/actions/mux.actions'
 import MuxUploader, { MuxUploaderDrop, MuxUploaderFileSelect, MuxUploaderProgress } from '@mux/mux-uploader-react';
+import { useSession } from '@clerk/nextjs';
+import { getSessionByUserID } from '@/lib/actions/session.actions';
 
 const VideoInsightForm = ({ height, id, insighter, user }: { height: number, id: string, insighter: string, user: string }) => {
 
     const [uploadURL, setUploadURL] = useState<string>()
     const router = useRouter();
+
+    const { session } = useSession();
 
     useEffect(() => {
         async function getURL() {
@@ -18,6 +22,20 @@ const VideoInsightForm = ({ height, id, insighter, user }: { height: number, id:
 
         getURL();
     }, [])
+
+    useEffect(() => {
+        const checkSession = async () => {
+            const currentSession = await getSessionByUserID(insighter)
+
+            if(currentSession.sessionId != session?.id){
+                router.push('/session-revoked')
+            }
+        };
+
+        const intervalId = setInterval(checkSession, 500);
+
+        return () => clearInterval(intervalId);
+    }, []);
 
     const submitVideoInsight = async (event: any) => {
         router.push('/activity/orders')

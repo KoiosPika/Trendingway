@@ -1,5 +1,15 @@
-import { SignIn } from "@clerk/nextjs";
+'use client'
 
-export default function Page(){
-    return <SignIn />
+import { SignIn } from "@clerk/nextjs";
+import { useSearchParams } from 'next/navigation';
+
+export default function SignInPage() {
+    const searchParams = useSearchParams();
+    const redirectTo = searchParams.get('redirectTo');
+
+  return (
+    <SignIn
+      fallbackRedirectUrl={redirectTo ? redirectTo.toString() : '/'}
+    />
+  );
 }

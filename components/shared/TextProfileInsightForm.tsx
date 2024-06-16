@@ -1,11 +1,13 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ScrollArea } from '../ui/scroll-area'
 import Image from 'next/image'
 import { createTextProfileInsight } from '@/lib/actions/insight.actions'
 import { useRouter } from 'next/navigation'
 import { Textarea } from '../ui/textarea'
+import { useSession } from '@clerk/nextjs'
+import { getSessionByUserID } from '@/lib/actions/session.actions'
 
 const TextProfileInsightForm = ({ height, id, insighter, user }: { height: number, id: string, insighter: string, user:string }) => {
 
@@ -21,6 +23,22 @@ const TextProfileInsightForm = ({ height, id, insighter, user }: { height: numbe
     const [additionalNotes, setAdditionalNotes] = useState<string>('')
     const [loading, setLoading] = useState<boolean>(false)
     const router = useRouter();
+
+    const {session} = useSession();
+
+    useEffect(() => {
+        const checkSession = async () => {
+            const currentSession = await getSessionByUserID(insighter)
+
+            if(currentSession.sessionId != session?.id){
+                router.push('/session-revoked')
+            }
+        };
+
+        const intervalId = setInterval(checkSession, 500);
+
+        return () => clearInterval(intervalId);
+    }, []);
 
     const submitTextProfileInsight = async () => {
 

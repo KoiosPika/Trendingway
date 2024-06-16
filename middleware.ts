@@ -2,6 +2,7 @@ import {
   clerkMiddleware,
   createRouteMatcher
 } from '@clerk/nextjs/server';
+import { NextResponse } from 'next/server';
 
 const isProtectedRoute = createRouteMatcher([
   '/wallet(.*)',
@@ -13,8 +14,19 @@ const isProtectedRoute = createRouteMatcher([
   '/personal-insight(.*)'
 ]);
 
-export default clerkMiddleware((auth, req) => {
-  if (isProtectedRoute(req)) auth().protect();
+export default clerkMiddleware(async (auth, req) => {
+  const { nextUrl: url } = req;
+  const signInUrl = new URL('/sign-in', url.origin);
+  const session = auth().sessionId;
+
+  if (isProtectedRoute(req)) {
+    if (!session) {
+      
+      signInUrl.searchParams.set('redirectTo', url.pathname + url.search);
+      return NextResponse.redirect(signInUrl);
+    }
+  }
+  return NextResponse.next();
 });
 
 export const config = {
