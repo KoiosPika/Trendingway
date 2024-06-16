@@ -7,14 +7,16 @@ const useLogoutOnClose = () => {
   useEffect(() => {
     const handleBeforeUnload = () => {
       localStorage.setItem('app_navigate', 'false');
-      signOut();
+      // Delay sign out to allow ongoing processes to complete
+      setTimeout(() => signOut(), 500);
     };
 
     const handleVisibilityChange = () => {
       if (document.visibilityState === 'hidden') {
         const navigating = localStorage.getItem('app_navigate');
         if (navigating !== 'true') {
-          signOut();
+          // Delay sign out to allow ongoing processes to complete
+          setTimeout(() => signOut(), 500);
         }
       }
     };
@@ -25,13 +27,8 @@ const useLogoutOnClose = () => {
 
     const handleUnload = () => {
       localStorage.setItem('app_navigate', 'false');
-    };
-
-    const checkAuthenticationStatus = () => {
-      const navigating = localStorage.getItem('app_navigate');
-      if (navigating !== 'true') {
-        signOut();
-      }
+      // Delay sign out to allow ongoing processes to complete
+      setTimeout(() => signOut(), 500);
     };
 
     // Add event listeners
@@ -40,15 +37,12 @@ const useLogoutOnClose = () => {
     document.addEventListener('click', handleClick);
     window.addEventListener('unload', handleUnload);
 
-    const authCheckInterval = setInterval(checkAuthenticationStatus, 1000);
-
     // Cleanup event listeners on component unmount
     return () => {
       window.removeEventListener('beforeunload', handleBeforeUnload);
       document.removeEventListener('visibilitychange', handleVisibilityChange);
       document.removeEventListener('click', handleClick);
       window.removeEventListener('unload', handleUnload);
-      clearInterval(authCheckInterval);
     };
   }, [signOut]);
 };
