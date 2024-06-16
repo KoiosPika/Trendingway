@@ -21,7 +21,6 @@ export default clerkMiddleware(async (auth, req) => {
 
   if (isProtectedRoute(req)) {
     if (!session) {
-      
       signInUrl.searchParams.set('redirectTo', url.pathname + url.search);
       return NextResponse.redirect(signInUrl);
     }

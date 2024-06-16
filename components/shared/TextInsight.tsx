@@ -11,6 +11,7 @@ import { getUserDataByUserId } from '@/lib/actions/userData.actions'
 import { IUserData } from '@/lib/database/models/userData.model'
 import { SignedIn, SignedOut } from '@clerk/nextjs'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
 const TextInsight = ({ price, userId, insighter }: { price: number, userId: string, insighter: string }) => {
 
@@ -21,6 +22,8 @@ const TextInsight = ({ price, userId, insighter }: { price: number, userId: stri
     const [isVisible, setIsVisible] = useState(false);
     const [loading, setLoading] = useState<boolean>(false);
     const [finished, setFinished] = useState<boolean>(false);
+
+    const pathname = usePathname();
 
     const handleClick = () => {
         setIsVisible(!isVisible);
@@ -130,7 +133,7 @@ const TextInsight = ({ price, userId, insighter }: { price: number, userId: stri
                 </SignedIn>
                 <SignedOut>
                     <AlertDialogFooter>
-                        <Link href={'/sign-in'} className='w-full'>
+                        <Link href={`/sign-in?redirectTo=${encodeURIComponent(pathname)}`} className='w-full'>
                             <Button className='bg-yellow-400 hover:bg-yellow-400 text-black font-bold w-full'>Sign In</Button>
                         </Link>
                     </AlertDialogFooter>

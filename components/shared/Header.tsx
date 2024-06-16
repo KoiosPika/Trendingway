@@ -1,4 +1,6 @@
 
+'use client'
+
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
@@ -6,8 +8,11 @@ import NavItems from './NavItems'
 import MobileNav from './MobileNav'
 import { Button } from '../ui/button'
 import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
+import { usePathname, useRouter } from 'next/navigation'
 
 const Header = () => {
+
+  const pathname = usePathname();
 
   return (
     <header className='w-full py-2 md:px-10 bg-white flex justify-center items-center'>
@@ -34,7 +39,7 @@ const Header = () => {
           </SignedIn>
           <SignedOut>
             <Button asChild className='rounded-md bg-white border-2 border-black hover:bg-yellow-400' size={'icon'}>
-              <Link href={'/sign-in'}>
+              <Link href={`/sign-in?redirectTo=${encodeURIComponent(pathname)}`}>
                 <Image src={'/icons/login.svg'} alt='sigin' width={20} height={20} />
               </Link>
             </Button>

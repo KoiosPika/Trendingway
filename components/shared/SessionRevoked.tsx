@@ -11,7 +11,7 @@ const SessionRevoked = () => {
     useEffect(() => {
 
         const timer = setTimeout(() => {
-            router.replace('/login');
+            router.replace('/');
         }, 5000);
 
         return () => clearTimeout(timer);
