@@ -5,9 +5,8 @@ import { ScrollArea } from '../ui/scroll-area'
 import { createTextInsight } from '@/lib/actions/insight.actions'
 import { useRouter } from 'next/navigation'
 import { Textarea } from '../ui/textarea'
-import useSessionCheck from '@/lib/hooks/useSessionCheck'
-import { getAuth } from '@clerk/nextjs/server'
 import { useSession } from '@clerk/nextjs'
+import { getSessionByUserID } from '@/lib/actions/session.actions'
 
 const TextInsightForm = ({ height, id, insighter, user }: { height: number, id: string, insighter: string, user: string }) => {
     const [contentNotes, setContentNotes] = useState<string>('')
@@ -33,15 +32,17 @@ const TextInsightForm = ({ height, id, insighter, user }: { height: number, id: 
 
     useEffect(() => {
         const checkSession = async () => {
-            if (!session?.status) {
-                router.replace('/session-revoked');
+            const currentSession = await getSessionByUserID(insighter)
+
+            if(currentSession.sessionId != session?.id){
+                router.push('/session-revoked')
             }
         };
 
         const intervalId = setInterval(checkSession, 1000); // Check every second
 
         return () => clearInterval(intervalId);
-    }, [session]);
+    }, []);
 
     const submitInsight = async () => {
 
