@@ -67,7 +67,7 @@ const page = async () => {
                                     <p className='font-semibold text-[20px]'>Recharge your wallet</p>
                                 </div>
                                 <div className='grid grid-cols-2 gap-3 text-center'>
-                                    <Checkout userId={userId} amount={3} />
+                                    <Checkout userId={userId} amount={1} />
                                     <Checkout userId={userId} amount={8} />
                                     <Checkout userId={userId} amount={15} />
                                     <Checkout userId={userId} amount={20} />
