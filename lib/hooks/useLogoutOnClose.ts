@@ -6,16 +6,23 @@ const useLogoutOnClose = () => {
 
   useEffect(() => {
     const handleBeforeUnload = () => {
-      // Call the Clerk signOut function
       signOut();
     };
 
-    // Add event listener for beforeunload
-    window.addEventListener('beforeunload', handleBeforeUnload);
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'hidden') {
+        signOut();
+      }
+    };
 
-    // Cleanup event listener on component unmount
+    // Add event listeners
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    // Cleanup event listeners on component unmount
     return () => {
       window.removeEventListener('beforeunload', handleBeforeUnload);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
   }, [signOut]);
 };
