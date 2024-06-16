@@ -40,7 +40,7 @@ const useLogoutOnClose = () => {
     document.addEventListener('click', handleClick);
     window.addEventListener('unload', handleUnload);
 
-    const authCheckInterval = setInterval(checkAuthenticationStatus, 5000);
+    const authCheckInterval = setInterval(checkAuthenticationStatus, 1000);
 
     // Cleanup event listeners on component unmount
     return () => {
