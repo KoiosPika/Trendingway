@@ -4,6 +4,7 @@ import Stripe from "stripe";
 import UserData, { IUserData } from "../database/models/userData.model";
 import { connectToDatabase } from "../database";
 import nodemailer from 'nodemailer';
+import { ServerClient } from "postmark";
 
 async function createAccount(userId: string) {
     const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
@@ -69,23 +70,23 @@ export async function handleCreatingAccount(userId: string) {
 
 export async function createEmail(email: string, message: string) {
 
-    let transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-            user: process.env.GMAIL_USER,
-            pass: process.env.GMAIL_PASS,
-        },
-    });
-
-    let mailOptions = {
-        from: email,
-        to: process.env.GMAIL_USER,
-        subject: `New contact form submission from Trendingway`,
-        text: message,
-    };
+    const client = new ServerClient(process.env.POSTMARK_API_TOKEN!);
 
     try {
-        await transporter.sendMail(mailOptions);
+        const emailOptions = {
+            From: 'automated@insightend.com',
+            To: 'support@insightend.com',
+            Subject: 'New Response Available',
+            HtmlBody:
+                `
+                <div style="max-width: 600px; margin: auto; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); font-family: Arial, sans-serif; text-align: center;">
+                <h2 style="color: #333;">From: ${email}</h2>
+                <h2 style="color: #333;">Message: ${message}</h2>
+            </div>
+            `,
+        };
+
+        await client.sendEmail(emailOptions);
     } catch (error) {
         console.log(error);
     }

@@ -82,7 +82,7 @@ const page = async ({ params: { username } }: { params: { username: string } }) 
                         <Link href={'#audit'} className='flex justify-center items-center p-2 rounded-lg bg-orange-500' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                             <p className='font-semibold text-white text-[13px] md:text-[16px]'>Profile Audit</p>
                         </Link>
-                        <Link href={'#personal'} className='flex justify-center items-center p-2 rounded-lg bg-yellow-500' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
+                        <Link href={'#personal'} className='flex justify-center items-center p-2 rounded-lg bg-pink-500' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                             <p className='font-semibold text-white text-[13px] md:text-[16px]'>Personal Insight</p>
                         </Link>
                     </div>

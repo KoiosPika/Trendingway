@@ -4,16 +4,19 @@ import React from 'react'
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import { useClerk } from '@clerk/nextjs';
 
 const SessionRevoked = () => {
 
     const router = useRouter();
 
+    const { signOut } = useClerk()
+
     useEffect(() => {
 
         const timer = setTimeout(() => {
-            router.replace('/sign-in?redirectTo=%2Fprofile');
-        }, 10000);
+            signOut();
+        }, 3000);
 
         return () => clearTimeout(timer);
     }, []);

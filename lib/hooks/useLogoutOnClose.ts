@@ -6,13 +6,13 @@ const useLogoutOnClose = () => {
 
   useEffect(() => {
     const handleBeforeUnload = () => {
-      sessionStorage.setItem('app_navigate', 'false');
+      localStorage.setItem('app_navigate', 'false');
       signOut();
     };
 
     const handleVisibilityChange = () => {
       if (document.visibilityState === 'hidden') {
-        const navigating = sessionStorage.getItem('app_navigate');
+        const navigating = localStorage.getItem('app_navigate');
         if (navigating !== 'true') {
           signOut();
         }
@@ -20,11 +20,18 @@ const useLogoutOnClose = () => {
     };
 
     const handleClick = () => {
-      sessionStorage.setItem('app_navigate', 'true');
+      localStorage.setItem('app_navigate', 'true');
     };
 
     const handleUnload = () => {
-      sessionStorage.setItem('app_navigate', 'false');
+      localStorage.setItem('app_navigate', 'false');
+    };
+
+    const checkAuthenticationStatus = () => {
+      const navigating = localStorage.getItem('app_navigate');
+      if (navigating !== 'true') {
+        signOut();
+      }
     };
 
     // Add event listeners
@@ -33,12 +40,15 @@ const useLogoutOnClose = () => {
     document.addEventListener('click', handleClick);
     window.addEventListener('unload', handleUnload);
 
+    const authCheckInterval = setInterval(checkAuthenticationStatus, 5000);
+
     // Cleanup event listeners on component unmount
     return () => {
       window.removeEventListener('beforeunload', handleBeforeUnload);
       document.removeEventListener('visibilitychange', handleVisibilityChange);
       document.removeEventListener('click', handleClick);
       window.removeEventListener('unload', handleUnload);
+      clearInterval(authCheckInterval);
     };
   }, [signOut]);
 };
