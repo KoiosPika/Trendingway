@@ -87,3 +87,25 @@ export function formatDateUS(inputDate: Date) {
 
   return formattedDate;
 }
+
+export const formatDateDifference = (pastDateInput: Date | string): string | boolean => {
+  const pastDate = new Date(pastDateInput);
+  
+  if (isNaN(pastDate.getTime())) {
+    throw new Error("Invalid date");
+  }
+  
+  const now = new Date();
+  
+  if (now>pastDate) {
+    return true;
+  }
+
+  const difference =pastDate.getTime() - now.getTime();
+  
+  const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+
+  return `${days}d ${hours}h ${minutes}m`;
+};

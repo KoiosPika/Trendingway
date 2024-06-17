@@ -98,3 +98,38 @@ export async function getEarningsData(userId: string, year: number) {
         console.log(error)
     }
 }
+
+export async function getAvailableEarnings(userId: string) {
+    try {
+        await connectToDatabase();
+
+        const now = new Date();
+
+        const earnings = await Earning.find({ User: userId, withdrawn: false, availableDate: { '$lt': now } });
+
+        let total = 0;
+
+        if (earnings) {
+            earnings.forEach((earning: IEarning) => {
+                total = total + earning.amount;
+            })
+        }
+
+        return total;
+
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export async function getEarningsAsPayouts(userId: string) {
+    try {
+        await connectToDatabase();
+
+        const earnings = await Earning.find({ User: userId }).sort({ createdAt: -1 }).limit(20)
+
+        return JSON.parse(JSON.stringify(earnings));
+    } catch (error) {
+        console.log(error)
+    }
+}

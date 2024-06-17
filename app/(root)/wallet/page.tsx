@@ -37,7 +37,7 @@ const page = async () => {
                 <div className='my-3 justify-center items-center flex flex-col w-full'>
                     <div className='rounded-lg flex flex-col justify-center items-center mt-3 mb-[100px] p-3 w-full lg:w-5/6 bg-white'>
                         <div className='grid grid-cols-1 md:grid-cols-2 w-11/12 gap-3 md:mt-5'>
-                            <div className='flex flex-col bg-red-500 w-full p-4 rounded-lg' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
+                            <div className='flex flex-col bg-red-500 w-full p-4 rounded-lg h-[140px]' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                                 <div className='flex flex-row items-center gap-2'>
                                     <Image src={'/icons/wallet.svg'} alt='wallet' height={20} width={20} />
                                     <p className='text-white font-semibold text-[18px]'>Current Balance</p>
@@ -48,16 +48,15 @@ const page = async () => {
                                     <Link href={'#recharge'} className='font-semibold text-[13px]'>Recharge Now</Link>
                                 </div>
                             </div>
-                            <div className='flex flex-col bg-green-600 w-full p-4 rounded-lg' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
+                            <div className='flex flex-col bg-green-700 w-full p-4 rounded-lg h-[140px]' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                                 <div className='flex flex-row items-center gap-2'>
                                     <Image src={'/icons/wallet.svg'} alt='wallet' height={20} width={20} />
-                                    <p className='text-white font-semibold text-[18px]'>Ready to withdraw</p>
+                                    <p className='text-white font-semibold text-[18px]'>Payout Information</p>
                                 </div>
-                                <p className='ml-7 text-[25px] font-semibold text-white'>${(user.withdrawBalance).toFixed(2)}</p>
-                                <div className='flex flex-row items-center gap-2 ml-auto bg-white px-2 py-1 rounded-lg h-[40px]'>
+                                <Link href={'/wallet/payouts'} className='flex flex-row items-center gap-2 ml-auto mt-auto bg-white px-2 py-1 rounded-lg h-[40px]'>
                                     <Image src={'/icons/dollar.svg'} alt='dollar' height={15} width={15} />
-                                    <p className='font-semibold text-[13px]'>Initiate Transaction</p>
-                                </div>
+                                    <p className='font-semibold text-[13px]'>Go to Payouts</p>
+                                </Link>
                             </div>
                         </div>
                         <div className='grid grid-cols-1 sm:grid-cols-2 w-11/12 gap-4'>

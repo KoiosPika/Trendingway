@@ -42,7 +42,7 @@ const EarningOrders = ({ userId }: { userId: string }) => {
             <div className='w-full flex flex-col max-w-[1000px] justify-center items-center'>
                 <div className='my-3 justify-center items-center flex flex-col w-full'>
                     <div className='rounded-lg flex flex-col justify-center items-center mt-3 mb-[100px] p-3 w-full lg:w-5/6 bg-white'>
-                        <div className='w-full md:w-11/12 px-2 py-4 md:p-8 my-3 rounded-lg bg-[#1AAD7A] text-white' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
+                        <div className='w-full md:w-11/12 px-2 py-4 md:p-8 my-3 rounded-lg bg-blue-600 text-white' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                             <div className='flex flex-row gap-2 mb-4'>
                                 <Image src={'/icons/invoice.svg'} alt='wallet' height={20} width={20} />
                                 <p className='font-semibold text-[20px]'>Earnings</p>

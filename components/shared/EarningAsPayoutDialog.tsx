@@ -3,59 +3,68 @@
 import React from 'react'
 import { AlertDialog, AlertDialogCancel, AlertDialogContent, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '../ui/alert-dialog'
 import { IEarning } from '@/lib/database/models/earning.model'
-import { formatDate, formatTime } from '@/lib/utils'
+import { formatDate, formatDateDifference, formatTime } from '@/lib/utils'
 import Image from 'next/image'
 
-const EarningDialog = ({ earning }: { earning: IEarning }) => {
+const EarningAsPayoutDialog = ({ earning }: { earning: IEarning }) => {
     return (
         <AlertDialog>
             <AlertDialogTrigger className='flex flex-row w-full justify-center items-center px-2 py-3 gap-2 bg-white text-black rounded-lg'>
                 <div className='w-full flex flex-row items-center'>
-                    <p className='font-semibold text-[12px] lg:text-[15px]'>${(earning?.amount).toFixed(2)}</p>
+                    <p className='font-bold text-[12px] lg:text-[15px]'>${(earning?.amount).toFixed(2)}</p>
                 </div>
                 <div className='w-full flex flex-row items-center'>
-                    <p className='font-semibold text-[12px] lg:text-[15px]'>{formatDate(earning?.createdAt)}</p>
+                    <p className='font-bold text-[12px] lg:text-[15px]'>{formatDate(earning?.createdAt)}</p>
                 </div>
                 {earning.service == 'TextInsight' &&
                     <div className='w-full flex flex-col sm:flex-row items-center gap-2'>
                         <Image src={'/icons/star-white.svg'} alt='video' width={200} height={200} className='bg-blue-500 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
-                        <p className='font-semibold text-[12px] lg:text-[14px] hidden sm:block'>Text Insight</p>
+                        <p className='font-semibold text-[12px] lg:text-[13px] hidden sm:block'>Text Insight</p>
                     </div>}
                 {earning.service == 'LongTextInsight' &&
                     <div className='w-full flex flex-col sm:flex-row items-center gap-2'>
                         <Image src={'/icons/star-white.svg'} alt='video' width={200} height={200} className='bg-purple-500 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
-                        <p className='font-semibold text-[12px] lg:text-[14px] hidden sm:block'>Long Text Insight</p>
+                        <p className='font-semibold text-[12px] lg:text-[13px] hidden sm:block'>Long Text Insight</p>
                     </div>}
                 {earning.service == 'VideoInsight' &&
                     <div className='w-full flex flex-col sm:flex-row items-center gap-2'>
                         <Image src={'/icons/video.svg'} alt='video' width={200} height={200} className='bg-red-500 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
-                        <p className='font-semibold text-[12px] lg:text-[14px] hidden sm:block'>Video Insight</p>
+                        <p className='font-semibold text-[12px] lg:text-[13px] hidden sm:block'>Video Insight</p>
                     </div>}
                 {earning.service == 'LongVideoInsight' &&
                     <div className='w-full flex flex-col sm:flex-row items-center gap-2'>
                         <Image src={'/icons/video.svg'} alt='video' width={200} height={200} className='bg-[#B69615] w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
-                        <p className='font-semibold text-[12px] lg:text-[14px] hidden sm:block'>Long Video Insight</p>
+                        <p className='font-semibold text-[12px] lg:text-[13px] hidden sm:block'>Long Video Insight</p>
                     </div>}
                 {earning.service == 'TextProfileInsight' &&
                     <div className='w-full flex flex-col sm:flex-row items-center gap-2'>
                         <Image src={'/icons/account.svg'} alt='video' width={200} height={200} className='bg-orange-500 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
-                        <p className='font-semibold text-[12px] lg:text-[14px] hidden sm:block'>Text Profile Insight</p>
+                        <p className='font-semibold text-[12px] lg:text-[13px] hidden sm:block'>Text Profile Insight</p>
                     </div>}
                 {earning.service == 'VideoProfileInsight' &&
                     <div className='w-full flex flex-col sm:flex-row items-center gap-2'>
                         <Image src={'/icons/video-icon.svg'} alt='video' width={200} height={200} className='bg-green-600 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
-                        <p className='font-semibold text-[12px] lg:text-[14px] hidden sm:block'>Video Profile Insight</p>
+                        <p className='font-semibold text-[12px] lg:text-[13px] hidden sm:block'>Video Profile Insight</p>
                     </div>}
                 {earning.service == 'TextPersonalInsight' &&
                     <div className='w-full flex flex-col sm:flex-row items-center gap-2'>
                         <Image src={'/icons/people.svg'} alt='video' width={200} height={200} className='bg-pink-500 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
-                        <p className='font-semibold text-[12px] lg:text-[14px] hidden sm:block'>Text Personal Insight</p>
+                        <p className='font-semibold text-[12px] lg:text-[13px] hidden sm:block'>Text Personal Insight</p>
                     </div>}
                 {earning.service == 'VideoPersonalInsight' &&
                     <div className='w-full flex flex-col sm:flex-row items-center gap-2'>
                         <Image src={'/icons/selfie.svg'} alt='video' width={200} height={200} className='bg-[#b83c4c] w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
-                        <p className='font-semibold text-[12px] lg:text-[14px] hidden sm:block'>Video Personal Insight</p>
+                        <p className='font-semibold text-[12px] lg:text-[13px] hidden sm:block'>Video Personal Insight</p>
                     </div>}
+                {formatDateDifference(earning.availableDate) && <div className='w-full flex flex-row items-center'>
+                    <p className='font-bold text-[12px] lg:text-[14px] text-yellow-600'>{formatDateDifference(earning?.availableDate)}</p>
+                </div>}
+                {earning.withdrawn && <div className='w-full flex flex-row items-center'>
+                    <p className='font-bold text-[12px] lg:text-[14px] text-red-500'>Withdrawn</p>
+                </div>}
+                {(!formatDateDifference(earning.availableDate)) && <div className='w-full flex flex-row items-center'>
+                    <p className='font-bold text-[12px] lg:text-[14px] text-green-700'>{formatDateDifference(earning?.availableDate)}</p>
+                </div>}
             </AlertDialogTrigger>
             <AlertDialogContent className="bg-blue-600 border-0">
                 <AlertDialogHeader>
@@ -112,12 +121,12 @@ const EarningDialog = ({ earning }: { earning: IEarning }) => {
                                 {earning.service == 'TextPersonalInsight' &&
                                     <div className='w-full flex flex-col sm:flex-row items-center gap-2'>
                                         <Image src={'/icons/people.svg'} alt='video' width={200} height={200} className='bg-pink-500 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
-                                        <p className='font-semibold text-[12px] lg:text-[14px] hidden sm:block'>Text Personal Insight</p>
+                                        <p className='font-bold text-[12px] lg:text-[14px] hidden sm:block'>Text Personal Insight</p>
                                     </div>}
                                 {earning.service == 'VideoPersonalInsight' &&
                                     <div className='w-full flex flex-col sm:flex-row items-center gap-2'>
                                         <Image src={'/icons/selfie.svg'} alt='video' width={200} height={200} className='bg-[#b83c4c] w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
-                                        <p className='font-semibold text-[12px] lg:text-[14px] hidden sm:block'>Video Personal Insight</p>
+                                        <p className='font-bold text-[12px] lg:text-[14px] hidden sm:block'>Video Personal Insight</p>
                                     </div>}
                             </td>
                         </tr>
@@ -146,8 +155,22 @@ const EarningDialog = ({ earning }: { earning: IEarning }) => {
                             <td className='font-bold text-black bg-white border-blue-600 border p-2 border-b-[3px]'>{formatDate(earning?.createdAt)}</td>
                         </tr>
                         <tr>
-                            <td className='font-bold pr-2 bg-white border-blue-600 border p-2 rounded-bl-lg border-b-[3px] border-r-[3px]'>Time:</td>
-                            <td className='font-bold text-black bg-white border-blue-600 border p-2 rounded-br-lg border-b-[3px]'>{formatTime(earning?.createdAt)}</td>
+                            <td className='font-bold pr-2 bg-white border-blue-600 border p-2 border-b-[3px] border-r-[3px]'>Time:</td>
+                            <td className='font-bold text-black bg-white border-blue-600 border p-2 border-b-[3px]'>{formatTime(earning?.createdAt)}</td>
+                        </tr>
+                        <tr>
+                            <td className='font-bold pr-2 bg-white border-blue-600 border p-2 border-b-[3px] border-r-[3px]'>Status:</td>
+                            {earning.withdrawn && <td className='font-bold text-red-500 bg-white border-blue-600 border p-2 border-b-[3px]'>Withdrawn</td>}
+                            {formatDateDifference(earning.availableDate) && <td className='font-bold text-yellow-600 bg-white border-blue-600 border p-2 border-b-[3px]'>Awaiting</td>}
+                            {(!formatDateDifference(earning.availableDate) && !earning.withdrawn) && <td className='font-bold text-green-700 bg-white border-blue-600 border p-2 border-b-[3px]'>Available</td>}
+                        </tr>
+                        <tr>
+                            <td className='font-bold pr-2 bg-white border-blue-600 p-2 border-b-[3px] border-r-[3px]'>Available Date:</td>
+                            <td className='font-bold text-black bg-white border-blue-600 border p-2 border-b-[3px]'>{formatDate(earning?.availableDate)}</td>
+                        </tr>
+                        <tr>
+                            <td className='font-bold pr-2 bg-white border-blue-600 border p-2 rounded-bl-lg border-b-[3px] border-r-[3px]'>Available Time:</td>
+                            <td className='font-bold text-black bg-white border-blue-600 border p-2 rounded-br-lg border-b-[3px]'>{formatTime(earning?.availableDate)}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -156,4 +179,4 @@ const EarningDialog = ({ earning }: { earning: IEarning }) => {
     )
 }
 
-export default EarningDialog
+export default EarningAsPayoutDialog
