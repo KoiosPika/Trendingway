@@ -14,20 +14,6 @@ async function createAccount(userId: string) {
 
         const account = await stripe.accounts.create({
             type: 'express',
-            capabilities: {
-                transfers: { requested: true },
-            },
-            controller: {
-                fees: {
-                    payer: 'application',
-                },
-                losses: {
-                    payments: 'application',
-                },
-                stripe_dashboard: {
-                    type: 'express',
-                },
-            },
         })
 
         await connectToDatabase();
@@ -44,7 +30,7 @@ async function createAccount(userId: string) {
     }
 }
 
-async function createAccountLink(userId: string) {
+export async function createAccountLink(userId: string) {
 
     const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
         apiVersion: '2024-04-10'

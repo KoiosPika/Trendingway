@@ -118,7 +118,7 @@ const page = async () => {
                                 }
                             </div>
                         </div>
-                        <StripeSetup userId={userId} />
+                        <StripeSetup userId={userId} account_id={user?.expressAccountID || ''} onboardingCompleted={user?.onboardingCompleted} />
 
                         <div className='grid grid-cols-1 sm:grid-cols-2 w-11/12 gap-4'>
                             <div className='w-full px-2 py-4 lg:p-8 my-2 rounded-lg bg-[#178EA0] text-white h-[400px]' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
