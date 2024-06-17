@@ -107,15 +107,22 @@ export async function getAvailableEarnings(userId: string) {
 
         const earnings = await Earning.find({ User: userId, withdrawn: false, availableDate: { '$lt': now } });
 
-        let total = 0;
+        let availableEarning = 0;
+        let availableInsights = 0;
 
         if (earnings) {
             earnings.forEach((earning: IEarning) => {
-                total = total + earning.amount;
+                availableEarning = availableEarning + earning.amount;
+                availableInsights++;
             })
         }
 
-        return total;
+        const data = {
+            availableEarning, 
+            availableInsights
+        }
+
+        return data;
 
     } catch (error) {
         console.log(error);

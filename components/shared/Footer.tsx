@@ -8,7 +8,7 @@ const Footer = () => {
                 <div className="flex flex-col items-center md:items-start">
                 <Image className='h-[45px] w-[45px] bg-black rounded-full' src={'/images/uncut.png'} alt='logo' height={1000} width={1000} />
                 </div>
-                <div className="grid grid-cols-3 md:grid-cols-6 gap-5 text-center text-sm">
+                <div className="grid grid-cols-3 md:grid-cols-6 lg:gap-5 gap-2 text-center text-[10px] lg:text-[13px]">
                     <a href="/" className="hover:text-yellow-400 font-semibold">Home</a>
                     <a href="/privacy" className="hover:text-yellow-400 font-semibold">Privacy Policy</a>
                     <a href="/profile" className="hover:text-yellow-400 font-semibold">Profile</a>
@@ -16,7 +16,7 @@ const Footer = () => {
                     <a href="/wallet" className="hover:text-yellow-400 font-semibold">Wallet</a>
                     <a href="/contact-us" className="hover:text-yellow-400 font-semibold">Contact Support</a>
                 </div>
-                <div className="justify-center mt-4 md:mt-0 hidden md:block">
+                <div className="justify-center mt-4 md:mt-0 hidden lg:block">
                     <Image src={'/images/qr code.PNG'} alt='qr_code' height={200} width={200} className='h-[45px] w-[45px]'/>
                 </div>
             </div>

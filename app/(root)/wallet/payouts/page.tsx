@@ -1,5 +1,4 @@
 import StripeSetup from '@/components/shared/StripeSetup';
-import { Button } from '@/components/ui/button';
 import { getAllEarnings, getAvailableEarnings } from '@/lib/actions/earning.actions';
 import { getAllOrders } from '@/lib/actions/order.actions';
 import { getUserDataByUserId } from '@/lib/actions/userData.actions';
@@ -21,30 +20,28 @@ const page = async () => {
 
     const earnings = await getAllEarnings(userId);
 
-    const available = await getAvailableEarnings(userId)
+    const data: any = await getAvailableEarnings(userId)
 
     return (
         <div className='w-full flex justify-center items-center bg-white'>
             <div className='w-full flex flex-col max-w-[1100px] justify-center items-center'>
                 <div className='my-3 justify-center items-center flex flex-col w-full'>
                     <div className='rounded-lg flex flex-col justify-center items-center mt-3 mb-[100px] p-3 w-full lg:w-5/6 bg-white'>
-                        <div className='w-11/12 bg-[#ffcf00] p-4 md:p-8 my-2 rounded-lg' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
+                        <div className='w-11/12 bg-orange-500 p-4 md:p-8 my-2 rounded-lg' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                             <div className='flex flex-row items-center gap-2'>
-                                <Image className='rounded-md h-[40px] w-[40px]' src={'/images/uncut.png'} alt='stripe' height={200} width={200} />
-                                <p className='font-bold text-[20px]'>Payouts Information</p>
+                                <Image className='rounded-md h-[40px] w-[40px]' src={'/icons/invoice.svg'} alt='stripe' height={200} width={200} />
+                                <p className='font-bold text-[20px] text-white'>Payouts Information</p>
                             </div>
                             <div className='w-full md:w-11/12 gap-1 ml-[5px] mt-3 md:ml-[45px]'>
-                                <p className='md:text-[16px] text-[13px] font-bold bg-white inline-flex px-2 py-[3px] rounded-md'>Amount available for transfer: ${available}</p>
-                                <p className='md:text-[16px] text-[13px] font-bold mt-2 bg-white inline-flex px-2 py-[3px] rounded-md'>Note: The amount to be transferred may increase if additional earnings become available during the transfer process</p>
-                            </div>
-                            <div className='flex w-full justify-center items-center'>
-                                <div className='grid grid-cols-1 md:grid-cols-2 md:gap-5 gap-2 mt-5 w-11/12'>
-                                    <Button className='bg-green-700'>Transfer now</Button>
-                                    <Link href={'/wallet/payouts/details'} className='bg-pink-700 flex justify-center items-center rounded-lg py-2'>
-                                        <p className='text-white font-bold'>View Details</p>
-                                    </Link>
+                                <div className='flex flex-row items-center w-full gap-[5px] font-bold text-[12px] md:text-[17px]'>
+                                    <p className='w-1/2 bg-white text-center py-1 rounded-l-lg'>Available for transfer:</p>
+                                    <p className='w-1/2 bg-white text-center py-1 rounded-r-lg'>${(data.availableEarning)?.toFixed(2)}</p>
                                 </div>
                             </div>
+                            <Link href={'/wallet/payouts/details'} className='bg-green-700 flex justify-center items-center rounded-lg ml-auto md:w-2/5 w-1/2 py-2 mt-5 md:mr-5'>
+                                <p className='text-white font-bold text-[10px] md:text-[14px]'>View Details and Transfer {`->`}</p>
+                            </Link>
+
                         </div>
                         <StripeSetup userId={userId} account_id={user?.expressAccountID || ''} onboardingCompleted={user?.onboardingCompleted} />
                         <div className='grid grid-cols-1 md:grid-cols-2 w-11/12 gap-3 md:mt-5'>

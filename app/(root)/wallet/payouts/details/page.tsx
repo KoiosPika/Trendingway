@@ -1,6 +1,6 @@
 import EarningAsPayoutDialog from '@/components/shared/EarningAsPayoutDialog';
 import EarningDialog from '@/components/shared/EarningDialog';
-import { getEarningsAsPayouts } from '@/lib/actions/earning.actions'
+import { getAvailableEarnings, getEarningsAsPayouts } from '@/lib/actions/earning.actions'
 import { IEarning } from '@/lib/database/models/earning.model';
 import { auth } from '@clerk/nextjs/server';
 import Image from 'next/image';
@@ -13,6 +13,8 @@ const page = async () => {
 
     const earnings = await getEarningsAsPayouts(userId)
 
+    const data: any = await getAvailableEarnings(userId)
+
     return (
         <div className='w-full flex justify-center items-center bg-white'>
             <div className='w-full flex flex-col max-w-[1100px] justify-center items-center'>
@@ -21,7 +23,27 @@ const page = async () => {
                         <div className='w-full md:w-11/12 px-2 py-4 md:p-8 my-3 rounded-lg bg-blue-600 text-white' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                             <div className='flex flex-row gap-2 mb-4'>
                                 <Image src={'/icons/invoice.svg'} alt='wallet' height={20} width={20} />
-                                <p className='font-semibold text-[20px]'>Earnings</p>
+                                <p className='font-semibold text-[20px]'>Transfer Funds</p>
+                            </div>
+                            <div className='w-full gap-1 my-3 text-black'>
+                                <div className='flex flex-row items-center w-full gap-[5px] font-bold text-[12px] md:text-[17px]'>
+                                    <p className='w-1/2 bg-white text-center py-1 rounded-tl-lg'>Available for transfer</p>
+                                    <p className='w-1/2 bg-white text-center py-1 rounded-tr-lg'>${(data.availableEarning)?.toFixed(2)}</p>
+                                </div>
+                                <div className='flex flex-row items-center w-full gap-[5px] font-bold text-[12px] md:text-[17px] mt-1'>
+                                    <p className='w-1/2 bg-white text-center py-1 rounded-bl-lg'>Number of Insights</p>
+                                    <p className='w-1/2 bg-white text-center py-1 rounded-br-lg'>{data.availableInsights}</p>
+                                </div>
+                                {data.availableEarning == 0 && <div className='flex w-full my-2'>
+                                    <p className='ml-auto px-3 py-1 bg-green-700 rounded-lg text-white font-semibold border-[1px] border-white'>No Funds Available</p>
+                                </div>}
+                                {data.availableEarning > 0 &&<div className='flex w-full my-2'>
+                                    <p className='ml-auto px-3 py-1 bg-green-700 rounded-lg text-white font-semibold border-[1px] border-white'>Transfer now</p>
+                                </div>}
+                            </div>
+                            <div className='flex flex-row gap-2 mb-4'>
+                                <Image src={'/icons/invoice.svg'} alt='wallet' height={20} width={20} />
+                                <p className='font-semibold text-[20px]'>Earnings Breakdown</p>
                             </div>
                             <div className='grid grid-cols-1 gap-2'>
                                 <div className='flex flex-row justify-center items-center p-2 gap-2 bg-white text-black font-bold rounded-lg'>
@@ -47,7 +69,7 @@ const page = async () => {
                                         <EarningAsPayoutDialog earning={earning} />
                                     </div>
                                 ))}
-                                
+
                             </div>
                         </div>
                     </div>
