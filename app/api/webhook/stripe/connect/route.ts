@@ -27,7 +27,7 @@ export async function POST(request: Request) {
         if (charges_enabled) {
             await UserData.findOneAndUpdate(
                 { expressAccountID: id },
-                { onboardingCompleted: true }
+                { '$set': { onboardingCompleted: true } }
             )
         }
 
