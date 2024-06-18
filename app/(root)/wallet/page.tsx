@@ -1,11 +1,8 @@
 import Checkout from '@/components/shared/Checkout'
-import StripeSetup from '@/components/shared/StripeSetup'
-import { getAllEarnings } from '@/lib/actions/earning.actions'
 import { getAllOrders } from '@/lib/actions/order.actions'
 import { getAllRefunds } from '@/lib/actions/refund.actions'
 import { getAllSpendings } from '@/lib/actions/spending.actions'
 import { getUserDataByUserId } from '@/lib/actions/userData.actions'
-import { IEarning } from '@/lib/database/models/earning.model'
 import { IOrder } from '@/lib/database/models/order.model'
 import { IRefund } from '@/lib/database/models/refund.model'
 import { ISpending } from '@/lib/database/models/spending.model'
@@ -24,8 +21,6 @@ const page = async () => {
     const user: IUserData = await getUserDataByUserId(userId)
 
     const orders = await getAllOrders(userId);
-
-    const earnings = await getAllEarnings(userId);
 
     const spendings = await getAllSpendings(userId)
 
@@ -59,7 +54,7 @@ const page = async () => {
                                 </Link>
                             </div>
                         </div>
-                        <div className='grid grid-cols-1 sm:grid-cols-2 w-11/12 gap-4'>
+                        <div className='grid grid-cols-1 sm:grid-cols-2 w-11/12 gap-4 mt-2'>
                             <div id='recharge' className='w-full p-4 md:p-8 my-3 rounded-lg bg-blue-600 text-white h-[400px]' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                                 <div className='flex flex-row gap-2 mb-4'>
                                     <Image src={'/icons/plus-white.svg'} alt='wallet' height={20} width={20} />
@@ -78,7 +73,7 @@ const page = async () => {
                                     <Checkout userId={userId} amount={50} />
                                 </div>
                             </div>
-                            <div className='w-full px-2 py-4 lg:p-8 my-3 rounded-lg bg-orange-500 text-white h-[400px]' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
+                            <div className='w-full px-2 py-4 lg:p-8 my-3 rounded-lg bg-orange-500 text-white md:h-[400px] h-[360px]' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                                 <div className='flex flex-row gap-2 mb-4'>
                                     <Image src={'/icons/invoice.svg'} alt='wallet' height={20} width={20} />
                                     <p className='font-semibold text-[20px]'>Recharge Orders</p>
@@ -117,10 +112,9 @@ const page = async () => {
                                 }
                             </div>
                         </div>
-                        <StripeSetup userId={userId} account_id={user?.expressAccountID || ''} onboardingCompleted={user?.onboardingCompleted} />
 
                         <div className='grid grid-cols-1 sm:grid-cols-2 w-11/12 gap-4'>
-                            <div className='w-full px-2 py-4 lg:p-8 my-2 rounded-lg bg-[#178EA0] text-white h-[400px]' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
+                            <div className='w-full px-2 py-4 lg:p-8 my-2 rounded-lg bg-[#178EA0] text-white md:h-[400px] h-[360px]' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                                 <div className='flex flex-row gap-2 mb-4'>
                                     <Image src={'/icons/invoice.svg'} alt='wallet' height={20} width={20} />
                                     <p className='font-semibold text-[20px]'>Spendings</p>
@@ -194,114 +188,7 @@ const page = async () => {
                                     </div>
                                 }
                             </div>
-                            <div className='w-full px-2 py-4 lg:p-8 my-2 rounded-lg bg-[#1AAD7A] text-white h-[400px]' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
-                                <div className='flex flex-row gap-2 mb-4'>
-                                    <Image src={'/icons/invoice.svg'} alt='wallet' height={20} width={20} />
-                                    <p className='font-semibold text-[20px]'>Earnings</p>
-                                </div>
-                                <div className='grid grid-cols-1 gap-2'>
-                                    <div className='flex flex-row justify-center items-center p-2 gap-2 bg-white text-black font-bold rounded-lg'>
-                                        <div className='w-full flex flex-row items-center gap-2'>
-                                            <Image src={'/icons/dollar-black.svg'} alt='dollar' height={12} width={12} />
-                                            <p className='text-[13px] lg:text-[15px]'>Amount</p>
-                                        </div>
-                                        <div className='w-full flex flex-row items-center gap-2'>
-                                            <Image src={'/icons/clock-black.svg'} alt='dollar' height={14} width={14} />
-                                            <p className='text-[13px] lg:text-[15px]'>When</p>
-                                        </div>
-                                        <div className='w-full flex flex-row items-center gap-2'>
-                                            <Image src={'/icons/wrench.svg'} alt='dollar' height={14} width={14} />
-                                            <p className='text-[13px] lg:text-[15px]'>Service</p>
-                                        </div>
-                                    </div>
-                                    {earnings.length > 0 && earnings.map((earning: IEarning, index: number) => (
-                                        <div key={index} className='flex flex-row justify-center items-center px-2 py-4 gap-2 bg-white text-black rounded-lg relative'>
-                                            <div className='w-full flex flex-row items-center'>
-                                                <p className='font-semibold text-[12px] lg:text-[15px]'>${(earning?.amount).toFixed(2)}</p>
-                                            </div>
-                                            <div className='w-full flex flex-row items-center'>
-                                                <p className='font-semibold text-[12px] lg:text-[15px]'>{formatDate(earning?.createdAt)}</p>
-                                            </div>
-                                            {earning.service == 'TextInsight' &&
-                                                <div className='w-full flex flex-col sm:flex-row items-center justify-center gap-2'>
-                                                    <Image src={'/icons/star-white.svg'} alt='video' width={200} height={200} className='bg-blue-500 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
-                                                </div>}
-                                            {earning.service == 'LongTextInsight' &&
-                                                <div className='w-full flex flex-col sm:flex-row items-center justify-center gap-2'>
-                                                    <Image src={'/icons/star-white.svg'} alt='video' width={200} height={200} className='bg-purple-500 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
-                                                </div>}
-                                            {earning.service == 'VideoInsight' &&
-                                                <div className='w-full flex flex-col sm:flex-row items-center justify-center gap-2'>
-                                                    <Image src={'/icons/video.svg'} alt='video' width={200} height={200} className='bg-red-500 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
-                                                </div>}
-                                            {earning.service == 'LongVideoInsight' &&
-                                                <div className='w-full flex flex-col sm:flex-row items-center justify-center gap-2'>
-                                                    <Image src={'/icons/video.svg'} alt='video' width={200} height={200} className='bg-[#B69615] w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
-                                                </div>}
-                                            {earning.service == 'TextProfileInsight' &&
-                                                <div className='w-full flex flex-col sm:flex-row items-center justify-center gap-2'>
-                                                    <Image src={'/icons/account.svg'} alt='video' width={200} height={200} className='bg-orange-500 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
-                                                </div>}
-                                            {earning.service == 'VideoProfileInsight' &&
-                                                <div className='w-full flex flex-col sm:flex-row items-center justify-center gap-2'>
-                                                    <Image src={'/icons/video-icon.svg'} alt='video' width={200} height={200} className='bg-green-600 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
-                                                </div>}
-                                            {earning.service == 'TextPersonalInsight' &&
-                                                <div className='w-full flex flex-col sm:flex-row items-center justify-center gap-2'>
-                                                    <Image src={'/icons/people.svg'} alt='video' width={200} height={200} className='bg-pink-500 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
-                                                </div>}
-                                            {earning.service == 'VideoPersonalInsight' &&
-                                                <div className='w-full flex flex-col sm:flex-row items-center justify-center gap-2'>
-                                                    <Image src={'/icons/selfie.svg'} alt='video' width={200} height={200} className='bg-red-700 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
-                                                </div>}
-                                        </div>
-                                    ))}
-                                    {earnings.length > 0 && <Link href={'/wallet/earnings'} className='ml-auto'>
-                                        <p className='bg-white px-4 py-2 rounded-lg inline-flex text-black text-[13px] font-semibold hover:bg-yellow-400'>More Details {`->`}</p>
-                                    </Link>}
-                                </div>
-                                {earnings.length == 0 &&
-                                    <div className='flex justify-center items-center h-3/4'>
-                                        <p className='text-[18px] font-bold'>No Earnings Yet</p>
-                                    </div>
-                                }
-                            </div>
-                        </div>
-
-
-                        <div className='grid grid-cols-1 sm:grid-cols-2 w-11/12 gap-4'>
-                            <div className='w-full px-2 py-4 lg:p-8 my-2 rounded-lg bg-[#D62055] text-white h-[400px]' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
-                                <div className='flex flex-row gap-2 mb-4'>
-                                    <Image src={'/icons/invoice.svg'} alt='wallet' height={20} width={20} />
-                                    <p className='font-semibold text-[20px]'>Payout Orders</p>
-                                </div>
-                                <div className='grid grid-cols-1 gap-2'>
-                                    <div className='flex flex-row justify-center items-center p-2 gap-2 bg-white text-black font-bold rounded-lg'>
-                                        <div className='w-full flex flex-row items-center gap-2'>
-                                            <Image src={'/icons/dollar-black.svg'} alt='dollar' height={12} width={12} />
-                                            <p className='text-[13px] lg:text-[15px]'>Amount</p>
-                                        </div>
-                                        <div className='w-full flex flex-row items-center gap-2'>
-                                            <Image src={'/icons/clock-black.svg'} alt='dollar' height={14} width={14} />
-                                            <p className='text-[13px] lg:text-[15px]'>When</p>
-                                        </div>
-                                    </div>
-                                    {orders.map((order: IOrder, index: number) => (
-                                        <div key={index} className='flex flex-row justify-center items-center p-5 gap-2 bg-white text-black rounded-lg relative'>
-                                            <div className='w-full flex flex-row items-center gap-5'>
-                                                <p className='font-semibold text-[13px] lg:text-[15px]'>${(order.amount).toFixed(2)}</p>
-                                            </div>
-                                            <div className='w-full flex flex-row items-center gap-5'>
-                                                <p className='font-semibold text-[13px] lg:text-[15px]'>{formatDate(order.createdAt)}</p>
-                                            </div>
-                                        </div>
-                                    ))}
-                                    <Link href={'/wallet/payouts'} className='ml-auto'>
-                                        <p className='bg-white px-4 py-2 rounded-lg inline-flex text-black text-[13px] font-semibold hover:bg-yellow-400'>More Details {`->`}</p>
-                                    </Link>
-                                </div>
-                            </div>
-                            <div className='w-full px-2 py-4 lg:p-8 my-2 rounded-lg bg-[#A81EE8] text-white h-[400px]' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
+                            <div className='w-full px-2 py-4 lg:p-8 my-2 rounded-lg bg-[#A81EE8] text-white md:h-[400px] h-[360px]' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                                 <div className='flex flex-row gap-2 mb-4'>
                                     <Image src={'/icons/invoice.svg'} alt='wallet' height={20} width={20} />
                                     <p className='font-semibold text-[20px]'>Refunds</p>

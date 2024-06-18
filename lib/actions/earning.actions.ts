@@ -5,6 +5,8 @@ import Earning, { IEarning } from "../database/models/earning.model";
 import Request from "../database/models/request.model";
 import Insight from "../database/models/insight.model";
 import UserData from "../database/models/userData.model";
+import Stripe from "stripe";
+import Transfer from "../database/models/transfer.model";
 
 const populateInsight = (query: any) => {
     return query
@@ -118,7 +120,7 @@ export async function getAvailableEarnings(userId: string) {
         }
 
         const data = {
-            availableEarning, 
+            availableEarning,
             availableInsights
         }
 
@@ -138,5 +140,58 @@ export async function getEarningsAsPayouts(userId: string) {
         return JSON.parse(JSON.stringify(earnings));
     } catch (error) {
         console.log(error)
+    }
+}
+
+export async function transferFunds(userId: string) {
+    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+        apiVersion: '2024-04-10'
+    });
+
+    try {
+
+        await connectToDatabase();
+
+        const now = new Date();
+
+        const earnings = await Earning.find({ User: userId, withdrawn: false, availableDate: { '$lt': now } });
+
+        let availableEarning = 0;
+
+        if (earnings) {
+            earnings.forEach((earning: IEarning) => {
+                availableEarning = availableEarning + earning.amount;
+            })
+        }
+
+        const User = await UserData.findOne({ User: userId });
+
+        const transfer = await stripe.transfers.create({
+            amount: availableEarning * 100,
+            currency: 'usd',
+            destination: User?.expressAccountId,
+        });
+
+        if (transfer) {
+            const updatePromises = earnings.map((earning) =>
+                Earning.findByIdAndUpdate(earning._id, { withdrawn: true })
+            );
+
+            await Promise.all(updatePromises);
+
+            await Transfer.create({
+                User: userId,
+                transferId: transfer.id,
+                amount: transfer.amount / 100,
+            })
+
+            return true;
+        }
+
+        return false;
+
+
+    } catch (error) {
+        console.log(error);
     }
 }

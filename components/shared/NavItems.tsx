@@ -11,6 +11,11 @@ const NavItems = () => {
 
   const Links = [
     {
+      label: 'Home',
+      icon: '/icons/home.svg',
+      route: `/`
+    },
+    {
       label: 'Profile',
       icon: '/icons/user.svg',
       route: `/profile`
