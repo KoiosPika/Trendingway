@@ -36,7 +36,7 @@ const StripeSetup = ({ userId, account_id, onboardingCompleted }: { userId: stri
                 <p onClick={handleCreate} className='ml-auto bg-white text-[#6772e4] font-semibold py-2 px-4 cursor-pointer inline-block border-[2px] border-yellow-500 rounded-full text-[12px] md:text-[16px]'>Set Up Now!</p>
             </div>}
             {(account_id && !onboardingCompleted) && <div className='flex flex-row w-full mt-3'>
-                <p onClick={handleCreateAccountLink} className='ml-auto bg-white text-[#6772e4] font-semibold py-2 px-4 cursor-pointer inline-block border-[2px] border-yellow-500 rounded-full text-[12px] md:text-[16px]'>Finish onboarding</p>
+                <p onClick={handleCreate} className='ml-auto bg-white text-[#6772e4] font-semibold py-2 px-4 cursor-pointer inline-block border-[2px] border-yellow-500 rounded-full text-[12px] md:text-[16px]'>Finish onboarding</p>
             </div>}
             {(account_id && onboardingCompleted) && 
             <Link href={'https://www.google.com'} target="_blank" className='flex flex-row w-full mt-3'>

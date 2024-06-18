@@ -27,7 +27,7 @@ const page = async () => {
             <div className='w-full flex flex-col max-w-[1100px] justify-center items-center'>
                 <div className='my-3 justify-center items-center flex flex-col w-full'>
                     <div className='rounded-lg flex flex-col justify-center items-center mt-3 mb-[100px] p-3 w-full lg:w-5/6 bg-white'>
-                        <div className='w-11/12 bg-orange-500 p-4 md:p-8 my-2 rounded-lg' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
+                        <div className='w-11/12 bg-green-700 p-4 md:p-8 my-2 rounded-lg' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                             <div className='flex flex-row items-center gap-2'>
                                 <Image className='rounded-md h-[40px] w-[40px]' src={'/icons/invoice.svg'} alt='stripe' height={200} width={200} />
                                 <p className='font-bold text-[20px] text-white'>Payouts Information</p>
@@ -38,7 +38,7 @@ const page = async () => {
                                     <p className='w-1/2 bg-white text-center py-1 rounded-r-lg'>${(data.availableEarning)?.toFixed(2)}</p>
                                 </div>
                             </div>
-                            <Link href={'/wallet/payouts/details'} className='bg-green-700 flex justify-center items-center rounded-lg ml-auto md:w-2/5 w-1/2 py-2 mt-5 md:mr-5'>
+                            <Link href={'/wallet/payouts/details'} className='bg-blue-700 flex justify-center items-center rounded-lg ml-auto md:w-2/5 w-1/2 py-2 mt-5 md:mr-5 border-[2px] border-white'>
                                 <p className='text-white font-bold text-[10px] md:text-[14px]'>View Details and Transfer {`->`}</p>
                             </Link>
 
