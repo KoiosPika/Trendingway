@@ -1,11 +1,14 @@
 'use client'
 
-import { createAccountLink, handleCreatingAccount } from "@/lib/actions/connect.actions"
+import { createAccountLink, getStripeDashboardLink, handleCreatingAccount } from "@/lib/actions/connect.actions"
 import Image from "next/image"
 import Link from "next/link"
+import { useState } from "react"
 
 const StripeSetup = ({ userId, account_id, onboardingCompleted }: { userId: string, account_id: string, onboardingCompleted: boolean }) => {
 
+    const [loading, setLoading] = useState(false)
+    
     const handleCreate = async () => {
         const link = await handleCreatingAccount(userId);
 
@@ -21,6 +24,11 @@ const StripeSetup = ({ userId, account_id, onboardingCompleted }: { userId: stri
             window.location.href = link;
         }
     }
+
+    const handleRedirectingtoDashboard = async () => {
+        await getStripeDashboardLink(userId);
+    }
+
     return (
         <div className='w-11/12 p-4 md:p-8 my-2 rounded-lg bg-[#6772e4] text-white' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
             <div className='flex flex-row items-center gap-2'>
@@ -39,9 +47,9 @@ const StripeSetup = ({ userId, account_id, onboardingCompleted }: { userId: stri
                 <p onClick={handleCreate} className='ml-auto bg-white text-[#6772e4] font-semibold py-2 px-4 cursor-pointer inline-block border-[2px] border-yellow-500 rounded-full text-[12px] md:text-[16px]'>Finish onboarding</p>
             </div>}
             {(account_id && onboardingCompleted) && 
-            <Link href={'https://www.google.com'} target="_blank" className='flex flex-row w-full mt-3'>
+            <div onClick={handleRedirectingtoDashboard} className='flex flex-row w-full mt-3'>
                 <p className='ml-auto bg-white text-[#6772e4] font-semibold py-2 px-4 cursor-pointer inline-block border-[2px] border-yellow-500 rounded-full text-[12px] md:text-[16px]'>Go to Express Dashboard</p>
-            </Link>}
+            </div>}
         </div>
     )
 }

@@ -4,6 +4,7 @@ import Stripe from "stripe";
 import UserData from "../database/models/userData.model";
 import { connectToDatabase } from "../database";
 import { ServerClient } from "postmark";
+import { redirect } from "next/navigation";
 
 async function createAccount(userId: string) {
     const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
@@ -52,6 +53,26 @@ export async function createAccountLink(userId: string) {
 
     } catch (error) {
         console.log(error)
+    }
+}
+
+export async function getStripeDashboardLink(userId:string){
+
+    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+        apiVersion: '2024-04-10'
+    });
+
+    try {
+        await connectToDatabase();
+
+        const user = await UserData.findOne({ User: userId });
+        
+        const loginLink = await stripe.accounts.createLoginLink(user?.expressAccountID);
+
+        redirect(loginLink.url);
+
+    } catch (error) {
+        throw error;
     }
 }
 
