@@ -35,13 +35,19 @@ const page = async () => {
                                             alt='star'
                                             width={24}
                                             height={24}
+                                            className='h-[15px] w-[15px] md:h-[18px] md:w-[18px]'
                                         />
                                     ))}
-                                    <p className='ml-2 text-black font-semibold'>({user?.nofRatings})</p>
+                                    <p className='ml-2 text-black font-semibold text-[12px] md:text-[15px]'>({user?.nofRatings})</p>
                                     <div className='h-[25px] w-[2px] bg-black mx-5' />
-                                    <div className='flex flex-row items-center gap-2'>
+                                    <div className='flex flex-row items-center gap-2 text-[12px] md:text-[15px]'>
                                         <p className='text-yellow-600 font-bold'>{user?.nofVideoesInsighted}</p>
                                         <p className='text-black font-bold'>Insights</p>
+                                    </div>
+                                    <div className='h-[25px] w-[2px] bg-black mx-5' />
+                                    <div className='flex flex-row items-center gap-2 text-[12px] md:text-[15px]'>
+                                        <p className='text-yellow-600 font-bold'>125K</p>
+                                        <p className='text-black font-bold'>Gifts</p>
                                     </div>
                                 </div>
                             </div>
