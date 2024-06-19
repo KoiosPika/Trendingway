@@ -10,15 +10,12 @@ import RatingDialog from './RatingDialog';
 import { Button } from '../ui/button';
 import { timeAgo } from '@/lib/utils';
 import { useRouter } from 'next/navigation';
-import { getPlaybackId } from '@/lib/actions/mux.actions';
-import MuxPlayer from '@mux/mux-player-react';
 
 const ResponsePage = ({ id, userId }: { id: string, userId: string }) => {
 
     const [insight, setInsight] = useState<IInsight>()
     const [height, setHeight] = useState(0)
     const [renderPage, setRenderPage] = useState<boolean>(false)
-    const [playbackId, setPlaybackId] = useState<string>('')
     const router = useRouter();
 
     useEffect(() => {
@@ -40,10 +37,6 @@ const ResponsePage = ({ id, userId }: { id: string, userId: string }) => {
             if (thisInsight?.User?._id != userId) {
                 router.push('/profile')
             } else {
-                if (thisInsight.insightID) {
-                    const thisPlaybackId = await getPlaybackId(thisInsight.insightID)
-                    setPlaybackId(thisPlaybackId as string)
-                }
                 setRenderPage(true);
             }
 
@@ -275,14 +268,6 @@ const ResponsePage = ({ id, userId }: { id: string, userId: string }) => {
                                 {insight?.additionalNotes && <div className='w-full mt-2 mb-5 flex flex-col items-center justify-center'>
                                     <p className='bg-purple-500 text-white px-3 py-2 rounded-lg font-semibold mr-auto ml-5 my-3'>Additional Notes</p>
                                     <p className='w-4/5 bg-slate-200 p-1.5 rounded-lg text-[16px] font-semibold'>{insight?.additionalNotes}</p>
-                                </div>}
-                                {insight?.insightID && <div className={`rounded-lg h-[${height - 200}px] flex justify-center items-center w-full mt-7`}>
-                                    {insight &&
-                                        <MuxPlayer
-                                            playbackId={playbackId}
-                                            streamType="on-demand"
-                                        />
-                                    }
                                 </div>}
                                 <div className='w-full flex flex-col justify-center items-center text-center my-6 gap-2'>
                                     {!insight?.rated && <RatingDialog id={id} />}

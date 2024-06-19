@@ -7,11 +7,8 @@ import Image from 'next/image';
 import { IMessage } from '@/lib/database/models/message.model';
 import { getMessagesByRequestID, getMoreMessages } from '@/lib/actions/message.actions';
 import { getChatByRequestID } from '@/lib/actions/chat.actions';
-import { getUploadUrl } from '@/lib/actions/mux.actions';
-import MuxUploader, { MuxUploaderFileSelect, MuxUploaderProgress } from '@mux/mux-uploader-react';
 import { useRouter } from 'next/navigation';
-import VideoMessage from './VideoMessage';
-import { createTextPersonalInsight } from '@/lib/actions/insight.actions';
+import { createPersonalInsight } from '@/lib/actions/insight.actions';
 import Link from 'next/link';
 import { useSession } from '@clerk/nextjs';
 import { getSessionByUserID } from '@/lib/actions/session.actions';
@@ -21,7 +18,6 @@ const PersonalInsightPage = ({ id, userId, user }: { id: string, userId: string,
     const [messages, setMessages] = useState<IMessage[]>([])
     const [height, setHeight] = useState<number>(window.innerHeight)
     const [chat, setChat] = useState<any>()
-    const [uploadURL, setUploadURL] = useState<string>()
     const [text, setText] = useState<string>('')
     const [loading, setLoading] = useState<boolean>(false)
     const [chatLoading, setChatLoading] = useState<boolean>(false)
@@ -88,22 +84,11 @@ const PersonalInsightPage = ({ id, userId, user }: { id: string, userId: string,
             setChat(thisChat)
         }
 
-        async function getURL() {
-            const thisURL = await getUploadUrl(id, user, userId, 'VideoPersonalInsight')
-
-            setUploadURL(thisURL)
-        }
-
         getChat()
         getMessages();
-        getURL()
     }, [])
 
-    const submitVideoPersonalInsight = (event: any) => {
-        router.push('/wallet')
-    }
-
-    const submitTextPersonalInsight = async () => {
+    const submitPersonalInsight = async () => {
 
         if (loading) {
             return;
@@ -117,7 +102,7 @@ const PersonalInsightPage = ({ id, userId, user }: { id: string, userId: string,
             Insighter: userId,
             User: user
         }
-        await createTextPersonalInsight(insight)
+        await createPersonalInsight(insight)
 
         router.push('/wallet')
     }
@@ -146,14 +131,12 @@ const PersonalInsightPage = ({ id, userId, user }: { id: string, userId: string,
                                     {message.User?._id == userId &&
                                         <div className='p-3 ml-auto md:w-2/4 w-3/4 flex flex-row items-center gap-2'>
                                             {message.type === "text" && <p className='md:text-[15px] text-[13px] bg-slate-200 p-2 rounded-md ml-auto font-semibold'>{message.text}</p>}
-                                            {message.type === "video" && <VideoMessage videoID={message.videoID} />}
                                             <Image src={message.User?.photo} alt='pfp' height={40} width={40} className='mt-auto rounded-full' />
                                         </div>}
                                     {message.User?._id != userId &&
                                         <div className='p-3 md:w-2/4 w-3/4 flex flex-row items-center gap-2'>
                                             <Image src={message.User?.photo} alt='pfp' height={40} width={40} className='mt-auto rounded-full' />
                                             {message.type === "text" && <p className='md:text-[15px] text-[13px] bg-slate-200 p-2 rounded-md font-semibold'>{message.text}</p>}
-                                            {message.type === "video" && <VideoMessage videoID={message.videoID} />}
                                         </div>}
                                 </div>
                             ))}
@@ -167,27 +150,11 @@ const PersonalInsightPage = ({ id, userId, user }: { id: string, userId: string,
                             </div>}
                         </div>
                     </ScrollArea>
-                    {chat && chat.type === 'TextPersonalInsight' &&
+                    {chat && chat.type === 'PersonalInsight' &&
                         <div className='flex flex-row items-center justify-center gap-2 w-full my-2'>
                             <Input onChange={(e) => setText(e.target.value)} placeholder='Your insight' className='w-4/5 border-2 border-black h-[50px] text-[16px]' />
-                            {!loading && <Image src={'/icons/up.svg'} alt='send' height={40} width={40} className='rotate-90 hover:cursor-pointer' onClick={submitTextPersonalInsight} />}
+                            {!loading && <Image src={'/icons/up.svg'} alt='send' height={40} width={40} className='rotate-90 hover:cursor-pointer' onClick={submitPersonalInsight} />}
                             {loading && <Image src={'/icons/spinner.svg'} alt='send' height={40} width={40} className='rotate-90 animate-spin' />}
-                        </div>}
-                    {chat && chat.type === 'VideoPersonalInsight' &&
-                        <div className='flex flex-col items-center justify-center w-full my-2'>
-                            <MuxUploader onChunkSuccess={(event) => submitVideoPersonalInsight(event)} id="my-uploader" className="hidden" endpoint={uploadURL} />
-                            <MuxUploaderFileSelect muxUploader="my-uploader" className='w-full flex justify-center items-center'>
-                                <button
-                                    className="bg-yellow-400 hover:bg-yellow-500 my-2 px-4 py-2 rounded text-black font-semibold text-sm"
-                                >
-                                    Upload a video insight
-                                </button>
-                            </MuxUploaderFileSelect>
-                            <MuxUploaderProgress
-                                type="bar"
-                                muxUploader="my-uploader"
-                                className="w-full text-3xl text-orange-600 underline"
-                            />
                         </div>}
                 </div>
             </div>}

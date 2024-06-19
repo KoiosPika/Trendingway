@@ -8,7 +8,6 @@ export interface IMessage extends Document {
     User: IUser
     type: string,
     text: string,
-    videoID: string,
     createdAt: Date
 }
 
@@ -17,7 +16,6 @@ const MessageSchema = new Schema({
     User: { type: Schema.Types.ObjectId, ref: "User" },
     type: { type: String },
     text: { type: String },
-    videoID: { type: String },
     createdAt: { type: Date, default: Date.now },
 })
 

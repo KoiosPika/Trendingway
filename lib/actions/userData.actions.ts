@@ -44,14 +44,10 @@ export async function getUserDataByUserId(userId: string) {
 
 export async function editUserData(userData:
     { userId: string, aboutMe: string, link: string, 
-    TextInsight: number, TextInsightAvailability: boolean,
-    TextPersonalInsight: number, TextPersonalInsightAvailability: boolean,
-    LongTextInsight: number, LongTextInsightAvailability: boolean, 
-    VideoInsight: number, VideoInsightAvailability: boolean, 
-    VideoPersonalInsight: number, VideoPersonalInsightAvailability: boolean, 
+    VideoInsight: number, VideoInsightAvailability: boolean,
     LongVideoInsight: number, LongVideoInsightAvailability: boolean, 
-    TextProfileInsight: number, TextProfileInsightAvailability: boolean, 
-    VideoProfileInsight: number, VideoProfileInsightAvailability: boolean,
+    ProfileInsight: number, ProfileInsightAvailability: boolean, 
+    PersonalInsight: number, PersonalInsightAvailability: boolean,
     languages: string[], categories: string[] }) {
     try {
         await connectToDatabase()
@@ -62,22 +58,14 @@ export async function editUserData(userData:
                 '$set': {
                     aboutMe: userData.aboutMe,
                     personalLink: userData.link,
-                    TextInsight: userData.TextInsight,
-                    TextInsightAvailability: userData.TextInsightAvailability,
-                    TextPersonalInsight: userData.TextPersonalInsight,
-                    TextPersonalInsightAvailability: userData.TextPersonalInsightAvailability,
-                    LongTextInsight: userData.LongTextInsight,
-                    LongTextInsightAvailability: userData.LongTextInsightAvailability,
                     VideoInsight: userData.VideoInsight,
                     VideoInsightAvailability: userData.VideoInsightAvailability,
-                    VideoPersonalInsight: userData.VideoPersonalInsight,
-                    VideoPersonalInsightAvailability: userData.VideoPersonalInsightAvailability,
                     LongVideoInsight: userData.LongVideoInsight,
                     LongVideoInsightAvailability: userData.LongVideoInsightAvailability,
-                    TextProfileInsight: userData.TextProfileInsight,
-                    TextProfileInsightAvailability: userData.TextProfileInsightAvailability,
-                    VideoProfileInsight: userData.VideoProfileInsight,
-                    VideoProfileInsightAvailability: userData.VideoProfileInsightAvailability,
+                    ProfileInsight: userData.ProfileInsight,
+                    ProfileInsightAvailability: userData.ProfileInsightAvailability,
+                    PersonalInsight: userData.PersonalInsight,
+                    PersonalInsightAvailability: userData.PersonalInsightAvailability,
                     languages: userData.languages,
                     categories: userData.categories
                 }

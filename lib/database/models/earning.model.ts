@@ -20,7 +20,7 @@ const EarningSchema = new Schema({
     User: { type: Schema.Types.ObjectId, ref: "User" },
     amount: { type: Number },
     service: { type: String },
-    availableDate: { type: Date, default: () => addDays(new Date(), 5) },
+    availableDate: { type: Date, default: () => addDays(new Date(), 1) },
     withdrawn: { type: Boolean, default: false },
     createdAt: { type: Date, default: Date.now },
 })

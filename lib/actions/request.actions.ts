@@ -138,7 +138,7 @@ export async function cancelOrder(id: string, message: string) {
             { '$set': { status: 'Canceled', message } }
         ))
 
-        if (request.type === 'TextPersonalInsight' || request.type === 'VideoPersonalInsight') {
+        if (request.type === 'PersonalInsight') {
             await Message.findByIdAndDelete(request.messageId)
         }
 

@@ -46,31 +46,32 @@ const page = async () => {
                             <div className='flex flex-col bg-green-700 w-full p-4 rounded-lg h-[140px]' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                                 <div className='flex flex-row items-center gap-2'>
                                     <Image src={'/icons/wallet.svg'} alt='wallet' height={20} width={20} />
-                                    <p className='text-white font-semibold text-[18px]'>Payout Information</p>
+                                    <p className='text-white font-semibold text-[18px]'>Earnings Information</p>
                                 </div>
-                                <Link href={'/wallet/payouts'} className='flex flex-row items-center gap-2 ml-auto mt-auto bg-white px-2 py-1 rounded-lg h-[40px]'>
+                                <p className='ml-7 text-[15px] text-white mt-1'>Transfer funds and see earning details</p>
+                                <Link href={'/wallet/earnings'} className='flex flex-row items-center gap-2 ml-auto mt-auto bg-white px-2 py-1 rounded-lg h-[40px]'>
                                     <Image src={'/icons/dollar.svg'} alt='dollar' height={15} width={15} />
-                                    <p className='font-semibold text-[13px]'>Go to Payouts</p>
+                                    <p className='font-semibold text-[13px]'>Go to Earnings</p>
                                 </Link>
                             </div>
                         </div>
                         <div className='grid grid-cols-1 sm:grid-cols-2 w-11/12 gap-4 mt-2'>
-                            <div id='recharge' className='w-full p-4 md:p-8 my-3 rounded-lg bg-blue-600 text-white h-[400px]' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
+                            <div id='recharge' className='w-full p-4 md:p-8 my-3 rounded-lg bg-blue-600 text-white md:h-[400px] h-[360px]' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                                 <div className='flex flex-row gap-2 mb-4'>
                                     <Image src={'/icons/plus-white.svg'} alt='wallet' height={20} width={20} />
                                     <p className='font-semibold text-[20px]'>Recharge your wallet</p>
                                 </div>
                                 <div className='grid grid-cols-2 gap-3 text-center'>
-                                    <Checkout userId={userId} amount={1} />
-                                    <Checkout userId={userId} amount={8} />
-                                    <Checkout userId={userId} amount={15} />
-                                    <Checkout userId={userId} amount={20} />
-                                    <Checkout userId={userId} amount={25} />
-                                    <Checkout userId={userId} amount={30} />
-                                    <Checkout userId={userId} amount={35} />
-                                    <Checkout userId={userId} amount={40} />
-                                    <Checkout userId={userId} amount={45} />
-                                    <Checkout userId={userId} amount={50} />
+                                    <Checkout userId={userId} amount={4.99} />
+                                    <Checkout userId={userId} amount={7.99} />
+                                    <Checkout userId={userId} amount={14.99} />
+                                    <Checkout userId={userId} amount={19.99} />
+                                    <Checkout userId={userId} amount={24.99} />
+                                    <Checkout userId={userId} amount={29.99} />
+                                    <Checkout userId={userId} amount={34.99} />
+                                    <Checkout userId={userId} amount={39.99} />
+                                    <Checkout userId={userId} amount={44.99} />
+                                    <Checkout userId={userId} amount={49.99} />
                                 </div>
                             </div>
                             <div className='w-full px-2 py-4 lg:p-8 my-3 rounded-lg bg-orange-500 text-white md:h-[400px] h-[360px]' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
@@ -142,38 +143,23 @@ const page = async () => {
                                             <div className='w-full flex flex-row items-center'>
                                                 <p className='font-semibold text-[12px] lg:text-[15px]'>{formatDate(spending?.createdAt)}</p>
                                             </div>
-                                            {spending.service == 'TextInsight' &&
+                                            {spending.service == 'VideoInsight' &&
                                                 <div className='w-full flex flex-col sm:flex-row items-center justify-center gap-2'>
                                                     <Image src={'/icons/star-white.svg'} alt='video' width={200} height={200} className='bg-blue-500 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
                                                 </div>}
-                                            {spending.service == 'LongTextInsight' &&
-                                                <div className='w-full flex flex-col sm:flex-row items-center justify-center gap-2'>
-                                                    <Image src={'/icons/star-white.svg'} alt='video' width={200} height={200} className='bg-purple-500 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
-                                                </div>}
-                                            {spending.service == 'VideoInsight' &&
-                                                <div className='w-full flex flex-col sm:flex-row items-center justify-center gap-2'>
-                                                    <Image src={'/icons/video.svg'} alt='video' width={200} height={200} className='bg-red-500 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
-                                                </div>}
                                             {spending.service == 'LongVideoInsight' &&
                                                 <div className='w-full flex flex-col sm:flex-row items-center justify-center gap-2'>
-                                                    <Image src={'/icons/video.svg'} alt='video' width={200} height={200} className='bg-[#B69615] w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
+                                                    <Image src={'/icons/video.svg'} alt='video' width={200} height={200} className='bg-purple-500 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
                                                 </div>}
-                                            {spending.service == 'TextProfileInsight' &&
+                                            
+                                            {spending.service == 'ProfileInsight' &&
                                                 <div className='w-full flex flex-col sm:flex-row items-center justify-center gap-2'>
                                                     <Image src={'/icons/account.svg'} alt='video' width={200} height={200} className='bg-orange-500 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
 
                                                 </div>}
-                                            {spending.service == 'VideoProfileInsight' &&
-                                                <div className='w-full flex flex-col sm:flex-row items-center justify-center gap-2'>
-                                                    <Image src={'/icons/video-icon.svg'} alt='video' width={200} height={200} className='bg-green-600 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
-                                                </div>}
-                                            {spending.service == 'TextPersonalInsight' &&
+                                            {spending.service == 'PersonalInsight' &&
                                                 <div className='w-full flex flex-col sm:flex-row items-center justify-center gap-2'>
                                                     <Image src={'/icons/people.svg'} alt='video' width={200} height={200} className='bg-pink-500 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
-                                                </div>}
-                                            {spending.service == 'VideoPersonalInsight' &&
-                                                <div className='w-full flex flex-col sm:flex-row items-center justify-center gap-2'>
-                                                    <Image src={'/icons/selfie.svg'} alt='video' width={200} height={200} className='bg-red-700 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
                                                 </div>}
                                         </div>
                                     ))}

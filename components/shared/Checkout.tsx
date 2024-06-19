@@ -32,7 +32,7 @@ const Checkout = ({ userId, amount }: { userId: string, amount: number }) => {
     return (
         <form action={onCheckout}>
             <Button type="submit" role="link" size="lg" className='bg-white text-black font-semibold p-2 rounded-lg w-full hover:bg-yellow-400 h-[48px]'>
-                <p className='font-bold text-[15px] md:text-[20px] text-black'>${amount}.00</p>
+                <p className='font-bold text-[15px] md:text-[20px] text-black'>${amount}</p>
             </Button>
         </form>
     )

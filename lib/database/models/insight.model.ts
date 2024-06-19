@@ -7,7 +7,6 @@ export interface IInsight extends Document {
     Request: IRequest,
     Insighter: IUser,
     User: IUser,
-    insightID: string
     contentRate: number,
     contentNotes: string,
     brightnessRate: number,
@@ -33,7 +32,6 @@ const InsightSchema = new Schema({
     Request: { type: Schema.Types.ObjectId, ref: "Request" },
     Insighter: { type: Schema.Types.ObjectId, ref: "User" },
     User: { type: Schema.Types.ObjectId, ref: "User" },
-    insightID: { type: String },
     contentRate: { type: Number },
     contentNotes: { type: String },
     brightnessRate: { type: Number },

@@ -35,22 +35,18 @@ const LoadMoreOrders = ({ id, userId }: { id: string, userId: string }) => {
                                 <p className='text-[13px]'>{request.User.username}</p>
                                 <p className='text-[12px] text-slate-400'>{timeAgo(request.createdAt.toString())}</p>
                             </div>
-                            {request.type === 'TextInsight' && <Image src={'/icons/star-white.svg'} alt='video' width={200} height={200} className='bg-blue-500 w-[40px] h-[40px] p-1.5 rounded-full ml-auto' />}
-                            {request.type === 'LongTextInsight' && <Image src={'/icons/star-white.svg'} alt='video' width={200} height={200} className='bg-purple-500 w-[40px] h-[40px] p-1.5 rounded-full ml-auto' />}
-                            {request.type === 'VideoInsight' && <Image src={'/icons/video.svg'} alt='video' width={200} height={200} className='bg-red-500 w-[40px] h-[40px] p-1.5 rounded-full ml-auto' />}
-                            {request.type === 'LongVideoInsight' && <Image src={'/icons/video.svg'} alt='video' width={200} height={200} className='bg-[#B69615] w-[40px] h-[40px] p-1.5 rounded-full ml-auto' />}
-                            {request.type === 'TextProfileInsight' && <Image src={'/icons/account.svg'} alt='video' width={200} height={200} className='bg-orange-500 w-[40px] h-[40px] p-1.5 rounded-full ml-auto' />}
-                            {request.type === 'VideoProfileInsight' && <Image src={'/icons/video-icon.svg'} alt='video' width={200} height={200} className='bg-green-500 w-[40px] h-[40px] p-1.5 rounded-full ml-auto' />}
-                            {request.type === 'TextPersonalInsight' && <Image src={'/icons/people.svg'} alt='video' width={200} height={200} className='bg-pink-500 w-[40px] h-[40px] p-1.5 rounded-full ml-auto' />}
-                            {request.type === 'VideoPersonalInsight' && <Image src={'/icons/selfie.svg'} alt='video' width={200} height={200} className='bg-[#b83c4c] w-[40px] h-[40px] p-1.5 rounded-full ml-auto' />}
+                            {request.type === 'VideoInsight' && <Image src={'/icons/star-white.svg'} alt='video' width={200} height={200} className='bg-blue-500 w-[40px] h-[40px] p-1.5 rounded-full ml-auto' />}
+                            {request.type === 'LongVideoInsight' && <Image src={'/icons/video.svg'} alt='video' width={200} height={200} className='bg-purple-500 w-[40px] h-[40px] p-1.5 rounded-full ml-auto' />}
+                            {request.type === 'ProfileInsight' && <Image src={'/icons/account.svg'} alt='video' width={200} height={200} className='bg-orange-500 w-[40px] h-[40px] p-1.5 rounded-full ml-auto' />}
+                            {request.type === 'PersonalInsight' && <Image src={'/icons/people.svg'} alt='video' width={200} height={200} className='bg-pink-500 w-[40px] h-[40px] p-1.5 rounded-full ml-auto' />}
                         </div>
                         <p className='ml-3 mt-2 mr-auto text-[12.5px] h-[50px] overflow-hidden'>{request.description}</p>
-                        {(request.type != 'TextPersonalInsight' && request.type != "VideoPersonalInsight") &&
+                        {(request.type != 'PersonalInsight') &&
                             <Link href={`/insight/${request._id}`} className='bg-yellow-400 w-full flex flex-row items-center justify-center gap-2 py-1 rounded-lg mt-4 mb-2'>
                                 <Image src={'/icons/star-black.svg'} alt='star' height={15} width={15} />
                                 <p className='text-[13px] md:text-[16px]'>Start Insight</p>
                             </Link>}
-                        {(request.type === 'TextPersonalInsight' || request.type === "VideoPersonalInsight") &&
+                        {(request.type === 'PersonalInsight') &&
                             <Link href={`/personal-insight/${request._id}`} className='bg-yellow-400 w-full flex flex-row items-center justify-center gap-2 py-1 rounded-lg mt-4 mb-2'>
                                 <Image src={'/icons/star-black.svg'} alt='star' height={15} width={15} />
                                 <p className='text-[13px] md:text-[16px]'>Start Insight</p>

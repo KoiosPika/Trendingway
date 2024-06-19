@@ -5,7 +5,6 @@ import Image from 'next/image'
 import { IMessage } from '@/lib/database/models/message.model'
 import { getChatByID } from '@/lib/actions/chat.actions'
 import Link from 'next/link'
-import VideoMessage from './VideoMessage'
 import { getMessagesByChatID, getMoreMessages } from '@/lib/actions/message.actions'
 import { useRouter } from 'next/navigation'
 
@@ -90,14 +89,12 @@ const ChatPage = ({ id, userId }: { id: string, userId: string }) => {
                                     {message.User?._id == userId &&
                                         <div className='p-3 ml-auto md:w-2/4 w-3/4 flex flex-row items-center gap-2'>
                                             {message.type === "text" && <p className='md:text-[15px] text-[13px] bg-slate-200 p-2 rounded-md ml-auto font-semibold'>{message.text}</p>}
-                                            {message.type === "video" && <VideoMessage videoID={message.videoID} />}
                                             <Image src={message.User?.photo} alt='pfp' height={40} width={40} className='mt-auto rounded-full' />
                                         </div>}
                                     {message.User?._id != userId &&
                                         <div className='p-3 md:w-2/4 w-3/4 flex flex-row items-center gap-2'>
                                             <Image src={message.User?.photo} alt='pfp' height={40} width={40} className='mt-auto rounded-full' />
                                             {message.type === "text" && <p className='md:text-[15px] text-[13px] bg-slate-200 p-2 rounded-md font-semibold'>{message.text}</p>}
-                                            {message.type === "video" && <VideoMessage videoID={message.videoID} />}
                                         </div>}
                                 </div>
                             ))}

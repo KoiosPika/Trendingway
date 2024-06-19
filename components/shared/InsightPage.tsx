@@ -7,10 +7,8 @@ import { getRequestById } from '@/lib/actions/request.actions'
 import { IRequest } from '@/lib/database/models/request.model'
 import { timeAgo } from '@/lib/utils'
 import { useRouter } from 'next/navigation'
-import TextInsightForm from './TextInsightForm';
 import VideoInsightForm from './VideoInsightForm';
-import TextProfileInsightForm from './TextProfileInsightForm';
-import VideoProfileInsightForm from './VideoProfileInsightForm';
+import ProfileInsightForm from './ProfileInsightForm';
 
 
 const InsightPage = ({ id, userId }: { id: string, userId: string }) => {
@@ -79,14 +77,10 @@ const InsightPage = ({ id, userId }: { id: string, userId: string }) => {
                                     {request && <YouTubeEmbed url={request?.postLink} width={350} height={height} />}
                                 </div>}
                             <div className={`h-full w-full flex justify-center items-center`}>
-                                {(request?.type === 'TextInsight' || request?.type === 'LongTextInsight') &&
-                                    <TextInsightForm height={height} id={id} insighter={request?.Insighter?._id} user={request?.User?._id} />}
                                 {(request?.type === 'VideoInsight' || request?.type === 'LongVideoInsight') &&
                                     <VideoInsightForm height={height} id={id} insighter={request?.Insighter?._id} user={request?.User?._id} />}
-                                {request?.type === 'TextProfileInsight' &&
-                                    <TextProfileInsightForm height={height} id={id} insighter={request?.Insighter?._id} user={request?.User?._id} />}
-                                {request?.type === 'VideoProfileInsight' &&
-                                    <VideoProfileInsightForm height={height} id={id} insighter={request?.Insighter?._id} user={request?.User?._id} />}
+                                {request?.type === 'ProfileInsight' &&
+                                    <ProfileInsightForm height={height} id={id} insighter={request?.Insighter?._id} user={request?.User?._id} />}
                             </div>
                         </div>
                     </div>

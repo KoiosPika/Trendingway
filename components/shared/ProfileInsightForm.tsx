@@ -3,13 +3,13 @@
 import React, { useEffect, useState } from 'react'
 import { ScrollArea } from '../ui/scroll-area'
 import Image from 'next/image'
-import { createTextProfileInsight } from '@/lib/actions/insight.actions'
+import { createProfileInsight } from '@/lib/actions/insight.actions'
 import { useRouter } from 'next/navigation'
 import { Textarea } from '../ui/textarea'
 import { useSession } from '@clerk/nextjs'
 import { getSessionByUserID } from '@/lib/actions/session.actions'
 
-const TextProfileInsightForm = ({ height, id, insighter, user }: { height: number, id: string, insighter: string, user:string }) => {
+const ProfileInsightForm = ({ height, id, insighter, user }: { height: number, id: string, insighter: string, user:string }) => {
 
     const [bioNotes, setBioNotes] = useState<string>('')
     const [bioRate, setBioRate] = useState<number>(1)
@@ -57,7 +57,7 @@ const TextProfileInsightForm = ({ height, id, insighter, user }: { height: numbe
             Insighter: insighter
         }
 
-        await createTextProfileInsight(insight)
+        await createProfileInsight(insight)
 
         router.push('/wallet')
 
@@ -144,4 +144,4 @@ const TextProfileInsightForm = ({ height, id, insighter, user }: { height: numbe
     )
 }
 
-export default TextProfileInsightForm
+export default ProfileInsightForm

@@ -45,7 +45,7 @@ const EarningOrders = ({ userId }: { userId: string }) => {
                         <div className='w-full md:w-11/12 px-2 py-4 md:p-8 my-3 rounded-lg bg-blue-600 text-white' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                             <div className='flex flex-row gap-2 mb-4'>
                                 <Image src={'/icons/invoice.svg'} alt='wallet' height={20} width={20} />
-                                <p className='font-semibold text-[20px]'>Earnings</p>
+                                <p className='font-semibold text-[20px]'>Earnings Summary</p>
                             </div>
                             <div className='grid grid-cols-1 gap-2'>
                                 <div className='flex flex-row justify-center items-center p-2 gap-2 bg-white text-black font-bold rounded-lg'>
@@ -86,7 +86,7 @@ const EarningOrders = ({ userId }: { userId: string }) => {
                             </div>
                             <div className='flex flex-row gap-2 my-4'>
                                 <Image src={'/icons/invoice.svg'} alt='wallet' height={20} width={20} />
-                                <p className='font-semibold text-[20px]'>Earnings breakdown</p>
+                                <p className='font-semibold text-[20px]'>Earnings Breakdown</p>
                             </div>
                             <div className='grid grid-cols-1 gap-2'>
                                 <div className='flex flex-row justify-center items-center p-2 gap-2 bg-white text-black font-bold rounded-lg'>
@@ -145,10 +145,10 @@ const LoadMoreEarnings = ({ userId, id }: { userId: string, id: string }) => {
                 </div>
             ))}
             {!loading && <div className='flex justify-center items-center mt-3 hover:cursor-pointer' onClick={getOrders}>
-                <p className='inline-flex bg-white text-[#1AAD7A] font-semibold px-2 py-1 rounded-lg text-[13px] md:text-[16px]'>Load More</p>
+                <p className='inline-flex bg-white text-blue-600 font-semibold px-2 py-1 rounded-lg text-[13px] md:text-[16px]'>Load More</p>
             </div>}
             {loading && <div className='flex justify-center items-center mt-3'>
-                <p className='inline-flex bg-white text-[#1AAD7A] font-semibold px-2 py-1 rounded-lg text-[13px] md:text-[16px]'>Loading...</p>
+                <p className='inline-flex bg-white text-blue-600 font-semibold px-2 py-1 rounded-lg text-[13px] md:text-[16px]'>Loading...</p>
             </div>}
         </>
     );

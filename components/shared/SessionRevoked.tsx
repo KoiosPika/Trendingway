@@ -8,8 +8,6 @@ import { useClerk } from '@clerk/nextjs';
 
 const SessionRevoked = () => {
 
-    const router = useRouter();
-
     const { signOut } = useClerk()
 
     useEffect(() => {
