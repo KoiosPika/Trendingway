@@ -72,7 +72,7 @@ const VideoInsightForm = ({ height, id, insighter, user }: { height: number, id:
         }
         await createVideoInsight(insight)
 
-        router.push('/wallet')
+        router.push('/activity/orders')
 
         setLoading(false);
     }

@@ -173,7 +173,7 @@ export async function createPersonalInsight(insight: { request: string, text: st
         session = await db.startSession();
         session.startTransaction();
 
-        const req = await Request.findById(insight.request)
+        const req = await Request.findById(insight.request).session(session)
 
         const message = await Message.create([{
             Chat: req.chatId,

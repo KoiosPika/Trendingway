@@ -104,7 +104,7 @@ const PersonalInsightPage = ({ id, userId, user }: { id: string, userId: string,
         }
         await createPersonalInsight(insight)
 
-        router.push('/wallet')
+        router.push('/activity/orders')
     }
 
 

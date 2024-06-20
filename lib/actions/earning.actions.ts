@@ -13,7 +13,7 @@ export async function createEarning(requestId: any, session: ClientSession) {
 
         await connectToDatabase();
 
-        const request = await Request.findById(requestId);
+        const request = await Request.findById(requestId).session(session);
 
         await UserData.findOneAndUpdate(
             { User: request.Insighter },
@@ -134,7 +134,19 @@ export async function getEarningsAsPayouts(userId: string) {
     try {
         await connectToDatabase();
 
-        const earnings = await Earning.find({ User: userId }).sort({ createdAt: -1 }).limit(20)
+        const earnings = await Earning.find({ User: userId }).sort({ createdAt: -1 }).limit(10)
+
+        return JSON.parse(JSON.stringify(earnings));
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export async function getPaginatedEarningsAsPayouts(userId: string, page: number) {
+    try {
+        await connectToDatabase();
+
+        const earnings = await Earning.find({ User: userId }).sort({ createdAt: -1 }).limit(10).skip(page)
 
         return JSON.parse(JSON.stringify(earnings));
     } catch (error) {
@@ -157,7 +169,7 @@ export async function createTransfer(userId: string) {
 
         const now = new Date();
 
-        const earnings = await Earning.find({ User: userId, withdrawn: false, availableDate: { '$lt': now } }).limit(150);
+        const earnings = await Earning.find({ User: userId, withdrawn: false, availableDate: { '$lt': now } }).limit(150).session(session);
 
         let availableEarning = 0;
 
@@ -167,9 +179,11 @@ export async function createTransfer(userId: string) {
             })
         }
 
-        availableEarning = Math.round(availableEarning)
+        if(availableEarning < 25){
+            throw Error;
+        }
 
-        const User = await UserData.findOne({ User: userId });
+        const User = await UserData.findOne({ User: userId }).session(session);
 
         const updatePromises = earnings.map((earning) =>
             Earning.findByIdAndUpdate(earning._id, { withdrawn: true }, { session })
@@ -178,12 +192,9 @@ export async function createTransfer(userId: string) {
         await Promise.all(updatePromises);
 
         const transfer = await stripe.transfers.create({
-            amount: availableEarning * 100,
+            amount: Number((availableEarning).toFixed(2)) * 100,
             currency: 'usd',
             destination: User?.expressAccountID,
-            metadata: {
-                user: userId
-            }
         });
 
         await session.commitTransaction();

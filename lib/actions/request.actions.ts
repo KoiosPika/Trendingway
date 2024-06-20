@@ -73,10 +73,10 @@ export async function createPersonalRequest(User: string, Insighter: string, des
                 { User1: User, User2: Insighter },
                 { User1: Insighter, User2: User }
             ]
-        })
+        }).session(session)
 
         if (!chat) {
-            chat = await Chat.create({ User1: User, User2: Insighter })
+            chat = await Chat.create([{ User1: User, User2: Insighter }], { session })
         }
 
         const message: any = await Message.create([{

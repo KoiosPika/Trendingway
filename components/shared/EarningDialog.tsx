@@ -37,22 +37,22 @@ const EarningDialog = ({ earning }: { earning: IEarning }) => {
                         <p className='font-semibold text-[12px] lg:text-[14px] hidden sm:block'>Personal Insight</p>
                     </div>}
             </AlertDialogTrigger>
-            <AlertDialogContent className="bg-blue-600 border-0">
+            <AlertDialogContent className="bg-[#549E4D] border-0">
                 <AlertDialogHeader>
                     <AlertDialogTitle className="flex flex-row items-center justify-between">
                         <p className="text-white font-bold">Earning Details:</p>
-                        <AlertDialogCancel className="rounded-full bg-white text-blue-600 hover:bg-black hover:text-white">X</AlertDialogCancel>
+                        <AlertDialogCancel className="rounded-full bg-white text-[#549E4D] hover:bg-black hover:text-white">X</AlertDialogCancel>
                     </AlertDialogTitle>
                 </AlertDialogHeader>
-                <table className='w-full text-[13px] md:text-[16px] border-collapse border border-blue-600'>
+                <table className='w-full text-[13px] md:text-[16px] border-collapse border border-[#549E4D]'>
                     <tbody>
                         <tr>
-                            <td className='font-bold pr-2 bg-white border-blue-600 border p-2 rounded-tl-lg border-b-[3px] border-r-[3px]'>Earning ID:</td>
-                            <td className='font-bold text-black bg-white border-blue-600 border p-2 rounded-tr-lg border-b-[3px]'>{earning?._id}</td>
+                            <td className='font-bold pr-2 bg-white border-[#549E4D] border p-2 rounded-tl-lg border-b-[3px] border-r-[3px]'>Earning ID:</td>
+                            <td className='font-bold text-black bg-white border-[#549E4D] border p-2 rounded-tr-lg border-b-[3px]'>{earning?._id}</td>
                         </tr>
                         <tr>
-                            <td className='font-bold pr-2 bg-white border-blue-600 border p-2 border-b-[3px] border-r-[3px]'>Service:</td>
-                            <td className='font-bold text-black bg-white border-blue-600 border p-2 border-b-[3px]'>
+                            <td className='font-bold pr-2 bg-white border-[#549E4D] border p-2 border-b-[3px] border-r-[3px]'>Service:</td>
+                            <td className='font-bold text-black bg-white border-[#549E4D] border p-2 border-b-[3px]'>
                                 {earning.service === 'VideoInsight' && (
                                     <div className='flex flex-row items-center gap-2'>
                                         <Image src={'/icons/star-white.svg'} alt='text Insight' width={25} height={25} className='bg-blue-500 p-[3px] rounded-full' />
@@ -79,8 +79,8 @@ const EarningDialog = ({ earning }: { earning: IEarning }) => {
                             </td>
                         </tr>
                         <tr>
-                            <td className='font-bold pr-2 bg-white border-blue-600 border p-2 border-b-[3px] border-r-[3px]'>Amount:</td>
-                            <td className='text-black bg-white border-blue-600 border p-2 border-b-[3px]'>
+                            <td className='font-bold pr-2 bg-white border-[#549E4D] border p-2 border-b-[3px] border-r-[3px]'>Amount:</td>
+                            <td className='text-black bg-white border-[#549E4D] border p-2 border-b-[3px]'>
                                 <div className='flex flex-col'>
                                     <div className='flex justify-between'>
                                         <span className='font-semibold'>Total:</span>
@@ -99,12 +99,12 @@ const EarningDialog = ({ earning }: { earning: IEarning }) => {
                             </td>
                         </tr>
                         <tr>
-                            <td className='font-bold pr-2 bg-white border-blue-600 p-2 border-b-[3px] border-r-[3px]'>Date:</td>
-                            <td className='font-bold text-black bg-white border-blue-600 border p-2 border-b-[3px]'>{formatDate(earning?.createdAt)}</td>
+                            <td className='font-bold pr-2 bg-white border-[#549E4D] p-2 border-b-[3px] border-r-[3px]'>Date:</td>
+                            <td className='font-bold text-black bg-white border-[#549E4D] border p-2 border-b-[3px]'>{formatDate(earning?.createdAt)}</td>
                         </tr>
                         <tr>
-                            <td className='font-bold pr-2 bg-white border-blue-600 border p-2 rounded-bl-lg border-b-[3px] border-r-[3px]'>Time:</td>
-                            <td className='font-bold text-black bg-white border-blue-600 border p-2 rounded-br-lg border-b-[3px]'>{formatTime(earning?.createdAt)}</td>
+                            <td className='font-bold pr-2 bg-white border-[#549E4D] border p-2 rounded-bl-lg border-b-[3px] border-r-[3px]'>Time:</td>
+                            <td className='font-bold text-black bg-white border-[#549E4D] border p-2 rounded-br-lg border-b-[3px]'>{formatTime(earning?.createdAt)}</td>
                         </tr>
                     </tbody>
                 </table>

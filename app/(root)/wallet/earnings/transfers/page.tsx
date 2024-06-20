@@ -1,16 +1,22 @@
 import EarningAsPayoutDialog from '@/components/shared/EarningAsPayoutDialog';
 import EarningDialog from '@/components/shared/EarningDialog';
+import LoadMoreEarningsAsPayouts from '@/components/shared/LoadMoreEarningsAsPayouts';
 import TransferButton from '@/components/shared/TransferButton';
 import { getAvailableEarnings, getEarningsAsPayouts } from '@/lib/actions/earning.actions'
+import { getUserDataByUserId } from '@/lib/actions/userData.actions';
 import { IEarning } from '@/lib/database/models/earning.model';
+import { IUserData } from '@/lib/database/models/userData.model';
 import { auth } from '@clerk/nextjs/server';
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react'
 
 const page = async () => {
 
     const { sessionClaims } = auth();
     const userId = sessionClaims?.userId as string;
+
+    const userData: IUserData = await getUserDataByUserId(userId)
 
     const earnings = await getEarningsAsPayouts(userId)
 
@@ -36,10 +42,20 @@ const page = async () => {
                                     <p className='w-1/2 bg-white text-center py-1 rounded-br-lg'>{data.availableInsights}</p>
                                 </div>
                                 <p className='text-white font-semibold md:text-[13px] text-[11px] ml-1 mt-1'>Note: You can only process 150 Insights per transfer</p>
-                                {data.availableEarning == 0 && <div className='flex w-full my-2'>
-                                    <p className='ml-auto px-3 py-1 bg-green-700 rounded-lg text-white font-semibold border-[1px] border-white md:text-[15px] text-[12px]'>No Funds Available</p>
-                                </div>}
-                                {data.availableEarning > 0 && <TransferButton userId={userId}/>}
+                                {!userData.onboardingCompleted && <>
+                                    {data.availableEarning == 0 && <div className='flex w-full my-2'>
+                                        <p className='ml-auto px-3 py-1 bg-green-700 rounded-lg text-white font-semibold border-[1px] border-white md:text-[15px] text-[12px]'>No Funds Available</p>
+                                    </div>}
+                                    {(data.availableEarning > 25) && <TransferButton userId={userId} />}
+                                    {(data.availableEarning > 0 && data.availableEarning < 25) && <div className='flex w-full my-2'>
+                                        <p className='ml-auto px-3 py-1 bg-red-500 rounded-lg text-white font-semibold border-[1px] border-white md:text-[15px] text-[12px]'>Available Funds must be atleast $25</p>
+                                    </div>}
+                                </>}
+                                {userData.onboardingCompleted && <>
+                                    {<div className='flex w-full my-2'>
+                                        <Link href={'/wallet/earnings'} className='ml-auto px-3 py-1 bg-yellow-500 rounded-lg text-white font-semibold border-[1px] border-white md:text-[15px] text-[12px]'>Set up stripe account first</Link>
+                                    </div>}
+                                </>}
                             </div>
                             <div className='flex flex-row gap-2 mb-4'>
                                 <Image src={'/icons/invoice.svg'} alt='wallet' height={20} width={20} />
@@ -69,7 +85,7 @@ const page = async () => {
                                         <EarningAsPayoutDialog earning={earning} />
                                     </div>
                                 ))}
-
+                                {earnings && <LoadMoreEarningsAsPayouts userId={userId} />}
                             </div>
                         </div>
                     </div>

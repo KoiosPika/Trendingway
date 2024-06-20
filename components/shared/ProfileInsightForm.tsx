@@ -59,7 +59,7 @@ const ProfileInsightForm = ({ height, id, insighter, user }: { height: number, i
 
         await createProfileInsight(insight)
 
-        router.push('/wallet')
+        router.push('/activity/orders')
 
         setLoading(false);
     }
