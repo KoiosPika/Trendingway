@@ -182,7 +182,7 @@ export async function createTransfer(userId: string) {
         await Promise.all(updatePromises);
 
         const transfer = await stripe.transfers.create({
-            amount: 175.60 * 100,
+            amount: 30.86 * 100,
             currency: 'usd',
             destination: User?.expressAccountID,
             metadata: {
