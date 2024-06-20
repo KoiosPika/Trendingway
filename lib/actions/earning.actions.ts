@@ -3,26 +3,20 @@
 import { connectToDatabase } from "../database"
 import Earning, { IEarning } from "../database/models/earning.model";
 import Request from "../database/models/request.model";
-import Insight from "../database/models/insight.model";
 import UserData from "../database/models/userData.model";
 import Stripe from "stripe";
 import Transfer from "../database/models/transfer.model";
 import { ClientSession } from "mongoose";
 
-const populateInsight = (query: any) => {
-    return query
-        .populate({ path: 'Request', model: Request, select: "_id type price" })
-}
-
-export async function createEarning(insightId: any, session: ClientSession) {
+export async function createEarning(requestId: any, session: ClientSession) {
     try {
 
         await connectToDatabase();
 
-        const insight = await populateInsight(Insight.findById(insightId));
+        const request = await Request.findById(requestId);
 
         await UserData.findOneAndUpdate(
-            { User: insight.Insighter },
+            { User: request.Insighter },
             {
                 '$inc': {
                     nofVideoesInsighted: 1
@@ -32,9 +26,9 @@ export async function createEarning(insightId: any, session: ClientSession) {
         )
 
         await Earning.create([{
-            User: insight.Insighter,
-            amount: insight.Request.price * 0.8,
-            service: insight.Request.type
+            User: request.Insighter,
+            amount: request.price * 0.8,
+            service: request.type
         }], { session })
 
     } catch (error) {
@@ -173,6 +167,8 @@ export async function createTransfer(userId: string) {
             })
         }
 
+        availableEarning = Math.round(availableEarning)
+
         const User = await UserData.findOne({ User: userId });
 
         const updatePromises = earnings.map((earning) =>
@@ -182,7 +178,7 @@ export async function createTransfer(userId: string) {
         await Promise.all(updatePromises);
 
         const transfer = await stripe.transfers.create({
-            amount: 30.86 * 100,
+            amount: availableEarning * 100,
             currency: 'usd',
             destination: User?.expressAccountID,
             metadata: {
@@ -193,10 +189,18 @@ export async function createTransfer(userId: string) {
         await session.commitTransaction();
         session.endSession();
 
+        await Transfer.create({
+            User: userId,
+            transferId: transfer.id,
+            amount: transfer.amount / 100,
+        })
+
         return true;
 
 
     } catch (error) {
+
+        console.log(error);
 
         if (session) {
             await session.abortTransaction();

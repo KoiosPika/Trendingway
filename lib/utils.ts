@@ -98,7 +98,7 @@ export const formatDateDifference = (pastDateInput: Date | string): string | boo
   const now = new Date();
   
   if (now>pastDate) {
-    return true;
+    return false;
   }
 
   const difference =pastDate.getTime() - now.getTime();

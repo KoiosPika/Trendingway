@@ -37,7 +37,7 @@ const EditProfile = ({ userId }: { userId: string }) => {
     const [selectedCategory, setSelectedCategory] = useState<string[]>(['']);
     const [loading, setLoading] = useState(false)
 
-    const enableSaving = VideoInsight >= 1.99 && LongVideoInsight >= 2.99 && ProfileInsight >= 2.99 && PersonalInsight >= 0.99;
+    const enableSaving = VideoInsight >= 0.99 && LongVideoInsight >= 1.99 && ProfileInsight >= 2.99 && PersonalInsight >= 0.99;
 
     useEffect(() => {
         async function getUser() {
@@ -74,7 +74,7 @@ const EditProfile = ({ userId }: { userId: string }) => {
 
     const handleSubmit = async () => {
 
-        if(!enableSaving){
+        if (!enableSaving) {
             return;
         }
 
@@ -170,7 +170,7 @@ const EditProfile = ({ userId }: { userId: string }) => {
 
                                 <div className='border-[1px] border-slate-400 rounded-lg h-[150px] md:h-[180px] flex justify-center items-center gap-2 relative' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                                     <div className='flex flex-col items-center gap-2 flex-1'>
-                                        <Image src={'/icons/star-white.svg'} alt='video' width={200} height={200} className='bg-purple-500 w-[40px] h-[40px] md:w-[55px] md:h-[55px] p-1 md:p-2 rounded-full' />
+                                        <Image src={'/icons/video.svg'} alt='video' width={200} height={200} className='bg-purple-500 w-[40px] h-[40px] md:w-[55px] md:h-[55px] p-1 md:p-2 rounded-full' />
                                         <p className='font-semibold text-[13px] md:text-[16px]'>Long Text Insight</p>
                                     </div>
                                     <div className='h-2/4 w-[2px] bg-black'></div>
@@ -230,7 +230,9 @@ const EditProfile = ({ userId }: { userId: string }) => {
 
                                 <div className='border-[1px] border-slate-400 rounded-lg h-[150px] md:h-[180px] flex justify-center items-center gap-2 relative' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                                     <div className='flex flex-col items-center gap-2 flex-1'>
-                                        <Image src={'/icons/people.svg'} alt='video' width={200} height={200} className='bg-pink-500 w-[40px] h-[40px] md:w-[55px] md:h-[55px] p-1 md:p-2 rounded-full' />
+                                        <div className='bg-pink-500 md:w-[55px] md:h-[55px] w-[40px] h-[40px] md:p-2 p-[6px] rounded-full flex justify-center items-center'>
+                                            <Image src={'/icons/messages.svg'} alt='video' width={200} height={200} className='md:p-[1px]' />
+                                        </div>
                                         <p className='font-semibold text-[13px] md:text-[16px]'>Text Personal Insight</p>
                                     </div>
                                     <div className='h-2/4 w-[2px] bg-black'></div>

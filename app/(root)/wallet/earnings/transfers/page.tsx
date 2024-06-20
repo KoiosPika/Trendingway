@@ -35,10 +35,11 @@ const page = async () => {
                                     <p className='w-1/2 bg-white text-center py-1 rounded-bl-lg'>Number of Insights</p>
                                     <p className='w-1/2 bg-white text-center py-1 rounded-br-lg'>{data.availableInsights}</p>
                                 </div>
+                                <p className='text-white font-semibold md:text-[13px] text-[11px] ml-1 mt-1'>Note: You can only process 150 Insights per transfer</p>
                                 {data.availableEarning == 0 && <div className='flex w-full my-2'>
                                     <p className='ml-auto px-3 py-1 bg-green-700 rounded-lg text-white font-semibold border-[1px] border-white md:text-[15px] text-[12px]'>No Funds Available</p>
                                 </div>}
-                                {data.availableEarning == 0 && <TransferButton userId={userId}/>}
+                                {data.availableEarning > 0 && <TransferButton userId={userId}/>}
                             </div>
                             <div className='flex flex-row gap-2 mb-4'>
                                 <Image src={'/icons/invoice.svg'} alt='wallet' height={20} width={20} />

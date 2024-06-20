@@ -5,7 +5,7 @@ import { IOrder } from '@/lib/database/models/order.model'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import RechargeDialog from './RechargeDialog'
-import { getAllTransfers, getTransfersData } from '@/lib/actions/transfer.actions'
+import { getAllTransfers, getPaginatedTransfers, getTransfersData } from '@/lib/actions/transfer.actions'
 import { ITransfer } from '@/lib/database/models/transfer.model'
 import TransferDialog from './TransferDialog'
 
@@ -48,7 +48,7 @@ const TransfersPage = ({ userId }: { userId: string }) => {
                         <div className='w-full md:w-11/12 px-2 py-4 md:p-8 my-3 rounded-lg bg-red-500 text-white' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                             <div className='flex flex-row gap-2 mb-4'>
                                 <Image src={'/icons/invoice.svg'} alt='wallet' height={20} width={20} />
-                                <p className='font-semibold text-[20px]'>Recharge Orders</p>
+                                <p className='font-semibold text-[20px]'>Transfers Data</p>
                             </div>
                             <div className='grid grid-cols-1 gap-2'>
                                 <div className='flex flex-row justify-center items-center p-2 gap-2 bg-white text-black font-bold rounded-lg'>
@@ -59,7 +59,7 @@ const TransfersPage = ({ userId }: { userId: string }) => {
                                         <p className='text-[13px] lg:text-[15px]'>$ Total</p>
                                     </div>
                                     <div className='w-full flex flex-row items-center gap-2'>
-                                        <p className='text-[13px] lg:text-[15px]'># Orders</p>
+                                        <p className='text-[13px] lg:text-[15px]'># Transfers</p>
                                     </div>
                                 </div>
                                 {transfersData && transfersData.map((data: ITransfersData, index: number) => (
@@ -83,7 +83,7 @@ const TransfersPage = ({ userId }: { userId: string }) => {
                             </div>
                             <div className='flex flex-row gap-2 my-4'>
                                 <Image src={'/icons/invoice.svg'} alt='wallet' height={20} width={20} />
-                                <p className='font-semibold text-[20px]'>Orders breakdown</p>
+                                <p className='font-semibold text-[20px]'>Transfers breakdown</p>
                             </div>
                             <div className='grid grid-cols-1 gap-2'>
                                 <div className='flex flex-row justify-center items-center p-2 gap-2 bg-white text-black font-bold rounded-lg'>
@@ -105,7 +105,7 @@ const TransfersPage = ({ userId }: { userId: string }) => {
                                         <TransferDialog transfer={transfer} />
                                     </div>
                                 ))}
-                                {transfers && <LoadMoreRecharges userId={userId} />}
+                                {transfers && <LoadMoreTransfers userId={userId} />}
                             </div>
                         </div>
                     </div>
@@ -117,34 +117,34 @@ const TransfersPage = ({ userId }: { userId: string }) => {
 
 export default TransfersPage
 
-const LoadMoreRecharges = ({ userId }: { userId: string }) => {
+const LoadMoreTransfers = ({ userId }: { userId: string }) => {
 
-    const [orders, setOrders] = useState<IOrder[]>([])
-    const [loading, setloading] = useState<boolean>(false)
+    const [transfers, setTransfers] = useState<ITransfer[]>([])
+    const [loading, setLoading] = useState<boolean>(false)
     const [page, setPage] = useState(1)
 
-    const getOrders = async () => {
+    const getTransfers = async () => {
 
-        setloading(true)
-        const requestedOrders = await getPaginatedOrders(userId, page * 3)
-        setOrders((prevOrders) => [...prevOrders, ...requestedOrders]);
-        setloading(false)
+        setLoading(true)
+        const requestedTransfers = await getPaginatedTransfers(userId, page * 3)
+        setTransfers((prevTransfers) => [...prevTransfers, ...requestedTransfers]);
+        setLoading(false)
         setPage(page + 1);
 
     }
 
     return (
         <>
-            {orders && orders.map((order: IOrder, index: number) => (
+            {transfers && transfers.map((transfer: ITransfer, index: number) => (
                 <div key={index} className='flex w-full'>
-                    <RechargeDialog order={order} />
+                    <TransferDialog transfer={transfer} />
                 </div>
             ))}
-            {!loading && <div className='flex justify-center items-center mt-3 hover:cursor-pointer' onClick={getOrders}>
-                <p className='inline-flex bg-white text-orange-500 font-semibold px-2 py-1 rounded-lg'>Load More</p>
+            {!loading && <div className='flex justify-center items-center mt-3 hover:cursor-pointer' onClick={getTransfers}>
+                <p className='inline-flex bg-white text-red-500 px-2 py-1 rounded-lg font-bold'>Load More</p>
             </div>}
             {loading && <div className='flex justify-center items-center mt-3'>
-                <p className='inline-flex bg-white text-orange-500 font-semibold px-2 py-1 rounded-lg'>Loading...</p>
+                <p className='inline-flex bg-white text-red-500 font-bold px-2 py-1 rounded-lg'>Loading...</p>
             </div>}
         </>
     );

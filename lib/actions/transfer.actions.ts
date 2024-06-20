@@ -47,3 +47,16 @@ export async function getTransfersData(userId: string, year: number) {
         console.log(error)
     }
 }
+
+export async function getPaginatedTransfers(userId: string, skip: number) {
+    try {
+        await connectToDatabase();
+
+        const order = await Transfer.find({ User: userId }).sort({ createdAt: -1 }).skip(skip).limit(9)
+
+        return JSON.parse(JSON.stringify(order))
+
+    } catch (error) {
+        console.log(error);
+    }
+}

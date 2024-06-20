@@ -51,19 +51,5 @@ export async function POST(request: Request) {
     return NextResponse.json({ message: 'OK' })
   }
 
-  if (eventType === 'transfer.created') {
-    const { id, amount, metadata } = event.data.object
-
-    await connectToDatabase();
-
-    await Transfer.create({
-      User: metadata.userId,
-      transferId: id,
-      amount: amount / 100,
-    })
-
-    return NextResponse.json({ message: 'OK' })
-  }
-
   return new Response('', { status: 200 })
 }

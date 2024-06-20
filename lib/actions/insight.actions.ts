@@ -57,7 +57,7 @@ export async function createVideoInsight(insight: { request: string, contentNote
             { session }
         ))
 
-        await createEarning(newInsight?._id, session)
+        await createEarning(insight.request, session)
 
         await session.commitTransaction();
         session.endSession();
@@ -125,7 +125,7 @@ export async function createProfileInsight(insight: { request: string, bioNotes:
             { session }
         ))
 
-        await createEarning(newInsight._id, session)
+        await createEarning(insight.request, session)
 
         await session.commitTransaction();
         session.endSession();
@@ -182,7 +182,7 @@ export async function createPersonalInsight(insight: { request: string, text: st
             text: insight.text
         }], { session })
 
-        const newInsight: any = await Insight.create([{
+        const newInsight = await Insight.create([{
             Request: insight.request,
             Insighter: insight.Insighter,
             User: insight.User,
@@ -195,7 +195,7 @@ export async function createPersonalInsight(insight: { request: string, text: st
             { session }
         ))
 
-        await createEarning(newInsight._id, session)
+        await createEarning(insight.request, session)
 
         await session.commitTransaction();
         session.endSession();

@@ -55,7 +55,9 @@ const PersonalInsight = ({ price, userId, insighter }: { price: number, userId: 
                 <div className='flex flex-col justify-center items-center border-[1px] border-slate-300 rounded-lg h-[240px] md:h-[220px]' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                     <div className='flex justify-center items-center gap-8' >
                         <div className='flex flex-col items-center gap-2'>
-                            <Image src={'/icons/account.svg'} alt='video' width={200} height={200} className='bg-pink-500 w-[55px] h-[55px] p-2 rounded-full' />
+                            <div className='bg-pink-500 w-[55px] h-[55px] p-2 rounded-full flex justify-center items-center'>
+                                <Image src={'/icons/messages.svg'} alt='video' width={200} height={200} className='w-[50px] h-[50px] p-[1px]' />
+                            </div>
                             <p className='font-semibold'>Personal Insight</p>
                         </div>
                         <div className='h-3/4 w-[2px] bg-black'></div>

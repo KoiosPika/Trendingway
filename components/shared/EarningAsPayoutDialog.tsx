@@ -19,19 +19,22 @@ const EarningAsPayoutDialog = ({ earning }: { earning: IEarning }) => {
                 {earning.service == 'VideoInsight' &&
                     <div className='w-full flex flex-col sm:flex-row items-center justify-center gap-2'>
                         <Image src={'/icons/star-white.svg'} alt='video' width={200} height={200} className='bg-blue-500 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
+                        <p className='md:text-[14px] hidden md:block font-bold mr-auto'>Video Insight</p>
                     </div>}
                 {earning.service == 'LongVideoInsight' &&
                     <div className='w-full flex flex-col sm:flex-row items-center justify-center gap-2'>
                         <Image src={'/icons/video.svg'} alt='video' width={200} height={200} className='bg-purple-500 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
+                        <p className='md:text-[14px] hidden md:block font-bold mr-auto'>Long Video Insight</p>
                     </div>}
                 {earning.service == 'ProfileInsight' &&
                     <div className='w-full flex flex-col sm:flex-row items-center justify-center gap-2'>
                         <Image src={'/icons/account.svg'} alt='video' width={200} height={200} className='bg-orange-500 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
-
+                        <p className='md:text-[14px] hidden md:block font-bold mr-auto'>Profile Insight</p>
                     </div>}
                 {earning.service == 'PersonalInsight' &&
-                    <div className='w-full flex flex-col sm:flex-row items-center justify-center gap-2'>
+                    <div className='w-full flex items-center justify-center gap-2'>
                         <Image src={'/icons/people.svg'} alt='video' width={200} height={200} className='bg-pink-500 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
+                        <p className='md:text-[14px] hidden md:block font-bold mr-auto'>Personal Insight</p>
                     </div>}
                 {formatDateDifference(earning.availableDate) && <div className='w-full flex flex-row items-center'>
                     <p className='font-bold text-[12px] lg:text-[14px] text-yellow-600'>{formatDateDifference(earning?.availableDate)}</p>
@@ -39,8 +42,8 @@ const EarningAsPayoutDialog = ({ earning }: { earning: IEarning }) => {
                 {earning.withdrawn && <div className='w-full flex flex-row items-center'>
                     <p className='font-bold text-[12px] lg:text-[14px] text-red-500'>Withdrawn</p>
                 </div>}
-                {(!formatDateDifference(earning.availableDate)) && <div className='w-full flex flex-row items-center'>
-                    <p className='font-bold text-[12px] lg:text-[14px] text-green-700'>{formatDateDifference(earning?.availableDate)}</p>
+                {(!formatDateDifference(earning.availableDate) && !earning.withdrawn) && <div className='w-full flex flex-row items-center'>
+                    <p className='font-bold text-[12px] lg:text-[14px] text-green-700'>Available</p>
                 </div>}
             </AlertDialogTrigger>
             <AlertDialogContent className="bg-blue-600 border-0">
