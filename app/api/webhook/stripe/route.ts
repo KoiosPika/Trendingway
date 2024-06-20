@@ -2,6 +2,8 @@ import stripe from 'stripe'
 import { NextResponse } from 'next/server'
 import { createOrder } from '@/lib/actions/order.actions'
 import UserData from '@/lib/database/models/userData.model'
+import { connectToDatabase } from '@/lib/database'
+import Transfer from '@/lib/database/models/transfer.model'
 
 export async function POST(request: Request) {
   const body = await request.text()
@@ -45,6 +47,20 @@ export async function POST(request: Request) {
         { onboardingCompleted: true }
       )
     }
+
+    return NextResponse.json({ message: 'OK' })
+  }
+
+  if (eventType === 'transfer.created') {
+    const { id, amount, metadata } = event.data.object
+
+    await connectToDatabase();
+
+    await Transfer.create({
+      User: metadata.userId,
+      transferId: id,
+      amount: amount / 100,
+    })
 
     return NextResponse.json({ message: 'OK' })
   }

@@ -1,9 +1,11 @@
 import StripeSetup from '@/components/shared/StripeSetup';
 import { getAllEarnings, getAvailableEarnings } from '@/lib/actions/earning.actions';
 import { getAllOrders } from '@/lib/actions/order.actions';
+import { getAllTransfers } from '@/lib/actions/transfer.actions';
 import { getUserDataByUserId } from '@/lib/actions/userData.actions';
 import { IEarning } from '@/lib/database/models/earning.model';
 import { IOrder } from '@/lib/database/models/order.model';
+import { ITransfer } from '@/lib/database/models/transfer.model';
 import { IUserData } from '@/lib/database/models/userData.model';
 import { formatDate } from '@/lib/utils';
 import { auth } from '@clerk/nextjs/server';
@@ -16,9 +18,10 @@ const page = async () => {
     const userId = sessionClaims?.userId as string;
 
     const user: IUserData = await getUserDataByUserId(userId)
-    const orders = await getAllOrders(userId);
 
     const earnings = await getAllEarnings(userId);
+
+    const transfers = await getAllTransfers(userId)
 
     const data: any = await getAvailableEarnings(userId)
 
@@ -27,10 +30,10 @@ const page = async () => {
             <div className='w-full flex flex-col max-w-[1100px] justify-center items-center'>
                 <div className='my-3 justify-center items-center flex flex-col w-full'>
                     <div className='rounded-lg flex flex-col justify-center items-center mt-3 mb-[100px] p-3 w-full lg:w-5/6 bg-white'>
-                        <div className='w-11/12 bg-green-700 p-4 md:p-8 my-2 rounded-lg' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
+                        <div className='w-11/12 bg-blue-600 p-4 md:p-8 my-2 rounded-lg' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                             <div className='flex flex-row items-center gap-2'>
-                                <Image className='rounded-md h-[40px] w-[40px]' src={'/icons/invoice.svg'} alt='stripe' height={200} width={200} />
-                                <p className='font-bold text-[20px] text-white'>Payouts Information</p>
+                                <Image className='rounded-md md:h-[40px] md:w-[40px] h-[30px] w-[30px]' src={'/icons/invoice.svg'} alt='stripe' height={200} width={200} />
+                                <p className='font-bold md:text-[20px] text-[17px] text-white'>Transfer Information</p>
                             </div>
                             <div className='w-full md:w-11/12 gap-1 ml-[5px] mt-3 md:ml-[45px]'>
                                 <div className='flex flex-row items-center w-full gap-[5px] font-bold text-[12px] md:text-[17px]'>
@@ -38,17 +41,17 @@ const page = async () => {
                                     <p className='w-1/2 bg-white text-center py-1 rounded-r-lg'>${(data.availableEarning)?.toFixed(2)}</p>
                                 </div>
                             </div>
-                            <Link href={'/wallet/earnings/transfers'} className='bg-blue-700 flex justify-center items-center rounded-lg ml-auto md:w-2/5 w-2/3 py-2 mt-5 md:mr-5 border-[2px] border-white'>
+                            <Link href={'/wallet/earnings/transfers'} className='bg-[#388931] flex justify-center items-center rounded-lg ml-auto md:w-2/5 w-2/3 py-2 mt-5 md:mr-5 border-[2px] border-white'>
                                 <p className='text-white font-bold text-[10px] md:text-[14px]'>View Details and Transfer {`->`}</p>
                             </Link>
 
                         </div>
                         <StripeSetup userId={userId} account_id={user?.expressAccountID || ''} onboardingCompleted={user?.onboardingCompleted} />
                         <div className='grid grid-cols-1 md:grid-cols-2 w-11/12 gap-3 md:mt-5'>
-                            <div className='w-full px-2 py-4 lg:p-8 my-2 rounded-lg bg-blue-600 text-white md:h-[400px] h-[360px]' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
-                                <div className='flex flex-row gap-2 mb-4'>
-                                    <Image src={'/icons/invoice.svg'} alt='wallet' height={20} width={20} />
-                                    <p className='font-semibold text-[20px]'>Earnings</p>
+                            <div className='w-full px-2 py-4 lg:p-8 my-2 rounded-lg bg-[#549E4D] text-white md:h-[400px] h-[360px]' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
+                                <div className='flex flex-row items-center gap-2 mb-4 ml-3 md:ml-0'>
+                                    <Image src={'/icons/invoice.svg'} alt='wallet' height={200} width={200} className='md:h-[40px] md:w-[40px] h-[30px] w-[30px]' />
+                                    <p className='font-bold md:text-[20px] text-[17px]'>Earnings</p>
                                 </div>
                                 <div className='grid grid-cols-1 gap-2'>
                                     <div className='flex flex-row justify-center items-center p-2 gap-2 bg-white text-black font-bold rounded-lg'>
@@ -103,10 +106,10 @@ const page = async () => {
                                     </div>
                                 }
                             </div>
-                            <div className='w-full px-2 py-4 lg:p-8 my-2 rounded-lg bg-[#D62055] text-white md:h-[400px] h-[360px]' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
-                                <div className='flex flex-row gap-2 mb-4'>
-                                    <Image src={'/icons/invoice.svg'} alt='wallet' height={20} width={20} />
-                                    <p className='font-semibold text-[20px]'>Payout Orders</p>
+                            <div className='w-full px-2 py-4 lg:p-8 my-2 rounded-lg bg-red-500 text-white md:h-[400px] h-[360px]' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
+                                <div className='flex flex-row items-center gap-2 mb-4 ml-3 md:ml-0'>
+                                    <Image src={'/icons/invoice.svg'} alt='wallet' height={200} width={200} className='md:h-[40px] md:w-[40px] h-[30px] w-[30px]' />
+                                    <p className='font-semibold md:text-[20px] text-[17px]'>Transfers</p>
                                 </div>
                                 <div className='grid grid-cols-1 gap-2'>
                                     <div className='flex flex-row justify-center items-center p-2 gap-2 bg-white text-black font-bold rounded-lg'>
@@ -119,13 +122,13 @@ const page = async () => {
                                             <p className='text-[13px] lg:text-[15px]'>When</p>
                                         </div>
                                     </div>
-                                    {orders.map((order: IOrder, index: number) => (
+                                    {transfers.map((transfer: ITransfer, index: number) => (
                                         <div key={index} className='flex flex-row justify-center items-center p-5 gap-2 bg-white text-black rounded-lg relative'>
                                             <div className='w-full flex flex-row items-center gap-5'>
-                                                <p className='font-semibold text-[13px] lg:text-[15px]'>${(order.amount).toFixed(2)}</p>
+                                                <p className='font-semibold text-[13px] lg:text-[15px]'>${(transfer.amount).toFixed(2)}</p>
                                             </div>
                                             <div className='w-full flex flex-row items-center gap-5'>
-                                                <p className='font-semibold text-[13px] lg:text-[15px]'>{formatDate(order.createdAt)}</p>
+                                                <p className='font-semibold text-[13px] lg:text-[15px]'>{formatDate(transfer.createdAt)}</p>
                                             </div>
                                         </div>
                                     ))}
