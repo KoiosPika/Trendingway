@@ -20,7 +20,7 @@ export default clerkMiddleware(async (auth, req) => {
   const session = auth().sessionId;
 
   const country = geo?.country;
-  if (country !== 'CA') {
+  if (country !== 'US') {
     return new NextResponse(`Access Denied for ${country}`, { status: 403 });
   }
 
