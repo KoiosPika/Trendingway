@@ -7,14 +7,17 @@ import Insight from "../database/models/insight.model";
 import UserData from "../database/models/userData.model";
 import Stripe from "stripe";
 import Transfer from "../database/models/transfer.model";
+import { ClientSession } from "mongoose";
 
 const populateInsight = (query: any) => {
     return query
         .populate({ path: 'Request', model: Request, select: "_id type price" })
 }
 
-export async function createEarning(insightId: string) {
+export async function createEarning(insightId: any, session: ClientSession) {
     try {
+
+        await connectToDatabase();
 
         const insight = await populateInsight(Insight.findById(insightId));
 
@@ -22,19 +25,21 @@ export async function createEarning(insightId: string) {
             { User: insight.Insighter },
             {
                 '$inc': {
-                    withdrawBalance: insight.Request.price * 0.8,
                     nofVideoesInsighted: 1
                 }
-            }
+            },
+            { session }
         )
 
-        await Earning.create({
+        await Earning.create([{
             User: insight.Insighter,
             amount: insight.Request.price * 0.8,
             service: insight.Request.type
-        })
+        }], { session })
+
     } catch (error) {
         console.log(error);
+        throw error;
     }
 }
 
@@ -143,18 +148,22 @@ export async function getEarningsAsPayouts(userId: string) {
     }
 }
 
-export async function transferFunds(userId: string) {
+export async function createTransfer(userId: string) {
     const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
         apiVersion: '2024-04-10'
     });
 
+    let session: ClientSession | null = null;
+
     try {
 
-        await connectToDatabase();
+        const db = await connectToDatabase()
+        session = await db.startSession();
+        session.startTransaction();
 
         const now = new Date();
 
-        const earnings = await Earning.find({ User: userId, withdrawn: false, availableDate: { '$lt': now } });
+        const earnings = await Earning.find({ User: userId, withdrawn: false, availableDate: { '$lt': now } }).limit(150);
 
         let availableEarning = 0;
 
@@ -166,32 +175,34 @@ export async function transferFunds(userId: string) {
 
         const User = await UserData.findOne({ User: userId });
 
+        const updatePromises = earnings.map((earning) =>
+            Earning.findByIdAndUpdate(earning._id, { withdrawn: true }, { session })
+        );
+
+        await Promise.all(updatePromises);
+
         const transfer = await stripe.transfers.create({
-            amount: availableEarning * 100,
+            amount: 10000 * 100,
             currency: 'usd',
-            destination: User?.expressAccountId,
+            destination: User?.expressAccountID,
+            metadata: {
+                user: userId
+            }
         });
 
-        if (transfer) {
-            const updatePromises = earnings.map((earning) =>
-                Earning.findByIdAndUpdate(earning._id, { withdrawn: true })
-            );
+        await session.commitTransaction();
+        session.endSession();
 
-            await Promise.all(updatePromises);
-
-            await Transfer.create({
-                User: userId,
-                transferId: transfer.id,
-                amount: transfer.amount / 100,
-            })
-
-            return true;
-        }
-
-        return false;
+        return true;
 
 
     } catch (error) {
-        console.log(error);
+
+        if (session) {
+            await session.abortTransaction();
+            session.endSession();
+        }
+
+        return false;
     }
 }

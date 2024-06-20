@@ -9,6 +9,7 @@ import User from "../database/models/user.model"
 import UserData from "../database/models/userData.model"
 import Chat from "../database/models/chat.model"
 import Message from "../database/models/message.model"
+import { ClientSession } from "mongoose"
 
 const populateRequest = (query: any) => {
     return query
@@ -17,33 +18,55 @@ const populateRequest = (query: any) => {
 }
 
 export async function createRequest({ User, Insighter, postLink, description, platform, price, type }: { User: string, Insighter: string, postLink: string | undefined, description: string, platform: string | undefined, price: number, type: string }) {
-    try {
-        await connectToDatabase()
 
-        const request = await Request.create({ User, Insighter, postLink, description, platform, insighted: false, price, type })
+    let session: ClientSession | null = null;
+
+    try {
+
+        const db = await connectToDatabase()
+        session = await db.startSession();
+        session.startTransaction();
+
+        const request = await Request.create([{ User, Insighter, postLink, description, platform, insighted: false, price, type }], { session })
 
         await UserData.findOneAndUpdate(
             { User },
-            { '$inc': { creditBalance: (-1 * price) } }
+            { '$inc': { creditBalance: (-1 * price) } },
+            { session }
         )
 
-        const spendings = await Spending.create({
+        const spendings = await Spending.create([{
             User,
             Insighter,
             amount: price,
             service: type
-        })
+        }], { session })
+
+        await session.commitTransaction();
+        session.endSession();
 
         return JSON.parse(JSON.stringify(request))
 
     } catch (error) {
+
+        if (session) {
+            await session.abortTransaction();
+            session.endSession();
+        }
+
         console.log(error)
     }
 }
 
 export async function createPersonalRequest(User: string, Insighter: string, description: string, price: number, type: string) {
+
+    let session: ClientSession | null = null;
+
     try {
-        await connectToDatabase();
+
+        const db = await connectToDatabase()
+        session = await db.startSession();
+        session.startTransaction();
 
         let chat = await Chat.findOne({
             $or: [
@@ -56,30 +79,40 @@ export async function createPersonalRequest(User: string, Insighter: string, des
             chat = await Chat.create({ User1: User, User2: Insighter })
         }
 
-        const message = await Message.create({
+        const message: any = await Message.create([{
             Chat: chat._id,
             User,
             type: "text",
             text: description,
-        })
+        }], { session })
 
-        const request = await Request.create({ User, Insighter, description, insighted: false, price, type, chatId: chat._id, messageId: message._id })
+        const request = await Request.create([{ User, Insighter, description, insighted: false, price, type, chatId: chat._id, messageId: message._id }], { session })
 
         await UserData.findOneAndUpdate(
             { User },
-            { '$inc': { creditBalance: (-1 * price) } }
+            { '$inc': { creditBalance: (-1 * price) } },
+            { session }
         )
 
-        const spendings = await Spending.create({
+        const spendings = await Spending.create([{
             User,
             Insighter,
             amount: price,
             service: type
-        })
+        }], { session })
+
+        await session.commitTransaction();
+        session.endSession();
 
         return JSON.parse(JSON.stringify(request))
 
     } catch (error) {
+
+        if (session) {
+            await session.abortTransaction();
+            session.endSession();
+        }
+
         console.log(error)
     }
 }
@@ -130,27 +163,37 @@ export async function cancelOrder(id: string, message: string) {
 
     const client = new ServerClient(process.env.POSTMARK_API_TOKEN!);
 
+    let session: ClientSession | null = null;
+
     try {
-        await connectToDatabase();
+
+        const db = await connectToDatabase()
+        session = await db.startSession();
+        session.startTransaction();
 
         const request = await populateRequest(Request.findOneAndUpdate(
             { _id: id },
-            { '$set': { status: 'Canceled', message } }
+            { '$set': { status: 'Canceled', message } },
+            { session }
         ))
 
         if (request.type === 'PersonalInsight') {
-            await Message.findByIdAndDelete(request.messageId)
+            await Message.findByIdAndDelete(request.messageId, { session })
         }
 
         await UserData.findOneAndUpdate(
             { User: request?.User },
-            { '$inc': { creditBalance: request?.price } }
+            { '$inc': { creditBalance: request?.price } },
+            { session }
         )
 
-        await Refund.create({
+        await Refund.create([{
             User: request.User,
             amount: request.price
-        })
+        }], { session })
+
+        await session.commitTransaction();
+        session.endSession();
 
         const emailOptions = {
             From: 'automated@insightend.com',
@@ -176,6 +219,12 @@ export async function cancelOrder(id: string, message: string) {
         await client.sendEmail(emailOptions);
 
     } catch (error) {
+
+        if (session) {
+            await session.abortTransaction();
+            session.endSession();
+        }
+
         console.log(error)
     }
 }

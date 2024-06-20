@@ -1,5 +1,6 @@
 import EarningAsPayoutDialog from '@/components/shared/EarningAsPayoutDialog';
 import EarningDialog from '@/components/shared/EarningDialog';
+import TransferButton from '@/components/shared/TransferButton';
 import { getAvailableEarnings, getEarningsAsPayouts } from '@/lib/actions/earning.actions'
 import { IEarning } from '@/lib/database/models/earning.model';
 import { auth } from '@clerk/nextjs/server';
@@ -35,11 +36,9 @@ const page = async () => {
                                     <p className='w-1/2 bg-white text-center py-1 rounded-br-lg'>{data.availableInsights}</p>
                                 </div>
                                 {data.availableEarning == 0 && <div className='flex w-full my-2'>
-                                    <p className='ml-auto px-3 py-1 bg-green-700 rounded-lg text-white font-semibold border-[1px] border-white'>No Funds Available</p>
+                                    <p className='ml-auto px-3 py-1 bg-green-700 rounded-lg text-white font-semibold border-[1px] border-white md:text-[15px] text-[12px]'>No Funds Available</p>
                                 </div>}
-                                {data.availableEarning > 0 &&<div className='flex w-full my-2'>
-                                    <p className='ml-auto px-3 py-1 bg-green-700 rounded-lg text-white font-semibold border-[1px] border-white'>Transfer now</p>
-                                </div>}
+                                {data.availableEarning == 0 && <TransferButton userId={userId}/>}
                             </div>
                             <div className='flex flex-row gap-2 mb-4'>
                                 <Image src={'/icons/invoice.svg'} alt='wallet' height={20} width={20} />

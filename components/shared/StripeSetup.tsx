@@ -10,22 +10,17 @@ const StripeSetup = ({ userId, account_id, onboardingCompleted }: { userId: stri
     const [loading, setLoading] = useState(false)
     
     const handleCreate = async () => {
-        const link = await handleCreatingAccount(userId);
-
-        if (link) {
-            window.location.href = link;
-        }
+        setLoading(true);
+        await handleCreatingAccount(userId);
     }
 
     const handleCreateAccountLink = async () => {
-        const link = await createAccountLink(userId);
-
-        if (link) {
-            window.location.href = link;
-        }
+        setLoading(true);
+        await createAccountLink(userId);
     }
 
     const handleRedirectingtoDashboard = async () => {
+        setLoading(true);
         await getStripeDashboardLink(userId);
     }
 
@@ -40,15 +35,17 @@ const StripeSetup = ({ userId, account_id, onboardingCompleted }: { userId: stri
             {(account_id && onboardingCompleted) && <p className='ml-9 md:text-[16px] text-[13px] mt-3'>Your Express account has been sucessfully set up! You can access your dashboard from the link below</p>}
             
             
-            {(!account_id && !onboardingCompleted) && <div className='flex flex-row w-full mt-3'>
+            {(!loading && !account_id && !onboardingCompleted) && <div className='flex flex-row w-full mt-3'>
                 <p onClick={handleCreate} className='ml-auto bg-white text-[#6772e4] font-semibold py-2 px-4 cursor-pointer inline-block border-[2px] border-yellow-500 rounded-full text-[12px] md:text-[16px]'>Set Up Now!</p>
             </div>}
-            {(account_id && !onboardingCompleted) && <div className='flex flex-row w-full mt-3'>
+            {(!loading && account_id && !onboardingCompleted) && <div className='flex flex-row w-full mt-3'>
                 <p onClick={handleCreateAccountLink} className='ml-auto bg-white text-[#6772e4] font-semibold py-2 px-4 cursor-pointer inline-block border-[2px] border-yellow-500 rounded-full text-[12px] md:text-[16px]'>Finish onboarding</p>
             </div>}
-            {(account_id && onboardingCompleted) && 
-            <div onClick={handleRedirectingtoDashboard} className='flex flex-row w-full mt-3'>
+            {(!loading && account_id && onboardingCompleted) && <div onClick={handleRedirectingtoDashboard} className='flex flex-row w-full mt-3'>
                 <p className='ml-auto bg-white text-[#6772e4] font-semibold py-2 px-4 cursor-pointer inline-block border-[2px] border-yellow-500 rounded-full text-[12px] md:text-[16px]'>Go to Express Dashboard</p>
+            </div>}
+            {(loading) && <div className='flex flex-row w-full mt-3'>
+                <p className='ml-auto bg-white text-[#6772e4] font-semibold py-2 px-4 cursor-pointer inline-block border-[2px] border-yellow-500 rounded-full text-[12px] md:text-[16px]'>Please wait...</p>
             </div>}
         </div>
     )

@@ -44,15 +44,15 @@ export async function createAccountLink(userId: string) {
 
         const accountLink = await stripe.accountLinks.create({
             account: user.expressAccountID,
-            refresh_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/reauth`,
-            return_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/return`,
+            refresh_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/wallet`,
+            return_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/wallet`,
             type: 'account_onboarding',
         })
 
-        return accountLink.url
+        redirect(accountLink.url);
 
     } catch (error) {
-        console.log(error)
+        throw error;
     }
 }
 
@@ -80,9 +80,9 @@ export async function handleCreatingAccount(userId: string) {
     try {
         await createAccount(userId);
 
-        const link = createAccountLink(userId);
+        await createAccountLink(userId);
 
-        return link;
+        return;
     } catch (error) {
         console.log(error)
     }

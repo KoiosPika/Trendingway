@@ -8,6 +8,7 @@ import Request from '../database/models/request.model'
 import { ServerClient } from 'postmark';
 import { createEarning } from './earning.actions'
 import Message from '../database/models/message.model'
+import { ClientSession } from 'mongoose'
 
 const populateInsight = (query: any) => {
     return query
@@ -26,10 +27,14 @@ export async function createVideoInsight(insight: { request: string, contentNote
 
     const client = new ServerClient(process.env.POSTMARK_API_TOKEN!);
 
-    try {
-        await connectToDatabase()
+    let session: ClientSession | null = null;
 
-        const newInsight: IInsight = await Insight.create({
+    try {
+        const db = await connectToDatabase()
+        session = await db.startSession();
+        session.startTransaction();
+
+        const newInsight: IInsight | any = await Insight.create([{
             Request: insight.request,
             Insighter: insight.Insighter,
             User: insight.User,
@@ -44,14 +49,18 @@ export async function createVideoInsight(insight: { request: string, contentNote
             soundRate: insight.soundRate,
             soundNotes: insight.soundNotes,
             additionalNotes: insight.additionalNotes,
-        })
+        }], { session })
 
         const updatedRequest = await populateRequest(Request.findOneAndUpdate(
             { _id: insight.request },
-            { $set: { status: 'Completed', insighted: true } }
+            { $set: { status: 'Completed', insighted: true } },
+            { session }
         ))
 
-        await createEarning(newInsight._id)
+        await createEarning(newInsight?._id, session)
+
+        await session.commitTransaction();
+        session.endSession();
 
         const emailOptions = {
             From: 'automated@insightend.com',
@@ -75,6 +84,12 @@ export async function createVideoInsight(insight: { request: string, contentNote
 
         return JSON.parse(JSON.stringify(newInsight))
     } catch (error) {
+
+        if (session) {
+            await session.abortTransaction();
+            session.endSession();
+        }
+
         console.log(error)
     }
 }
@@ -83,10 +98,15 @@ export async function createProfileInsight(insight: { request: string, bioNotes:
 
     const client = new ServerClient(process.env.POSTMARK_API_TOKEN!);
 
-    try {
-        await connectToDatabase()
+    let session: ClientSession | null = null;
 
-        const newInsight: IInsight = await Insight.create({
+    try {
+
+        const db = await connectToDatabase()
+        session = await db.startSession();
+        session.startTransaction();
+
+        const newInsight: any = await Insight.create([{
             Request: insight.request,
             Insighter: insight.Insighter,
             User: insight.User,
@@ -97,14 +117,18 @@ export async function createProfileInsight(insight: { request: string, bioNotes:
             postsRate: insight.postsRate,
             postsNotes: insight.postsNotes,
             additionalNotes: insight.additionalNotes
-        })
+        }], { session })
 
         const updatedRequest = await populateRequest(Request.findOneAndUpdate(
             { _id: insight.request },
-            { $set: { status: 'Completed', insighted: true } }
+            { $set: { status: 'Completed', insighted: true } },
+            { session }
         ))
 
-        await createEarning(newInsight._id)
+        await createEarning(newInsight._id, session)
+
+        await session.commitTransaction();
+        session.endSession();
 
         const emailOptions = {
             From: 'automated@insightend.com',
@@ -128,6 +152,11 @@ export async function createProfileInsight(insight: { request: string, bioNotes:
 
         return JSON.parse(JSON.stringify(newInsight))
     } catch (error) {
+
+        if (session) {
+            await session.abortTransaction();
+            session.endSession();
+        }
         console.log(error)
     }
 }
@@ -136,31 +165,40 @@ export async function createPersonalInsight(insight: { request: string, text: st
 
     const client = new ServerClient(process.env.POSTMARK_API_TOKEN!);
 
+    let session: ClientSession | null = null;
+
     try {
-        await connectToDatabase();
+
+        const db = await connectToDatabase()
+        session = await db.startSession();
+        session.startTransaction();
 
         const req = await Request.findById(insight.request)
 
-        const message = await Message.create({
+        const message = await Message.create([{
             Chat: req.chatId,
             User: insight.Insighter,
             type: "text",
             text: insight.text
-        })
+        }], { session })
 
-        const newInsight = await Insight.create({
+        const newInsight: any = await Insight.create([{
             Request: insight.request,
             Insighter: insight.Insighter,
             User: insight.User,
             insightful: 'Completed',
-        })
+        }], { session })
 
         let updatedRequest = await populateRequest(Request.findOneAndUpdate(
             { _id: insight.request },
-            { $set: { status: 'Completed', insighted: true } }
+            { $set: { status: 'Completed', insighted: true } },
+            { session }
         ))
 
-        await createEarning(newInsight._id)
+        await createEarning(newInsight._id, session)
+
+        await session.commitTransaction();
+        session.endSession();
 
         const emailOptions = {
             From: 'automated@insightend.com',
@@ -183,6 +221,12 @@ export async function createPersonalInsight(insight: { request: string, text: st
         await client.sendEmail(emailOptions);
 
     } catch (error) {
+
+        if (session) {
+            await session.abortTransaction();
+            session.endSession();
+        }
+
         console.log(error)
     }
 }
@@ -200,12 +244,19 @@ export async function getInsightByRequestId(id: string) {
 }
 
 export async function submitInsightRate(id: string, rating: number) {
+
+    let session: ClientSession | null = null;
+
     try {
-        await connectToDatabase();
+
+        const db = await connectToDatabase()
+        session = await db.startSession();
+        session.startTransaction();
 
         const insight = await populateInsight(Insight.findOneAndUpdate(
             { Request: id },
-            { '$set': { rated: true } }
+            { '$set': { rated: true } },
+            { session }
         ));
 
         await UserData.updateOne(
@@ -225,11 +276,21 @@ export async function submitInsightRate(id: string, rating: number) {
                         }
                     }
                 }
-            ]
+            ],
+            { session }
         )
+
+        await session.commitTransaction();
+        session.endSession();
 
 
     } catch (error) {
+
+        if (session) {
+            await session.abortTransaction();
+            session.endSession();
+        }
+        
         console.log(error)
     }
 }
