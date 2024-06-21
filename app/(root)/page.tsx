@@ -72,7 +72,7 @@ const page = async () => {
                 <p className='font-bold text-[30px] md:text-[25px] lg:text-[30px] mr-auto ml-4'>Checkout our</p>
                 <p className='font-bold text-[42px] md:text-[35px] lg:text-[42px] ml-auto mr-4'>Privacy Policy</p>
                 <p className='font-bold text-[18px] md:text-[15px] lg:text-[18px] ml-auto mr-4'>For data information</p>
-                <Link href={'/search'} className='ml-auto mr-[30px] mt-5 flex justify-center gap-2 items-center bg-black px-3 py-1 rounded-md'>
+                <Link href={'/privacy'} className='ml-auto mr-[30px] mt-5 flex justify-center gap-2 items-center bg-black px-3 py-1 rounded-md'>
                   <Image src={'/icons/privacy.svg'} alt='guide' height={20} width={20} />
                   <p className='text-white font-semibold text-[17px]'>Privacy Policy</p>
                 </Link>
@@ -87,7 +87,7 @@ const page = async () => {
                 <p className='font-bold text-[30px] md:text-[25px] lg:text-[30px] mr-auto ml-4'>Please read our</p>
                 <p className='font-bold text-[44px] md:text-[38px] lg:text-[44px] ml-auto mr-4'>Terms of Use</p>
                 <p className='font-bold text-[18px] md:text-[15px] lg:text-[18px] ml-auto mr-4'>Before using our platform</p>
-                <Link href={'/'} className='ml-auto mr-[30px] mt-5 flex justify-center gap-2 items-center bg-black px-3 py-1 rounded-md'>
+                <Link href={'/terms'} className='ml-auto mr-[30px] mt-5 flex justify-center gap-2 items-center bg-black px-3 py-1 rounded-md'>
                   <Image src={'/icons/list-white.svg'} alt='guide' height={20} width={20} />
                   <p className='text-white font-semibold text-[17px]'>Terms of Use</p>
                 </Link>

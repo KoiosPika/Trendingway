@@ -16,9 +16,9 @@ const Footer = () => {
                     <a href="/terms" className="hover:text-yellow-400 font-semibold">Terms of use</a>
                     <a href="/contact-us" className="hover:text-yellow-400 font-semibold">Contact Support</a>
                 </div>
-                <div className="justify-center mt-4 md:mt-0 hidden lg:block">
+                {/* <div className="justify-center mt-4 md:mt-0 hidden lg:block">
                     <Image src={'/images/qr code.PNG'} alt='qr_code' height={200} width={200} className='h-[45px] w-[45px]'/>
-                </div>
+                </div> */}
             </div>
         </footer>
     )
