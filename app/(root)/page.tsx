@@ -54,7 +54,7 @@ const page = async () => {
                 <p className='font-bold text-[30px] md:text-[25px] lg:text-[30px] mr-auto ml-4'>If you have any</p>
                 <p className='font-bold text-[55px] md:text-[45px] lg:text-[55px] ml-auto mr-4'>Questions</p>
                 <p className='font-bold text-[18px] md:text-[15px] lg:text-[18px] ml-auto mr-4'>Please contact us</p>
-                <Link href={'/'} className='ml-auto mr-[30px] mt-5 flex justify-center gap-2 items-center bg-black px-3 py-1 rounded-md'>
+                <Link href={'/contact-us'} className='ml-auto mr-[30px] mt-5 flex justify-center gap-2 items-center bg-black px-3 py-1 rounded-md'>
                   <Image src={'/icons/email-white.svg'} alt='guide' height={20} width={20} />
                   <p className='text-white font-semibold text-[17px]'>Contact Us</p>
                 </Link>
@@ -82,7 +82,7 @@ const page = async () => {
               </div>
             </div>
 
-            <div className='grid md:grid-cols-2 grod-cols-1 w-10/12 gap-5 md:gap-3 mt-5 md:mt-0'>
+            <div className='grid md:grid-cols-2 grod-cols-1 w-10/12 gap-5 md:gap-3 mt-5 md:mt-0 mb-10'>
               <div className='bg-yellow-400 w-[350px] h-[350px] md:h-[300px] md:w-[300px] lg:h-[350px] lg:w-[350px] flex flex-col justify-center items-center rounded-[40px] place-self-center'>
                 <p className='font-bold text-[30px] md:text-[25px] lg:text-[30px] mr-auto ml-4'>Please read our</p>
                 <p className='font-bold text-[44px] md:text-[38px] lg:text-[44px] ml-auto mr-4'>Terms of Use</p>
