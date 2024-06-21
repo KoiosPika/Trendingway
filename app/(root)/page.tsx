@@ -31,7 +31,7 @@ const page = async () => {
               </div>
             </div>
 
-            <div className='grid md:grid-cols-2 grod-cols-1 w-10/12 gap-5 md:gap-3'>
+            <div className='grid md:grid-cols-2 grod-cols-1 w-10/12 gap-5 md:gap-3 mt-5 md:mt-0'>
               <div className='bg-white h-[350px] md:flex justify-center items-center hidden'>
                 <Image src={'/images/image_2.png'} alt='image' height={500} width={500} className='rounded-[40px] w-[350px] h-[350px] md:h-[300px] md:w-[300px] lg:h-[350px] lg:w-[350px]' />
               </div>
@@ -49,7 +49,7 @@ const page = async () => {
               </div>
             </div>
 
-            <div className='grid md:grid-cols-2 grod-cols-1 w-10/12 gap-5 md:gap-3'>
+            <div className='grid md:grid-cols-2 grod-cols-1 w-10/12 gap-5 md:gap-3 mt-5 md:mt-0'>
               <div className='bg-yellow-400 w-[350px] h-[350px] md:h-[300px] md:w-[300px] lg:h-[350px] lg:w-[350px] flex flex-col justify-center items-center rounded-[40px] place-self-center'>
                 <p className='font-bold text-[30px] md:text-[25px] lg:text-[30px] mr-auto ml-4'>If you have any</p>
                 <p className='font-bold text-[55px] md:text-[45px] lg:text-[55px] ml-auto mr-4'>Questions</p>
@@ -64,7 +64,7 @@ const page = async () => {
               </div>
             </div>
 
-            <div className='grid md:grid-cols-2 grod-cols-1 w-10/12 gap-5 md:gap-3'>
+            <div className='grid md:grid-cols-2 grod-cols-1 w-10/12 gap-5 md:gap-3 mt-5 md:mt-0'>
               <div className='bg-white h-[350px] md:flex justify-center items-center hidden'>
                 <Image src={'/images/image_4.png'} alt='image' height={500} width={500} className='rounded-[40px] w-[350px] h-[350px] md:h-[300px] md:w-[300px] lg:h-[350px] lg:w-[350px]' />
               </div>
@@ -82,7 +82,7 @@ const page = async () => {
               </div>
             </div>
 
-            <div className='grid md:grid-cols-2 grod-cols-1 w-10/12 gap-5 md:gap-3'>
+            <div className='grid md:grid-cols-2 grod-cols-1 w-10/12 gap-5 md:gap-3 mt-5 md:mt-0'>
               <div className='bg-yellow-400 w-[350px] h-[350px] md:h-[300px] md:w-[300px] lg:h-[350px] lg:w-[350px] flex flex-col justify-center items-center rounded-[40px] place-self-center'>
                 <p className='font-bold text-[30px] md:text-[25px] lg:text-[30px] mr-auto ml-4'>Please read our</p>
                 <p className='font-bold text-[44px] md:text-[38px] lg:text-[44px] ml-auto mr-4'>Terms of Use</p>
