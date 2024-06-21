@@ -38,7 +38,7 @@ const Header = () => {
             }} />
           </SignedIn>
           <SignedOut>
-            <Button asChild className='rounded-md bg-white border-2 border-black hover:bg-yellow-400' size={'icon'}>
+            <Button asChild className='rounded-full bg-white border-2 border-black hover:bg-yellow-400' size={'icon'}>
               <Link href={`/sign-in?redirectTo=${encodeURIComponent(pathname)}`}>
                 <Image src={'/icons/login.svg'} alt='sigin' width={20} height={20} />
               </Link>

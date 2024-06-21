@@ -31,30 +31,45 @@ export async function POST(request: Request) {
 
     const { id, amount_total, payment_intent, metadata, customer_details } = event.data.object
 
-    if (customer_details?.address?.country != 'US') {
+    try {
+
       const paymentIntent = await stripe.paymentIntents.retrieve(payment_intent as string)
 
       const charge_id = paymentIntent.latest_charge?.toString()
 
-      await stripe.refunds.create({
-        charge: charge_id
-      })
-      
-    } else {
-      const order = {
-        stripeId: id,
-        User: metadata?.buyerId || '',
-        amount: amount_total! / 100 || 0,
-        createdAt: new Date(),
+      if (customer_details?.address?.country != 'US') {
+
+        await stripe.refunds.create({ charge: charge_id })
+
+      } else {
+
+        const charge = await stripe.charges.retrieve(charge_id as string)
+
+        if (charge.payment_method_details?.card?.country != 'US') {
+
+          await stripe.refunds.create({ charge: charge_id })
+
+        } else {
+
+          const order = {
+            stripeId: id,
+            User: metadata?.buyerId || '',
+            amount: amount_total! / 100 || 0,
+            createdAt: new Date(),
+          }
+
+          await connectToDatabase();
+
+          const newOrder = await createOrder(order)
+        }
+
       }
 
-      const newOrder = await createOrder(order)
+      return NextResponse.json({ message: 'OK' })
+    } catch (error) {
+      console.log(error);
     }
 
-    return NextResponse.json({ message: 'OK' })
+    return new Response('', { status: 200 })
   }
-
-
-
-  return new Response('', { status: 200 })
 }
