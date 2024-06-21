@@ -15,49 +15,52 @@ const page = async () => {
       <div className='w-full flex justify-center items-center bg-white'>
         <div className='w-full flex flex-col max-w-[900px] justify-center items-center'>
           <div className='my-3 justify-center items-center flex flex-col w-full gap-5'>
-            <div className='grid lg:grid-cols-2 grod-cols-1 w-10/12 gap-5 mt-5 justify-center items-center'>
-              <div className='bg-yellow-400 md:h-[350px] h-[350px] md:w-[350px] w-[350px] flex flex-col justify-center items-center rounded-[40px]'>
-                <p className='font-bold text-[30px] lg:text-[30px] mr-auto ml-4'>Welcome to</p>
-                <p className='font-bold text-[55px] lg:text-[55px] ml-auto mr-4'>Insightend</p>
-                <p className='font-bold text-[18px] lg:text-[18px] ml-auto mr-4'>Platform for insighters</p>
+
+            <div className='grid md:grid-cols-2 grod-cols-1 w-10/12 gap-5 md:gap-3 mt-5'>
+              <div className='bg-yellow-400 w-[350px] h-[350px] md:h-[300px] md:w-[300px] lg:h-[350px] lg:w-[350px] flex flex-col justify-center items-center rounded-[40px] place-self-center'>
+                <p className='font-bold text-[30px] md:text-[25px] lg:text-[30px] mr-auto ml-4'>Welcome to</p>
+                <p className='font-bold text-[55px] md:text-[45px] lg:text-[55px] ml-auto mr-4'>Insightend</p>
+                <p className='font-bold text-[18px] md:text-[15px] lg:text-[18px] ml-auto mr-4'>Platform for insighters</p>
                 <Link href={'/'} className='ml-auto mr-[30px] mt-5 flex justify-center gap-2 items-center bg-black px-3 py-1 rounded-md'>
                   <Image src={'/icons/book.svg'} alt='guide' height={20} width={20} />
                   <p className='text-white font-semibold text-[17px]'>Full Guide</p>
                 </Link>
               </div>
-              <div className='bg-white h-[350px] flex md:justify-center items-center'>
-                <Image src={'/images/image_1.png'} alt='image' height={500} width={500} className='rounded-[40px] md:h-[350px] h-[350px] md:w-[350px] w-[350px]' />
+              <div className='bg-white h-[350px] flex justify-center items-center'>
+                <Image src={'/images/image_1.png'} alt='image' height={500} width={500} className='rounded-[40px] w-[350px] h-[350px] md:h-[300px] md:w-[300px] lg:h-[350px] lg:w-[350px]' />
               </div>
             </div>
-            <div className='grid lg:grid-cols-2 grod-cols-1 w-10/12 gap-5 mt-5 justify-center items-center'>
-              <div className='bg-white h-[350px] md:justify-center items-center hidden lg:block'>
-                <Image src={'/images/image_2.png'} alt='image' height={500} width={500} className='rounded-[40px] md:h-[350px] h-[350px] md:w-[350px] w-[350px]' />
+
+            <div className='grid md:grid-cols-2 grod-cols-1 w-10/12 gap-5 md:gap-3 mt-5'>
+              <div className='bg-white h-[350px] md:flex justify-center items-center hidden'>
+                <Image src={'/images/image_2.png'} alt='image' height={500} width={500} className='rounded-[40px] w-[350px] h-[350px] md:h-[300px] md:w-[300px] lg:h-[350px] lg:w-[350px]' />
               </div>
-              <div className='bg-yellow-400 md:h-[350px] h-[350px] md:w-[350px] w-[350px] flex flex-col justify-center items-center rounded-[40px]'>
-                <p className='font-bold text-[30px] lg:text-[30px] mr-auto ml-4'>Connect with</p>
-                <p className='font-bold text-[57px] lg:text-[57px] ml-auto mr-4'>Insighters</p>
-                <p className='font-bold text-[18px] lg:text-[18px] ml-auto mr-4'>And request their insights</p>
+              <div className='bg-yellow-400 w-[350px] h-[350px] md:h-[300px] md:w-[300px] lg:h-[350px] lg:w-[350px] flex flex-col justify-center items-center rounded-[40px] place-self-center'>
+                <p className='font-bold text-[30px] md:text-[25px] lg:text-[30px] mr-auto ml-4'>Connect with</p>
+                <p className='font-bold text-[57px] md:text-[45px] lg:text-[57px] ml-auto mr-4'>Insighters</p>
+                <p className='font-bold text-[18px] md:text-[15px] lg:text-[18px] ml-auto mr-4'>And request their insights</p>
                 <Link href={'/search'} className='ml-auto mr-[30px] mt-5 flex justify-center gap-2 items-center bg-black px-3 py-1 rounded-md'>
                   <Image src={'/icons/search.svg'} alt='guide' height={20} width={20} />
                   <p className='text-white font-semibold text-[17px]'>Search</p>
                 </Link>
               </div>
-              <div className='bg-white h-[350px] md:justify-center items-center block lg:hidden'>
-                <Image src={'/images/image_2.png'} alt='image' height={500} width={500} className='rounded-[40px] md:h-[350px] h-[350px] md:w-[350px] w-[350px]' />
+              <div className='bg-white h-[350px] flex justify-center items-center md:h-[0px]'>
+                <Image src={'/images/image_2.png'} alt='image' height={500} width={500} className='rounded-[40px] w-[350px] h-[350px] md:h-[300px] md:w-[300px] lg:h-[350px] lg:w-[350px] block md:hidden' />
               </div>
             </div>
-            <div className='grid lg:grid-cols-2 grod-cols-1 w-10/12 gap-5 mt-5 justify-center items-center'>
-              <div className='bg-yellow-400 md:h-[350px] h-[350px] md:w-[350px] w-[350px] flex flex-col justify-center items-center rounded-[40px]'>
-                <p className='font-bold text-[30px] lg:text-[30px] mr-auto ml-4'>If you have any</p>
-                <p className='font-bold text-[58px] lg:text-[58px] ml-auto mr-4'>Questions</p>
-                <p className='font-bold text-[18px] lg:text-[18px] ml-auto mr-4'>Please contact us</p>
-                <Link href={'/contact-us'} className='ml-auto mr-[30px] mt-5 flex justify-center gap-2 items-center bg-black px-3 py-1 rounded-md'>
+
+            <div className='grid md:grid-cols-2 grod-cols-1 w-10/12 gap-5 md:gap-3 mt-5'>
+              <div className='bg-yellow-400 w-[350px] h-[350px] md:h-[300px] md:w-[300px] lg:h-[350px] lg:w-[350px] flex flex-col justify-center items-center rounded-[40px] place-self-center'>
+                <p className='font-bold text-[30px] md:text-[25px] lg:text-[30px] mr-auto ml-4'>If you have any</p>
+                <p className='font-bold text-[55px] md:text-[45px] lg:text-[55px] ml-auto mr-4'>Questions</p>
+                <p className='font-bold text-[18px] md:text-[15px] lg:text-[18px] ml-auto mr-4'>Please contact us</p>
+                <Link href={'/'} className='ml-auto mr-[30px] mt-5 flex justify-center gap-2 items-center bg-black px-3 py-1 rounded-md'>
                   <Image src={'/icons/email-white.svg'} alt='guide' height={20} width={20} />
                   <p className='text-white font-semibold text-[17px]'>Contact Us</p>
                 </Link>
               </div>
-              <div className='bg-white h-[350px] flex md:justify-center items-center'>
-                <Image src={'/images/image_3.png'} alt='image' height={500} width={500} className='rounded-[40px] md:h-[350px] h-[350px] md:w-[350px] w-[350px]' />
+              <div className='bg-white h-[350px] flex justify-center items-center'>
+                <Image src={'/images/image_3.png'} alt='image' height={500} width={500} className='rounded-[40px] w-[350px] h-[350px] md:h-[300px] md:w-[300px] lg:h-[350px] lg:w-[350px]' />
               </div>
             </div>
           </div>
