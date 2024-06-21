@@ -19,10 +19,10 @@ export default clerkMiddleware(async (auth, req) => {
   const signInUrl = new URL('/sign-in', url.origin);
   const session = auth().sessionId;
 
-  const country = geo?.country;
-  if (country !== 'US') {
-    return new NextResponse(`Access Denied for ${country}`, { status: 403 });
-  }
+  // const country = geo?.country;
+  // if (country !== 'US') {
+  //   return new NextResponse(`Access Denied for ${country}`, { status: 403 });
+  // }
 
   if (isProtectedRoute(req)) {
     if (!session) {

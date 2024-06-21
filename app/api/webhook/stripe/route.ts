@@ -1,4 +1,4 @@
-import stripe from 'stripe'
+import Stripe from 'stripe'
 import { NextResponse } from 'next/server'
 import { createOrder } from '@/lib/actions/order.actions'
 import UserData from '@/lib/database/models/userData.model'
@@ -14,7 +14,7 @@ export async function POST(request: Request) {
   let event
 
   try {
-    event = stripe.webhooks.constructEvent(body, sig, endpointSecret)
+    event = Stripe.webhooks.constructEvent(body, sig, endpointSecret)
   } catch (err) {
     return NextResponse.json({ message: 'Webhook error', error: err })
   }
@@ -22,34 +22,39 @@ export async function POST(request: Request) {
   // Get the ID and type
   const eventType = event.type
 
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+    apiVersion: '2024-04-10'
+  });
+
   // CREATE
   if (eventType === 'checkout.session.completed') {
-    const { id, amount_total, metadata } = event.data.object
 
-    const order = {
-      stripeId: id,
-      User: metadata?.buyerId || '',
-      amount: amount_total! / 100 || 0,
-      createdAt: new Date(),
-    }
+    const { id, amount_total, payment_intent, metadata, customer_details } = event.data.object
 
-    const newOrder = await createOrder(order)
+    if (customer_details?.address?.country != 'US') {
+      const paymentIntent = await stripe.paymentIntents.retrieve(payment_intent as string)
 
-    return NextResponse.json({ message: 'OK', order: newOrder })
-  }
+      const charge_id = paymentIntent.latest_charge?.toString()
 
-  if (eventType === 'account.updated') {
-    const { id, charges_enabled } = event.data.object
+      await stripe.refunds.create({
+        charge: charge_id
+      })
+      
+    } else {
+      const order = {
+        stripeId: id,
+        User: metadata?.buyerId || '',
+        amount: amount_total! / 100 || 0,
+        createdAt: new Date(),
+      }
 
-    if (charges_enabled) {
-      await UserData.findOneAndUpdate(
-        { expressAccountID: id },
-        { onboardingCompleted: true }
-      )
+      const newOrder = await createOrder(order)
     }
 
     return NextResponse.json({ message: 'OK' })
   }
+
+
 
   return new Response('', { status: 200 })
 }
