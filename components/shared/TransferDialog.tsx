@@ -38,6 +38,27 @@ const TransferDialog = ({ transfer }: { transfer: ITransfer }) => {
                             <td className='font-bold pr-2 bg-white border-b-[3px] border-red-500 p-2'>Amount:</td>
                             <td className='font-bold text-black bg-white border-b-[3px] border-l-[3px] border-red-500 p-2'>${(transfer?.amount).toFixed(2)}</td>
                         </tr>
+                        {transfer.monthlyDeductible &&
+                            <tr>
+                                <td className='font-bold pr-2 bg-white border-b-[3px] border-red-500 p-2'>Breakdown:</td>
+                                <td className='font-bold text-black bg-white border-b-[3px] border-l-[3px] border-red-500 p-2'>
+                                    <div className='flex flex-col'>
+                                        <div className='flex justify-between'>
+                                            <span className='font-semibold'>Total:</span>
+                                            <span className='font-semibold'>${(transfer?.amount + 2).toFixed(2)}</span>
+                                        </div>
+                                        <div className='flex justify-between font-bold'>
+                                            <span className='text-gray-600'>Stripe Connect Fee:</span>
+                                            <span className='text-gray-600'>-$2.00</span>
+                                        </div>
+                                        <hr className='my-2 border-gray-400' />
+                                        <div className='flex justify-between'>
+                                            <span className='font-bold'>Net Amount:</span>
+                                            <span className='font-bold'>${(transfer?.amount).toFixed(2)}</span>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>}
                         <tr>
                             <td className='font-bold pr-2 bg-white border-b-[2px] border-red-500 p-2'>Date:</td>
                             <td className='font-bold text-black bg-white border-b-[3px] border-l-[3px] border-red-500 p-2'>{formatDate(transfer?.createdAt)}</td>

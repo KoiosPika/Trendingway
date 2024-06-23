@@ -22,6 +22,12 @@ const page = async () => {
 
     const data: any = await getAvailableEarnings(userId)
 
+    const now = new Date();
+
+    const transferDate = new Date(userData.transferDate)
+
+    const transferDeductible: boolean = now > transferDate
+
     return (
         <div className='w-full flex justify-center items-center bg-white'>
             <div className='w-full flex flex-col max-w-[1100px] justify-center items-center'>
@@ -43,12 +49,12 @@ const page = async () => {
                                 </div>
                                 <p className='text-white font-semibold md:text-[13px] text-[11px] ml-1 mt-1'>Note: You can only process 150 Insights per transfer</p>
                                 {userData.onboardingCompleted && <>
-                                    {data.availableEarning == 0 && <div className='flex w-full my-2'>
+                                    {data.availableInsights == 0 && <div className='flex w-full my-2'>
                                         <p className='ml-auto px-3 py-1 bg-green-700 rounded-lg text-white font-semibold border-[1px] border-white md:text-[15px] text-[12px]'>No Funds Available</p>
                                     </div>}
-                                    {(data.availableEarning > 25) && <TransferButton userId={userId} />}
-                                    {(data.availableEarning > 0 && data.availableEarning < 25) && <div className='flex w-full my-2'>
-                                        <p className='ml-auto px-3 py-1 bg-red-500 rounded-lg text-white font-semibold border-[1px] border-white md:text-[15px] text-[12px]'>Available Funds must be atleast $25</p>
+                                    {(data.availableInsights >= 10) && <TransferButton userId={userId} transferDeductible={transferDeductible} />}
+                                    {(data.availableInsights > 0 && data.availableInsights < 10) && <div className='flex w-full my-2'>
+                                        <p className='ml-auto px-3 py-1 bg-red-500 rounded-lg text-white font-semibold border-[1px] border-white md:text-[15px] text-[12px]'>You need 10 insights to initiate a transfer</p>
                                     </div>}
                                 </>}
                                 {!userData.onboardingCompleted && <>

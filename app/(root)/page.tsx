@@ -21,7 +21,7 @@ const page = async () => {
                 <p className='font-bold text-[30px] md:text-[25px] lg:text-[30px] mr-auto ml-4'>Welcome to</p>
                 <p className='font-bold text-[55px] md:text-[45px] lg:text-[55px] ml-auto mr-4'>Insightend</p>
                 <p className='font-bold text-[18px] md:text-[15px] lg:text-[18px] ml-auto mr-4'>Platform for insighters</p>
-                <Link href={'/'} className='ml-auto mr-[30px] mt-5 flex justify-center gap-2 items-center bg-black px-3 py-1 rounded-md'>
+                <Link href={'/guide'} className='ml-auto mr-[30px] mt-5 flex justify-center gap-2 items-center bg-black px-3 py-1 rounded-md'>
                   <Image src={'/icons/book.svg'} alt='guide' height={20} width={20} />
                   <p className='text-white font-semibold text-[17px]'>Full Guide</p>
                 </Link>

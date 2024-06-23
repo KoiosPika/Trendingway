@@ -169,6 +169,10 @@ export async function createTransfer(userId: string) {
 
         const now = new Date();
 
+        const nextMonth = new Date();
+
+        nextMonth.setMonth(nextMonth.getMonth() + 1);
+
         const earnings = await Earning.find({ User: userId, withdrawn: false, availableDate: { '$lt': now } }).limit(150).session(session);
 
         let availableEarning = 0;
@@ -179,11 +183,18 @@ export async function createTransfer(userId: string) {
             })
         }
 
-        if(availableEarning < 25){
+        if (earnings.length < 10) {
             throw Error;
         }
 
         const User = await UserData.findOne({ User: userId }).session(session);
+
+        const deducteStripeFee = new Date(User.transferDate) < now;
+
+        if (deducteStripeFee) {
+            availableEarning = availableEarning - 2;
+            await UserData.findByIdAndUpdate(User._id, { '$set': { transferDate: nextMonth } }, { session });
+        }
 
         const updatePromises = earnings.map((earning) =>
             Earning.findByIdAndUpdate(earning._id, { withdrawn: true }, { session })
@@ -191,8 +202,10 @@ export async function createTransfer(userId: string) {
 
         await Promise.all(updatePromises);
 
+        availableEarning = Math.round(availableEarning * 100)
+
         const transfer = await stripe.transfers.create({
-            amount: Number((availableEarning).toFixed(2)) * 100,
+            amount: availableEarning,
             currency: 'usd',
             destination: User?.expressAccountID,
         });
@@ -204,6 +217,7 @@ export async function createTransfer(userId: string) {
             User: userId,
             transferId: transfer.id,
             amount: transfer.amount / 100,
+            monthlyDeductible: deducteStripeFee
         })
 
         return true;

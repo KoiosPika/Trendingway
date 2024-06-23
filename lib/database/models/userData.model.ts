@@ -22,7 +22,14 @@ export interface IUserData extends Document {
     onboardingCompleted: boolean,
     languages: string[],
     categories: string[],
+    transferDate: Date
 }
+
+const substractDays = (date: Date, days: number) => {
+    const result = new Date(date);
+    result.setDate(result.getDate() - days);
+    return result;
+};
 
 const UserDataSchema = new Schema({
     User: { type: Schema.Types.ObjectId, ref: "User" },
@@ -46,7 +53,8 @@ const UserDataSchema = new Schema({
     avgRating: { type: Number, default: 0 },
     nofVideoesInsighted: { type: Number, default: 0 },
     expressAccountID: { type: String },
-    onboardingCompleted: { type: Boolean, default:false },
+    transferDate: { type: Date, default: () => substractDays(new Date(), 1) },
+    onboardingCompleted: { type: Boolean, default: false },
     languages: { type: [String], required: true },
     categories: { type: [String], required: true },
 })

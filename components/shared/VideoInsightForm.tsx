@@ -38,7 +38,7 @@ const VideoInsightForm = ({ height, id, insighter, user }: { height: number, id:
             }
         };
 
-        const intervalId = setInterval(checkSession, 1000); // Check every second
+        const intervalId = setInterval(checkSession, 1500); // Check every second
 
         return () => clearInterval(intervalId);
     }, []);
