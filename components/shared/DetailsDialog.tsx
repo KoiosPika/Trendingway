@@ -45,7 +45,6 @@ const DetailsDialog = ({ page }: { page: string }) => {
                     <>
                         <p className='font-semibold bg-slate-200 p-2 rounded-lg'>On this page, you can check out all the services your customers have requested from you</p>
                         <p className='font-semibold bg-slate-200 p-2 rounded-lg'>You can also cancel an order and provide a message to the customer explianing why</p>
-                        <p className='font-semibold bg-slate-200 p-2 rounded-lg'>Any services that last over 5 days will be refunded automatically</p>
                     </>}
                 {page === 'Requests' &&
                     <>

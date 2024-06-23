@@ -49,10 +49,10 @@ const page = () => {
                                     </div>
                                 </div>
                                 <div className='flex flex-col md:flex-row items-center gap-3'>
-                                    <div className='flex flex-col justify-center items-center bg-white border-[2px] border-black rounded-lg py-2 md:w-1/2 w-full'>
+                                    <Link href={'/guide/activity-page'} className='flex flex-col justify-center items-center bg-white border-[2px] border-black rounded-lg py-2 md:w-1/2 w-full hover:bg-yellow-300'>
                                         <Image src={'/icons/bell.svg'} alt='user' height={30} width={30} />
                                         <p className='mt-2 font-bold'>Activity Page</p>
-                                    </div>
+                                    </Link>
                                     <p className='font-bold hidden md:block'>{`->`}</p>
                                     <p className='font-bold block md:hidden'>{`↓`}</p>
                                     <div className='md:w-1/2 w-full font-semibold'>
