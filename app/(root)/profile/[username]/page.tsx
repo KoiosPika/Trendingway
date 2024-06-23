@@ -83,7 +83,7 @@ const page = async ({ params: { username } }: { params: { username: string } }) 
                         </Link>
                     </div>
                     <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-5 px-3 w-full mb-[25px] mt-5'>
-                        <div className='flex flex-col justify-center items-center'>
+                    <div className='flex flex-col justify-center items-center'>
                             <p className='mb-3 text-slate-500 font-bold text-[16px]'>--- Short Content Insight (Less than 60s) ---</p>
                             {user?.VideoInsightAvailability && <VideoInsight price={user?.VideoInsight} userId={userId} insighter={user.User._id} />}
                             {!user?.VideoInsightAvailability &&
@@ -96,7 +96,7 @@ const page = async ({ params: { username } }: { params: { username: string } }) 
                                         <div className='h-2/4 w-[2px] bg-black'></div>
                                         <p className='text-[25px] font-semibold'>${user?.VideoInsight}</p>
                                     </div>
-                                    <p className='mt-2 mx-2 p-2 bg-blue-500 rounded-lg text-white font-semibold'>Upload a link to your TikTok, Reel or Short, and get an insight about the content, title and description, hashtags and more</p>
+                                    <p className='mt-2 mx-2 p-2 bg-blue-500 rounded-lg text-white font-semibold'>Upload a link to your TikTok, Reel or Short, and get an insight about the content, title, description, hashtags and more</p>
                                     <div className='absolute top-1 right-2 flex flex-row items-center gap-2 bg-white px-2 border-[1px] border-red-500 rounded-lg'>
                                         <Image src={'/icons/unavailable.svg'} alt='unavailable' height={15} width={15} />
                                         <p className='text-red-500 font-bold'>Unavailable</p>
@@ -110,13 +110,13 @@ const page = async ({ params: { username } }: { params: { username: string } }) 
                                 <div className='flex flex-col justify-center items-center border-[1px] border-slate-300 rounded-lg h-[240px] md:h-[220px] bg-slate-200 relative' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                                     <div className='flex justify-center items-center gap-8' >
                                         <div className='flex flex-col items-center gap-2'>
-                                            <Image src={'/icons/star-white.svg'} alt='video' width={200} height={200} className='bg-purple-500 w-[55px] h-[55px] p-2 rounded-full' />
+                                            <Image src={'/icons/video.svg'} alt='video' width={200} height={200} className='bg-purple-500 w-[55px] h-[55px] p-2 rounded-full' />
                                             <p className='font-semibold'>Long Text Insight</p>
                                         </div>
                                         <div className='h-2/4 w-[2px] bg-black'></div>
                                         <p className='text-[25px] font-semibold'>${user?.LongVideoInsight}</p>
                                     </div>
-                                    <p className='mt-2 mx-2 p-2 bg-purple-500 rounded-lg text-white font-semibold'>Upload a link to your TikTok, Reel or Short, and get an insight about the content, title and description, hashtags and more</p>
+                                    <p className='mt-2 mx-2 p-2 bg-purple-500 rounded-lg text-white font-semibold'>Upload a link to your TikTok, Reel or Short, and get an insight about the content, title, description, hashtags and more</p>
                                     <div className='absolute top-1 right-2 flex flex-row items-center gap-2 bg-white px-2 border-[1px] border-red-500 rounded-lg'>
                                         <Image src={'/icons/unavailable.svg'} alt='unavailable' height={15} width={15} />
                                         <p className='text-red-500 font-bold'>Unavailable</p>
@@ -142,7 +142,7 @@ const page = async ({ params: { username } }: { params: { username: string } }) 
                                             <p className='text-red-500 font-bold'>Unavailable</p>
                                         </div>
                                     </div>
-                                    <p className='mt-2 mx-2 p-2 bg-orange-500 rounded-lg text-white font-semibold'>Upload a link to your TikTok, Reel or Short, and get an insight about your account and what can be improved to get more audience</p>
+                                    <p className='mt-2 mx-2 p-2 bg-orange-500 rounded-lg text-white font-semibold'>Upload a link to your TikTok, Reel or Short, and get an insight about your account and what can be improved to attract more audience</p>
                                 </div>}
                         </div>
                         <div className='flex flex-col justify-center items-center'>
@@ -152,7 +152,7 @@ const page = async ({ params: { username } }: { params: { username: string } }) 
                                 <div className='flex flex-col justify-center items-center border-[1px] border-slate-300 rounded-lg h-[240px] md:h-[220px] bg-slate-200 relative' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                                     <div className='flex justify-center items-center gap-8' >
                                         <div className='flex flex-col items-center gap-2'>
-                                            <Image src={'/icons/people.svg'} alt='video' width={200} height={200} className='bg-pink-500 w-[55px] h-[55px] p-2 rounded-full' />
+                                            <Image src={'/icons/messages.svg'} alt='video' width={200} height={200} className='bg-pink-500 w-[55px] h-[55px] p-2 rounded-full' />
                                             <p className='font-semibold'>Personal Insight</p>
                                         </div>
                                         <div className='h-2/4 w-[2px] bg-black'></div>
@@ -162,7 +162,7 @@ const page = async ({ params: { username } }: { params: { username: string } }) 
                                             <p className='text-red-500 font-bold'>Unavailable</p>
                                         </div>
                                     </div>
-                                    <p className='mt-2 mx-2 p-2 bg-pink-500 rounded-lg text-white font-semibold'>Upload a link to your TikTok, Reel or Short, and get an insight about your account and what can be improved to get more audience</p>
+                                    <p className='mt-2 mx-2 p-2 bg-pink-500 rounded-lg text-white font-semibold'>Start a conversation with your Insighter by simply asking a question, which will open up a chat room where you can connect and interact with them</p>
                                 </div>}
                         </div>
                     </div>

@@ -166,7 +166,7 @@ const EditProfile = ({ userId }: { userId: string }) => {
 
                                 </div>
 
-                                <p className='mb-3 text-slate-500 font-bold text-[16px]'>--- Long Content Insight (More than 60s) ---</p>
+                                <p className='mb-3 text-slate-500 font-bold text-[16px] place-self-center'>--- Long Content Insight (More than 60s) ---</p>
 
                                 <div className='border-[1px] border-slate-400 rounded-lg h-[150px] md:h-[180px] flex justify-center items-center gap-2 relative' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                                     <div className='flex flex-col items-center gap-2 flex-1'>
@@ -196,7 +196,7 @@ const EditProfile = ({ userId }: { userId: string }) => {
                                     </div>
                                 </div>
 
-                                <p className='mb-3 text-slate-500 font-bold text-[16px]'>--- Profile Auditting Insight ---</p>
+                                <p className='mb-3 text-slate-500 font-bold text-[16px] place-self-center'>--- Profile Auditting Insight ---</p>
 
                                 <div className='border-[1px] border-slate-400 rounded-lg h-[150px] md:h-[180px] flex justify-center items-center gap-2 relative' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                                     <div className='flex flex-col items-center gap-2 flex-1'>
@@ -226,7 +226,7 @@ const EditProfile = ({ userId }: { userId: string }) => {
                                     </div>
                                 </div>
 
-                                <p className='mb-3 text-slate-500 font-bold text-[16px]'>--- Personal Insight (Qs & As) ---</p>
+                                <p className='mb-3 text-slate-500 font-bold text-[16px] place-self-center'>--- Personal Insight (Qs & As) ---</p>
 
                                 <div className='border-[1px] border-slate-400 rounded-lg h-[150px] md:h-[180px] flex justify-center items-center gap-2 relative' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                                     <div className='flex flex-col items-center gap-2 flex-1'>

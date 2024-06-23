@@ -63,7 +63,7 @@ const PersonalInsight = ({ price, userId, insighter }: { price: number, userId: 
                         <div className='h-3/4 w-[2px] bg-black'></div>
                         <p className='text-[25px] font-semibold'>${price}</p>
                     </div>
-                    <p className='mt-2 mx-2 p-2 bg-pink-500 rounded-lg text-white font-semibold'>Upload a link to your TikTok, Reel or Short, and get an insight about your account and what can be improved to get more audience</p>
+                    <p className='mt-2 mx-2 p-2 bg-pink-500 rounded-lg text-white font-semibold'>Start a conversation with your Insighter by simply asking a question, which will open up a chat room where you can connect and interact with them</p>
                 </div>
             </AlertDialogTrigger>
             <AlertDialogContent className="bg-pink-500 border-0">

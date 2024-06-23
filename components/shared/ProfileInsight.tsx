@@ -69,7 +69,7 @@ const ProfileInsight = ({ price, userId, insighter }: { price: number, userId: s
                         <div className='h-3/4 w-[2px] bg-black'></div>
                         <p className='text-[25px] font-semibold'>${price}</p>
                     </div>
-                    <p className='mt-2 mx-2 p-2 bg-orange-500 rounded-lg text-white font-semibold'>Upload a link to your TikTok, Reel or Short, and get an insight about your account and what can be improved to get more audience</p>
+                    <p className='mt-2 mx-2 p-2 bg-orange-500 rounded-lg text-white font-semibold'>Upload a link to your TikTok, Reel or Short, and get an insight about your account and what can be improved to attract more audience</p>
                 </div>
             </AlertDialogTrigger>
             <AlertDialogContent className="bg-orange-500 border-0">
