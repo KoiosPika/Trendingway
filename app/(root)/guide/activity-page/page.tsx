@@ -28,6 +28,7 @@ const page = () => {
                     <p className='font-bold mr-auto ml-3 text-[12px] md:text-[16px] my-2'>• If you requested a personal insight, {`you'll`} be directed to chat page like the one above</p>
                     <Image src={'/images/Screen13.PNG'} alt='photo' height={1500} width={1500} className='my-5 md:w-1/2 w-full rounded-lg' />
                     <p className='font-bold mr-auto ml-3 text-[12px] md:text-[16px] my-2'>• At the bottom of every insight (excluding personal insights) {`you'll`} be able to rate the insight you received</p>
+                    <p className='mr-auto font-bold text-[18px] ml-3 my-5 bg-yellow-400 px-2 py-1 rounded-md'>4. History Page</p>
                 </div>
             </div>
         </div>
