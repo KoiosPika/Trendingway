@@ -97,7 +97,7 @@ const VideoInsightForm = ({ height, id, insighter, user }: { height: number, id:
                         ))}
                     </div>
                 </div>
-                <Textarea value={contentNotes} onChange={(e) => setContentNotes(e.target.value)} placeholder='Notes about content' className='w-4/5 border-2 border-black text-[16px]' />
+                <Textarea value={contentNotes} onChange={(e) => setContentNotes(e.target.value)} placeholder='Notes about content:' className='w-4/5 border-2 border-black text-[16px]' />
             </div>
             <div className='w-full mt-2 mb-5 flex flex-col items-center justify-center'>
                 <p className='bg-purple-500 text-white px-3 py-2 rounded-lg font-semibold mr-auto ml-5'>Brightness</p>
@@ -137,7 +137,7 @@ const VideoInsightForm = ({ height, id, insighter, user }: { height: number, id:
                         ))}
                     </div>
                 </div>
-                <Textarea value={descriptionNotes} onChange={(e) => setDescriptionNotes(e.target.value)} placeholder='Notes about hashtags:' className='w-4/5 border-2 border-black' />
+                <Textarea value={descriptionNotes} onChange={(e) => setDescriptionNotes(e.target.value)} placeholder='Notes about title & description:' className='w-4/5 border-2 border-black' />
             </div>
             <div className='w-full mt-2 mb-5 flex flex-col items-center justify-center'>
                 <p className='bg-purple-500 text-white px-3 py-2 rounded-lg font-semibold mr-auto ml-5'>Hashtags</p>
@@ -177,11 +177,11 @@ const VideoInsightForm = ({ height, id, insighter, user }: { height: number, id:
                         ))}
                     </div>
                 </div>
-                <Textarea value={soundNotes} onChange={(e) => setSoundNotes(e.target.value)} placeholder='Notes about hashtags:' className='w-4/5 border-2 border-black' />
+                <Textarea value={soundNotes} onChange={(e) => setSoundNotes(e.target.value)} placeholder='Notes about sound:' className='w-4/5 border-2 border-black' />
             </div>
             <div className='w-full mt-2 mb-5 flex flex-col items-center justify-center'>
                 <p className='bg-purple-500 text-white px-3 py-2 rounded-lg font-semibold mr-auto ml-5 my-3'>Additional Notes</p>
-                <Textarea value={additionalNotes} onChange={(e) => setAdditionalNotes(e.target.value)} placeholder='Notes about hashtags:' className='w-4/5 border-2 border-black' />
+                <Textarea value={additionalNotes} onChange={(e) => setAdditionalNotes(e.target.value)} placeholder='Any additional notes:' className='w-4/5 border-2 border-black' />
             </div>
             <div className='w-full flex flex-row justify-center items-center text-center my-6'>
                 {!loading && <div onClick={submitInsight} className='w-1/3 bg-green-400 flex flex-row items-center justify-center gap-2 rounded-md hover:cursor-pointer'>

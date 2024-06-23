@@ -12,6 +12,7 @@ const populateChat = (query: any) => {
 }
 
 export async function getChatByRequestID(id: string) {
+
     try {
         await connectToDatabase();
 

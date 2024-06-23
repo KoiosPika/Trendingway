@@ -68,7 +68,9 @@ export async function createPersonalRequest(User: string, Insighter: string, des
         session = await db.startSession();
         session.startTransaction();
 
-        let chat = await Chat.findOne({
+        let chat = null;
+
+        chat = await Chat.findOne({
             $or: [
                 { User1: User, User2: Insighter },
                 { User1: Insighter, User2: User }
@@ -76,7 +78,7 @@ export async function createPersonalRequest(User: string, Insighter: string, des
         }).session(session)
 
         if (!chat) {
-            chat = await Chat.create([{ User1: User, User2: Insighter }], { session })
+            [chat] = await Chat.create([{ User1: User, User2: Insighter }], { session })
         }
 
         const message: any = await Message.create([{
