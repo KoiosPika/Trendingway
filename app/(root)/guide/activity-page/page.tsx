@@ -29,6 +29,12 @@ const page = () => {
                     <Image src={'/images/Screen13.PNG'} alt='photo' height={1500} width={1500} className='my-5 md:w-1/2 w-full rounded-lg' />
                     <p className='font-bold mr-auto ml-3 text-[12px] md:text-[16px] my-2'>• At the bottom of every insight (excluding personal insights) {`you'll`} be able to rate the insight you received</p>
                     <p className='mr-auto font-bold text-[18px] ml-3 my-5 bg-yellow-400 px-2 py-1 rounded-md'>4. History Page</p>
+                    <Image src={'/images/Screen14.PNG'} alt='photo' height={1500} width={1500} className='my-5' />
+                    <p className='font-bold mr-auto ml-3 text-[12px] md:text-[16px] my-2'>• On history tab, {`you'll`} find all orders you received</p>
+                    <p className='font-bold mr-auto ml-3 text-[12px] md:text-[16px] my-2'>• Each order would have a status to indicate what you did with the request</p>
+                    <p className='font-bold mr-auto ml-3 text-[12px] md:text-[16px] my-2'>• Status {`'Awaiting'`} means the you {`haven't`} insighted the order yet</p>
+                    <p className='font-bold mr-auto ml-3 text-[12px] md:text-[16px] my-2'>• Status {`'Canceled'`} means the you have canceled the order</p>
+                    <p className='font-bold mr-auto ml-3 text-[12px] md:text-[16px] my-2'>• Status {`'Completed'`} means the you already insighted the order</p>
                 </div>
             </div>
         </div>

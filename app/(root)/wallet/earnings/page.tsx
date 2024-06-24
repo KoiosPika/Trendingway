@@ -92,7 +92,7 @@ const page = async () => {
                                                 </div>}
                                             {earning.service == 'PersonalInsight' &&
                                                 <div className='w-full flex flex-col sm:flex-row items-center justify-center gap-2'>
-                                                    <Image src={'/icons/people.svg'} alt='video' width={200} height={200} className='bg-pink-500 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
+                                                    <Image src={'/icons/messages.svg'} alt='video' width={200} height={200} className='bg-pink-500 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
                                                 </div>}
                                         </div>
                                     ))}
