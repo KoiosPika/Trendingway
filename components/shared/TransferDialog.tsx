@@ -47,8 +47,8 @@ const TransferDialog = ({ transfer }: { transfer: ITransfer }) => {
                                             <span className='font-semibold'>Total:</span>
                                             <span className='font-semibold'>${(transfer?.amount + 2).toFixed(2)}</span>
                                         </div>
-                                        <div className='flex justify-between font-bold'>
-                                            <span className='text-gray-600'>Stripe Connect Fee:</span>
+                                        <div className='flex justify-between items-center font-bold'>
+                                            <span className='text-gray-600 text-[14px]'>Stripe Connect Fee:</span>
                                             <span className='text-gray-600'>-$2.00</span>
                                         </div>
                                         <hr className='my-2 border-gray-400' />

@@ -63,7 +63,7 @@ export async function createEarning(requestId: any, session: ClientSession) {
 
         await Earning.create([{
             User: request.Insighter,
-            amount: Number((request.price * 0.8).toFixed(2)),
+            amount: Number((request.price * 0.78).toFixed(2)),
             service: request.type,
             availableDate: today
         }], { session })
