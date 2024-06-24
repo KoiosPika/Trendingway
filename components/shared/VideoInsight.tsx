@@ -79,7 +79,7 @@ const VideoInsight = ({ price, userId, insighter }: { price: number, userId: str
                     </AlertDialogTitle>
                     <p className='font-semibold text-white text-[16px]'>Video URL</p>
                     <div className='flex flex-row'>
-                        <Input value={URL} placeholder="Video URL" onChange={(e) => setURL(e.target.value)} />
+                        <Input value={URL} placeholder="Video URL" onChange={(e) => setURL(e.target.value)} className='text-[16px]' />
                         <div className="relative inline-block w-[25px]">
                             <button
                                 onClick={handleClick}
@@ -109,7 +109,7 @@ const VideoInsight = ({ price, userId, insighter }: { price: number, userId: str
                             className='text-center p-2 text-[13px] md:text-[16px] rounded-r-md hover:cursor-pointer' onClick={() => setPlatform('TikTok')}>Tiktok</p>
                     </div>
                     <p className='font-semibold text-white text-[16px]'>Description</p>
-                    <Textarea value={description} placeholder='Describe the problem' onChange={(e) => setDescription(e.target.value)} />
+                    <Textarea value={description} placeholder='Describe the problem' onChange={(e) => setDescription(e.target.value)} className='text-[16px]' />
                 </AlertDialogHeader>
                 <SignedIn>
                     <AlertDialogFooter>

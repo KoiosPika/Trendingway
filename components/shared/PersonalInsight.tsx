@@ -73,7 +73,7 @@ const PersonalInsight = ({ price, userId, insighter }: { price: number, userId: 
                         <AlertDialogCancel className="rounded-full bg-white text-black">X</AlertDialogCancel>
                     </AlertDialogTitle>
                     <p className='font-semibold text-white text-[16px]'>What would you like to know about me?</p>
-                    <Textarea value={description} placeholder='Type your question here' onChange={(e) => setDescription(e.target.value)} />
+                    <Textarea value={description} placeholder='Type your question here' onChange={(e) => setDescription(e.target.value)} className='text-[16px]' />
                 </AlertDialogHeader>
                 <SignedIn>
                     <AlertDialogFooter>

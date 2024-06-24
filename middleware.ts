@@ -19,6 +19,13 @@ export default clerkMiddleware(async (auth, req) => {
   const signInUrl = new URL('/sign-in', url.origin);
   const session = auth().sessionId;
 
+  const gpcHeader = req.headers.get('sec-gpc');
+
+  if (gpcHeader === '1') {
+    console.log('GPC header received: Adjusting privacy settings.');
+  }
+
+
   // const country = geo?.country;
   // if (country !== 'US') {
   //   return new NextResponse(`Access Denied for ${country}`, { status: 403 });

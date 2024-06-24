@@ -9,6 +9,42 @@ import Transfer from "../database/models/transfer.model";
 import { ClientSession } from "mongoose";
 
 export async function createEarning(requestId: any, session: ClientSession) {
+
+    const today = new Date();
+    const dayOfWeek = today.getDay();
+
+    let daysToAdd;
+    switch (dayOfWeek) {
+        case 0: // Sunday
+            daysToAdd = 3; // Payment processed on Monday, available on Wednesday
+            break;
+        case 1: // Monday
+            daysToAdd = 2; // Payment processed on Monday, available on Wednesday
+            break;
+        case 2: // Tuesday
+            daysToAdd = 2; // Payment processed on Tuesday, available on Thursday
+            break;
+        case 3: // Wednesday
+            daysToAdd = 2; // Payment processed on Wednesday, available on Friday
+            break;
+        case 4: // Thursday
+            daysToAdd = 4; // Payment processed on Thursday, available next Monday
+            break;
+        case 5: // Friday
+            daysToAdd = 4; // Payment processed on Friday, available next Tuesday
+            break;
+        case 6: // Saturday
+            daysToAdd = 3; // Payment processed on Monday, available on Wednesday
+            break;
+        default:
+            daysToAdd = 2; // Default case to cover unexpected values
+            break;
+    }
+
+    daysToAdd++;
+
+    today.setDate(today.getDate() + daysToAdd);
+
     try {
 
         await connectToDatabase();
@@ -28,7 +64,8 @@ export async function createEarning(requestId: any, session: ClientSession) {
         await Earning.create([{
             User: request.Insighter,
             amount: Number((request.price * 0.8).toFixed(2)),
-            service: request.type
+            service: request.type,
+            availableDate: today
         }], { session })
 
     } catch (error) {
