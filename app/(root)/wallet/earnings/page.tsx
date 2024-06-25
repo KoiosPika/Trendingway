@@ -132,10 +132,15 @@ const page = async () => {
                                             </div>
                                         </div>
                                     ))}
-                                    <Link href={'/wallet/earnings/transfer-details'} className='ml-auto'>
+                                    {transfers.length > 0 && <Link href={'/wallet/earnings/transfer-details'} className='ml-auto'>
                                         <p className='bg-white px-4 py-2 rounded-lg inline-flex text-black text-[13px] font-semibold hover:bg-yellow-400'>More Details {`->`}</p>
-                                    </Link>
+                                    </Link>}
                                 </div>
+                                {transfers.length == 0 &&
+                                    <div className='flex justify-center items-center h-3/4'>
+                                        <p className='text-[18px] font-bold'>No Transfers Yet</p>
+                                    </div>
+                                }
                             </div>
                         </div>
                     </div>
