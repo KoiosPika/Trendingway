@@ -96,7 +96,7 @@ const EarningAsPayoutDialog = ({ earning }: { earning: IEarning }) => {
                                         <span className='font-semibold'>${(earning?.amount / 0.78).toFixed(2)}</span>
                                     </div>
                                     <div className='flex justify-between font-bold'>
-                                        <span className='text-gray-600'>20% Service Fee:</span>
+                                        <span className='text-gray-600'>22% Service Fee:</span>
                                         <span className='text-gray-600'>-${(earning?.amount * 0.2 / 0.78).toFixed(2)}</span>
                                     </div>
                                     <hr className='my-2 border-gray-400' />

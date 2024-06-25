@@ -24,7 +24,7 @@ async function createAccount(userId: string) {
             { '$set': { expressAccountID: account.id } }
         )
 
-        return JSON.parse(JSON.stringify(user.expressAccountID))
+        return;
 
     } catch (error) {
         console.log(error)

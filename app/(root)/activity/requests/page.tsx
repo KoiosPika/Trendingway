@@ -62,7 +62,7 @@ const page = async () => {
                       <Image src={'/icons/star-black.svg'} alt='star' height={15} width={15} />
                       <p className='text-[13px] md:text-[16px] text-black font-bold'>Awaiting Insight</p>
                     </Button>
-                    {(new Date(request.endDate) > new Date()) && <CancelRequest request={request._id} />}
+                    {(new Date(request.endDate) < new Date()) && <CancelRequest request={request._id} />}
                   </div>}
                   {request.status === 'Canceled' && <CanceledOrderDialog request={request} />}
                 </div>

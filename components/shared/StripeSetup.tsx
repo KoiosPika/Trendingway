@@ -30,7 +30,7 @@ const StripeSetup = ({ userId, account_id, onboardingCompleted }: { userId: stri
                 <Image className='rounded-md border-2 border-white h-[30px] w-[30px]' src={'/icons/stripe.png'} alt='stripe' height={200} width={200} />
                 <p className='font-bold md:text-[20px] text-[15px]'>Stripe Connect</p>
             </div>
-            {(!account_id && !onboardingCompleted) && <p className='ml-9 md:text-[16px] text-[13px] mt-3'>Set up your Stripe Connect Express account to receive the money</p>}
+            {(!account_id && !onboardingCompleted) && <p className='ml-9 md:text-[16px] text-[13px] mt-3'>Set up your Stripe Connect Express account to receive your earnings</p>}
             {(account_id && !onboardingCompleted) && <p className='ml-9 md:text-[16px] text-[13px] mt-3'>{`Looks like you haven't finished setting up your account. You can complete your onboarding process by using the link below`}</p>}
             {(account_id && onboardingCompleted) && <p className='ml-9 md:text-[16px] text-[13px] mt-3'>Your Express account has been sucessfully set up! You can access your dashboard from the link below</p>}
             
