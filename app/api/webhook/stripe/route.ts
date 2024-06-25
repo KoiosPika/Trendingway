@@ -61,6 +61,12 @@ export async function POST(request: Request) {
           await connectToDatabase();
 
           const newOrder = await createOrder(order)
+
+          await stripe.transfers.create({
+            amount: Math.round(amount_total! * 100 * 0.08),
+            currency: 'usd',
+            destination: process.env.STRIPE_FEE_ACCOUNT as string
+          });
         }
 
       }

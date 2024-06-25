@@ -22,14 +22,10 @@ const CancelOrder = ({ request }: { request: IRequest }) => {
 
         setLoading(true);
 
-        try {
-            await cancelOrder(request._id, message);
-            setLoading(false);
-            router.refresh();
-        } catch (error) {
-            console.error(error);
-            setLoading(false);
-        }
+        await cancelOrder(request._id, message);
+        setLoading(false);
+        router.refresh();
+
     };
 
     return (
@@ -47,7 +43,7 @@ const CancelOrder = ({ request }: { request: IRequest }) => {
                     </AlertDialogTitle>
                 </AlertDialogHeader>
                 <p className='text-white ml-2'>Are you sure you want to cancel this order?</p>
-                <p className='text-white font-semibold ml-2'>You can earn ${(request.price * 0.80).toFixed(2)} from this order</p>
+                <p className='text-white font-semibold ml-2'>You can earn ${(request.price * 0.78).toFixed(2)} from this order</p>
                 <Textarea
                     className='text-[16px] h-[40px]'
                     placeholder={`Tell the customer why you're canceling their order`}

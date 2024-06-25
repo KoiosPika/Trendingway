@@ -54,17 +54,11 @@ export const checkoutOrder = async (order: { amount: number, User: string }) => 
             cancel_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/`,
             automatic_tax: { 'enabled': true },
             billing_address_collection: 'required',
-            payment_intent_data: {
-                application_fee_amount: order.amount * 100 * 0.22,
-                transfer_data: {
-                    destination: (process.env.STRIPE_FEE_ACCOUNT as string)
-                }
-            }
         });
 
         redirect(session.url!)
     } catch (error) {
-        throw error;
+        throw(error);
     }
 }
 

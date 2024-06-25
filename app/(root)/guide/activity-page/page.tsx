@@ -20,6 +20,12 @@ const page = () => {
                     <p className='font-bold mr-auto ml-3 text-[12px] md:text-[16px] my-2'>• When you press Cancel Order, you can leave a note to your customer telling them why {`you're`} canceling their order</p>
                     <p className='font-bold mr-auto ml-3 text-[12px] md:text-[16px] my-2'>• Remember: if you {`don't`} give an insight within 5 days of the order, the customer can withdraw their order and you will not earn anything</p>
                     <p className='mr-auto font-bold text-[18px] ml-3 my-5 bg-yellow-400 px-2 py-1 rounded-md'>2. Requests Page</p>
+                    <Image src={'/images/Screen30.PNG'} alt='photo' height={1500} width={1500} className='my-5' />
+                    <p className='font-bold mr-auto ml-3 text-[12px] md:text-[16px] my-2'>• On this page you can see a list of your requests</p>
+                    <p className='font-bold mr-auto ml-3 text-[12px] md:text-[16px] my-2'>• Only requests that are still awaiting insights or canceled requests will appear on here.</p>
+                    <p className='font-bold mr-auto ml-3 text-[12px] md:text-[16px] my-2'>• If you made a request and 5 days passed without receiving an insight, {`you'll`} be able to cancel the request.</p>
+                    <Image src={'/images/Screen31.PNG'} alt='photo' height={1500} width={1500} className='my-5 md:w-1/2 w-full rounded-lg' />
+                    <p className='font-bold mr-auto ml-3 text-[12px] md:text-[16px] my-2'>• If the request is canceled by an insighter, you can click on Canceled & Refunded button and {`you'll`} be able to see the reason why your insighter decided to cancel the request.</p>
                     <p className='mr-auto font-bold text-[18px] ml-3 my-5 bg-yellow-400 px-2 py-1 rounded-md'>3. Insights Page</p>
                     <Image src={'/images/Screen9.PNG'} alt='photo' height={1500} width={1500} className='my-5' />
                     <p className='font-bold mr-auto ml-3 text-[12px] md:text-[16px] my-2'>• When {`you're`} on the Insights Tab, you will be able to see all of the insights your insighters have given based on your requests</p>

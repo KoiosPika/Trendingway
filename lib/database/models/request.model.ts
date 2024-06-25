@@ -21,6 +21,7 @@ export interface IRequest extends Document {
     message: string,
     chatId: string,
     messageId: string,
+    endDate: Date,
     createdAt: Date
 }
 

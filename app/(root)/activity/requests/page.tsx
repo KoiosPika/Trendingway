@@ -1,3 +1,4 @@
+import CancelRequest from '@/components/shared/CancelRequest'
 import CanceledOrderDialog from '@/components/shared/CanceledOrderDialog'
 import DetailsDialog from '@/components/shared/DetailsDialog'
 import LoadMoreRequests from '@/components/shared/LoadMoreRequests'
@@ -56,10 +57,13 @@ const page = async () => {
                     {request.type === 'PersonalInsight' && <Image src={'/icons/messages.svg'} alt='video' width={200} height={200} className='bg-pink-500 w-[40px] h-[40px] p-1.5 rounded-full ml-auto' />}
                   </div>
                   <p className='ml-3 mt-2 mr-auto text-[12.5px] h-[50px] overflow-hidden'>{request.description}</p>
-                  {request.status === 'Awaiting' && <Button className='bg-yellow-400 w-full flex flex-row items-center justify-center gap-2 py-1 rounded-lg mt-4 mb-2 hover:cursor-default hover:bg-yellow-400'>
-                    <Image src={'/icons/star-black.svg'} alt='star' height={15} width={15} />
-                    <p className='text-[13px] md:text-[16px] text-black font-bold'>Awaiting Insight</p>
-                  </Button>}
+                  {request.status === 'Awaiting' && <div className='flex flex-row items-center gap-1 w-full'>
+                    <Button className='bg-yellow-400 flex-1 flex flex-row items-center justify-center gap-2 py-1 rounded-lg mt-4 mb-2 hover:cursor-default hover:bg-yellow-400'>
+                      <Image src={'/icons/star-black.svg'} alt='star' height={15} width={15} />
+                      <p className='text-[13px] md:text-[16px] text-black font-bold'>Awaiting Insight</p>
+                    </Button>
+                    {(new Date(request.endDate) > new Date()) && <CancelRequest request={request._id} />}
+                  </div>}
                   {request.status === 'Canceled' && <CanceledOrderDialog request={request} />}
                 </div>
               ))}

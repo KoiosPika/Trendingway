@@ -93,11 +93,11 @@ const EarningAsPayoutDialog = ({ earning }: { earning: IEarning }) => {
                                 <div className='flex flex-col'>
                                     <div className='flex justify-between'>
                                         <span className='font-semibold'>Total:</span>
-                                        <span className='font-semibold'>${(earning?.amount / 0.8).toFixed(2)}</span>
+                                        <span className='font-semibold'>${(earning?.amount / 0.78).toFixed(2)}</span>
                                     </div>
                                     <div className='flex justify-between font-bold'>
                                         <span className='text-gray-600'>20% Service Fee:</span>
-                                        <span className='text-gray-600'>-${(earning?.amount * 0.2 / 0.8).toFixed(2)}</span>
+                                        <span className='text-gray-600'>-${(earning?.amount * 0.2 / 0.78).toFixed(2)}</span>
                                     </div>
                                     <hr className='my-2 border-gray-400' />
                                     <div className='flex justify-between'>

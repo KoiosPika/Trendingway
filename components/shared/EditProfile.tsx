@@ -160,7 +160,7 @@ const EditProfile = ({ userId }: { userId: string }) => {
                                             <p className='font-bold text-white text-[11px] md:text-[18px]'>Expected Earning Per 1 Order = </p>
                                         </div>
                                         <div className='flex w-1/2 h-[30px] bg-blue-500 rounded-br-md justify-center items-center'>
-                                            <p className='font-bold text-white text-[13px] md:text-[18px]'>${VideoInsight} x 80% = ${(VideoInsight * 0.80).toFixed(2)} </p>
+                                            <p className='font-bold text-white text-[13px] md:text-[18px]'>${VideoInsight} x 78% = ${(VideoInsight * 0.78).toFixed(2)} </p>
                                         </div>
                                     </div>
 
@@ -191,7 +191,7 @@ const EditProfile = ({ userId }: { userId: string }) => {
                                             <p className='font-bold text-white text-[11px] md:text-[18px]'>Expected Earning Per 1 Order = </p>
                                         </div>
                                         <div className='flex w-1/2 h-[30px] bg-purple-500 rounded-br-md justify-center items-center'>
-                                            <p className='font-bold text-white text-[13px] md:text-[18px]'>${LongVideoInsight} x 80% = ${(LongVideoInsight * 0.80).toFixed(2)} </p>
+                                            <p className='font-bold text-white text-[13px] md:text-[18px]'>${LongVideoInsight} x 78% = ${(LongVideoInsight * 0.78).toFixed(2)} </p>
                                         </div>
                                     </div>
                                 </div>
@@ -221,7 +221,7 @@ const EditProfile = ({ userId }: { userId: string }) => {
                                             <p className='font-bold text-white text-[11px] md:text-[18px]'>Expected Earning Per 1 Order = </p>
                                         </div>
                                         <div className='flex w-1/2 h-[30px] bg-orange-500 rounded-br-md justify-center items-center'>
-                                            <p className='font-bold text-white text-[13px] md:text-[18px]'>${ProfileInsight} x 80% = ${(ProfileInsight * 0.80).toFixed(2)} </p>
+                                            <p className='font-bold text-white text-[13px] md:text-[18px]'>${ProfileInsight} x 78% = ${(ProfileInsight * 0.78).toFixed(2)} </p>
                                         </div>
                                     </div>
                                 </div>
@@ -253,7 +253,7 @@ const EditProfile = ({ userId }: { userId: string }) => {
                                             <p className='font-bold text-white text-[11px] md:text-[18px]'>Expected Earning Per 1 Order = </p>
                                         </div>
                                         <div className='flex w-1/2 h-[30px] bg-pink-500 rounded-br-md justify-center items-center'>
-                                            <p className='font-bold text-white text-[13px] md:text-[18px]'>${PersonalInsight} x 80% = ${(PersonalInsight * 0.80).toFixed(2)} </p>
+                                            <p className='font-bold text-white text-[13px] md:text-[18px]'>${PersonalInsight} x 78% = ${(PersonalInsight * 0.78).toFixed(2)} </p>
                                         </div>
                                     </div>
                                 </div>
