@@ -1,3 +1,4 @@
+import ContactDialog from "@/components/shared/ContactDialog"
 import SearchUsername from "@/components/shared/SearchUsername"
 import Head from "next/head"
 import Image from "next/image"
@@ -54,10 +55,7 @@ const page = async () => {
                 <p className='font-bold text-[30px] md:text-[25px] lg:text-[30px] mr-auto ml-4'>If you have any</p>
                 <p className='font-bold text-[55px] md:text-[45px] lg:text-[55px] ml-auto mr-4'>Questions</p>
                 <p className='font-bold text-[18px] md:text-[15px] lg:text-[18px] ml-auto mr-4'>Please contact us</p>
-                <Link href={'/contact-us'} className='ml-auto mr-[30px] mt-5 flex justify-center gap-2 items-center bg-black px-3 py-1 rounded-md'>
-                  <Image src={'/icons/email-white.svg'} alt='guide' height={20} width={20} />
-                  <p className='text-white font-semibold text-[17px]'>Contact Us</p>
-                </Link>
+                <ContactDialog />
               </div>
               <div className='bg-white h-[350px] flex justify-center items-center'>
                 <Image src={'/images/image_3.png'} alt='image' height={500} width={500} className='rounded-[40px] w-[350px] h-[350px] md:h-[300px] md:w-[300px] lg:h-[350px] lg:w-[350px]' />

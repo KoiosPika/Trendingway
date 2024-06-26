@@ -9,6 +9,7 @@ import EarningDialog from './EarningDialog'
 interface IEarningData {
     month: string,
     total: number,
+    fee: number,
     orderCount: number
 }
 
@@ -71,7 +72,7 @@ const EarningOrders = ({ userId }: { userId: string }) => {
                                             <p className='text-[11px] lg:text-[15px]'>$ {Number((data?.total).toFixed(2)).toLocaleString()}</p>
                                         </div>
                                         <div className='w-full flex flex-row items-center gap-2'>
-                                            <p className='text-[11px] lg:text-[15px]'>$ {Number(((data?.total / 0.78) - data?.total).toFixed(2)).toLocaleString()}</p>
+                                            <p className='text-[11px] lg:text-[15px]'>$ {data?.fee}</p>
                                         </div>
                                         <div className='w-full flex flex-row items-center gap-2'>
                                             <p className='text-[11px] lg:text-[15px]'>{(data?.orderCount).toLocaleString()}</p>

@@ -10,6 +10,7 @@ export interface IEarning extends Document {
     _id: string,
     User: string,
     amount: number,
+    fee: number,
     service: string,
     availableDate: Date,
     withdrawn: boolean,
@@ -19,6 +20,7 @@ export interface IEarning extends Document {
 const EarningSchema = new Schema({
     User: { type: Schema.Types.ObjectId, ref: "User" },
     amount: { type: Number },
+    fee: { type: Number },
     service: { type: String },
     availableDate: { type: Date },
     withdrawn: { type: Boolean, default: false },

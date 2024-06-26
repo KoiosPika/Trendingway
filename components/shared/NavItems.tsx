@@ -31,9 +31,9 @@ const NavItems = () => {
       route: '/wallet'
     },
     {
-      label: 'Contact Us',
-      icon: '/icons/email.svg',
-      route: '/contact-us'
+      label: 'Insighters',
+      icon: '/icons/search-black.svg',
+      route: '/search'
     },
   ]
 

@@ -4,9 +4,6 @@ import { WebhookEvent } from '@clerk/nextjs/server'
 import { createUser, updateUser } from '@/lib/actions/user.actions'
 import { NextResponse } from 'next/server'
 import { createClerkClient } from '@clerk/clerk-sdk-node';
-import Session from '@/lib/database/models/session.model'
-import { connectToDatabase } from '@/lib/database'
-import User from '@/lib/database/models/user.model'
 
 
 export async function POST(req: Request) {
@@ -95,27 +92,6 @@ export async function POST(req: Request) {
     const updatedUser = await updateUser({ id, user })
 
     return NextResponse.json({ message: 'OK', user: updatedUser })
-  }
-
-  if (eventType === 'session.created') {
-    const { id, user_id } = evt.data;
-
-    await connectToDatabase();
-
-    const existingSession = await Session.findOne({ user: user_id })
-
-    if (existingSession) {
-
-      await clerkClient.sessions.revokeSession(existingSession.sessionId)
-      await Session.findOneAndUpdate({ user: user_id }, { sessionId: id })
-
-    } else {
-      const user = await User.findOne({ clerkId: user_id })
-      const newSession = await Session.create({ user: user_id, sessionId: id, User: user._id })
-    }
-
-
-    return NextResponse.json({ message: 'OK' })
   }
 
   return new Response('', { status: 200 })

@@ -65,6 +65,7 @@ export async function createEarning(requestId: any, session: ClientSession) {
         await Earning.create([{
             User: request.Insighter,
             amount: Number((request.price * 0.78).toFixed(2)),
+            fee: Number((request.price * 0.22).toFixed(2)),
             service: request.type,
             availableDate: today
         }], { session })
@@ -122,12 +123,14 @@ export async function getEarningsData(userId: string, year: number) {
         const groupedOrders = months.map(month => ({
             month,
             total: 0,
+            fee: 0,
             orderCount: 0
         }));
 
         orders.forEach(order => {
             const monthIndex = new Date(order.createdAt).getMonth();
             groupedOrders[monthIndex].total += order.amount;
+            groupedOrders[monthIndex].fee += order.fee;
             groupedOrders[monthIndex].orderCount += 1;
         });
 
