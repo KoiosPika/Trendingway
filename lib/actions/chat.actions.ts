@@ -3,6 +3,7 @@
 import { connectToDatabase } from "../database"
 import Chat from "../database/models/chat.model";
 import Request from "../database/models/request.model";
+import Status from "../database/models/status.model";
 import User from "../database/models/user.model";
 
 const populateChat = (query: any) => {
@@ -28,7 +29,7 @@ export async function getChatByRequestID(id: string) {
     }
 }
 
-export async function getChatByID(id:string){
+export async function getChatByID(id: string) {
     try {
         await connectToDatabase();
 

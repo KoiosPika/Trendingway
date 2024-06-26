@@ -4,11 +4,12 @@ import { connectToDatabase } from '@/lib/database'
 import User from '@/lib/database/models/user.model'
 import UserData from '../database/models/userData.model'
 import Insight, { IInsight } from '../database/models/insight.model'
-import Request from '../database/models/request.model'
+import Request, { IRequest } from '../database/models/request.model'
 import { ServerClient } from 'postmark';
 import { createEarning } from './earning.actions'
 import Message from '../database/models/message.model'
 import { ClientSession } from 'mongoose'
+import Status from '../database/models/status.model'
 
 const populateInsight = (query: any) => {
     return query
@@ -31,8 +32,25 @@ export async function createVideoInsight(insight: { request: string, contentNote
 
     try {
         const db = await connectToDatabase()
+
+        const status = await Status.findOneAndUpdate(
+            { User: insight.Insighter, processing: false },
+            { $set: { processing: true } },
+            { new: true }
+        );
+
+        if (!status) {
+            return false;
+        }
+
         session = await db.startSession();
         session.startTransaction();
+
+        const request: IRequest | null = await Request.findById(insight.request).session(session);
+
+        if (request?.insighted) {
+            throw Error;
+        }
 
         const newInsight: IInsight | any = await Insight.create([{
             Request: insight.request,
@@ -51,8 +69,8 @@ export async function createVideoInsight(insight: { request: string, contentNote
             additionalNotes: insight.additionalNotes,
         }], { session })
 
-        const updatedRequest = await populateRequest(Request.findOneAndUpdate(
-            { _id: insight.request },
+        const updatedRequest = await populateRequest(Request.findByIdAndUpdate(
+            insight.request,
             { $set: { status: 'Completed', insighted: true } },
             { session }
         ))
@@ -61,6 +79,8 @@ export async function createVideoInsight(insight: { request: string, contentNote
 
         await session.commitTransaction();
         session.endSession();
+
+        await Status.findByIdAndUpdate(status._id, { '$set': { processing: false } })
 
         const emailOptions = {
             From: 'automated@insightend.com',
@@ -82,7 +102,7 @@ export async function createVideoInsight(insight: { request: string, contentNote
 
         await client.sendEmail(emailOptions);
 
-        return JSON.parse(JSON.stringify(newInsight))
+        return true;
     } catch (error) {
 
         if (session) {
@@ -90,7 +110,9 @@ export async function createVideoInsight(insight: { request: string, contentNote
             session.endSession();
         }
 
-        console.log(error)
+        await Status.findOneAndUpdate({ User: insight.Insighter }, { '$set': { processing: false } })
+
+        return false;
     }
 }
 
@@ -103,8 +125,25 @@ export async function createProfileInsight(insight: { request: string, bioNotes:
     try {
 
         const db = await connectToDatabase()
+
+        const status = await Status.findOneAndUpdate(
+            { User: insight.Insighter, processing: false },
+            { $set: { processing: true } },
+            { new: true }
+        );
+
+        if (!status) {
+            return false;
+        }
+
         session = await db.startSession();
         session.startTransaction();
+
+        const request: IRequest | null = await Request.findById(insight.request).session(session);
+
+        if (request?.insighted) {
+            throw Error;
+        }
 
         const newInsight: any = await Insight.create([{
             Request: insight.request,
@@ -119,8 +158,8 @@ export async function createProfileInsight(insight: { request: string, bioNotes:
             additionalNotes: insight.additionalNotes
         }], { session })
 
-        const updatedRequest = await populateRequest(Request.findOneAndUpdate(
-            { _id: insight.request },
+        const updatedRequest = await populateRequest(Request.findByIdAndUpdate(
+            insight.request,
             { $set: { status: 'Completed', insighted: true } },
             { session }
         ))
@@ -129,6 +168,8 @@ export async function createProfileInsight(insight: { request: string, bioNotes:
 
         await session.commitTransaction();
         session.endSession();
+
+        await Status.findByIdAndUpdate(status._id, { '$set': { processing: false } })
 
         const emailOptions = {
             From: 'automated@insightend.com',
@@ -150,14 +191,17 @@ export async function createProfileInsight(insight: { request: string, bioNotes:
 
         await client.sendEmail(emailOptions);
 
-        return JSON.parse(JSON.stringify(newInsight))
+        return true;
     } catch (error) {
 
         if (session) {
             await session.abortTransaction();
             session.endSession();
         }
-        console.log(error)
+
+        await Status.findOneAndUpdate({ User: insight.Insighter }, { '$set': { processing: false } })
+
+        return false;
     }
 }
 
@@ -170,13 +214,28 @@ export async function createPersonalInsight(insight: { request: string, text: st
     try {
 
         const db = await connectToDatabase()
+
+        const status = await Status.findOneAndUpdate(
+            { User: insight.Insighter, processing: false },
+            { $set: { processing: true } },
+            { new: true }
+        );
+
+        if (!status) {
+            return false;
+        }
+
         session = await db.startSession();
         session.startTransaction();
 
-        const req = await Request.findById(insight.request).session(session)
+        const req : IRequest | null = await Request.findById(insight.request).session(session)
+
+        if (req?.insighted) {
+            throw Error;
+        }
 
         const message = await Message.create([{
-            Chat: req.chatId,
+            Chat: req?.chatId,
             User: insight.Insighter,
             type: "text",
             text: insight.text
@@ -189,8 +248,8 @@ export async function createPersonalInsight(insight: { request: string, text: st
             insightful: 'Completed',
         }], { session })
 
-        let updatedRequest = await populateRequest(Request.findOneAndUpdate(
-            { _id: insight.request },
+        let updatedRequest = await populateRequest(Request.findByIdAndUpdate(
+            insight.request,
             { $set: { status: 'Completed', insighted: true } },
             { session }
         ))
@@ -199,6 +258,8 @@ export async function createPersonalInsight(insight: { request: string, text: st
 
         await session.commitTransaction();
         session.endSession();
+
+        await Status.findByIdAndUpdate(status._id, { '$set': { processing: false } })
 
         const emailOptions = {
             From: 'automated@insightend.com',
@@ -220,6 +281,8 @@ export async function createPersonalInsight(insight: { request: string, text: st
 
         await client.sendEmail(emailOptions);
 
+        return true;
+
     } catch (error) {
 
         if (session) {
@@ -227,7 +290,12 @@ export async function createPersonalInsight(insight: { request: string, text: st
             session.endSession();
         }
 
+        await Status.findOneAndUpdate({ User: insight.Insighter }, { '$set': { processing: false } })
+        
         console.log(error)
+
+        return false;
+
     }
 }
 
@@ -290,7 +358,7 @@ export async function submitInsightRate(id: string, rating: number) {
             await session.abortTransaction();
             session.endSession();
         }
-        
+
         console.log(error)
     }
 }

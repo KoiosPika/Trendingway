@@ -7,6 +7,7 @@ import UserData from "../database/models/userData.model";
 import Stripe from "stripe";
 import Transfer from "../database/models/transfer.model";
 import { ClientSession } from "mongoose";
+import Status from "../database/models/status.model";
 
 export async function createEarning(requestId: any, session: ClientSession) {
 
@@ -201,6 +202,17 @@ export async function createTransfer(userId: string) {
     try {
 
         const db = await connectToDatabase()
+
+        const status = await Status.findOneAndUpdate(
+            { User: userId, processing: false },
+            { $set: { processing: true } },
+            { new: true }
+        );
+
+        if (!status) {
+            return false;
+        }
+
         session = await db.startSession();
         session.startTransaction();
 
@@ -257,8 +269,9 @@ export async function createTransfer(userId: string) {
             monthlyDeductible: deducteStripeFee
         })
 
-        return true;
+        await Status.findByIdAndUpdate(status._id, { '$set': { processing: false } })
 
+        return true;
 
     } catch (error) {
 
@@ -268,6 +281,8 @@ export async function createTransfer(userId: string) {
             await session.abortTransaction();
             session.endSession();
         }
+
+        await Status.findOneAndUpdate({ User: userId }, { '$set': { processing: false } })
 
         return false;
     }

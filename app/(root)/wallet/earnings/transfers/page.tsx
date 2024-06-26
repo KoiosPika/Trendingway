@@ -1,5 +1,4 @@
 import EarningAsPayoutDialog from '@/components/shared/EarningAsPayoutDialog';
-import EarningDialog from '@/components/shared/EarningDialog';
 import LoadMoreEarningsAsPayouts from '@/components/shared/LoadMoreEarningsAsPayouts';
 import TransferButton from '@/components/shared/TransferButton';
 import { getAvailableEarnings, getEarningsAsPayouts } from '@/lib/actions/earning.actions'

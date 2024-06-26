@@ -3,8 +3,6 @@ import Image from 'next/image'
 import { ScrollArea } from '../ui/scroll-area'
 import { useRouter } from 'next/navigation'
 import { Textarea } from '../ui/textarea'
-import { useSession } from '@clerk/nextjs'
-import { getSessionByUserID } from '@/lib/actions/session.actions'
 import { createVideoInsight } from '@/lib/actions/insight.actions'
 
 const VideoInsightForm = ({ height, id, insighter, user }: { height: number, id: string, insighter: string, user: string }) => {
@@ -24,35 +22,12 @@ const VideoInsightForm = ({ height, id, insighter, user }: { height: number, id:
     const [soundRate, setSoundRate] = useState<number>(1)
 
     const [additionalNotes, setAdditionalNotes] = useState<string>('')
-    const [loading, setLoading] = useState<boolean>(false)
+    const [status, setStatus] = useState<'Ready' | 'Loading' | 'Error' | 'Success'>('Ready')
     const router = useRouter();
-
-    const { session } = useSession();
-
-    useEffect(() => {
-        const checkSession = async () => {
-            const currentSession = await getSessionByUserID(insighter)
-
-            if(currentSession.sessionId != session?.id){
-                router.push('/session-revoked')
-            }
-        };
-
-        const intervalId = setInterval(checkSession, 1500); // Check every second
-
-        return () => clearInterval(intervalId);
-    }, []);
 
     const submitInsight = async () => {
 
-        setLoading(true);
-
-        await new Promise(resolve => setTimeout(resolve, 5000));
-
-        if (!session?.status) {
-            router.push('/session-revoked');
-            return;
-        }
+        setStatus('Loading');
 
         const insight = {
             request: id,
@@ -70,11 +45,15 @@ const VideoInsightForm = ({ height, id, insighter, user }: { height: number, id:
             soundRate,
             additionalNotes: descriptionNotes || ''
         }
-        await createVideoInsight(insight)
+        const response = await createVideoInsight(insight)
+
+        if (!response) {
+            setStatus('Error')
+        } else {
+            setStatus('Success')
+        }
 
         router.push('/activity/orders')
-
-        setLoading(false);
     }
 
     return (
@@ -184,13 +163,18 @@ const VideoInsightForm = ({ height, id, insighter, user }: { height: number, id:
                 <Textarea value={additionalNotes} onChange={(e) => setAdditionalNotes(e.target.value)} placeholder='Any additional notes:' className='w-4/5 border-2 border-black' />
             </div>
             <div className='w-full flex flex-row justify-center items-center text-center my-6'>
-                {!loading && <div onClick={submitInsight} className='w-1/3 bg-green-400 flex flex-row items-center justify-center gap-2 rounded-md hover:cursor-pointer'>
+                {status === 'Ready' && <div onClick={submitInsight} className='w-1/3 bg-green-400 flex flex-row items-center justify-center gap-2 rounded-md hover:cursor-pointer'>
                     <Image src={'/icons/star-black.svg'} alt='star' height={15} width={15} />
                     <p className='py-1 rounded-md font-semibold'>Submit</p>
                 </div>}
-                {loading && <div className='w-1/3 bg-green-200 flex flex-row items-center justify-center gap-2 rounded-md hover:cursor-pointer'>
-                    <Image src={'/icons/star-black.svg'} alt='star' height={15} width={15} />
+                {status === 'Loading' && <div className='w-1/3 bg-green-200 flex flex-row items-center justify-center gap-2 rounded-md hover:cursor-pointer'>
                     <p className='py-1 rounded-md font-semibold'>Submitting</p>
+                </div>}
+                {status === 'Error' && <div className='w-1/3 bg-red-500 flex flex-row items-center justify-center gap-2 rounded-md hover:cursor-pointer'>
+                    <p className='py-1 rounded-md font-semibold text-white'>Error! Try Again</p>
+                </div>}
+                {status === 'Success' && <div className='w-1/3 bg-green-400 flex flex-row items-center justify-center gap-2 rounded-md hover:cursor-pointer'>
+                    <p className='py-1 rounded-md font-semibold'>Submitted!</p>
                 </div>}
             </div>
         </ScrollArea>

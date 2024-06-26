@@ -19,26 +19,11 @@ const PersonalInsightPage = ({ id, userId, user }: { id: string, userId: string,
     const [height, setHeight] = useState<number>(window.innerHeight)
     const [chat, setChat] = useState<any>()
     const [text, setText] = useState<string>('')
-    const [loading, setLoading] = useState<boolean>(false)
+    const [status, setStatus] = useState<'Ready' | 'Loading' | 'Error' | 'Success'>('Ready')
     const [chatLoading, setChatLoading] = useState<boolean>(false)
     const [visible, setVisible] = useState<boolean>(true)
     const [renderPage, setRenderPage] = useState<boolean>(false)
     const router = useRouter();
-    const {session} = useSession();
-
-    useEffect(() => {
-        const checkSession = async () => {
-            const currentSession = await getSessionByUserID(userId)
-
-            if(currentSession.sessionId != session?.id){
-                router.push('/session-revoked')
-            }
-        };
-
-        const intervalId = setInterval(checkSession, 500);
-
-        return () => clearInterval(intervalId);
-    }, []);
 
     const updateDimensions = () => {
         setHeight(window.innerHeight);
@@ -90,11 +75,7 @@ const PersonalInsightPage = ({ id, userId, user }: { id: string, userId: string,
 
     const submitPersonalInsight = async () => {
 
-        if (loading) {
-            return;
-        }
-
-        setLoading(true)
+        setStatus('Loading')
 
         const insight = {
             request: id,
@@ -102,9 +83,17 @@ const PersonalInsightPage = ({ id, userId, user }: { id: string, userId: string,
             Insighter: userId,
             User: user
         }
-        await createPersonalInsight(insight)
+        const response = await createPersonalInsight(insight)
 
-        router.push('/activity/orders')
+        if (!response) {
+            setStatus('Error')
+        } else {
+            setStatus('Success')
+        }
+
+        setTimeout(() => {
+            router.push('/activity/orders');
+        }, 1000); 
     }
 
 
@@ -153,8 +142,10 @@ const PersonalInsightPage = ({ id, userId, user }: { id: string, userId: string,
                     {chat && chat.type === 'PersonalInsight' &&
                         <div className='flex flex-row items-center justify-center gap-2 w-full my-2'>
                             <Input onChange={(e) => setText(e.target.value)} placeholder='Your insight' className='w-4/5 border-2 border-black h-[50px] text-[16px]' />
-                            {!loading && <Image src={'/icons/up.svg'} alt='send' height={40} width={40} className='rotate-90 hover:cursor-pointer' onClick={submitPersonalInsight} />}
-                            {loading && <Image src={'/icons/spinner.svg'} alt='send' height={40} width={40} className='rotate-90 animate-spin' />}
+                            {status === 'Ready' && <Image src={'/icons/up.svg'} alt='send' height={40} width={40} className='rotate-90 hover:cursor-pointer' onClick={submitPersonalInsight} />}
+                            {status === 'Loading' && <Image src={'/icons/spinner.svg'} alt='send' height={40} width={40} className='rotate-90 animate-spin' />}
+                            {status === 'Error' && <Image src={'/icons/exclamation.svg'} alt='send' height={40} width={40} />}
+                            {status === 'Success' && <Image src={'/icons/check.svg'} alt='send' height={40} width={40} />}
                         </div>}
                 </div>
             </div>}
