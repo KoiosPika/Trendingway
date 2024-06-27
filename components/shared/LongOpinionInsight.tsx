@@ -49,7 +49,7 @@ const LongOpinionInsight = ({ price, userId, insighter }: { price: number, userI
             return;
         }
 
-        await createRequest({ User: userId, Insighter: insighter, postLink: URL, description, platform, price, type: 'VideoInsight' });
+        await createRequest({ User: userId, Insighter: insighter, postLink: URL, description, platform, price, type: 'LongOpinionInsight' });
 
         setLoading(false);
         setFinished(true);
@@ -114,9 +114,9 @@ const LongOpinionInsight = ({ price, userId, insighter }: { price: number, userI
                 <SignedIn>
                     <AlertDialogFooter>
                         {user && (user.creditBalance < price) && (
-                            <Button className='bg-red-700 hover:bg-red-700 hover:cursor-default' disabled>
-                                Insufficient Funds
-                            </Button>
+                            <Button className='bg-red-700 hover:bg-red-700 hover:cursor-default border-white border-[1px]'>
+                            Insufficient Funds
+                        </Button>
                         )}
                         {user && (user.creditBalance >= price) && (
                             !finished ? (
@@ -124,7 +124,7 @@ const LongOpinionInsight = ({ price, userId, insighter }: { price: number, userI
                                     {loading ? 'Processing...' : `Request for $${price}`}
                                 </Button>
                             ) : (
-                                <Button className='bg-green-600' disabled>
+                                <Button className='bg-green-700 hover:bg-green-700 border-[1px] border-white'>
                                     Finished
                                 </Button>
                             )

@@ -21,11 +21,11 @@ const ResponsePage = ({ id, userId }: { id: string, userId: string }) => {
     useEffect(() => {
         if (insight) {
             if (insight?.Request.platform === 'TikTok') {
-                setHeight(950)
+                setHeight(750)
             } else if (insight?.Request.platform === 'Instagram') {
                 setHeight(750)
             } else if (insight?.Request.platform === 'Youtube') {
-                setHeight(900);
+                setHeight(750);
             }
         }
     }, [insight])
@@ -66,14 +66,14 @@ const ResponsePage = ({ id, userId }: { id: string, userId: string }) => {
                         </div>
                         <div className={`rounded-t-lg flex flex-col md:h-[${height}px] h-full md:flex-row justify-center items-center my-3 w-full lg:w-4/5`}>
                             {insight?.Request?.platform === 'TikTok' &&
-                                <div className={`rounded-lg h-full w-full md:w-[400px] bg-white md:mt-5 flex-col flex justify-center items-center border-[2px] border-slate-300`} style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
+                                <div className={`rounded-lg h-full w-full md:w-[400px] bg-white md:mt-5 flex-col flex justify-center items-center border-[2px] border-slate-300`} style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray', height }}>
                                     <div className='mt-2 font-semibold text-center w-full flex justify-center items-center mb-3'>
                                         {insight && <Image className='w-[50px] h-[50px] rounded-full ml-3 border-2 border-green-400' src={insight?.User?.photo} alt='pfp' height={500} width={500} />}
                                         <p className='ml-2 mr-auto'>{insight?.User?.username}</p>
                                     </div>
                                     {insight &&
                                         <div className={`rounded-lg h-[${height - 200}px] flex justify-center items-center w-full mt-7`}>
-                                            <TikTokEmbed url={insight?.Request?.postLink} width={350} />
+                                            <TikTokEmbed url={insight?.Request?.postLink} width={350} height={height - 120} />
                                         </div>}
                                 </div>}
 
@@ -92,7 +92,7 @@ const ResponsePage = ({ id, userId }: { id: string, userId: string }) => {
 
 
                             {insight?.Request?.platform === 'Youtube' &&
-                                <div className={`rounded-lg h-full w-full md:w-[400px] bg-white md:mt-5 flex-col flex justify-center items-center border-[2px] border-slate-300`} style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray', height }}>
+                                <div className={`rounded-lg h-full w-full md:w-[400px] bg-white md:mt-5 flex-col flex justify-center items-center border-[2px] border-slate-300`} style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray', height: height}}>
                                     <div className='mt-2 font-semibold text-center w-full flex justify-center items-center mb-2'>
                                         {insight && <Image className='w-[50px] h-[50px] rounded-full ml-3 border-2 border-green-400' src={insight?.User?.photo} alt='pfp' height={500} width={500} />}
                                         <div className='flex flex-col mr-auto ml-2'>
@@ -100,14 +100,14 @@ const ResponsePage = ({ id, userId }: { id: string, userId: string }) => {
                                         </div>
                                     </div>
                                     {insight &&
-                                        <div className={`rounded-lg h-[${height - 200}px] flex justify-center items-center w-full mt-7`}>
-                                            <YouTubeEmbed url={insight?.Request?.postLink} width={350} height={height - 200} />
+                                        <div className={`rounded-lg h-[${height - 200}px] flex justify-center items-center w-full mt-3`}>
+                                            <YouTubeEmbed url={insight?.Request?.postLink} width={350} height={height - 100} />
                                         </div>}
                                 </div>}
 
 
                             <ScrollArea className={`w-full md:w-[400px] md:h-[0px] h-full bg-white rounded-lg flex-col flex justify-center items-center mt-5 md:ml-3 border-[2px] border-slate-300`} style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray', height: height }}>
-                                <div className='mt-2 font-semibold text-center w-full flex justify-center items-center mb-3'>
+                                <div className='mt-5 font-semibold text-center w-full flex justify-center items-center mb-4'>
                                     {insight && <Image className='w-[50px] h-[50px] rounded-full ml-3 border-2 border-green-400' src={insight?.Insighter?.photo} alt='pfp' height={500} width={500} />}
                                     <p className='ml-2 mr-auto'>{insight?.Insighter?.username}</p>
                                 </div>

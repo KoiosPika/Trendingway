@@ -49,7 +49,7 @@ const OpinionInsight = ({ price, userId, insighter }: { price: number, userId: s
             return;
         }
 
-        await createRequest({ User: userId, Insighter: insighter, postLink: URL, description, platform, price, type: 'VideoInsight' });
+        await createRequest({ User: userId, Insighter: insighter, postLink: URL, description, platform, price, type: 'OpinionInsight' });
 
         setLoading(false);
         setFinished(true);
@@ -114,7 +114,7 @@ const OpinionInsight = ({ price, userId, insighter }: { price: number, userId: s
                 <SignedIn>
                     <AlertDialogFooter>
                         {user && (user.creditBalance < price) && (
-                            <Button className='bg-red-700 hover:bg-red-700 hover:cursor-default' disabled>
+                            <Button className='bg-red-700 hover:bg-red-700 hover:cursor-default border-white border-[1px]'>
                                 Insufficient Funds
                             </Button>
                         )}
@@ -124,7 +124,7 @@ const OpinionInsight = ({ price, userId, insighter }: { price: number, userId: s
                                     {loading ? 'Processing...' : `Request for $${price}`}
                                 </Button>
                             ) : (
-                                <Button className='bg-green-600' disabled>
+                                <Button className='bg-green-700 hover:bg-green-700 border-[1px] border-white'>
                                     Finished
                                 </Button>
                             )

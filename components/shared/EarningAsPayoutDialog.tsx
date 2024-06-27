@@ -18,23 +18,33 @@ const EarningAsPayoutDialog = ({ earning }: { earning: IEarning }) => {
                 </div>
                 {earning.service == 'VideoInsight' &&
                     <div className='w-full flex flex-col sm:flex-row items-center justify-center gap-2'>
-                        <Image src={'/icons/star-white.svg'} alt='video' width={200} height={200} className='bg-blue-500 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
+                        <Image src={'/icons/star-white.svg'} alt='video' width={200} height={200} className='bg-blue-600 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
                         <p className='md:text-[14px] hidden md:block font-bold mr-auto'>Video Insight</p>
                     </div>}
                 {earning.service == 'LongVideoInsight' &&
                     <div className='w-full flex flex-col sm:flex-row items-center justify-center gap-2'>
-                        <Image src={'/icons/video.svg'} alt='video' width={200} height={200} className='bg-purple-500 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
+                        <Image src={'/icons/video.svg'} alt='video' width={200} height={200} className='bg-purple-600 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
                         <p className='md:text-[14px] hidden md:block font-bold mr-auto'>Long Video Insight</p>
                     </div>}
                 {earning.service == 'ProfileInsight' &&
                     <div className='w-full flex flex-col sm:flex-row items-center justify-center gap-2'>
-                        <Image src={'/icons/account.svg'} alt='video' width={200} height={200} className='bg-orange-500 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
+                        <Image src={'/icons/account.svg'} alt='video' width={200} height={200} className='bg-orange-600 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
                         <p className='md:text-[14px] hidden md:block font-bold mr-auto'>Profile Insight</p>
                     </div>}
                 {earning.service == 'PersonalInsight' &&
                     <div className='w-full flex items-center justify-center gap-2'>
-                        <Image src={'/icons/messages.svg'} alt='video' width={200} height={200} className='bg-pink-500 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
+                        <Image src={'/icons/question.svg'} alt='video' width={200} height={200} className='bg-pink-600 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
                         <p className='md:text-[14px] hidden md:block font-bold mr-auto'>Personal Insight</p>
+                    </div>}
+                {earning.service == 'OpinionInsight' &&
+                    <div className='w-full flex flex-col sm:flex-row items-center justify-center gap-2'>
+                        <Image src={'/icons/gavel.svg'} alt='video' width={200} height={200} className='bg-[#3B711E] w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
+                        <p className='md:text-[14px] hidden md:block font-bold mr-auto'>Opinion Insight</p>
+                    </div>}
+                {earning.service == 'LongOpinionInsight' &&
+                    <div className='w-full flex flex-col sm:flex-row items-center justify-center gap-2'>
+                        <Image src={'/icons/feather.svg'} alt='video' width={200} height={200} className='bg-[#3E2EA3] w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
+                        <p className='md:text-[14px] hidden md:block font-bold mr-auto'>Long Opinion Insight</p>
                     </div>}
                 {formatDateDifference(earning.availableDate) && <div className='w-full flex flex-row items-center'>
                     <p className='font-bold text-[12px] lg:text-[14px] text-yellow-600'>{formatDateDifference(earning?.availableDate)}</p>
@@ -64,27 +74,39 @@ const EarningAsPayoutDialog = ({ earning }: { earning: IEarning }) => {
                             <td className='font-bold text-black bg-white border-blue-600 border p-2 border-b-[3px]'>
                                 {earning.service === 'VideoInsight' && (
                                     <div className='flex flex-row items-center gap-2'>
-                                        <Image src={'/icons/star-white.svg'} alt='text Insight' width={25} height={25} className='bg-blue-500 p-[3px] rounded-full' />
+                                        <Image src={'/icons/star-white.svg'} alt='text Insight' width={25} height={25} className='bg-blue-600 p-[3px] rounded-full' />
                                         <p className='font-bold text-[12px] lg:text-[14px]'>Video Insight</p>
                                     </div>
                                 )}
                                 {earning.service === 'LongVideoInsight' && (
                                     <div className='flex flex-row items-center gap-2'>
-                                        <Image src={'/icons/video.svg'} alt='text insight' width={25} height={25} className='bg-purple-500 p-[3px] rounded-full' />
+                                        <Image src={'/icons/video.svg'} alt='text insight' width={25} height={25} className='bg-purple-600 p-[3px] rounded-full' />
                                         <p className='font-bold text-[12px] lg:text-[14px]'>Long Video Insight</p>
                                     </div>
                                 )}
                                 {earning.service === 'ProfileInsight' && (
                                     <div className='flex flex-row items-center gap-2'>
-                                        <Image src={'/icons/account.svg'} alt='text profile insight' width={25} height={25} className='bg-orange-500 p-[3px] rounded-full' />
+                                        <Image src={'/icons/account.svg'} alt='text profile insight' width={25} height={25} className='bg-orange-600 p-[3px] rounded-full' />
                                         <p className='font-bold text-[12px] lg:text-[14px]'>Profile Insight</p>
                                     </div>
                                 )}
                                 {earning.service == 'PersonalInsight' &&
                                     <div className='w-full flex flex-col sm:flex-row items-center gap-2'>
-                                        <Image src={'/icons/messages.svg'} alt='video' width={200} height={200} className='bg-pink-500 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
+                                        <Image src={'/icons/question.svg'} alt='video' width={200} height={200} className='bg-pink-600 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
                                         <p className='font-bold text-[12px] lg:text-[14px] hidden sm:block'>Personal Insight</p>
                                     </div>}
+                                {earning.service === 'OpinionInsight' && (
+                                    <div className='flex flex-row items-center gap-2'>
+                                        <Image src={'/icons/gavel.svg'} alt='text Insight' width={25} height={25} className='bg-[#3B711E] p-[3px] rounded-full' />
+                                        <p className='font-bold text-[12px] lg:text-[14px]'>Opinion Insight</p>
+                                    </div>
+                                )}
+                                {earning.service === 'LongOpinionInsight' && (
+                                    <div className='flex flex-row items-center gap-2'>
+                                        <Image src={'/icons/feather.svg'} alt='text insight' width={25} height={25} className='bg-[#3E2EA3] p-[3px] rounded-full' />
+                                        <p className='font-bold text-[12px] lg:text-[14px]'>Long Opinion Insight</p>
+                                    </div>
+                                )}
                             </td>
                         </tr>
                         <tr>

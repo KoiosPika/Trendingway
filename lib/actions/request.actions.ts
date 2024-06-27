@@ -208,10 +208,14 @@ export async function cancelOrder(id: string, message: string) {
         session.startTransaction();
 
         const request = await populateRequest(Request.findOneAndUpdate(
-            { _id: id },
+            { _id: id, status: 'Awaiting' },
             { '$set': { status: 'Canceled', message } },
             { session }
         ))
+
+        if (!request) {
+            throw Error;
+        }
 
         if (request.type === 'PersonalInsight') {
             await Message.findByIdAndDelete(request.messageId, { session })
@@ -254,6 +258,8 @@ export async function cancelOrder(id: string, message: string) {
 
         await client.sendEmail(emailOptions);
 
+        return true;
+
     } catch (error) {
 
         if (session) {
@@ -262,6 +268,9 @@ export async function cancelOrder(id: string, message: string) {
         }
 
         console.log(error)
+        
+        return false;
+
     }
 }
 

@@ -76,21 +76,29 @@ const page = async () => {
                                             </div>
                                             {earning.service == 'VideoInsight' &&
                                                 <div className='w-full flex flex-col sm:flex-row items-center justify-center gap-2'>
-                                                    <Image src={'/icons/star-white.svg'} alt='video' width={200} height={200} className='bg-blue-500 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
+                                                    <Image src={'/icons/star-white.svg'} alt='video' width={200} height={200} className='bg-blue-600 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
                                                 </div>}
                                             {earning.service == 'LongVideoInsight' &&
                                                 <div className='w-full flex flex-col sm:flex-row items-center justify-center gap-2'>
-                                                    <Image src={'/icons/video.svg'} alt='video' width={200} height={200} className='bg-purple-500 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
+                                                    <Image src={'/icons/video.svg'} alt='video' width={200} height={200} className='bg-purple-600 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
                                                 </div>}
 
                                             {earning.service == 'ProfileInsight' &&
                                                 <div className='w-full flex flex-col sm:flex-row items-center justify-center gap-2'>
-                                                    <Image src={'/icons/account.svg'} alt='video' width={200} height={200} className='bg-orange-500 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
+                                                    <Image src={'/icons/account.svg'} alt='video' width={200} height={200} className='bg-orange-600 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
 
                                                 </div>}
                                             {earning.service == 'PersonalInsight' &&
                                                 <div className='w-full flex flex-col sm:flex-row items-center justify-center gap-2'>
-                                                    <Image src={'/icons/messages.svg'} alt='video' width={200} height={200} className='bg-pink-500 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
+                                                    <Image src={'/icons/question.svg'} alt='video' width={200} height={200} className='bg-pink-600 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
+                                                </div>}
+                                            {earning.service == 'OpinionInsight' &&
+                                                <div className='w-full flex flex-col sm:flex-row items-center justify-center gap-2'>
+                                                    <Image src={'/icons/gavel.svg'} alt='video' width={200} height={200} className='bg-[#3B711E] w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
+                                                </div>}
+                                            {earning.service == 'LongOpinionInsight' &&
+                                                <div className='w-full flex flex-col sm:flex-row items-center justify-center gap-2'>
+                                                    <Image src={'/icons/feather.svg'} alt='video' width={200} height={200} className='bg-[#3E2EA3] w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
                                                 </div>}
                                         </div>
                                     ))}

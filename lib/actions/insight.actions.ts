@@ -299,6 +299,89 @@ export async function createPersonalInsight(insight: { request: string, text: st
     }
 }
 
+export async function createOpinionInsight(insight: { request: string, contentNotes: string, contentRate: number, Insighter: string, User: string }) {
+
+    const client = new ServerClient(process.env.POSTMARK_API_TOKEN!);
+
+    let session: ClientSession | null = null;
+
+    try {
+        const db = await connectToDatabase()
+
+        const status = await Status.findOneAndUpdate(
+            { User: insight.Insighter, processing: false },
+            { $set: { processing: true } },
+            { new: true }
+        );
+
+        if (!status) {
+            return false;
+        }
+
+        session = await db.startSession();
+        session.startTransaction();
+
+        const request: IRequest | null = await Request.findById(insight.request).session(session);
+
+        if (request?.insighted) {
+            throw Error;
+        }
+
+        const newInsight: IInsight | any = await Insight.create([{
+            Request: insight.request,
+            Insighter: insight.Insighter,
+            User: insight.User,
+            contentRate: insight.contentRate,
+            contentNotes: insight.contentNotes,
+        }], { session })
+
+        const updatedRequest = await populateRequest(Request.findByIdAndUpdate(
+            insight.request,
+            { $set: { status: 'Completed', insighted: true } },
+            { session }
+        ))
+
+        await createEarning(insight.request, session)
+
+        await session.commitTransaction();
+        session.endSession();
+
+        await Status.findByIdAndUpdate(status._id, { '$set': { processing: false } })
+
+        const emailOptions = {
+            From: 'automated@insightend.com',
+            To: 'admin@insightend.com',
+            Subject: 'New Response Available',
+            HtmlBody:
+                `
+                <div style="max-width: 600px; margin: auto; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); font-family: Arial, sans-serif; text-align: center;">
+                <h2 style="color: #333;">A new insight by ${updatedRequest?.Insighter?.username} is available!</h2>
+                <div style="margin: 20px 0;">
+                    <img src="${updatedRequest?.Insighter?.photo}" alt="User Image" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin-bottom: 20px;" />
+                </div>
+                <div style="margin-top: 20px;">
+                    <a href="https://www.insightend.com/activity/insights" style="display: inline-block; padding: 10px 20px; font-size: 16px; color: #FFFFFF; background-color: #4299E1; border-radius: 5px; text-decoration: none;">Go to Video Insight</a>
+                </div>
+            </div>
+            `,
+        };
+
+        await client.sendEmail(emailOptions);
+
+        return true;
+    } catch (error) {
+
+        if (session) {
+            await session.abortTransaction();
+            session.endSession();
+        }
+
+        await Status.findOneAndUpdate({ User: insight.Insighter }, { '$set': { processing: false } })
+
+        return false;
+    }
+}
+
 export async function getInsightByRequestId(id: string) {
     try {
         await connectToDatabase();

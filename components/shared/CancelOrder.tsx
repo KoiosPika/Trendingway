@@ -10,7 +10,7 @@ import { cancelOrder } from '@/lib/actions/request.actions'
 const CancelOrder = ({ request }: { request: IRequest }) => {
 
     const [message, setMessage] = useState<string>('')
-    const [loading, setLoading] = useState<boolean>(false);
+    const [status, setStatus] = useState<'Loading' | 'Error' | 'Success' | 'Ready'>('Ready');
 
     const router = useRouter();
 
@@ -20,11 +20,21 @@ const CancelOrder = ({ request }: { request: IRequest }) => {
             return;
         }
 
-        setLoading(true);
+        setStatus('Loading');
 
-        await cancelOrder(request._id, message);
-        setLoading(false);
-        router.refresh();
+        const response = await cancelOrder(request._id, message);
+
+        if (response) {
+            setStatus('Success')
+        } else {
+            setStatus('Error')
+        }
+
+        setTimeout(() => {
+
+            router.refresh();
+
+        }, 2000);
 
     };
 
@@ -51,12 +61,18 @@ const CancelOrder = ({ request }: { request: IRequest }) => {
                     onChange={(e) => setMessage(e.target.value)}
                     required
                 />
-                <div
-                    onClick={handleCancelingOrder}
-                    className={`flex w-full ${loading ? 'bg-gray-500' : 'bg-blue-900'} text-white justify-center items-center py-2 rounded-lg hover:cursor-pointer mt-2`}
-                >
-                    {loading ? <p>Loading...</p> : <p>Yes, Cancel Order</p>}
-                </div>
+                {status === 'Ready' && <div onClick={handleCancelingOrder} className={`flex w-full 'bg-blue-900' text-white justify-center items-center py-2 rounded-lg hover:cursor-pointer mt-2`}>
+                    <p>Yes, Cancel Order</p>
+                </div>}
+                {status === 'Loading' && <div className={`flex w-full 'bg-blue-900' text-white justify-center items-center py-2 rounded-lg mt-2`}>
+                    <p>Please wait...</p>
+                </div>}
+                {status === 'Error' && <div className={`flex w-full 'bg-blue-900' text-white justify-center items-center py-2 rounded-lg hover:cursor-pointer mt-2`}>
+                    <p>Error, Please try again later</p>
+                </div>}
+                {status === 'Success' && <div className={`flex w-full 'bg-blue-900' text-white justify-center items-center py-2 rounded-lg hover:cursor-pointer mt-2`}>
+                    <p>Canceled!</p>
+                </div>}
             </AlertDialogContent>
         </AlertDialog>
     )

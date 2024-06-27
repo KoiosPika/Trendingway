@@ -72,7 +72,7 @@ const EarningOrders = ({ userId }: { userId: string }) => {
                                             <p className='text-[11px] lg:text-[15px]'>$ {Number((data?.total).toFixed(2)).toLocaleString()}</p>
                                         </div>
                                         <div className='w-full flex flex-row items-center gap-2'>
-                                            <p className='text-[11px] lg:text-[15px]'>$ {data?.fee}</p>
+                                            <p className='text-[11px] lg:text-[15px]'>$ {Number((data?.fee).toFixed(2)).toLocaleString()}</p>
                                         </div>
                                         <div className='w-full flex flex-row items-center gap-2'>
                                             <p className='text-[11px] lg:text-[15px]'>{(data?.orderCount).toLocaleString()}</p>

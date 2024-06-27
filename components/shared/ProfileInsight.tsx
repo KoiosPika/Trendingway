@@ -117,9 +117,9 @@ const ProfileInsight = ({ price, userId, insighter }: { price: number, userId: s
                 <SignedIn>
                     <AlertDialogFooter>
                         {user && (user.creditBalance < price) && (
-                            <Button className='bg-red-700 hover:bg-red-700 hover:cursor-default' disabled>
-                                Insufficient Funds
-                            </Button>
+                            <Button className='bg-red-700 hover:bg-red-700 hover:cursor-default border-white border-[1px]'>
+                            Insufficient Funds
+                        </Button>
                         )}
                         {user && (user.creditBalance >= price) && (
                             !finished ? (
@@ -127,7 +127,7 @@ const ProfileInsight = ({ price, userId, insighter }: { price: number, userId: s
                                     {loading ? 'Processing...' : `Request for $${price}`}
                                 </Button>
                             ) : (
-                                <Button className='bg-green-500' disabled>
+                                <Button className='bg-green-700 hover:bg-green-700 border-[1px] border-white'>
                                     Finished
                                 </Button>
                             )
