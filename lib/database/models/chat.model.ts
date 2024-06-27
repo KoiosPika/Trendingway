@@ -9,8 +9,8 @@ export interface IChat extends Document {
 }
 
 const ChatSchema = new Schema({
-    User1: { type: Schema.Types.ObjectId, ref: "User" },
-    User2: { type: Schema.Types.ObjectId, ref: "User" },
+    User1: { type: Schema.Types.ObjectId, ref: "User", index: true },
+    User2: { type: Schema.Types.ObjectId, ref: "User", index: true },
     createdAt: { type: Date, default: Date.now },
 })
 

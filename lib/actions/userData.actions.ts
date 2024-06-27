@@ -43,12 +43,14 @@ export async function getUserDataByUserId(userId: string) {
 }
 
 export async function editUserData(userData:
-    { userId: string, aboutMe: string, link: string, 
-    VideoInsight: number, VideoInsightAvailability: boolean,
-    LongVideoInsight: number, LongVideoInsightAvailability: boolean, 
-    ProfileInsight: number, ProfileInsightAvailability: boolean, 
-    PersonalInsight: number, PersonalInsightAvailability: boolean,
-    languages: string[], categories: string[] }) {
+    {
+        userId: string, aboutMe: string, link: string,
+        VideoInsight: number, VideoInsightAvailability: boolean,
+        LongVideoInsight: number, LongVideoInsightAvailability: boolean,
+        ProfileInsight: number, ProfileInsightAvailability: boolean,
+        PersonalInsight: number, PersonalInsightAvailability: boolean,
+        languages: string[], categories: string[]
+    }) {
     try {
         await connectToDatabase()
 
@@ -100,7 +102,7 @@ export async function getTopUsers() {
                 $addFields: {
                     compositeScore: {
                         $add: [
-                            { $multiply: ['$avgRating', 0.7] }, 
+                            { $multiply: ['$avgRating', 0.7] },
                             { $multiply: ['$nofRatings', 0.3] }
                         ]
                     }
@@ -153,5 +155,25 @@ export async function getTopUsersByConditions(matchConditions: any) {
 
     } catch (error) {
         console.log(error)
+    }
+}
+
+export async function DeleteFields(){
+    try {
+        await connectToDatabase();
+
+        const users = await UserData.updateMany(
+            {}, // The filter object is empty, which means this operation will affect all documents
+            {
+                $unset: {
+                    creditBalance: "",       // Removes the 'credit' field
+                    onboardingCompleted: "",   // Removes the 'onboarding' field
+                    expressAccountID: "",    // Removes the 'accountId' field
+                    transferDate: ""  // Removes the 'transferDate' field
+                }
+            }
+        );
+    } catch (error) {
+        console.log(error);
     }
 }

@@ -5,6 +5,7 @@ import UserData from "../database/models/userData.model";
 import { connectToDatabase } from "../database";
 import { ServerClient } from "postmark";
 import { redirect } from "next/navigation";
+import UserFinancials from "../database/models/userFinancials.model";
 
 async function createAccount(userId: string) {
     const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
@@ -19,7 +20,7 @@ async function createAccount(userId: string) {
 
         await connectToDatabase();
 
-        const user = await UserData.findOneAndUpdate(
+        const user = await UserFinancials.findOneAndUpdate(
             { User: userId },
             { '$set': { expressAccountID: account.id } }
         )
@@ -40,7 +41,7 @@ export async function createAccountLink(userId: string) {
     try {
         await connectToDatabase();
 
-        const user = await UserData.findOne({ User: userId });
+        const user = await UserFinancials.findOne({ User: userId });
 
         const accountLink = await stripe.accountLinks.create({
             account: user.expressAccountID,
@@ -65,7 +66,7 @@ export async function getStripeDashboardLink(userId:string){
     try {
         await connectToDatabase();
 
-        const user = await UserData.findOne({ User: userId });
+        const user = await UserFinancials.findOne({ User: userId });
         
         const loginLink = await stripe.accounts.createLoginLink(user?.expressAccountID);
 
@@ -95,7 +96,7 @@ export async function createEmail(email: string, message: string) {
     try {
         const emailOptions = {
             From: 'automated@insightend.com',
-            To: 'support@insightend.com',
+            To: 'services@insightend.com',
             Subject: 'New Response Available',
             HtmlBody:
                 `

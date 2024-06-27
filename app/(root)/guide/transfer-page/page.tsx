@@ -20,7 +20,7 @@ const page = () => {
                     <p className='font-bold mr-auto ml-3 text-[12px] md:text-[16px] my-2'>• On this image, I have 10 available earnings ready to be transfered</p>
                     <p className='font-bold mr-auto ml-3 text-[12px] md:text-[16px] my-2'>• When this happens, the button {`' Transfer Funds '`} will appear</p>
                     <p className='font-bold mr-auto ml-3 text-[12px] md:text-[16px] my-2'>• Press that button to transfer funds to your Stripe Connect Account</p>
-                    <Image src={'/images/Screen24.PNG'} alt='photo' height={1500} width={1500} className='my-5 md:w-3/4' />
+                    <Image src={'/images/Screen45.PNG'} alt='photo' height={1500} width={1500} className='my-5 md:w-3/4 rounded-lg' />
                     <p className='font-bold mr-auto ml-3 text-[12px] md:text-[16px] my-2'>• When you press on any of the earnings, it will give you these details that includes the status of the earning and when it will be available</p>
                     <p className='font-bold mr-auto ml-3 text-[12px] md:text-[16px] my-2 bg-yellow-300'>• Note: Because this is a guide, the earnings are available immediately, however, just like mentioned in the Terms of Use, all earnings will be available for transferal 3 days after completing the insight</p>
                 </div>

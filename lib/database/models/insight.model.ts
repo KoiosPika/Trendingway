@@ -29,9 +29,9 @@ export interface IInsight extends Document {
 }
 
 const InsightSchema = new Schema({
-    Request: { type: Schema.Types.ObjectId, ref: "Request" },
-    Insighter: { type: Schema.Types.ObjectId, ref: "User" },
-    User: { type: Schema.Types.ObjectId, ref: "User" },
+    Request: { type: Schema.Types.ObjectId, ref: "Request", index: true },
+    Insighter: { type: Schema.Types.ObjectId, ref: "User", index: true },
+    User: { type: Schema.Types.ObjectId, ref: "User", index: true },
     contentRate: { type: Number },
     contentNotes: { type: String },
     brightnessRate: { type: Number },

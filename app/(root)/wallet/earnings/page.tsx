@@ -1,12 +1,10 @@
 import StripeSetup from '@/components/shared/StripeSetup';
 import { getAllEarnings, getAvailableEarnings } from '@/lib/actions/earning.actions';
-import { getAllOrders } from '@/lib/actions/order.actions';
 import { getAllTransfers } from '@/lib/actions/transfer.actions';
-import { getUserDataByUserId } from '@/lib/actions/userData.actions';
+import { getUserFinancials } from '@/lib/actions/userFinancials.model';
 import { IEarning } from '@/lib/database/models/earning.model';
-import { IOrder } from '@/lib/database/models/order.model';
 import { ITransfer } from '@/lib/database/models/transfer.model';
-import { IUserData } from '@/lib/database/models/userData.model';
+import { IUserFinancials } from '@/lib/database/models/userFinancials.model';
 import { formatDate } from '@/lib/utils';
 import { auth } from '@clerk/nextjs/server';
 import Image from 'next/image';
@@ -17,7 +15,7 @@ const page = async () => {
     const { sessionClaims } = auth();
     const userId = sessionClaims?.userId as string;
 
-    const user: IUserData = await getUserDataByUserId(userId)
+    const user: IUserFinancials = await getUserFinancials(userId)
 
     const earnings = await getAllEarnings(userId);
 

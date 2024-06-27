@@ -10,6 +10,7 @@ import UserData from "../database/models/userData.model"
 import Chat from "../database/models/chat.model"
 import Message from "../database/models/message.model"
 import { ClientSession } from "mongoose"
+import UserFinancials from "../database/models/userFinancials.model"
 
 const populateRequest = (query: any) => {
     return query
@@ -18,6 +19,8 @@ const populateRequest = (query: any) => {
 }
 
 export async function createRequest({ User, Insighter, postLink, description, platform, price, type }: { User: string, Insighter: string, postLink: string | undefined, description: string, platform: string | undefined, price: number, type: string }) {
+
+    const client = new ServerClient(process.env.POSTMARK_API_TOKEN!);
 
     let session: ClientSession | null = null;
 
@@ -29,7 +32,7 @@ export async function createRequest({ User, Insighter, postLink, description, pl
 
         const request = await Request.create([{ User, Insighter, postLink, description, platform, insighted: false, price, type }], { session })
 
-        await UserData.findOneAndUpdate(
+        const user = await UserFinancials.findOneAndUpdate(
             { User },
             { '$inc': { creditBalance: (-1 * price) } },
             { session }
@@ -42,8 +45,39 @@ export async function createRequest({ User, Insighter, postLink, description, pl
             service: type
         }], { session })
 
+        const now = new Date();
+
+        const timeDifference = now.getTime() - user.lastOrderEmail.getTime();
+
+        const hoursDifference = timeDifference / (1000 * 60 * 60)
+
+        if (hoursDifference >= 6) {
+
+            const emailOptions = {
+                From: 'automated@insightend.com',
+                To: 'admin@insightend.com',
+                Subject: 'Order Canceled',
+                HtmlBody:
+                    `
+                    <div style="max-width: 600px; margin: auto; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); font-family: Arial, sans-serif; text-align: center;">
+                    <h2 style="color: #333;">You have new orders!</h2>
+                    <p style="font-size: 16px; color: #555;">Log in to your activity page to see your latest orders</p>
+                    <p style="font-size: 16px; color: #555;">Customers can withdraw their requests if not answered within 5 days</p>
+                    <div style="margin-top: 20px;">
+                        <a href="https://www.insightend.com/activity/orders" style="display: inline-block; padding: 10px 20px; font-size: 16px; color: #FFFFFF; background-color: #EC1A0D; border-radius: 5px; text-decoration: none;">Go to Activity</a>
+                    </div>
+                </div>
+                `,
+            };
+
+            await UserFinancials.findByIdAndUpdate(user._id, { '$set': { lastOrderEmail: now } }, { session })
+
+            await client.sendEmail(emailOptions);
+        }
+
         await session.commitTransaction();
         session.endSession();
+
 
         return JSON.parse(JSON.stringify(request))
 
@@ -90,7 +124,7 @@ export async function createPersonalRequest(User: string, Insighter: string, des
 
         const request = await Request.create([{ User, Insighter, description, insighted: false, price, type, chatId: chat._id, messageId: message._id }], { session })
 
-        await UserData.findOneAndUpdate(
+        await UserFinancials.findOneAndUpdate(
             { User },
             { '$inc': { creditBalance: (-1 * price) } },
             { session }
@@ -183,7 +217,7 @@ export async function cancelOrder(id: string, message: string) {
             await Message.findByIdAndDelete(request.messageId, { session })
         }
 
-        await UserData.findOneAndUpdate(
+        await UserFinancials.findOneAndUpdate(
             { User: request?.User },
             { '$inc': { creditBalance: request?.price } },
             { session }

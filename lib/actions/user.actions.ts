@@ -3,6 +3,7 @@
 import { connectToDatabase } from '@/lib/database'
 import User from '@/lib/database/models/user.model'
 import UserData from '../database/models/userData.model'
+import UserFinancials from '../database/models/userFinancials.model'
 
 export async function createUser(user: { clerkId: string, username: string, email: string, photo: string }) {
     try {
@@ -10,10 +11,14 @@ export async function createUser(user: { clerkId: string, username: string, emai
 
         const newUser = await User.create({ ...user })
 
-        const newUserData = await UserData.create({
+        await UserData.create({
             User: newUser?._id,
             personalLink: null,
             aboutMe: `Hi I'm ${user?.username}`,
+        })
+
+        await UserFinancials.create({
+            User: newUser?._id
         })
 
         return JSON.parse(JSON.stringify(newUser))
@@ -55,7 +60,7 @@ export async function getUsersByUsername(partialUsername: string) {
     try {
         await connectToDatabase();
 
-        const users = await User.find({ username: { $regex: partialUsername, $options: 'i' } });
+        const users = await User.find({ username: { $regex: partialUsername, $options: 'i' } }).limit(10);
 
         return JSON.parse(JSON.stringify(users));
     } catch (error) {

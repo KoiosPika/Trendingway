@@ -1,9 +1,7 @@
 import Stripe from 'stripe'
 import { NextResponse } from 'next/server'
 import { createOrder } from '@/lib/actions/order.actions'
-import UserData from '@/lib/database/models/userData.model'
 import { connectToDatabase } from '@/lib/database'
-import Transfer from '@/lib/database/models/transfer.model'
 
 export async function POST(request: Request) {
   const body = await request.text()

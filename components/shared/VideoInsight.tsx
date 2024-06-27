@@ -12,13 +12,15 @@ import { IUserData } from '@/lib/database/models/userData.model'
 import { SignedIn, SignedOut } from '@clerk/nextjs'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { getUserFinancials } from '@/lib/actions/userFinancials.model'
+import { IUserFinancials } from '@/lib/database/models/userFinancials.model'
 
 const VideoInsight = ({ price, userId, insighter }: { price: number, userId: string, insighter: string }) => {
 
     const [platform, setPlatform] = useState<string>('Instagram')
     const [URL, setURL] = useState<string>('')
     const [description, setDescription] = useState<string>('')
-    const [user, setUser] = useState<IUserData>()
+    const [user, setUser] = useState<IUserFinancials>()
     const [isVisible, setIsVisible] = useState(false);
     const [loading, setLoading] = useState<boolean>(false);
     const [finished, setFinished] = useState<boolean>(false);
@@ -30,7 +32,7 @@ const VideoInsight = ({ price, userId, insighter }: { price: number, userId: str
     };
 
     const fetchUserData = async () => {
-        const userData = await getUserDataByUserId(userId);
+        const userData = await getUserFinancials(userId);
         setUser(userData);
     };
 

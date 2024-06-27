@@ -1,9 +1,6 @@
 import stripe from 'stripe'
 import { NextResponse } from 'next/server'
-import { createOrder } from '@/lib/actions/order.actions'
-import UserData from '@/lib/database/models/userData.model'
-import { connectToDatabase } from '@/lib/database'
-import Transfer from '@/lib/database/models/transfer.model'
+import UserFinancials from '@/lib/database/models/userFinancials.model'
 
 export async function POST(request: Request) {
     const body = await request.text()
@@ -27,7 +24,7 @@ export async function POST(request: Request) {
         const { id, charges_enabled } = event.data.object
 
         if (charges_enabled) {
-            await UserData.findOneAndUpdate(
+            await UserFinancials.findOneAndUpdate(
                 { expressAccountID: id },
                 { '$set': { onboardingCompleted: true } }
             )

@@ -1,18 +1,14 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
-import { AlertDialog, AlertDialogCancel, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '../ui/alert-dialog'
+import React, { useState } from 'react'
+import { AlertDialog, AlertDialogCancel, AlertDialogContent, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '../ui/alert-dialog'
 import { Button } from '../ui/button'
 import Image from 'next/image'
 import { Input } from '../ui/input'
 import { Textarea } from '../ui/textarea'
-import { createRequest } from '@/lib/actions/request.actions'
-import { getUserDataByUserId } from '@/lib/actions/userData.actions'
-import { IUserData } from '@/lib/database/models/userData.model'
-import { SignedIn, SignedOut } from '@clerk/nextjs'
-import Link from 'next/link'
-import { usePathname, useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { createEmail } from '@/lib/actions/connect.actions'
+import { DeleteFields } from '@/lib/actions/userData.actions'
 
 const ContactDialog = () => {
 
@@ -28,6 +24,7 @@ const ContactDialog = () => {
 
         setLoading(false);
     }
+
 
     return (
         <AlertDialog>

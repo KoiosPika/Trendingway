@@ -10,7 +10,7 @@ export interface ISpending extends Document {
 }
 
 const SpendingSchema = new Schema({
-    User: { type: Schema.Types.ObjectId, ref: "User" },
+    User: { type: Schema.Types.ObjectId, ref: "User", index: true },
     Insighter: { type: Schema.Types.ObjectId, ref: "User" },
     amount: { type: Number },
     service: { type: String },

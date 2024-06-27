@@ -8,6 +8,7 @@ import Stripe from "stripe";
 import Transfer from "../database/models/transfer.model";
 import { ClientSession } from "mongoose";
 import Status from "../database/models/status.model";
+import UserFinancials from "../database/models/userFinancials.model";
 
 export async function createEarning(requestId: any, session: ClientSession) {
 
@@ -239,13 +240,13 @@ export async function createTransfer(userId: string) {
             throw Error;
         }
 
-        const User = await UserData.findOne({ User: userId }).session(session);
+        const User = await UserFinancials.findOne({ User: userId }).session(session);
 
         const deducteStripeFee = new Date(User.transferDate) < now;
 
         if (deducteStripeFee) {
             availableEarning = availableEarning - 2;
-            await UserData.findByIdAndUpdate(User._id, { '$set': { transferDate: nextMonth } }, { session });
+            await UserFinancials.findByIdAndUpdate(User._id, { '$set': { transferDate: nextMonth } }, { session });
         }
 
         const updatePromises = earnings.map((earning) =>

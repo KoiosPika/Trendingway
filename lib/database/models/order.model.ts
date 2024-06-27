@@ -9,7 +9,7 @@ export interface IOrder extends Document {
 }
 
 const OrderSchema = new Schema({
-    User: { type: Schema.Types.ObjectId, ref: "User" },
+    User: { type: Schema.Types.ObjectId, ref: "User", index: true },
     amount: { type: Number },
     stripeId: { type: String, require: true },
     createdAt: { type: Date, default: Date.now },

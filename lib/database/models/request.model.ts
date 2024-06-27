@@ -26,8 +26,8 @@ export interface IRequest extends Document {
 }
 
 const RequestSchema = new Schema({
-    User: { type: Schema.Types.ObjectId, ref: "User" },
-    Insighter: { type: Schema.Types.ObjectId, ref: "User" },
+    User: { type: Schema.Types.ObjectId, ref: "User", index: true },
+    Insighter: { type: Schema.Types.ObjectId, ref: "User", index: true },
     postLink: { type: String },
     description: { type: String },
     platform: { type: String },

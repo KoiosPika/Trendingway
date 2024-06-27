@@ -8,7 +8,7 @@ export interface IRefund extends Document {
 }
 
 const RefundSchema = new Schema({
-    User: { type: Schema.Types.ObjectId, ref: "User" },
+    User: { type: Schema.Types.ObjectId, ref: "User", index: true },
     amount: { type: Number },
     createdAt: { type: Date, default: Date.now },
 })

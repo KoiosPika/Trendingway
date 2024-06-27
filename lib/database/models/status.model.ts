@@ -8,7 +8,7 @@ export interface IStatus extends Document {
 }
 
 const StatusSchema = new Schema({
-    User: { type: Schema.Types.ObjectId, ref: "User" },
+    User: { type: Schema.Types.ObjectId, ref: "User", index: true },
     processing: { type: Boolean, default: false },
 })
 

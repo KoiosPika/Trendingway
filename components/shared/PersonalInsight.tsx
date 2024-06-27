@@ -11,17 +11,19 @@ import { getUserDataByUserId } from '@/lib/actions/userData.actions'
 import Link from 'next/link'
 import { SignedIn, SignedOut } from '@clerk/nextjs'
 import { usePathname } from 'next/navigation'
+import { IUserFinancials } from '@/lib/database/models/userFinancials.model'
+import { getUserFinancials } from '@/lib/actions/userFinancials.model'
 
 const PersonalInsight = ({ price, userId, insighter }: { price: number, userId: string, insighter: string }) => {
 
     const [description, setDescription] = useState<string>('')
-    const [user, setUser] = useState<IUserData>()
+    const [user, setUser] = useState<IUserFinancials>()
     const [loading, setLoading] = useState<boolean>(false);
     const [finished, setFinished] = useState<boolean>(false);
     const pathname = usePathname();
 
     const fetchUserData = async () => {
-        const userData = await getUserDataByUserId(userId);
+        const userData = await getUserFinancials(userId);
         setUser(userData);
     };
 

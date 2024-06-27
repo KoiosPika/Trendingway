@@ -5,6 +5,7 @@ import { connectToDatabase } from "../database";
 import Order from "../database/models/order.model";
 import UserData from "../database/models/userData.model";
 import { redirect } from "next/navigation";
+import UserFinancials from "../database/models/userFinancials.model";
 
 export const createOrder = async (order: { User: string, amount: number, createdAt: Date, stripeId: string }) => {
 
@@ -16,7 +17,7 @@ export const createOrder = async (order: { User: string, amount: number, created
             buyer: order.User,
         });
 
-        await UserData.findOneAndUpdate(
+        await UserFinancials.findOneAndUpdate(
             { "User": order.User },
             { '$inc': { "creditBalance": order.amount } },
         )

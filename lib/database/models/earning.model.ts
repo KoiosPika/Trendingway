@@ -18,7 +18,7 @@ export interface IEarning extends Document {
 }
 
 const EarningSchema = new Schema({
-    User: { type: Schema.Types.ObjectId, ref: "User" },
+    User: { type: Schema.Types.ObjectId, ref: "User", index: true },
     amount: { type: Number },
     fee: { type: Number },
     service: { type: String },

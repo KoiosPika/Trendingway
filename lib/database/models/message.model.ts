@@ -12,7 +12,7 @@ export interface IMessage extends Document {
 }
 
 const MessageSchema = new Schema({
-    Chat: { type: Schema.Types.ObjectId, ref: "Chat" },
+    Chat: { type: Schema.Types.ObjectId, ref: "Chat", index:true },
     User: { type: Schema.Types.ObjectId, ref: "User" },
     type: { type: String },
     text: { type: String },

@@ -2,11 +2,11 @@ import Checkout from '@/components/shared/Checkout'
 import { getAllOrders } from '@/lib/actions/order.actions'
 import { getAllRefunds } from '@/lib/actions/refund.actions'
 import { getAllSpendings } from '@/lib/actions/spending.actions'
-import { getUserDataByUserId } from '@/lib/actions/userData.actions'
+import { getUserFinancials } from '@/lib/actions/userFinancials.model'
 import { IOrder } from '@/lib/database/models/order.model'
 import { IRefund } from '@/lib/database/models/refund.model'
 import { ISpending } from '@/lib/database/models/spending.model'
-import { IUserData } from '@/lib/database/models/userData.model'
+import { IUserFinancials } from '@/lib/database/models/userFinancials.model'
 import { formatDate } from '@/lib/utils'
 import { auth } from '@clerk/nextjs/server'
 import Image from 'next/image'
@@ -18,7 +18,7 @@ const page = async () => {
     const { sessionClaims } = auth();
     const userId = sessionClaims?.userId as string;
 
-    const user: IUserData = await getUserDataByUserId(userId)
+    const user: IUserFinancials = await getUserFinancials(userId)
 
     const orders = await getAllOrders(userId);
 
@@ -61,17 +61,12 @@ const page = async () => {
                                     <Image src={'/icons/plus-white.svg'} alt='wallet' height={20} width={20} />
                                     <p className='font-semibold text-[20px]'>Recharge your wallet</p>
                                 </div>
-                                <div className='grid grid-cols-2 gap-3 text-center'>
+                                <div className='grid grid-cols-1 gap-3 text-center'>
                                     <Checkout userId={userId} amount={4.99} coins={2} />
                                     <Checkout userId={userId} amount={7.99} coins={5} />
                                     <Checkout userId={userId} amount={14.99} coins={9} />
                                     <Checkout userId={userId} amount={19.99} coins={15} />
                                     <Checkout userId={userId} amount={24.99} coins={20} />
-                                    <Checkout userId={userId} amount={29.99} coins={2} />
-                                    <Checkout userId={userId} amount={34.99} coins={5} />
-                                    <Checkout userId={userId} amount={39.99} coins={9} />
-                                    <Checkout userId={userId} amount={44.99} coins={15} />
-                                    <Checkout userId={userId} amount={49.99} coins={20} />
                                 </div>
                             </div>
                             <div className='w-full px-2 py-4 lg:p-8 my-3 rounded-lg bg-orange-500 text-white md:h-[400px] h-[360px]' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>

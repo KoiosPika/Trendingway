@@ -2,9 +2,9 @@ import EarningAsPayoutDialog from '@/components/shared/EarningAsPayoutDialog';
 import LoadMoreEarningsAsPayouts from '@/components/shared/LoadMoreEarningsAsPayouts';
 import TransferButton from '@/components/shared/TransferButton';
 import { getAvailableEarnings, getEarningsAsPayouts } from '@/lib/actions/earning.actions'
-import { getUserDataByUserId } from '@/lib/actions/userData.actions';
+import { getUserFinancials } from '@/lib/actions/userFinancials.model';
 import { IEarning } from '@/lib/database/models/earning.model';
-import { IUserData } from '@/lib/database/models/userData.model';
+import { IUserFinancials } from '@/lib/database/models/userFinancials.model';
 import { auth } from '@clerk/nextjs/server';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -15,7 +15,7 @@ const page = async () => {
     const { sessionClaims } = auth();
     const userId = sessionClaims?.userId as string;
 
-    const userData: IUserData = await getUserDataByUserId(userId)
+    const user: IUserFinancials = await getUserFinancials(userId)
 
     const earnings = await getEarningsAsPayouts(userId)
 
@@ -23,7 +23,7 @@ const page = async () => {
 
     const now = new Date();
 
-    const transferDate = new Date(userData.transferDate)
+    const transferDate = new Date(user.transferDate)
 
     const transferDeductible: boolean = now > transferDate
 
@@ -47,7 +47,7 @@ const page = async () => {
                                     <p className='w-1/2 bg-white text-center py-1 rounded-br-lg'>{data.availableInsights}</p>
                                 </div>
                                 <p className='text-white font-semibold md:text-[13px] text-[11px] ml-1 mt-1'>Note: You can only process 150 Insights per transfer</p>
-                                {userData.onboardingCompleted && <>
+                                {user.onboardingCompleted && <>
                                     {data.availableInsights == 0 && <div className='flex w-full my-2'>
                                         <p className='ml-auto px-3 py-1 bg-green-700 rounded-lg text-white font-semibold border-[1px] border-white md:text-[15px] text-[12px]'>No Funds Available</p>
                                     </div>}
@@ -56,7 +56,7 @@ const page = async () => {
                                         <p className='ml-auto px-3 py-1 bg-red-500 rounded-lg text-white font-semibold border-[1px] border-white md:text-[15px] text-[12px]'>You need 10 insights to initiate a transfer</p>
                                     </div>}
                                 </>}
-                                {!userData.onboardingCompleted && <>
+                                {!user.onboardingCompleted && <>
                                     {<div className='flex w-full my-2'>
                                         <Link href={'/wallet/earnings'} className='ml-auto px-3 py-1 bg-yellow-500 rounded-lg text-white font-semibold border-[1px] border-white md:text-[15px] text-[12px]'>Set up stripe account first</Link>
                                     </div>}

@@ -10,7 +10,7 @@ export interface ITransfer extends Document {
 }
 
 const TransferSchema = new Schema({
-    User: { type: Schema.Types.ObjectId, ref: "User" },
+    User: { type: Schema.Types.ObjectId, ref: "User", index: true },
     transferId: { type: String },
     amount: { type: Number },
     monthlyDeductible: { type: Boolean },
