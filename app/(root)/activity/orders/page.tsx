@@ -44,7 +44,9 @@ const page = async () => {
               {requests.map((request: IRequest) => (
                 <div key={request._id} className='flex flex-col justify-center items-center p-5 bg-white text-black rounded-lg border-[0.5px] border-gray-400' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                   <div className='flex flex-row items-center gap-2 mr-auto md:ml-2 w-full'>
-                    <Image src={request.User.photo} alt='pfp' className='h-[40px] w-[40px] border-2 border-green-400 rounded-full' height={1000} width={1000} />
+                    <Link href={`/profile/${request.User.username}`}>
+                      <Image src={request.User.photo} alt='pfp' className='h-[40px] w-[40px] border-2 border-green-400 rounded-full' height={1000} width={1000} />
+                    </Link>
                     <div>
                       <p className='text-[13px]'>{request.User.username}</p>
                       <p className='text-[12px] text-slate-400'>{timeAgo(request.createdAt.toString())}</p>

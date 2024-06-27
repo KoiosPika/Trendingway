@@ -4,6 +4,7 @@ import { connectToDatabase } from '@/lib/database'
 import User from '@/lib/database/models/user.model'
 import UserData from '../database/models/userData.model'
 import UserFinancials from '../database/models/userFinancials.model'
+import Status from '../database/models/status.model'
 
 export async function createUser(user: { clerkId: string, username: string, email: string, photo: string }) {
     try {
@@ -18,6 +19,10 @@ export async function createUser(user: { clerkId: string, username: string, emai
         })
 
         await UserFinancials.create({
+            User: newUser?._id
+        })
+
+        await Status.create({
             User: newUser?._id
         })
 

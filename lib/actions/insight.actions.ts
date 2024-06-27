@@ -20,7 +20,7 @@ const populateInsight = (query: any) => {
 
 const populateRequest = (query: any) => {
     return query
-        .populate({ path: 'User', model: User, select: "_id photo username" })
+        .populate({ path: 'User', model: User, select: "_id photo username email" })
         .populate({ path: 'Insighter', model: User, select: "_id photo username" })
 }
 
@@ -84,7 +84,7 @@ export async function createVideoInsight(insight: { request: string, contentNote
 
         const emailOptions = {
             From: 'automated@insightend.com',
-            To: 'admin@insightend.com',
+            To: `${updatedRequest.User.email}`,
             Subject: 'New Response Available',
             HtmlBody:
                 `

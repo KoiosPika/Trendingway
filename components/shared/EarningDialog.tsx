@@ -84,7 +84,7 @@ const EarningDialog = ({ earning }: { earning: IEarning }) => {
                                 {earning.service == 'PersonalInsight' &&
                                     <div className='w-full flex flex-col sm:flex-row items-center gap-2'>
                                         <Image src={'/icons/question.svg'} alt='video' width={200} height={200} className='bg-pink-600 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
-                                        <p className='font-semibold text-[12px] lg:text-[14px] hidden sm:block'>Personal Insight</p>
+                                        <p className='font-semibold text-[12px] lg:text-[14px]'>Personal Insight</p>
                                     </div>}
                                 {earning.service === 'OpinionInsight' && (
                                     <div className='flex flex-row items-center gap-2'>
