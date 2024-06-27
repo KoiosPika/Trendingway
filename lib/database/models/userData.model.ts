@@ -13,6 +13,10 @@ export interface IUserData extends Document {
     ProfileInsightAvailability: boolean,
     PersonalInsight: number,
     PersonalInsightAvailability: boolean,
+    OpinionInsight: number,
+    OpinionInsightAvailability: boolean,
+    LongOpinionInsight: number,
+    LongOpinionInsightAvailability: boolean,
     aboutMe: string
     nofRatings: number
     avgRating: number
@@ -32,6 +36,10 @@ const UserDataSchema = new Schema({
     ProfileInsightAvailability: { type: Boolean, default: true },
     PersonalInsight: { type: Number, default: 4.99 },
     PersonalInsightAvailability: { type: Boolean, default: true },
+    OpinionInsight: { type: Number, default: 2.99 },
+    OpinionInsightAvailability: { type: Boolean, default: true },
+    LongOpinionInsight: { type: Number, default: 3.99 },
+    LongOpinionInsightAvailability: { type: Boolean, default: true },
     aboutMe: { type: String },
     nofRatings: { type: Number, default: 0 },
     avgRating: { type: Number, default: 0 },

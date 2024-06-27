@@ -47,6 +47,8 @@ export async function editUserData(userData:
         userId: string, aboutMe: string, link: string,
         VideoInsight: number, VideoInsightAvailability: boolean,
         LongVideoInsight: number, LongVideoInsightAvailability: boolean,
+        OpinionInsight: number, OpinionInsightAvailability: boolean,
+        LongOpinionInsight: number, LongOpinionInsightAvailability: boolean,
         ProfileInsight: number, ProfileInsightAvailability: boolean,
         PersonalInsight: number, PersonalInsightAvailability: boolean,
         languages: string[], categories: string[]
@@ -64,6 +66,10 @@ export async function editUserData(userData:
                     VideoInsightAvailability: userData.VideoInsightAvailability,
                     LongVideoInsight: userData.LongVideoInsight,
                     LongVideoInsightAvailability: userData.LongVideoInsightAvailability,
+                    OpinionInsight: userData.OpinionInsight,
+                    OpinionInsightAvailability: userData.OpinionInsightAvailability,
+                    LongOpinionInsight: userData.LongOpinionInsight,
+                    LongOpinionInsightAvailability: userData.LongOpinionInsightAvailability,
                     ProfileInsight: userData.ProfileInsight,
                     ProfileInsightAvailability: userData.ProfileInsightAvailability,
                     PersonalInsight: userData.PersonalInsight,
@@ -158,18 +164,18 @@ export async function getTopUsersByConditions(matchConditions: any) {
     }
 }
 
-export async function DeleteFields(){
+export async function createFields() {
     try {
         await connectToDatabase();
 
         const users = await UserData.updateMany(
             {}, // The filter object is empty, which means this operation will affect all documents
             {
-                $unset: {
-                    creditBalance: "",       // Removes the 'credit' field
-                    onboardingCompleted: "",   // Removes the 'onboarding' field
-                    expressAccountID: "",    // Removes the 'accountId' field
-                    transferDate: ""  // Removes the 'transferDate' field
+                '$set': {
+                    OpinionInsight: 2.99,
+                    OpinionInsightAvailability: true,
+                    LongOpinionInsight: 3.99,
+                    LongOpinionInsightAvailability: true,
                 }
             }
         );

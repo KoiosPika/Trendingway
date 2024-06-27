@@ -8,7 +8,7 @@ import { Input } from '../ui/input'
 import { Textarea } from '../ui/textarea'
 import { useRouter } from 'next/navigation'
 import { createEmail } from '@/lib/actions/connect.actions'
-import { DeleteFields } from '@/lib/actions/userData.actions'
+import { createFields } from '@/lib/actions/userData.actions'
 
 const ContactDialog = () => {
 

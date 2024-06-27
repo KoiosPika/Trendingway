@@ -1,4 +1,6 @@
+import LongOpinionInsight from '@/components/shared/LongOpinionInsight';
 import LongVideoInsight from '@/components/shared/LongVideoInsight';
+import OpinionInsight from '@/components/shared/OpinionInsight';
 import PersonalInsight from '@/components/shared/PersonalInsight';
 import ProfileInsight from '@/components/shared/ProfileInsight';
 import VideoInsight from '@/components/shared/VideoInsight';
@@ -163,6 +165,48 @@ const page = async ({ params: { username } }: { params: { username: string } }) 
                                         </div>
                                     </div>
                                     <p className='mt-2 mx-2 p-2 bg-pink-500 rounded-lg text-white font-semibold'>Start a conversation with your Insighter by simply asking a question, which will open up a chat room where you can connect and interact with them</p>
+                                </div>}
+                        </div>
+                    </div>
+                    <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-5 px-3 w-full mb-[25px]'>
+                        <div className='flex flex-col justify-center items-center'>
+                            <p className='mb-3 text-slate-500 font-bold text-[16px]'>--- Opinion Insight (60s Videos) ---</p>
+                            {user?.OpinionInsightAvailability && <OpinionInsight price={user?.OpinionInsight} userId={userId} insighter={user.User._id} />}
+                            {!user?.OpinionInsightAvailability &&
+                                <div className='flex flex-col justify-center items-center border-[1px] border-slate-300 rounded-lg h-[240px] md:h-[220px] bg-slate-200 relative' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
+                                    <div className='flex justify-center items-center gap-8' >
+                                        <div className='flex flex-col items-center gap-2'>
+                                            <Image src={'/icons/gavel.svg'} alt='video' width={200} height={200} className='bg-[#3b711e] w-[55px] h-[55px] p-2 rounded-full' />
+                                            <p className='font-semibold'>Opinion Insight</p>
+                                        </div>
+                                        <div className='h-2/4 w-[2px] bg-black'></div>
+                                        <p className='text-[25px] font-semibold'>${user?.OpinionInsight}</p>
+                                        <div className='absolute top-1 right-2 flex flex-row items-center gap-2 bg-white px-2 border-[1px] border-red-500 rounded-lg'>
+                                            <Image src={'/icons/unavailable.svg'} alt='unavailable' height={15} width={15} />
+                                            <p className='text-red-500 font-bold'>Unavailable</p>
+                                        </div>
+                                    </div>
+                                    <p className='mt-2 mx-2 p-2 bg-[#3b711e] rounded-lg text-white font-semibold'>Upload a link to your TikTok, Reel or Short, and get an insight about your account and what can be improved to attract more audience</p>
+                                </div>}
+                        </div>
+                        <div className='flex flex-col justify-center items-center'>
+                            <p className='mb-3 text-slate-500 font-bold text-[16px]'>--- Long Opinion Insight (+60s Videos) ---</p>
+                            {user?.LongOpinionInsightAvailability && <LongOpinionInsight price={user?.LongOpinionInsight} userId={userId} insighter={user.User._id} />}
+                            {!user?.LongOpinionInsightAvailability &&
+                                <div className='flex flex-col justify-center items-center border-[1px] border-slate-300 rounded-lg h-[240px] md:h-[220px] bg-slate-200 relative' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
+                                    <div className='flex justify-center items-center gap-8' >
+                                        <div className='flex flex-col items-center gap-2'>
+                                            <Image src={'/icons/feather.svg'} alt='video' width={200} height={200} className='bg-[#3e2ea3] w-[55px] h-[55px] p-2 rounded-full' />
+                                            <p className='font-semibold'>Long Opinion Insight</p>
+                                        </div>
+                                        <div className='h-2/4 w-[2px] bg-black'></div>
+                                        <p className='text-[25px] font-semibold'>${user?.LongOpinionInsight}</p>
+                                        <div className='absolute top-1 right-2 flex flex-row items-center gap-2 bg-white px-2 border-[1px] border-red-500 rounded-lg'>
+                                            <Image src={'/icons/unavailable.svg'} alt='unavailable' height={15} width={15} />
+                                            <p className='text-red-500 font-bold'>Unavailable</p>
+                                        </div>
+                                    </div>
+                                    <p className='mt-2 mx-2 p-2 bg-[#3e2ea3] rounded-lg text-white font-semibold'>Start a conversation with your Insighter by simply asking a question, which will open up a chat room where you can connect and interact with them</p>
                                 </div>}
                         </div>
                     </div>
