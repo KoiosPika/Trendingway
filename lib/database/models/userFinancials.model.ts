@@ -7,7 +7,8 @@ export interface IUserFinancials extends Document {
     creditBalance: number
     expressAccountID: string,
     onboardingCompleted: boolean,
-    transferDate: Date
+    transferDate: Date,
+    points: number
 }
 
 const substractDays = (date: Date, days: number) => {
@@ -22,7 +23,8 @@ const UserFinancialsSchema = new Schema({
     expressAccountID: { type: String },
     transferDate: { type: Date, default: () => substractDays(new Date(), 1) },
     onboardingCompleted: { type: Boolean, default: false },
-    lastOrderEmail: { type: Date, default: () => substractDays(new Date(), 1) }
+    lastOrderEmail: { type: Date, default: () => substractDays(new Date(), 1) },
+    points: { type: Number, default: 0 }
 })
 
 const UserFinancials = models.UserFinancials || model('UserFinancials', UserFinancialsSchema);

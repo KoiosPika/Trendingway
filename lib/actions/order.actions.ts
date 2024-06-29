@@ -9,6 +9,36 @@ import UserFinancials from "../database/models/userFinancials.model";
 
 export const createOrder = async (order: { User: string, amount: number, createdAt: Date, stripeId: string }) => {
 
+    let points;
+
+    switch (order.amount) {
+        case 2.99:
+            break;
+
+        case 4.99:
+            points = 200
+            break;
+
+        case 7.99:
+            points = 500
+            break;
+
+        case 10.99:
+            points = 800
+            break;
+
+        case 15.99:
+            points = 1300
+            break;
+
+        case 19.99:
+            points = 1700
+            break;
+
+        default:
+            break;
+    }
+
     try {
         await connectToDatabase();
 
@@ -19,7 +49,7 @@ export const createOrder = async (order: { User: string, amount: number, created
 
         await UserFinancials.findOneAndUpdate(
             { "User": order.User },
-            { '$inc': { "creditBalance": order.amount } },
+            { '$inc': { "creditBalance": order.amount, "points": points } },
         )
 
         return JSON.parse(JSON.stringify(newOrder));
@@ -41,7 +71,8 @@ export const checkoutOrder = async (order: { amount: number, User: string }) => 
                         currency: 'usd',
                         unit_amount: order.amount * 100,
                         product_data: {
-                            name: 'Recharge'
+                            name: 'Recharge',
+                            tax_code: 'txcd_20030000'
                         }
                     },
                     quantity: 1
@@ -59,7 +90,7 @@ export const checkoutOrder = async (order: { amount: number, User: string }) => 
 
         redirect(session.url!)
     } catch (error) {
-        throw(error);
+        throw (error);
     }
 }
 

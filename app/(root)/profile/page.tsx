@@ -1,6 +1,6 @@
-import LongOpinionInsight from '@/components/shared/LongOpinionInsight';
+import LongRandomInsight from '@/components/shared/LongRandomInsight';
 import LongVideoInsight from '@/components/shared/LongVideoInsight';
-import OpinionInsight from '@/components/shared/OpinionInsight';
+import RandomInsight from '@/components/shared/RandomInsight';
 import PersonalInsight from '@/components/shared/PersonalInsight';
 import ProfileInsight from '@/components/shared/ProfileInsight';
 import VideoInsight from '@/components/shared/VideoInsight';
@@ -170,17 +170,17 @@ const page = async () => {
                     </div>
                     <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-5 px-3 w-full mb-[25px]'>
                         <div className='flex flex-col justify-center items-center'>
-                            <p className='mb-3 text-slate-500 font-bold text-[16px]'>--- Opinion Insight (60s Videos) ---</p>
-                            {user?.OpinionInsightAvailability && <OpinionInsight price={user?.OpinionInsight} userId={userId} insighter={user.User._id} />}
-                            {!user?.OpinionInsightAvailability &&
+                            <p className='mb-3 text-slate-500 font-bold text-[16px]'>--- Random Insight (60s Videos) ---</p>
+                            {user?.RandomInsightAvailability && <RandomInsight price={user?.RandomInsight} userId={userId} insighter={user.User._id} />}
+                            {!user?.RandomInsightAvailability &&
                                 <div className='flex flex-col justify-center items-center border-[1px] border-slate-300 rounded-lg h-[240px] md:h-[220px] bg-slate-200 relative' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                                     <div className='flex justify-center items-center gap-8' >
                                         <div className='flex flex-col items-center gap-2'>
                                             <Image src={'/icons/gavel.svg'} alt='video' width={200} height={200} className='bg-[#3b711e] w-[55px] h-[55px] p-2 rounded-full' />
-                                            <p className='font-semibold'>Opinion Insight</p>
+                                            <p className='font-semibold'>Random Insight</p>
                                         </div>
                                         <div className='h-2/4 w-[2px] bg-black'></div>
-                                        <p className='text-[25px] font-semibold'>${user?.OpinionInsight}</p>
+                                        <p className='text-[25px] font-semibold'>${user?.RandomInsight}</p>
                                         <div className='absolute top-1 right-2 flex flex-row items-center gap-2 bg-white px-2 border-[1px] border-red-500 rounded-lg'>
                                             <Image src={'/icons/unavailable.svg'} alt='unavailable' height={15} width={15} />
                                             <p className='text-red-500 font-bold'>Unavailable</p>
@@ -190,17 +190,17 @@ const page = async () => {
                                 </div>}
                         </div>
                         <div className='flex flex-col justify-center items-center'>
-                            <p className='mb-3 text-slate-500 font-bold text-[16px]'>--- Long Opinion Insight (+60s Videos) ---</p>
-                            {user?.LongOpinionInsightAvailability && <LongOpinionInsight price={user?.LongOpinionInsight} userId={userId} insighter={user.User._id} />}
-                            {!user?.LongOpinionInsightAvailability &&
+                            <p className='mb-3 text-slate-500 font-bold text-[16px]'>--- Long Random Insight (+60s Videos) ---</p>
+                            {user?.LongRandomInsightAvailability && <LongRandomInsight price={user?.LongRandomInsight} userId={userId} insighter={user.User._id} />}
+                            {!user?.LongRandomInsightAvailability &&
                                 <div className='flex flex-col justify-center items-center border-[1px] border-slate-300 rounded-lg h-[240px] md:h-[220px] bg-slate-200 relative' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                                     <div className='flex justify-center items-center gap-8' >
                                         <div className='flex flex-col items-center gap-2'>
                                             <Image src={'/icons/feather.svg'} alt='video' width={200} height={200} className='bg-[#3e2ea3] w-[55px] h-[55px] p-2 rounded-full' />
-                                            <p className='font-semibold'>Long Opinion Insight</p>
+                                            <p className='font-semibold'>Long Random Insight</p>
                                         </div>
                                         <div className='h-2/4 w-[2px] bg-black'></div>
-                                        <p className='text-[25px] font-semibold'>${user?.LongOpinionInsight}</p>
+                                        <p className='text-[25px] font-semibold'>${user?.LongRandomInsight}</p>
                                         <div className='absolute top-1 right-2 flex flex-row items-center gap-2 bg-white px-2 border-[1px] border-red-500 rounded-lg'>
                                             <Image src={'/icons/unavailable.svg'} alt='unavailable' height={15} width={15} />
                                             <p className='text-red-500 font-bold'>Unavailable</p>

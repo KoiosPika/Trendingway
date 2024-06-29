@@ -3,9 +3,9 @@ import Image from 'next/image'
 import { ScrollArea } from '../ui/scroll-area'
 import { useRouter } from 'next/navigation'
 import { Textarea } from '../ui/textarea'
-import { createOpinionInsight } from '@/lib/actions/insight.actions'
+import { createRandomInsight } from '@/lib/actions/insight.actions'
 
-const OpinionInsightForm = ({ height, id, insighter, user }: { height: number, id: string, insighter: string, user: string }) => {
+const RandomInsightForm = ({ height, id, insighter, user }: { height: number, id: string, insighter: string, user: string }) => {
     const [contentNotes, setContentNotes] = useState<string>('')
     const [contentRate, setContentRate] = useState<number>(1)
 
@@ -23,7 +23,7 @@ const OpinionInsightForm = ({ height, id, insighter, user }: { height: number, i
             contentNotes: contentNotes || '',
             contentRate,
         }
-        const response = await createOpinionInsight(insight)
+        const response = await createRandomInsight(insight)
 
         if (!response) {
             setStatus('Error')
@@ -75,4 +75,4 @@ const OpinionInsightForm = ({ height, id, insighter, user }: { height: number, i
     )
 }
 
-export default OpinionInsightForm
+export default RandomInsightForm

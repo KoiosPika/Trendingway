@@ -65,8 +65,8 @@ export async function createEarning(requestId: any, session: ClientSession) {
 
         await Earning.create([{
             User: request.Insighter,
-            amount: Number((request.price * 0.78).toFixed(2)),
-            fee: Number((request.price * 0.22).toFixed(2)),
+            amount: Number((request.price * 0.87).toFixed(2)),
+            fee: Number((request.price * 0.13).toFixed(2)),
             service: request.type,
             availableDate: today
         }], { session })
@@ -245,7 +245,6 @@ export async function createTransfer(userId: string) {
         const deducteStripeFee = new Date(User.transferDate) < now;
 
         if (deducteStripeFee) {
-            availableEarning = availableEarning - 2;
             await UserFinancials.findByIdAndUpdate(User._id, { '$set': { transferDate: nextMonth } }, { session });
         }
 
@@ -255,12 +254,26 @@ export async function createTransfer(userId: string) {
 
         await Promise.all(updatePromises);
 
-        availableEarning = Math.round(availableEarning * 100)
+        let fee = (availableEarning * 0.055) + 0.75
+
+        fee = Math.round(fee * 100)
+
+        let total_fee = deducteStripeFee ? fee + 200 : fee;
+
+        availableEarning = Math.round(availableEarning * 100) - total_fee
 
         const transfer = await stripe.transfers.create({
             amount: availableEarning,
             currency: 'usd',
             destination: User?.expressAccountID,
+        });
+
+        let transferedFee = fee - Math.round(availableEarning * 0.0025 + 25)
+
+        const feeTransfer = await stripe.transfers.create({
+            amount: transferedFee,
+            currency: 'usd',
+            destination: (process.env.STRIPE_FEE_ACCOUNT as string),
         });
 
         await session.commitTransaction();
@@ -270,6 +283,7 @@ export async function createTransfer(userId: string) {
             User: userId,
             transferId: transfer.id,
             amount: transfer.amount / 100,
+            fee: fee / 100,
             monthlyDeductible: deducteStripeFee
         })
 

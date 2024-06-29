@@ -87,17 +87,41 @@ export async function createVideoInsight(insight: { request: string, contentNote
             To: `${updatedRequest.User.email}`,
             Subject: 'New Response Available',
             HtmlBody:
-                `
-                <div style="max-width: 600px; margin: auto; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); font-family: Arial, sans-serif; text-align: center;">
-                <h2 style="color: #333;">A new insight by ${updatedRequest?.Insighter?.username} is available!</h2>
-                <div style="margin: 20px 0;">
-                    <img src="${updatedRequest?.Insighter?.photo}" alt="User Image" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin-bottom: 20px;" />
-                </div>
-                <div style="margin-top: 20px;">
-                    <a href="https://www.insightend.com/activity/insights" style="display: inline-block; padding: 10px 20px; font-size: 16px; color: #FFFFFF; background-color: #4299E1; border-radius: 5px; text-decoration: none;">Go to Video Insight</a>
-                </div>
-            </div>
-            `,
+                `<table width="100%" cellspacing="0" cellpadding="0" style="max-width: 500px; margin: auto; padding: 20px; font-family: Arial, sans-serif; text-align: center;">
+        <tr style="background-color: #FFF; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <td>
+                <table width="100%" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td style="padding: 10px; text-align: left;">
+                            <img src="https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvdXBsb2FkZWQvaW1nXzJpVVN2a2hxcjFFQ2c5ZWFnSTQ2MEhrOEE2YSJ9"
+                                alt="Coin"
+                                style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
+                        </td>
+                    </tr>
+                </table>
+                <h3 style="color: #333;">A new insight by ${updatedRequest?.Insighter?.username} is available!</h3>
+                <table width="100%" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td style="text-align: left; padding: 10px;">
+                            <img src="${updatedRequest?.Insighter?.photo}" alt="photo"
+                                style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
+                        </td>
+                        <td style="background-color: rgb(186, 191, 195); padding: 5px; border-radius: 0 20px 20px 20px; width: 85%; font-size: 14px;">
+                            ${insight.contentNotes}
+                        </td>
+                    </tr>
+                </table>
+                <table width="100%" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td style="padding: 20px; text-align: center; vertical-align: middle;">
+                            <a href="https://www.insightend.com/activity/insights"
+                                style="display: inline-block; padding: 10px; font-size: 16px; color: #FFFFFF; background-color: #3182ce; border-radius: 5px; text-decoration: none; width: 75%; text-align: center;">Go to Video Insight</a>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>`,
         };
 
         await client.sendEmail(emailOptions);
@@ -177,16 +201,42 @@ export async function createProfileInsight(insight: { request: string, bioNotes:
             Subject: 'New Response Available',
             HtmlBody:
                 `
-                <div style="max-width: 600px; margin: auto; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); font-family: Arial, sans-serif; text-align: center;">
-                <h2 style="color: #333;">A new insight by ${updatedRequest?.Insighter?.username} is available!</h2>
-                <div style="margin: 20px 0;">
-                    <img src="${updatedRequest?.Insighter?.photo}" alt="User Image" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin-bottom: 20px;" />
-                </div>
-                <div style="margin-top: 20px;">
-                    <a href="https://www.insightend.com/activity/insights" style="display: inline-block; padding: 10px 20px; font-size: 16px; color: #FFFFFF; background-color: #E86510; border-radius: 5px; text-decoration: none;">Go to Profile Insight</a>
-                </div>
-            </div>
-            `,
+                <table width="100%" cellspacing="0" cellpadding="0" style="max-width: 500px; margin: auto; padding: 20px; font-family: Arial, sans-serif; text-align: center;">
+        <tr style="background-color: #FFF; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <td>
+                <table width="100%" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td style="padding: 10px; text-align: left;">
+                            <img src="https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvdXBsb2FkZWQvaW1nXzJpVVN2a2hxcjFFQ2c5ZWFnSTQ2MEhrOEE2YSJ9"
+                                alt="Coin"
+                                style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
+                        </td>
+                    </tr>
+                </table>
+                <h3 style="color: #333;">A new insight by ${updatedRequest?.Insighter?.username} is available!</h3>
+                <table width="100%" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td style="text-align: left; padding: 10px;">
+                            <img src="${updatedRequest?.Insighter?.photo}" alt="photo"
+                                style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
+                        </td>
+                        <td style="background-color: #E85819; padding: 5px; border-radius: 0 20px 20px 20px; width: 85%; font-size: 14px; color: #FFF;">
+                            ${insight.bioNotes}
+                        </td>
+                    </tr>
+                </table>
+                <table width="100%" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td style="padding: 20px; text-align: center; vertical-align: middle;">
+                            <a href="https://www.insightend.com/activity/insights"
+                                style="display: inline-block; padding: 10px; font-size: 16px; color: #FFFFFF; background-color: #E85819; border-radius: 5px; text-decoration: none; width: 75%; text-align: center;">Go to Profile Insight</a>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+                `,
         };
 
         await client.sendEmail(emailOptions);
@@ -228,7 +278,7 @@ export async function createPersonalInsight(insight: { request: string, text: st
         session = await db.startSession();
         session.startTransaction();
 
-        const req : IRequest | null = await Request.findById(insight.request).session(session)
+        const req: IRequest | null = await Request.findById(insight.request).session(session)
 
         if (req?.insighted) {
             throw Error;
@@ -267,15 +317,41 @@ export async function createPersonalInsight(insight: { request: string, text: st
             Subject: 'New Response Available',
             HtmlBody:
                 `
-                <div style="max-width: 600px; margin: auto; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); font-family: Arial, sans-serif; text-align: center;">
-                <h2 style="color: #333;">A new insight by ${updatedRequest?.Insighter?.username} is available!</h2>
-                <div style="margin: 20px 0;">
-                    <img src="${updatedRequest?.Insighter?.photo}" alt="User Image" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin-bottom: 20px;" />
-                </div>
-                <div style="margin-top: 20px;">
-                    <a href="https://www.insightend.com/activity/insights" style="display: inline-block; padding: 10px 20px; font-size: 16px; color: #FFFFFF; background-color: #E86510; border-radius: 5px; text-decoration: none;">Go to Personal Insight</a>
-                </div>
-            </div>
+                <table width="100%" cellspacing="0" cellpadding="0" style="max-width: 500px; margin: auto; padding: 20px; font-family: Arial, sans-serif; text-align: center;">
+        <tr style="background-color: #FFF; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <td>
+                <table width="100%" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td style="padding: 10px; text-align: left;">
+                            <img src="https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvdXBsb2FkZWQvaW1nXzJpVVN2a2hxcjFFQ2c5ZWFnSTQ2MEhrOEE2YSJ9"
+                                alt="Coin"
+                                style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
+                        </td>
+                    </tr>
+                </table>
+                <h3 style="color: #333;">A new insight by ${updatedRequest?.Insighter?.username} is available!</h3>
+                <table width="100%" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td style="text-align: left; padding: 10px;">
+                            <img src="${updatedRequest?.Insighter?.photo}" alt="photo"
+                                style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
+                        </td>
+                        <td style="background-color: #D40F6F; padding: 5px; border-radius: 0 20px 20px 20px; width: 85%; font-size: 14px; color: #FFF;">
+                            ${insight.text}
+                        </td>
+                    </tr>
+                </table>
+                <table width="100%" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td style="padding: 20px; text-align: center; vertical-align: middle;">
+                            <a href="https://www.insightend.com/activity/insights"
+                                style="display: inline-block; padding: 10px; font-size: 16px; color: #FFFFFF; background-color: #D40F6F; border-radius: 5px; text-decoration: none; width: 75%; text-align: center;">Go to Chat</a>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
             `,
         };
 
@@ -291,7 +367,7 @@ export async function createPersonalInsight(insight: { request: string, text: st
         }
 
         await Status.findOneAndUpdate({ User: insight.Insighter }, { '$set': { processing: false } })
-        
+
         console.log(error)
 
         return false;
@@ -299,7 +375,7 @@ export async function createPersonalInsight(insight: { request: string, text: st
     }
 }
 
-export async function createOpinionInsight(insight: { request: string, contentNotes: string, contentRate: number, Insighter: string, User: string }) {
+export async function createRandomInsight(insight: { request: string, contentNotes: string, contentRate: number, Insighter: string, User: string }) {
 
     const client = new ServerClient(process.env.POSTMARK_API_TOKEN!);
 
@@ -354,15 +430,41 @@ export async function createOpinionInsight(insight: { request: string, contentNo
             Subject: 'New Response Available',
             HtmlBody:
                 `
-                <div style="max-width: 600px; margin: auto; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); font-family: Arial, sans-serif; text-align: center;">
-                <h2 style="color: #333;">A new insight by ${updatedRequest?.Insighter?.username} is available!</h2>
-                <div style="margin: 20px 0;">
-                    <img src="${updatedRequest?.Insighter?.photo}" alt="User Image" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin-bottom: 20px;" />
-                </div>
-                <div style="margin-top: 20px;">
-                    <a href="https://www.insightend.com/activity/insights" style="display: inline-block; padding: 10px 20px; font-size: 16px; color: #FFFFFF; background-color: #4299E1; border-radius: 5px; text-decoration: none;">Go to Video Insight</a>
-                </div>
-            </div>
+                <table width="100%" cellspacing="0" cellpadding="0" style="max-width: 500px; margin: auto; padding: 20px; font-family: Arial, sans-serif; text-align: center;">
+        <tr style="background-color: #FFF; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <td>
+                <table width="100%" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td style="padding: 10px; text-align: left;">
+                            <img src="https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvdXBsb2FkZWQvaW1nXzJpVVN2a2hxcjFFQ2c5ZWFnSTQ2MEhrOEE2YSJ9"
+                                alt="Coin"
+                                style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
+                        </td>
+                    </tr>
+                </table>
+                <h3 style="color: #333;">A new insight by ${updatedRequest?.Insighter?.username} is available!</h3>
+                <table width="100%" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td style="text-align: left; padding: 10px;">
+                            <img src="${updatedRequest?.Insighter?.photo}" alt="photo"
+                                style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
+                        </td>
+                        <td style="background-color: #267A13; padding: 5px; border-radius: 0 20px 20px 20px; width: 85%; font-size: 14px; color: #FFF;">
+                            ${insight.contentNotes}
+                        </td>
+                    </tr>
+                </table>
+                <table width="100%" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td style="padding: 20px; text-align: center; vertical-align: middle;">
+                            <a href="https://www.insightend.com/activity/insights"
+                                style="display: inline-block; padding: 10px; font-size: 16px; color: #FFFFFF; background-color: #267A13; border-radius: 5px; text-decoration: none; width: 75%; text-align: center;">Go to Random Insight</a>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
             `,
         };
 

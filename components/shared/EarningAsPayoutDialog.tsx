@@ -36,15 +36,15 @@ const EarningAsPayoutDialog = ({ earning }: { earning: IEarning }) => {
                         <Image src={'/icons/question.svg'} alt='video' width={200} height={200} className='bg-pink-600 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
                         <p className='md:text-[14px] hidden md:block font-bold mr-auto'>Personal Insight</p>
                     </div>}
-                {earning.service == 'OpinionInsight' &&
+                {earning.service == 'RandomInsight' &&
                     <div className='w-full flex flex-col sm:flex-row items-center justify-center gap-2'>
                         <Image src={'/icons/gavel.svg'} alt='video' width={200} height={200} className='bg-[#3B711E] w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
-                        <p className='md:text-[14px] hidden md:block font-bold mr-auto'>Opinion Insight</p>
+                        <p className='md:text-[14px] hidden md:block font-bold mr-auto'>Random Insight</p>
                     </div>}
-                {earning.service == 'LongOpinionInsight' &&
+                {earning.service == 'LongRandomInsight' &&
                     <div className='w-full flex flex-col sm:flex-row items-center justify-center gap-2'>
                         <Image src={'/icons/feather.svg'} alt='video' width={200} height={200} className='bg-[#3E2EA3] w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
-                        <p className='md:text-[14px] hidden md:block font-bold mr-auto'>Long Opinion Insight</p>
+                        <p className='md:text-[14px] hidden md:block font-bold mr-auto'>Long Random Insight</p>
                     </div>}
                 {formatDateDifference(earning.availableDate) && <div className='w-full flex flex-row items-center'>
                     <p className='font-bold text-[12px] lg:text-[14px] text-yellow-600'>{formatDateDifference(earning?.availableDate)}</p>
@@ -95,16 +95,16 @@ const EarningAsPayoutDialog = ({ earning }: { earning: IEarning }) => {
                                         <Image src={'/icons/question.svg'} alt='video' width={200} height={200} className='bg-pink-600 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
                                         <p className='font-bold text-[12px] lg:text-[14px]'>Personal Insight</p>
                                     </div>}
-                                {earning.service === 'OpinionInsight' && (
+                                {earning.service === 'RandomInsight' && (
                                     <div className='flex flex-row items-center gap-2'>
                                         <Image src={'/icons/gavel.svg'} alt='text Insight' width={25} height={25} className='bg-[#3B711E] p-[3px] rounded-full' />
-                                        <p className='font-bold text-[12px] lg:text-[14px]'>Opinion Insight</p>
+                                        <p className='font-bold text-[12px] lg:text-[14px]'>Random Insight</p>
                                     </div>
                                 )}
-                                {earning.service === 'LongOpinionInsight' && (
+                                {earning.service === 'LongRandomInsight' && (
                                     <div className='flex flex-row items-center gap-2'>
                                         <Image src={'/icons/feather.svg'} alt='text insight' width={25} height={25} className='bg-[#3E2EA3] p-[3px] rounded-full' />
-                                        <p className='font-bold text-[12px] lg:text-[14px]'>Long Opinion Insight</p>
+                                        <p className='font-bold text-[12px] lg:text-[14px]'>Long Random Insight</p>
                                     </div>
                                 )}
                             </td>

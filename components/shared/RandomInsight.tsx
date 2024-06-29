@@ -10,10 +10,10 @@ import { createRequest } from '@/lib/actions/request.actions'
 import { SignedIn, SignedOut } from '@clerk/nextjs'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { getUserFinancials } from '@/lib/actions/userFinancials.model'
+import { getUserFinancials } from '@/lib/actions/userFinancials.actions'
 import { IUserFinancials } from '@/lib/database/models/userFinancials.model'
 
-const LongOpinionInsight = ({ price, userId, insighter }: { price: number, userId: string, insighter: string }) => {
+const RandomInsight = ({ price, userId, insighter }: { price: number, userId: string, insighter: string }) => {
 
     const [platform, setPlatform] = useState<'Instagram' | 'Youtube' | 'TikTok'>('Instagram')
     const [URL, setURL] = useState<string>('')
@@ -49,7 +49,7 @@ const LongOpinionInsight = ({ price, userId, insighter }: { price: number, userI
             return;
         }
 
-        await createRequest({ User: userId, Insighter: insighter, postLink: URL, description, platform, price, type: 'LongOpinionInsight' });
+        await createRequest({ User: userId, Insighter: insighter, postLink: URL, description, platform, price, type: 'RandomInsight' });
 
         setLoading(false);
         setFinished(true);
@@ -62,16 +62,16 @@ const LongOpinionInsight = ({ price, userId, insighter }: { price: number, userI
                 <div className='flex flex-col justify-center items-center border-[1px] border-slate-300 rounded-lg h-[240px] md:h-[220px]' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                     <div className='flex justify-center items-center gap-8' >
                         <div className='flex flex-col items-center gap-2'>
-                            <Image src={'/icons/feather.svg'} alt='video' width={200} height={200} className='bg-[#3e2ea3] w-[55px] h-[55px] p-2 rounded-full' />
-                            <p className='font-semibold'>Long Opinion Insight</p>
+                            <Image src={'/icons/gavel.svg'} alt='video' width={200} height={200} className='bg-[#3b711e] w-[55px] h-[55px] p-2 rounded-full' />
+                            <p className='font-semibold'>Random Insight</p>
                         </div>
                         <div className='h-3/4 w-[2px] bg-black'></div>
                         <p className='text-[25px] font-semibold'>${price}</p>
                     </div>
-                    <p className='mt-2 mx-2 p-2 bg-[#3e2ea3] rounded-lg text-white font-semibold'>Upload a link to your TikTok, Reel or Short, and get an insight about the content, title, description, hashtags and more</p>
+                    <p className='mt-2 mx-2 p-2 bg-[#3b711e] rounded-lg text-white font-semibold'>Upload a link to your TikTok, Reel or Short, and get an insight about the content, title, description, hashtags and more</p>
                 </div>
             </AlertDialogTrigger>
-            <AlertDialogContent className="bg-[#3e2ea3] border-0">
+            <AlertDialogContent className="bg-[#3b711e] border-0">
                 <AlertDialogHeader>
                     <AlertDialogTitle className="flex flex-row items-center justify-between">
                         <p className="text-yellow-300 font-bold text-[18px] rounded-md">Request Insight</p>
@@ -115,8 +115,8 @@ const LongOpinionInsight = ({ price, userId, insighter }: { price: number, userI
                     <AlertDialogFooter>
                         {user && (user.creditBalance < price) && (
                             <Button className='bg-red-700 hover:bg-red-700 hover:cursor-default border-white border-[1px]'>
-                            Insufficient Funds
-                        </Button>
+                                Insufficient Funds
+                            </Button>
                         )}
                         {user && (user.creditBalance >= price) && (
                             !finished ? (
@@ -143,4 +143,4 @@ const LongOpinionInsight = ({ price, userId, insighter }: { price: number, userI
     )
 }
 
-export default LongOpinionInsight
+export default RandomInsight

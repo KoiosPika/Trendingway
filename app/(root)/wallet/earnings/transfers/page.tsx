@@ -2,7 +2,7 @@ import EarningAsPayoutDialog from '@/components/shared/EarningAsPayoutDialog';
 import LoadMoreEarningsAsPayouts from '@/components/shared/LoadMoreEarningsAsPayouts';
 import TransferButton from '@/components/shared/TransferButton';
 import { getAvailableEarnings, getEarningsAsPayouts } from '@/lib/actions/earning.actions'
-import { getUserFinancials } from '@/lib/actions/userFinancials.model';
+import { getUserFinancials } from '@/lib/actions/userFinancials.actions';
 import { IEarning } from '@/lib/database/models/earning.model';
 import { IUserFinancials } from '@/lib/database/models/userFinancials.model';
 import { auth } from '@clerk/nextjs/server';

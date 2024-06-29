@@ -2,7 +2,7 @@ import Checkout from '@/components/shared/Checkout'
 import { getAllOrders } from '@/lib/actions/order.actions'
 import { getAllRefunds } from '@/lib/actions/refund.actions'
 import { getAllSpendings } from '@/lib/actions/spending.actions'
-import { getUserFinancials } from '@/lib/actions/userFinancials.model'
+import { getUserFinancials } from '@/lib/actions/userFinancials.actions'
 import { IOrder } from '@/lib/database/models/order.model'
 import { IRefund } from '@/lib/database/models/refund.model'
 import { ISpending } from '@/lib/database/models/spending.model'
@@ -56,17 +56,18 @@ const page = async () => {
                             </div>
                         </div>
                         <div className='grid grid-cols-1 sm:grid-cols-2 w-11/12 gap-4 mt-2'>
-                            <div id='recharge' className='w-full p-4 md:p-8 my-3 rounded-lg bg-blue-600 text-white md:h-[400px] h-[360px]' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
+                            <div id='recharge' className='w-full p-4 md:p-8 my-3 rounded-lg bg-blue-600 text-white md:h-[400px] h-[380px]' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                                 <div className='flex flex-row gap-2 mb-4'>
                                     <Image src={'/icons/plus-white.svg'} alt='wallet' height={20} width={20} />
                                     <p className='font-semibold text-[20px]'>Recharge your wallet</p>
                                 </div>
                                 <div className='grid grid-cols-1 gap-3 text-center'>
-                                    <Checkout userId={userId} amount={4.99} coins={2} />
-                                    <Checkout userId={userId} amount={7.99} coins={5} />
-                                    <Checkout userId={userId} amount={14.99} coins={9} />
-                                    <Checkout userId={userId} amount={19.99} coins={15} />
-                                    <Checkout userId={userId} amount={24.99} coins={20} />
+                                    <Checkout userId={userId} amount={2.99}  points={0} />
+                                    <Checkout userId={userId} amount={4.99}  points={200} />
+                                    <Checkout userId={userId} amount={7.99} points={500} />
+                                    <Checkout userId={userId} amount={10.99} points={800} />
+                                    <Checkout userId={userId} amount={15.99} points={1300} />
+                                    <Checkout userId={userId} amount={19.99} points={1700} />
                                 </div>
                             </div>
                             <div className='w-full px-2 py-4 lg:p-8 my-3 rounded-lg bg-orange-500 text-white md:h-[400px] h-[360px]' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
@@ -155,11 +156,11 @@ const page = async () => {
                                                 <div className='w-full flex flex-col sm:flex-row items-center justify-center gap-2'>
                                                     <Image src={'/icons/question.svg'} alt='video' width={200} height={200} className='bg-pink-600 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
                                                 </div>}
-                                            {spending.service == 'OpinionInsight' &&
+                                            {spending.service == 'RandomInsight' &&
                                                 <div className='w-full flex flex-col sm:flex-row items-center justify-center gap-2'>
                                                     <Image src={'/icons/gavel.svg'} alt='video' width={200} height={200} className='bg-[#3b711e] w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
                                                 </div>}
-                                            {spending.service == 'LongOpinionInsight' &&
+                                            {spending.service == 'LongRandomInsight' &&
                                                 <div className='w-full flex flex-col sm:flex-row items-center justify-center gap-2'>
                                                     <Image src={'/icons/feather.svg'} alt='video' width={200} height={200} className='bg-[#3e2ea3] w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
                                                 </div>}

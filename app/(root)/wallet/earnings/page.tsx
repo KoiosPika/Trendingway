@@ -1,7 +1,7 @@
 import StripeSetup from '@/components/shared/StripeSetup';
 import { getAllEarnings, getAvailableEarnings } from '@/lib/actions/earning.actions';
 import { getAllTransfers } from '@/lib/actions/transfer.actions';
-import { getUserFinancials } from '@/lib/actions/userFinancials.model';
+import { getUserFinancials } from '@/lib/actions/userFinancials.actions';
 import { IEarning } from '@/lib/database/models/earning.model';
 import { ITransfer } from '@/lib/database/models/transfer.model';
 import { IUserFinancials } from '@/lib/database/models/userFinancials.model';
@@ -92,11 +92,11 @@ const page = async () => {
                                                 <div className='w-full flex flex-col sm:flex-row items-center justify-center gap-2'>
                                                     <Image src={'/icons/question.svg'} alt='video' width={200} height={200} className='bg-pink-600 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
                                                 </div>}
-                                            {earning.service == 'OpinionInsight' &&
+                                            {earning.service == 'RandomInsight' &&
                                                 <div className='w-full flex flex-col sm:flex-row items-center justify-center gap-2'>
                                                     <Image src={'/icons/gavel.svg'} alt='video' width={200} height={200} className='bg-[#3B711E] w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
                                                 </div>}
-                                            {earning.service == 'LongOpinionInsight' &&
+                                            {earning.service == 'LongRandomInsight' &&
                                                 <div className='w-full flex flex-col sm:flex-row items-center justify-center gap-2'>
                                                     <Image src={'/icons/feather.svg'} alt='video' width={200} height={200} className='bg-[#3E2EA3] w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
                                                 </div>}

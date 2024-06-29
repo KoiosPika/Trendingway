@@ -12,7 +12,7 @@ import { IUserData } from '@/lib/database/models/userData.model'
 import { SignedIn, SignedOut } from '@clerk/nextjs'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { getUserFinancials } from '@/lib/actions/userFinancials.model'
+import { getUserFinancials } from '@/lib/actions/userFinancials.actions'
 import { IUserFinancials } from '@/lib/database/models/userFinancials.model'
 
 const LongVideoInsight = ({ price, userId, insighter }: { price: number, userId: string, insighter: string }) => {

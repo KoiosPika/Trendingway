@@ -1,6 +1,7 @@
 'use server'
 
 import { connectToDatabase } from "../database"
+import UserData from "../database/models/userData.model";
 import UserFinancials from "../database/models/userFinancials.model";
 
 export async function getUserFinancials(userId: string) {

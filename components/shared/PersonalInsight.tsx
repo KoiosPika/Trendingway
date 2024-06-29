@@ -12,7 +12,7 @@ import Link from 'next/link'
 import { SignedIn, SignedOut } from '@clerk/nextjs'
 import { usePathname } from 'next/navigation'
 import { IUserFinancials } from '@/lib/database/models/userFinancials.model'
-import { getUserFinancials } from '@/lib/actions/userFinancials.model'
+import { getUserFinancials } from '@/lib/actions/userFinancials.actions'
 
 const PersonalInsight = ({ price, userId, insighter }: { price: number, userId: string, insighter: string }) => {
 

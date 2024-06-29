@@ -36,15 +36,15 @@ const SpendingDialog = ({ spending }: { spending: ISpending }) => {
                         <Image src={'/icons/question.svg'} alt='video' width={200} height={200} className='bg-pink-600 w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
                         <p className='font-semibold text-[12px] lg:text-[14px] hidden sm:block'>Personal Insight</p>
                     </div>}
-                {spending.service == 'OpinionInsight' &&
+                {spending.service == 'RandomInsight' &&
                     <div className='w-full flex flex-col sm:flex-row items-center gap-2'>
                         <Image src={'/icons/gavel.svg'} alt='video' width={200} height={200} className='bg-[#3b711e] w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
-                        <p className='font-semibold text-[12px] lg:text-[14px] hidden sm:block'>Opinion Insight</p>
+                        <p className='font-semibold text-[12px] lg:text-[14px] hidden sm:block'>Random Insight</p>
                     </div>}
-                {spending.service == 'LongOpinionInsight' &&
+                {spending.service == 'LongRandomInsight' &&
                     <div className='w-full flex flex-col sm:flex-row items-center gap-2'>
                         <Image src={'/icons/feather.svg'} alt='video' width={200} height={200} className='bg-[#3e2ea3] w-[25px] h-[25px] md:w-[30px] md:h-[30px] p-[3px] rounded-full' />
-                        <p className='font-semibold text-[12px] lg:text-[14px] hidden sm:block'>Long Opinion Insight</p>
+                        <p className='font-semibold text-[12px] lg:text-[14px] hidden sm:block'>Long Random Insight</p>
                     </div>}
             </AlertDialogTrigger>
             <AlertDialogContent className="bg-[#178EA0] border-0">
@@ -86,16 +86,16 @@ const SpendingDialog = ({ spending }: { spending: ISpending }) => {
                                         <Image src={'/icons/question.svg'} alt='video' width={25} height={25} className='bg-pink-600 p-[3px] rounded-full' />
                                         <p className='font-bold text-[12px] lg:text-[14px]'>Personal Insight</p>
                                     </div>}
-                                {spending.service === 'OpinionInsight' && (
+                                {spending.service === 'RandomInsight' && (
                                     <div className='flex flex-row items-center gap-2'>
                                         <Image src={'/icons/gavel.svg'} alt='text insight' width={25} height={25} className='bg-[#3B711E] p-[3px] rounded-full' />
-                                        <p className='font-bold text-[12px] lg:text-[14px]'>Opinion Insight</p>
+                                        <p className='font-bold text-[12px] lg:text-[14px]'>Random Insight</p>
                                     </div>
                                 )}
-                                {spending.service === 'LongOpinionInsight' && (
+                                {spending.service === 'LongRandomInsight' && (
                                     <div className='flex flex-row items-center gap-2'>
                                         <Image src={'/icons/feather.svg'} alt='text insight' width={25} height={25} className='bg-[#3E2EA3] p-[3px] rounded-full' />
-                                        <p className='font-bold text-[12px] lg:text-[14px]'>Long Opinion Insight</p>
+                                        <p className='font-bold text-[12px] lg:text-[14px]'>Long Random Insight</p>
                                     </div>
                                 )}
                             </td>

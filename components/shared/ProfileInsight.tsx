@@ -12,7 +12,7 @@ import { getUserDataByUserId } from '@/lib/actions/userData.actions'
 import Link from 'next/link'
 import { SignedIn, SignedOut } from '@clerk/nextjs'
 import { usePathname } from 'next/navigation'
-import { getUserFinancials } from '@/lib/actions/userFinancials.model'
+import { getUserFinancials } from '@/lib/actions/userFinancials.actions'
 import { IUserFinancials } from '@/lib/database/models/userFinancials.model'
 
 const ProfileInsight = ({ price, userId, insighter }: { price: number, userId: string, insighter: string }) => {

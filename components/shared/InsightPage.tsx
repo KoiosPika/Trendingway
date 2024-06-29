@@ -9,7 +9,7 @@ import { timeAgo } from '@/lib/utils'
 import { useRouter } from 'next/navigation'
 import VideoInsightForm from './VideoInsightForm';
 import ProfileInsightForm from './ProfileInsightForm';
-import OpinionInsightForm from './OpinionInsightForm';
+import RandomInsightForm from './RandomInsightForm';
 
 
 const InsightPage = ({ id, userId }: { id: string, userId: string }) => {
@@ -82,8 +82,8 @@ const InsightPage = ({ id, userId }: { id: string, userId: string }) => {
                                     <VideoInsightForm height={height} id={id} insighter={request?.Insighter?._id} user={request?.User?._id} />}
                                 {request?.type === 'ProfileInsight' &&
                                     <ProfileInsightForm height={height} id={id} insighter={request?.Insighter?._id} user={request?.User?._id} />}
-                                {(request?.type === 'OpinionInsight' || request?.type === 'LongOpinionInsight') &&
-                                    <OpinionInsightForm height={height} id={id} insighter={request?.Insighter?._id} user={request?.User?._id} />}
+                                {(request?.type === 'RandomInsight' || request?.type === 'LongRandomInsight') &&
+                                    <RandomInsightForm height={height} id={id} insighter={request?.Insighter?._id} user={request?.User?._id} />}
                             </div>
                         </div>
                     </div>

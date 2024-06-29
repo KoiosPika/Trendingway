@@ -14,8 +14,13 @@ import UserFinancials from "../database/models/userFinancials.model"
 
 const populateRequest = (query: any) => {
     return query
-        .populate({ path: 'User', model: User, select: "_id photo username" })
+        .populate({ path: 'User', model: User, select: "_id photo username email" })
         .populate({ path: 'Insighter', model: User, select: "_id photo username" })
+}
+
+const populateFinance = (query: any) => {
+    return query
+        .populate({ path: 'User', model: User, select: "_id photo username email" })
 }
 
 export async function createRequest({ User, Insighter, postLink, description, platform, price, type }: { User: string, Insighter: string, postLink: string | undefined, description: string, platform: string | undefined, price: number, type: string }) {
@@ -32,11 +37,11 @@ export async function createRequest({ User, Insighter, postLink, description, pl
 
         const request = await Request.create([{ User, Insighter, postLink, description, platform, insighted: false, price, type }], { session })
 
-        const user = await UserFinancials.findOneAndUpdate(
+        const user = await populateFinance(UserFinancials.findOneAndUpdate(
             { User },
             { '$inc': { creditBalance: (-1 * price) } },
             { session }
-        )
+        ))
 
         const spendings = await Spending.create([{
             User,
@@ -55,18 +60,35 @@ export async function createRequest({ User, Insighter, postLink, description, pl
 
             const emailOptions = {
                 From: 'automated@insightend.com',
-                To: 'admin@insightend.com',
+                To: `${user.User.email}`,
                 Subject: 'Order Canceled',
                 HtmlBody:
                     `
-                    <div style="max-width: 600px; margin: auto; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); font-family: Arial, sans-serif; text-align: center;">
-                    <h2 style="color: #333;">You have new orders!</h2>
-                    <p style="font-size: 16px; color: #555;">Log in to your activity page to see your latest orders</p>
-                    <p style="font-size: 16px; color: #555;">Customers can withdraw their requests if not answered within 5 days</p>
-                    <div style="margin-top: 20px;">
-                        <a href="https://www.insightend.com/activity/orders" style="display: inline-block; padding: 10px 20px; font-size: 16px; color: #FFFFFF; background-color: #EC1A0D; border-radius: 5px; text-decoration: none;">Go to Activity</a>
-                    </div>
-                </div>
+                    <table width="100%" cellspacing="0" cellpadding="0" style="max-width: 500px; margin: auto; padding: 20px; font-family: Arial, sans-serif; text-align: center;">
+        <tr style="background-color: #FFF; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <td>
+                <table width="100%" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td style="padding: 10px; text-align: left;">
+                            <img src="https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvdXBsb2FkZWQvaW1nXzJpVVN2a2hxcjFFQ2c5ZWFnSTQ2MEhrOEE2YSJ9"
+                                alt="Coin"
+                                style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
+                        </td>
+                    </tr>
+                </table>
+                <h3 style="color: #333;">You have new requests!</h3>
+                <h3 style="color: #333;">Log in to your activity dashboard to see the newest requests you received!</h3>
+                <table width="100%" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td style="padding: 20px; text-align: center; vertical-align: middle;">
+                            <a href="https://www.insightend.com/activity/insights"
+                                style="display: inline-block; padding: 10px; font-size: 16px; color: #FFFFFF; background-color: #ffcf00; border-radius: 5px; text-decoration: none; width: 75%; text-align: center;">Go to Activity</a>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
                 `,
             };
 
@@ -237,22 +259,36 @@ export async function cancelOrder(id: string, message: string) {
 
         const emailOptions = {
             From: 'automated@insightend.com',
-            To: 'admin@insightend.com',
+            To: `${request.User.email}`,
             Subject: 'Order Canceled',
             HtmlBody:
                 `
-                <div style="max-width: 600px; margin: auto; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); font-family: Arial, sans-serif; text-align: center;">
-                <h2 style="color: #333;">${request?.Insighter?.username} has canceled your order!</h2>
-                <div style="margin: 20px 0;">
-                    <img src="${request?.Insighter?.photo}" alt="User Image" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin-bottom: 20px;" />
-                </div>
-                <p style="font-size: 16px; color: #555;">${request?.Insighter?.username} has canceled your order, and $${(request.price).toFixed(2)} were refunded to your credit balance</p>
-                <p style="font-size: 16px; color: #555;">${request?.Insighter?.username} says: ${message}</p>
-                <p style="font-size: 16px; color: #555;">You can check your refunds in the Refunds section in your wallet page</p>
-                <div style="margin-top: 20px;">
-                    <a href="https://www.insightend.com/wallet" style="display: inline-block; padding: 10px 20px; font-size: 16px; color: #FFFFFF; background-color: #EC1A0D; border-radius: 5px; text-decoration: none;">Go to Wallet</a>
-                </div>
-            </div>
+                <table width="100%" cellspacing="0" cellpadding="0" style="max-width: 500px; margin: auto; padding: 20px; font-family: Arial, sans-serif; text-align: center;">
+        <tr style="background-color: #FFF; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <td>
+                <table width="100%" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td style="padding: 10px; text-align: left;">
+                            <img src="https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvdXBsb2FkZWQvaW1nXzJpVVN2a2hxcjFFQ2c5ZWFnSTQ2MEhrOEE2YSJ9"
+                                alt="Coin"
+                                style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
+                        </td>
+                    </tr>
+                </table>
+                <h3 style="color: #333;">${request.Insighter.username} has canceled your request!</h3>
+                <h3 style="color: #333;">Your request price of $${request.price} was refunded back to your balance</h3>
+                <h3 style="color: #333;">Log in to your activity dashboard to see why they canceled your request</h3>
+                <table width="100%" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td style="padding: 20px; text-align: center; vertical-align: middle;">
+                            <a href="https://www.insightend.com/activity/requests"
+                                style="display: inline-block; padding: 10px; font-size: 16px; color: #FFFFFF; background-color: #ffcf00; border-radius: 5px; text-decoration: none; width: 75%; text-align: center;">Go to Activity</a>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
             `,
         };
 
@@ -268,7 +304,7 @@ export async function cancelOrder(id: string, message: string) {
         }
 
         console.log(error)
-        
+
         return false;
 
     }

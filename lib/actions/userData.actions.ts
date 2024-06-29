@@ -47,8 +47,8 @@ export async function editUserData(userData:
         userId: string, aboutMe: string, link: string,
         VideoInsight: number, VideoInsightAvailability: boolean,
         LongVideoInsight: number, LongVideoInsightAvailability: boolean,
-        OpinionInsight: number, OpinionInsightAvailability: boolean,
-        LongOpinionInsight: number, LongOpinionInsightAvailability: boolean,
+        RandomInsight: number, RandomInsightAvailability: boolean,
+        LongRandomInsight: number, LongRandomInsightAvailability: boolean,
         ProfileInsight: number, ProfileInsightAvailability: boolean,
         PersonalInsight: number, PersonalInsightAvailability: boolean,
         languages: string[], categories: string[]
@@ -66,10 +66,10 @@ export async function editUserData(userData:
                     VideoInsightAvailability: userData.VideoInsightAvailability,
                     LongVideoInsight: userData.LongVideoInsight,
                     LongVideoInsightAvailability: userData.LongVideoInsightAvailability,
-                    OpinionInsight: userData.OpinionInsight,
-                    OpinionInsightAvailability: userData.OpinionInsightAvailability,
-                    LongOpinionInsight: userData.LongOpinionInsight,
-                    LongOpinionInsightAvailability: userData.LongOpinionInsightAvailability,
+                    RandomInsight: userData.RandomInsight,
+                    RandomInsightAvailability: userData.RandomInsightAvailability,
+                    LongRandomInsight: userData.LongRandomInsight,
+                    LongRandomInsightAvailability: userData.LongRandomInsightAvailability,
                     ProfileInsight: userData.ProfileInsight,
                     ProfileInsightAvailability: userData.ProfileInsightAvailability,
                     PersonalInsight: userData.PersonalInsight,
@@ -172,10 +172,10 @@ export async function createFields() {
             {}, // The filter object is empty, which means this operation will affect all documents
             {
                 '$set': {
-                    OpinionInsight: 2.99,
-                    OpinionInsightAvailability: true,
-                    LongOpinionInsight: 3.99,
-                    LongOpinionInsightAvailability: true,
+                    RandomInsight: 2.99,
+                    RandomInsightAvailability: true,
+                    LongRandomInsight: 3.99,
+                    LongRandomInsightAvailability: true,
                 }
             }
         );
