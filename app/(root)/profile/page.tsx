@@ -71,20 +71,20 @@ const page = async () => {
                     <p className='mx-5 font-semibold md:text-[15px] text-[14px]'>{user?.aboutMe || `Hi I'm ${user?.User.username}`}</p>
                     <p className='mr-auto mt-10 mb-3 font-semibold text-[14px] md:text-[18px] ml-3'>Services by {user?.User?.username}: </p>
                     <div className='w-full bg-white gap-3 sticky top-0 z-10 grid md:grid-cols-4 grid-cols-2 p-2'>
-                        <Link href={'#short'} className='flex justify-center items-center p-2 rounded-lg bg-blue-500' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
-                            <p className='font-semibold text-white text-[13px] md:text-[16px]'>Short Content</p>
+                        <Link href={'#video-insight'} className='flex justify-center items-center p-2 rounded-lg bg-blue-600' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
+                            <p className='font-semibold text-white text-[13px] md:text-[16px]'>Video Insight</p>
                         </Link>
-                        <Link href={'#long'} className='flex justify-center items-center p-2 rounded-lg bg-purple-500' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
-                            <p className='font-semibold text-white text-[13px] md:text-[16px]'>Long Content</p>
+                        <Link href={'#profile-insight'} className='flex justify-center items-center p-2 rounded-lg bg-orange-600' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
+                            <p className='font-semibold text-white text-[13px] md:text-[16px]'>Profile Insight</p>
                         </Link>
-                        <Link href={'#audit'} className='flex justify-center items-center p-2 rounded-lg bg-orange-500' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
-                            <p className='font-semibold text-white text-[13px] md:text-[16px]'>Profile Audit</p>
-                        </Link>
-                        <Link href={'#personal'} className='flex justify-center items-center p-2 rounded-lg bg-pink-600' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
+                        <Link href={'#personal-insight'} className='flex justify-center items-center p-2 rounded-lg bg-pink-600' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                             <p className='font-semibold text-white text-[13px] md:text-[16px]'>Personal Insight</p>
                         </Link>
+                        <Link href={'#random-insight'} className='flex justify-center items-center p-2 rounded-lg bg-green-700' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
+                            <p className='font-semibold text-white text-[13px] md:text-[16px]'>Random Insight</p>
+                        </Link>
                     </div>
-                    <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-5 px-3 w-full mb-[25px] mt-5'>
+                    <div id='video-insight' className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-5 px-3 w-full mb-[25px] mt-5'>
                         <div className='flex flex-col justify-center items-center'>
                             <p className='mb-3 text-slate-500 font-bold text-[16px]'>--- Short Content Insight (60s Videos) ---</p>
                             {user?.VideoInsightAvailability && <VideoInsight price={user?.VideoInsight} userId={userId} insighter={user.User._id} />}
@@ -127,7 +127,7 @@ const page = async () => {
                         </div>
                     </div>
                     <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-5 px-3 w-full mb-[25px]'>
-                        <div className='flex flex-col justify-center items-center'>
+                        <div id='profile-insight' className='flex flex-col justify-center items-center'>
                             <p className='mb-3 text-slate-500 font-bold text-[16px]'>--- Profile Auditting Insight ---</p>
                             {user?.ProfileInsightAvailability && <ProfileInsight price={user?.ProfileInsight} userId={userId} insighter={user.User._id} />}
                             {!user?.ProfileInsightAvailability &&
@@ -147,7 +147,7 @@ const page = async () => {
                                     <p className='mt-2 mx-2 p-2 bg-orange-500 rounded-lg text-white font-semibold'>Upload a link to your TikTok, Reel or Short, and get an insight about your account and what can be improved to attract more audience</p>
                                 </div>}
                         </div>
-                        <div className='flex flex-col justify-center items-center'>
+                        <div id='personal-insight' className='flex flex-col justify-center items-center'>
                             <p className='mb-3 text-slate-500 font-bold text-[16px]'>--- Personal Insight (Qs & As) ---</p>
                             {user?.PersonalInsightAvailability && <PersonalInsight price={user?.PersonalInsight} userId={userId} insighter={user.User._id} />}
                             {!user?.PersonalInsightAvailability &&
@@ -168,7 +168,7 @@ const page = async () => {
                                 </div>}
                         </div>
                     </div>
-                    <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-5 px-3 w-full mb-[25px]'>
+                    <div id='random-insight' className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-5 px-3 w-full mb-[25px]'>
                         <div className='flex flex-col justify-center items-center'>
                             <p className='mb-3 text-slate-500 font-bold text-[16px]'>--- Random Insight (60s Videos) ---</p>
                             {user?.RandomInsightAvailability && <RandomInsight price={user?.RandomInsight} userId={userId} insighter={user.User._id} />}

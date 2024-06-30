@@ -51,7 +51,7 @@ const page = async () => {
                                     {data.availableInsights == 0 && <div className='flex w-full my-2'>
                                         <p className='ml-auto px-3 py-1 bg-green-700 rounded-lg text-white font-semibold border-[1px] border-white md:text-[15px] text-[12px]'>No Funds Available</p>
                                     </div>}
-                                    {(data.availableInsights >= 10) && <TransferButton userId={userId} transferDeductible={transferDeductible} />}
+                                    {(data.availableInsights >= 5) && <TransferButton userId={userId} transferDeductible={transferDeductible} />}
                                     {(data.availableInsights > 0 && data.availableInsights < 10) && <div className='flex w-full my-2'>
                                         <p className='ml-auto px-3 py-1 bg-red-500 rounded-lg text-white font-semibold border-[1px] border-white md:text-[15px] text-[12px]'>You need 10 insights to initiate a transfer</p>
                                     </div>}

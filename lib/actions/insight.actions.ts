@@ -85,7 +85,7 @@ export async function createVideoInsight(insight: { request: string, contentNote
         const emailOptions = {
             From: 'automated@insightend.com',
             To: `${updatedRequest.User.email}`,
-            Subject: 'New Response Available',
+            Subject: 'New Insight Available',
             HtmlBody:
                 `<table width="100%" cellspacing="0" cellpadding="0" style="max-width: 500px; margin: auto; padding: 20px; font-family: Arial, sans-serif; text-align: center;">
         <tr style="background-color: #FFF; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
@@ -106,7 +106,7 @@ export async function createVideoInsight(insight: { request: string, contentNote
                             <img src="${updatedRequest?.Insighter?.photo}" alt="photo"
                                 style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
                         </td>
-                        <td style="background-color: rgb(186, 191, 195); padding: 5px; border-radius: 0 20px 20px 20px; width: 85%; font-size: 14px;">
+                        <td style="background-color: #3182ce; color: white; padding: 5px; border-radius: 0 20px 20px 20px; width: 85%; font-size: 14px;">
                             ${insight.contentNotes}
                         </td>
                     </tr>
@@ -198,7 +198,7 @@ export async function createProfileInsight(insight: { request: string, bioNotes:
         const emailOptions = {
             From: 'automated@insightend.com',
             To: 'admin@insightend.com',
-            Subject: 'New Response Available',
+            Subject: 'New Insight Available',
             HtmlBody:
                 `
                 <table width="100%" cellspacing="0" cellpadding="0" style="max-width: 500px; margin: auto; padding: 20px; font-family: Arial, sans-serif; text-align: center;">
@@ -314,7 +314,7 @@ export async function createPersonalInsight(insight: { request: string, text: st
         const emailOptions = {
             From: 'automated@insightend.com',
             To: 'admin@insightend.com',
-            Subject: 'New Response Available',
+            Subject: 'New Insight Available',
             HtmlBody:
                 `
                 <table width="100%" cellspacing="0" cellpadding="0" style="max-width: 500px; margin: auto; padding: 20px; font-family: Arial, sans-serif; text-align: center;">
@@ -427,7 +427,7 @@ export async function createRandomInsight(insight: { request: string, contentNot
         const emailOptions = {
             From: 'automated@insightend.com',
             To: 'admin@insightend.com',
-            Subject: 'New Response Available',
+            Subject: 'New Insight Available',
             HtmlBody:
                 `
                 <table width="100%" cellspacing="0" cellpadding="0" style="max-width: 500px; margin: auto; padding: 20px; font-family: Arial, sans-serif; text-align: center;">

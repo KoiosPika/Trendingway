@@ -61,7 +61,7 @@ export async function createRequest({ User, Insighter, postLink, description, pl
             const emailOptions = {
                 From: 'automated@insightend.com',
                 To: `${user.User.email}`,
-                Subject: 'Order Canceled',
+                Subject: 'New Orders',
                 HtmlBody:
                     `
                     <table width="100%" cellspacing="0" cellpadding="0" style="max-width: 500px; margin: auto; padding: 20px; font-family: Arial, sans-serif; text-align: center;">
@@ -82,7 +82,7 @@ export async function createRequest({ User, Insighter, postLink, description, pl
                     <tr>
                         <td style="padding: 20px; text-align: center; vertical-align: middle;">
                             <a href="https://www.insightend.com/activity/insights"
-                                style="display: inline-block; padding: 10px; font-size: 16px; color: #FFFFFF; background-color: #ffcf00; border-radius: 5px; text-decoration: none; width: 75%; text-align: center;">Go to Activity</a>
+                                style="display: inline-block; padding: 10px; font-size: 16px; color: #000000; background-color: #ffcf00; border-radius: 5px; text-decoration: none; width: 75%; text-align: center;">Go to Activity</a>
                         </td>
                     </tr>
                 </table>
@@ -118,6 +118,8 @@ export async function createPersonalRequest(User: string, Insighter: string, des
 
     let session: ClientSession | null = null;
 
+    const client = new ServerClient(process.env.POSTMARK_API_TOKEN!);
+
     try {
 
         const db = await connectToDatabase()
@@ -146,7 +148,7 @@ export async function createPersonalRequest(User: string, Insighter: string, des
 
         const request = await Request.create([{ User, Insighter, description, insighted: false, price, type, chatId: chat._id, messageId: message._id }], { session })
 
-        await UserFinancials.findOneAndUpdate(
+        const user = await UserFinancials.findOneAndUpdate(
             { User },
             { '$inc': { creditBalance: (-1 * price) } },
             { session }
@@ -158,6 +160,53 @@ export async function createPersonalRequest(User: string, Insighter: string, des
             amount: price,
             service: type
         }], { session })
+
+        const now = new Date();
+
+        const timeDifference = now.getTime() - user.lastOrderEmail.getTime();
+
+        const hoursDifference = timeDifference / (1000 * 60 * 60)
+
+        if (hoursDifference >= 6) {
+
+            const emailOptions = {
+                From: 'automated@insightend.com',
+                To: `${user.User.email}`,
+                Subject: 'New Orders',
+                HtmlBody:
+                    `
+                    <table width="100%" cellspacing="0" cellpadding="0" style="max-width: 500px; margin: auto; padding: 20px; font-family: Arial, sans-serif; text-align: center;">
+        <tr style="background-color: #FFF; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <td>
+                <table width="100%" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td style="padding: 10px; text-align: left;">
+                            <img src="https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvdXBsb2FkZWQvaW1nXzJpVVN2a2hxcjFFQ2c5ZWFnSTQ2MEhrOEE2YSJ9"
+                                alt="Coin"
+                                style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
+                        </td>
+                    </tr>
+                </table>
+                <h3 style="color: #333;">You have new requests!</h3>
+                <h3 style="color: #333;">Log in to your activity dashboard to see the newest requests you received!</h3>
+                <table width="100%" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td style="padding: 20px; text-align: center; vertical-align: middle;">
+                            <a href="https://www.insightend.com/activity/insights"
+                                style="display: inline-block; padding: 10px; font-size: 16px; color: #000000; background-color: #ffcf00; border-radius: 5px; text-decoration: none; width: 75%; text-align: center;">Go to Activity</a>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+                `,
+            };
+
+            await UserFinancials.findByIdAndUpdate(user._id, { '$set': { lastOrderEmail: now } }, { session })
+
+            await client.sendEmail(emailOptions);
+        }
 
         await session.commitTransaction();
         session.endSession();
