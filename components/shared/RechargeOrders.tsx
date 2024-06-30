@@ -93,7 +93,11 @@ const RechargeOrders = ({ userId }: { userId: string }) => {
                                         <p className='text-[13px] lg:text-[15px]'>When</p>
                                     </div>
                                     <div className='w-full flex flex-row items-center gap-2'>
-                                        <Image src={'/icons/clock-black.svg'} alt='dollar' height={14} width={14} />
+                                        <Image src={'/icons/wrench.svg'} alt='dollar' height={14} width={14} />
+                                        <p className='text-[13px] lg:text-[15px]'>Type</p>
+                                    </div>
+                                    <div className='w-full flex flex-row items-center gap-2'> 
+                                        <p className='text-[13px] lg:text-[15px] bg-black text-white px-[6px] md:px-[7px] rounded-full'>?</p>
                                         <p className='text-[13px] lg:text-[15px]'>Details</p>
                                     </div>
                                 </div>

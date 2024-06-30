@@ -5,13 +5,15 @@ export interface IOrder extends Document {
     User: string,
     amount: number,
     stripeId: string,
+    type: string,
     createdAt: Date
 }
 
 const OrderSchema = new Schema({
     User: { type: Schema.Types.ObjectId, ref: "User", index: true },
     amount: { type: Number },
-    stripeId: { type: String, require: true },
+    type: { type: String },
+    stripeId: { type: String },
     createdAt: { type: Date, default: Date.now },
 })
 

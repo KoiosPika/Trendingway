@@ -45,60 +45,12 @@ export async function POST(request: Request) {
           stripeId: id,
           User: metadata?.buyerId || '',
           amount: amount_total! / 100 || 0,
+          type:'recharge',
           createdAt: new Date(),
         }
 
-        await connectToDatabase();
-
         const newOrder = await createOrder(order)
-
-        switch (amount_total) {
-          case 299:
-            break;
-
-          case 499:
-            await stripe.transfers.create({
-              amount: Math.round(amount_total! * 100 * 0.04),
-              currency: 'usd',
-              destination: process.env.STRIPE_FEE_ACCOUNT as string
-            });
-            break;
-
-          case 799:
-            await stripe.transfers.create({
-              amount: Math.round(amount_total! * 100 * 0.06),
-              currency: 'usd',
-              destination: process.env.STRIPE_FEE_ACCOUNT as string
-            });
-            break;
-          
-          case 1099:
-            await stripe.transfers.create({
-              amount: Math.round(amount_total! * 100 * 0.07),
-              currency: 'usd',
-              destination: process.env.STRIPE_FEE_ACCOUNT as string
-            });
-            break;
-
-          case 1599:
-            await stripe.transfers.create({
-              amount: Math.round(amount_total! * 100 * 0.08),
-              currency: 'usd',
-              destination: process.env.STRIPE_FEE_ACCOUNT as string
-            });
-            break;
-
-          case 1999:
-            await stripe.transfers.create({
-              amount: Math.round(amount_total! * 100 * 0.08),
-              currency: 'usd',
-              destination: process.env.STRIPE_FEE_ACCOUNT as string
-            });
-            break;
-
-          default:
-            break;
-        }
+        
       }
 
       return NextResponse.json({ message: 'OK' })

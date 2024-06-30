@@ -236,7 +236,7 @@ export async function createTransfer(userId: string) {
             })
         }
 
-        if (earnings.length < 10) {
+        if (earnings.length < 5) {
             throw Error;
         }
 
@@ -268,7 +268,7 @@ export async function createTransfer(userId: string) {
             destination: User?.expressAccountID,
         });
 
-        let transferedFee = fee - Math.round(availableEarning * 0.0025 + 25)
+        let transferedFee = fee - Math.round(availableEarning * 0.005 + 25)
 
         const feeTransfer = await stripe.transfers.create({
             amount: transferedFee,

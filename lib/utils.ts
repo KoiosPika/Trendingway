@@ -53,41 +53,6 @@ export function timeAgo(timestamp: string): string {
   }
 }
 
-export const getTimeLeft = (futureDate: Date) => {
-  const now = new Date();
-  const endDate = new Date(futureDate);
-  const difference = endDate.getTime() - now.getTime(); // Difference in milliseconds
-
-  if (difference <= 0) {
-    return "Time is up";
-  }
-
-  const minutes = Math.floor(difference / (1000 * 60));
-  const hours = Math.floor(minutes / 60);
-  const remainingMinutes = minutes % 60;
-
-  if (hours >= 1) {
-    return `${hours} hour${hours > 1 ? 's' : ''} left`;
-  } else {
-    return `${remainingMinutes} minute${remainingMinutes !== 1 ? 's' : ''} left`;
-  }
-};
-
-export function formatDateUS(inputDate: Date) {
-  // Parse the input date
-  const date = new Date(inputDate);
-
-  // Get the month, day, and year
-  const month = date.getMonth() + 1; // Months are zero-based
-  const day = date.getDate();
-  const year = date.getFullYear();
-
-  // Format the date as mm/dd/yyyy
-  const formattedDate = `${month}/${day}/${year}`;
-
-  return formattedDate;
-}
-
 export const formatDateDifference = (pastDateInput: Date | string): string | boolean => {
   const pastDate = new Date(pastDateInput);
   
@@ -109,3 +74,24 @@ export const formatDateDifference = (pastDateInput: Date | string): string | boo
 
   return `${days}d ${hours}h ${minutes}m`;
 };
+
+export function checkRechargeDate(targetDate: Date): string | false {
+  const now = new Date();
+  const differenceInSeconds = Math.floor((targetDate.getTime() - now.getTime()) / 1000);
+
+  // If the target date is in the past relative to the current time, return false
+  if (differenceInSeconds < 0) {
+      return false;
+  }
+
+  // Process future dates
+  if (differenceInSeconds < 60) {
+      return '>1m';  // Less than one minute remaining
+  } else if (differenceInSeconds < 3600) {
+      return `${Math.floor(differenceInSeconds / 60)}m`;  // Minutes remaining
+  } else if (differenceInSeconds < 86400) {
+      return `${Math.floor(differenceInSeconds / 3600)}h`;  // Hours remaining
+  } else {
+      return `${Math.floor(differenceInSeconds / 86400)}d`;  // Days remaining
+  }
+}

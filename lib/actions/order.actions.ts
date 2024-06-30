@@ -3,16 +3,19 @@
 import Stripe from "stripe";
 import { connectToDatabase } from "../database";
 import Order from "../database/models/order.model";
-import UserData from "../database/models/userData.model";
 import { redirect } from "next/navigation";
 import UserFinancials from "../database/models/userFinancials.model";
 
-export const createOrder = async (order: { User: string, amount: number, createdAt: Date, stripeId: string }) => {
+export const createOrder = async (order: { User: string, amount: number, createdAt: Date, stripeId: string, type:string }) => {
 
     let points;
 
+    const afterTenDays = new Date();
+    afterTenDays.setDate(afterTenDays.getDate() + 10);
+
     switch (order.amount) {
         case 2.99:
+            points = 0
             break;
 
         case 4.99:
@@ -44,12 +47,19 @@ export const createOrder = async (order: { User: string, amount: number, created
 
         const newOrder = await Order.create({
             ...order,
-            buyer: order.User,
         });
 
         await UserFinancials.findOneAndUpdate(
             { "User": order.User },
-            { '$inc': { "creditBalance": order.amount, "points": points } },
+            {
+                '$inc': {
+                    "creditBalance": order.amount,
+                    "points": points
+                },
+                '$set': {
+                    "lastRechargeDate": afterTenDays
+                }
+            },
         )
 
         return JSON.parse(JSON.stringify(newOrder));
@@ -130,7 +140,8 @@ export async function getOrdersData(userId: string, year: number) {
 
         const orders = await Order.find({
             User: userId,
-            createdAt: { $gte: start, $lt: end }
+            createdAt: { $gte: start, $lt: end },
+            type: "recharge"
         }).sort({ createdAt: -1 });
 
         const months = Array.from({ length: 12 }, (_, i) => new Date(0, i).toLocaleString('default', { month: 'long' }));
