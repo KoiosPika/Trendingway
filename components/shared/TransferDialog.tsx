@@ -7,6 +7,8 @@ import { ITransfer } from '@/lib/database/models/transfer.model'
 
 const TransferDialog = ({ transfer }: { transfer: ITransfer }) => {
 
+    const total = transfer.amount + (transfer.monthlyDeductible ? 2 : 0) + transfer.fee
+
     return (
         <AlertDialog>
             <AlertDialogTrigger className='flex flex-row w-full justify-center items-center px-2 py-3 gap-2 bg-white text-black rounded-lg relative hover:bg-yellow-500'>
@@ -34,22 +36,22 @@ const TransferDialog = ({ transfer }: { transfer: ITransfer }) => {
                             <td className='font-bold pr-2 bg-white rounded-tl-lg border-b-[3px] border-red-500 p-2'>Transfer ID:</td>
                             <td className='font-bold text-black bg-white border-b-[3px] border-l-[3px] border-red-500 rounded-tr-lg p-2'>{transfer?._id}</td>
                         </tr>
-                        <tr>
-                            <td className='font-bold pr-2 bg-white border-b-[3px] border-red-500 p-2'>Amount:</td>
-                            <td className='font-bold text-black bg-white border-b-[3px] border-l-[3px] border-red-500 p-2'>${(transfer?.amount).toFixed(2)}</td>
-                        </tr>
-                        {transfer.monthlyDeductible &&
                             <tr>
                                 <td className='font-bold pr-2 bg-white border-b-[3px] border-red-500 p-2'>Breakdown:</td>
                                 <td className='font-bold text-black bg-white border-b-[3px] border-l-[3px] border-red-500 p-2'>
                                     <div className='flex flex-col'>
                                         <div className='flex justify-between'>
                                             <span className='font-semibold'>Total:</span>
-                                            <span className='font-semibold'>${(transfer?.amount + 2).toFixed(2)}</span>
+                                            <span className='font-semibold'>${(total).toFixed(2)}</span>
                                         </div>
+                                        {transfer.monthlyDeductible && 
                                         <div className='flex justify-between items-center font-bold'>
-                                            <span className='text-gray-600 text-[14px]'>Stripe Connect Fee:</span>
+                                            <span className='text-gray-600 md:text-[14px] text-[12px]'>Stripe Fee (monthly):</span>
                                             <span className='text-gray-600'>-$2.00</span>
+                                        </div>}
+                                        <div className='flex justify-between items-center font-bold'>
+                                            <span className='text-gray-600 md:text-[14px] text-[12px]'>Transfer Fee (5.5% + 75¢)</span>
+                                            <span className='text-gray-600'>-${(transfer?.fee)}</span>
                                         </div>
                                         <hr className='my-2 border-gray-400' />
                                         <div className='flex justify-between'>
@@ -58,7 +60,7 @@ const TransferDialog = ({ transfer }: { transfer: ITransfer }) => {
                                         </div>
                                     </div>
                                 </td>
-                            </tr>}
+                            </tr>
                         <tr>
                             <td className='font-bold pr-2 bg-white border-b-[2px] border-red-500 p-2'>Date:</td>
                             <td className='font-bold text-black bg-white border-b-[3px] border-l-[3px] border-red-500 p-2'>{formatDate(transfer?.createdAt)}</td>
