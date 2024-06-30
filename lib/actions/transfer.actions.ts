@@ -3,11 +3,11 @@
 import { connectToDatabase } from "../database";
 import Transfer from "../database/models/transfer.model";
 
-export async function getAllTransfers(userId:string){
+export async function getAllTransfers(userId: string) {
     try {
         await connectToDatabase();
 
-        const transfers = await Transfer.find({User:userId}).sort({createdAt:-1}).limit(3)
+        const transfers = await Transfer.find({ User: userId }).sort({ createdAt: -1 }).limit(3)
 
         return JSON.parse(JSON.stringify(transfers));
     } catch (error) {
@@ -32,12 +32,14 @@ export async function getTransfersData(userId: string, year: number) {
         const groupedTransfers = months.map(month => ({
             month,
             total: 0,
+            fee: 0,
             transferCount: 0
         }));
 
         transfers.forEach(transfer => {
             const monthIndex = new Date(transfer.createdAt).getMonth();
             groupedTransfers[monthIndex].total += transfer.amount;
+            groupedTransfers[monthIndex].fee += transfer.fee;
             groupedTransfers[monthIndex].transferCount += 1;
         });
 

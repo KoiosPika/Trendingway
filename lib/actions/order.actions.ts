@@ -10,8 +10,8 @@ export const createOrder = async (order: { User: string, amount: number, created
 
     let points;
 
-    const afterTenDays = new Date();
-    afterTenDays.setDate(afterTenDays.getDate() + 10);
+    const afterFifteenDays = new Date();
+    afterFifteenDays.setDate(afterFifteenDays.getDate() + 15);
 
     switch (order.amount) {
         case 2.99:
@@ -57,7 +57,7 @@ export const createOrder = async (order: { User: string, amount: number, created
                     "points": points
                 },
                 '$set': {
-                    "lastRechargeDate": afterTenDays
+                    "lastRechargeDate": afterFifteenDays
                 }
             },
         )

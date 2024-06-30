@@ -12,6 +12,7 @@ import TransferDialog from './TransferDialog'
 interface ITransfersData {
     month: string
     total: number
+    fee: number
     transferCount: number
 }
 
@@ -59,6 +60,9 @@ const TransfersPage = ({ userId }: { userId: string }) => {
                                         <p className='text-[13px] lg:text-[15px]'>$ Total</p>
                                     </div>
                                     <div className='w-full flex flex-row items-center gap-2'>
+                                        <p className='text-[13px] lg:text-[15px]'>$ Fee</p>
+                                    </div>
+                                    <div className='w-full flex flex-row items-center gap-2'>
                                         <p className='text-[13px] lg:text-[15px]'># Transfers</p>
                                     </div>
                                 </div>
@@ -69,6 +73,9 @@ const TransfersPage = ({ userId }: { userId: string }) => {
                                         </div>
                                         <div className='w-full flex flex-row items-center gap-2'>
                                             <p className='text-[13px] lg:text-[15px]'>$ {(data?.total).toLocaleString()}</p>
+                                        </div>
+                                        <div className='w-full flex flex-row items-center gap-2'>
+                                            <p className='text-[13px] lg:text-[15px]'>$ {(data?.fee).toLocaleString()}</p>
                                         </div>
                                         <div className='w-full flex flex-row items-center gap-2'>
                                             <p className='text-[13px] lg:text-[15px]'>{(data?.transferCount).toLocaleString()}</p>

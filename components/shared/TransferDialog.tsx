@@ -50,8 +50,8 @@ const TransferDialog = ({ transfer }: { transfer: ITransfer }) => {
                                             <span className='text-gray-600'>-$2.00</span>
                                         </div>}
                                         <div className='flex justify-between items-center font-bold'>
-                                            <span className='text-gray-600 md:text-[14px] text-[12px]'>Transfer Fee (5.5% + 75¢)</span>
-                                            <span className='text-gray-600'>-${(transfer?.fee)}</span>
+                                            {transfer.fee_code == 1 && <span className='text-gray-600 md:text-[14px] text-[12px]'>Transfer Fee (5.5% + 75¢)</span>}
+                                            <span className='text-gray-600'>-${(transfer?.fee).toFixed(2)}</span>
                                         </div>
                                         <hr className='my-2 border-gray-400' />
                                         <div className='flex justify-between'>

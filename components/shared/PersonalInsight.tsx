@@ -18,8 +18,7 @@ const PersonalInsight = ({ price, userId, insighter }: { price: number, userId: 
 
     const [description, setDescription] = useState<string>('')
     const [user, setUser] = useState<IUserFinancials>()
-    const [loading, setLoading] = useState<boolean>(false);
-    const [finished, setFinished] = useState<boolean>(false);
+    const [status, setStatus] = useState<'Ready' | 'Loading' | 'Error' | 'Success' | 'Limit'>('Ready')
     const pathname = usePathname();
 
     const fetchUserData = async () => {
@@ -34,20 +33,31 @@ const PersonalInsight = ({ price, userId, insighter }: { price: number, userId: 
 
 
     const handleRequest = async () => {
-        if (loading || finished) {
-            return;
-        }
-
-        setLoading(true);
+        
+        setStatus('Loading');
         await fetchUserData();
         if (user && user?.creditBalance < price) {
             return;
         }
 
-        await createPersonalRequest(userId, insighter, description, price, 'PersonalInsight');
+        const response = await createPersonalRequest(userId, insighter, description, price, 'PersonalInsight');
 
-        setLoading(false);
-        setFinished(true);
+        switch (response) {
+            case 'Success':
+                setStatus('Success')
+                break;
+
+            case 'Error':
+                setStatus('Error')
+                break;
+
+            case 'Limit Reached':
+                setStatus('Limit')
+                break;
+        
+            default:
+                break;
+        }
 
     };
 
@@ -82,17 +92,28 @@ const PersonalInsight = ({ price, userId, insighter }: { price: number, userId: 
                             Insufficient Funds
                         </Button>
                         )}
-                        {user && (user.creditBalance >= price) && (
-                            !finished ? (
-                                <Button className="bg-white text-black font-semibold hover:bg-yellow-400" onClick={handleRequest} disabled={loading}>
-                                    {loading ? 'Processing...' : `Request for $${price}`}
-                                </Button>
-                            ) : (
-                                <Button className='bg-green-700 hover:bg-green-700 border-[1px] border-white'>
-                                    Finished
-                                </Button>
-                            )
-                        )}
+                        {user && (user.creditBalance >= price) && <>
+                            {status === 'Ready' &&
+                                <Button className="bg-white text-black font-semibold hover:bg-yellow-400" onClick={handleRequest}>
+                                    {`Request for $${price}`}
+                                </Button>}
+                            {status === 'Loading' &&
+                                <Button className="bg-green-600 text-white font-semibold hover:bg-green-600">
+                                    Processing...
+                                </Button>}
+                            {status === 'Success' &&
+                                <Button className="bg-green-600 text-white font-semibold hover:bg-green-600">
+                                    Request Submitted!
+                                </Button>}
+                            {status === 'Error' &&
+                                <Button className="bg-red-600 text-white font-semibold hover:bg-red-600">
+                                    Error! Try again
+                                </Button>}
+                            {status === 'Limit' &&
+                                <Button className="bg-red-600 text-white font-semibold hover:bg-red-600">
+                                    Request box full
+                                </Button>}
+                        </>}
                     </AlertDialogFooter>
                 </SignedIn>
                 <SignedOut>

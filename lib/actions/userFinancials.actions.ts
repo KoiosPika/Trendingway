@@ -69,7 +69,7 @@ export async function redeemPoints(userId: string) {
 
         let amount = pointsToRedeem / 1000;
 
-        await UserFinancials.findByIdAndUpdate(userFinancials._id, { '$inc': { creditBalance: amount } }, { session })
+        await UserFinancials.findByIdAndUpdate(userFinancials._id, { '$inc': { creditBalance: amount, points: -1 * pointsToRedeem } }, { session })
 
         await Order.create([{
             User: userId,
@@ -82,7 +82,7 @@ export async function redeemPoints(userId: string) {
 
         await Status.findByIdAndUpdate(status._id, { '$set': { processing: false } })
 
-        return true;
+        return amount;
 
     } catch (error) {
         console.log(error);
@@ -98,15 +98,13 @@ export async function redeemPoints(userId: string) {
     }
 }
 
-export async function addChargeDate() {
+export async function createCurrentRequests() {
     try {
         await connectToDatabase();
 
-        const now = new Date();
-
         await UserFinancials.updateMany(
             {},
-            { '$set': { "lastRechargeDate": now } }
+            { '$set': { "currentRequests": 0 } }
         )
     } catch (error) {
         console.log(error);

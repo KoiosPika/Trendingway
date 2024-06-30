@@ -7,6 +7,7 @@ export interface ITransfer extends Document {
     transferId: string,
     monthlyDeductible: boolean,
     fee: number,
+    fee_code: number,
     createdAt: Date
 }
 
@@ -16,6 +17,7 @@ const TransferSchema = new Schema({
     amount: { type: Number },
     fee: { type: Number },
     monthlyDeductible: { type: Boolean },
+    fee_code: { type: Number },
     createdAt: { type: Date, default: Date.now },
 })
 

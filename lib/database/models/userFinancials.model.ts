@@ -9,7 +9,8 @@ export interface IUserFinancials extends Document {
     onboardingCompleted: boolean,
     transferDate: Date,
     points: number,
-    lastRechargeDate: Date
+    lastRechargeDate: Date,
+    currentRequests:number
 }
 
 const substractDays = (date: Date, days: number) => {
@@ -26,7 +27,8 @@ const UserFinancialsSchema = new Schema({
     onboardingCompleted: { type: Boolean, default: false },
     lastOrderEmail: { type: Date, default: () => substractDays(new Date(), 1) },
     points: { type: Number, default: 0 },
-    lastRechargeDate: { type: Date, default: () => substractDays(new Date(), 1) }
+    lastRechargeDate: { type: Date, default: () => substractDays(new Date(), 1) },
+    currentRequests: { type: Number, default: 0 },
 })
 
 const UserFinancials = models.UserFinancials || model('UserFinancials', UserFinancialsSchema);
