@@ -79,7 +79,7 @@ export const checkoutOrder = async (order: { amount: number, User: string }) => 
                 {
                     price_data: {
                         currency: 'usd',
-                        unit_amount: order.amount * 100,
+                        unit_amount: Math.round(order.amount * 100),
                         product_data: {
                             name: 'Recharge',
                             tax_code: 'txcd_20030000'
