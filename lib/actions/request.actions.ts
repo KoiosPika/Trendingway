@@ -35,11 +35,11 @@ export async function createRequest({ User, Insighter, postLink, description, pl
         session = await db.startSession();
         session.startTransaction();
 
-        const user = await UserFinancials.findOneAndUpdate(
+        const user = await populateFinance(UserFinancials.findOneAndUpdate(
             { User: User, currentRequests: { $lt: 1000 } },
             { '$inc': { creditBalance: -1 * price, currentRequests: 1 } },
             { new: true, session }
-        );
+        ));
 
         if(!user){
             throw Error('Limit Reached')
@@ -139,11 +139,11 @@ export async function createPersonalRequest(User: string, Insighter: string, des
 
         let chat = null;
 
-        const user = await UserFinancials.findOneAndUpdate(
+        const user = await populateFinance(UserFinancials.findOneAndUpdate(
             { User: User, currentRequests: { $lt: 1000 } },
             { '$inc': { creditBalance: -1 * price, currentRequests: 1 } },
             { new: true, session }
-        );
+        ));
 
         if(!user){
             throw Error('Limit Reached')
@@ -234,7 +234,7 @@ export async function createPersonalRequest(User: string, Insighter: string, des
             await session.abortTransaction();
             session.endSession();
         }
-        
+
         console.log(error)
 
         if(error.message === 'Limit Reached'){

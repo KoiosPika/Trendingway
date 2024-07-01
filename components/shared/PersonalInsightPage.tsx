@@ -100,15 +100,15 @@ const PersonalInsightPage = ({ id, userId, user }: { id: string, userId: string,
     return (
         <>
             {renderPage && <div className='w-full flex justify-center items-center bg-white h-full'>
-                <div className='w-full flex flex-col md:max-w-[900px] h-full'>
-                    <div className='w-full flex justify-center items-center bg-blue-500 md:rounded-lg py-2 gap-2'>
-                        {chat && <Image src={chat.User1._id == userId ? chat.User2.photo : chat.User1.photo} alt='pfp' height={50} width={50} className='rounded-full border-[2px] border-white' />}
+                <div className='w-full flex flex-col md:max-w-[800px] h-full'>
+                    <div className='w-full flex justify-center items-center bg-yellow-400 md:rounded-lg py-2 gap-2'>
+                        {chat && <Image src={chat.User1._id == userId ? chat.User2.photo : chat.User1.photo} alt='pfp' height={50} width={50} className='rounded-full border-[2px] border-black' />}
                         {chat &&
                             <div className='flex flex-col pag-2'>
-                                <p className='font-semibold text-white'>{chat.User1._id == userId ? chat.User2.username : chat.User1.username}</p>
+                                <p className='font-semibold text-black'>{chat.User1._id == userId ? chat.User2.username : chat.User1.username}</p>
                                 <Link target='_blank' href={`/profile/${chat.User1._id == userId ? chat.User2.username : chat.User1.username}`} className='flex flex-row items-center gap-1'>
                                     <Image src={'/icons/arrow-up.svg'} alt='link' height={15} width={15} />
-                                    <p className='font-semibold text-white underline text-[14px]'>Visit Profile</p>
+                                    <p className='font-semibold text-black underline text-[14px]'>Visit Profile</p>
                                 </Link>
                             </div>
                         }
@@ -119,13 +119,13 @@ const PersonalInsightPage = ({ id, userId, user }: { id: string, userId: string,
                                 <div key={index} className='w-full'>
                                     {message.User?._id == userId &&
                                         <div className='p-3 ml-auto md:w-2/4 w-3/4 flex flex-row items-center gap-2'>
-                                            {message.type === "text" && <p className='md:text-[15px] text-[13px] bg-slate-200 p-2 rounded-md ml-auto font-semibold'>{message.text}</p>}
+                                            {message.type === "text" && <p className='md:text-[15px] text-[13px] bg-[#F9C906] p-2 rounded-md ml-auto font-semibold'>{message.text}</p>}
                                             <Image src={message.User?.photo} alt='pfp' height={40} width={40} className='mt-auto rounded-full' />
                                         </div>}
                                     {message.User?._id != userId &&
                                         <div className='p-3 md:w-2/4 w-3/4 flex flex-row items-center gap-2'>
                                             <Image src={message.User?.photo} alt='pfp' height={40} width={40} className='mt-auto rounded-full' />
-                                            {message.type === "text" && <p className='md:text-[15px] text-[13px] bg-slate-200 p-2 rounded-md font-semibold'>{message.text}</p>}
+                                            {message.type === "text" && <p className='md:text-[15px] text-[13px] bg-[#F9C906] p-2 rounded-md font-semibold'>{message.text}</p>}
                                         </div>}
                                 </div>
                             ))}
@@ -141,11 +141,11 @@ const PersonalInsightPage = ({ id, userId, user }: { id: string, userId: string,
                     </ScrollArea>
                     {chat && chat.type === 'PersonalInsight' &&
                         <div className='flex flex-row items-center justify-center gap-2 w-full my-2'>
-                            <Input onChange={(e) => setText(e.target.value)} placeholder='Your insight' className='w-4/5 border-2 border-black h-[50px] text-[16px]' />
-                            {status === 'Ready' && <Image src={'/icons/up.svg'} alt='send' height={40} width={40} className='rotate-90 hover:cursor-pointer' onClick={submitPersonalInsight} />}
+                            <Input onChange={(e) => setText(e.target.value)} placeholder='Your insight' className='md:w-11/12 w-10/12 border-2 border-black h-[50px] text-[16px]' />
+                            {status === 'Ready' && <Image src={'/icons/up-yellow.svg'} alt='send' height={40} width={40} className='rotate-90 hover:cursor-pointer bg-black border-[2px] border-black rounded-full' onClick={submitPersonalInsight} />}
                             {status === 'Loading' && <Image src={'/icons/spinner.svg'} alt='send' height={40} width={40} className='rotate-90 animate-spin' />}
-                            {status === 'Error' && <Image src={'/icons/exclamation.svg'} alt='send' height={40} width={40} />}
-                            {status === 'Success' && <Image src={'/icons/check.svg'} alt='send' height={40} width={40} />}
+                            {status === 'Error' && <Image src={'/icons/exclamation.svg'} alt='send' height={40} width={40} className='bg-black border-[2px] border-black rounded-full'/>}
+                            {status === 'Success' && <Image src={'/icons/check.svg'} alt='send' height={40} width={40} className='bg-black border-[2px] border-black rounded-full' />}
                         </div>}
                 </div>
             </div>}

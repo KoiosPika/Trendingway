@@ -10,6 +10,7 @@ import { createEarning } from './earning.actions'
 import Message from '../database/models/message.model'
 import { ClientSession } from 'mongoose'
 import Status from '../database/models/status.model'
+import UserFinancials from '../database/models/userFinancials.model'
 
 const populateInsight = (query: any) => {
     return query
@@ -48,7 +49,7 @@ export async function createVideoInsight(insight: { request: string, contentNote
 
         const request: IRequest | null = await Request.findById(insight.request).session(session);
 
-        if (request?.insighted) {
+        if (request?.insighted || request?.status != 'Awaiting') {
             throw Error;
         }
 
@@ -74,6 +75,8 @@ export async function createVideoInsight(insight: { request: string, contentNote
             { $set: { status: 'Completed', insighted: true } },
             { session }
         ))
+
+        await UserFinancials.findOneAndUpdate({ User: insight.Insighter }, { '$inc': { "currentRequests": -1 } }, { session })
 
         await createEarning(insight.request, session)
 
@@ -165,7 +168,7 @@ export async function createProfileInsight(insight: { request: string, bioNotes:
 
         const request: IRequest | null = await Request.findById(insight.request).session(session);
 
-        if (request?.insighted) {
+        if (request?.insighted || request?.status != 'Awaiting') {
             throw Error;
         }
 
@@ -187,6 +190,8 @@ export async function createProfileInsight(insight: { request: string, bioNotes:
             { $set: { status: 'Completed', insighted: true } },
             { session }
         ))
+
+        await UserFinancials.findOneAndUpdate({ User: insight.Insighter }, { '$inc': { "currentRequests": -1 } }, { session })
 
         await createEarning(insight.request, session)
 
@@ -280,7 +285,7 @@ export async function createPersonalInsight(insight: { request: string, text: st
 
         const req: IRequest | null = await Request.findById(insight.request).session(session)
 
-        if (req?.insighted) {
+        if (req?.insighted || req?.status != 'Awaiting') {
             throw Error;
         }
 
@@ -303,6 +308,8 @@ export async function createPersonalInsight(insight: { request: string, text: st
             { $set: { status: 'Completed', insighted: true } },
             { session }
         ))
+
+        await UserFinancials.findOneAndUpdate({ User: insight.Insighter }, { '$inc': { "currentRequests": -1 } }, { session })
 
         await createEarning(insight.request, session)
 
@@ -399,7 +406,7 @@ export async function createRandomInsight(insight: { request: string, contentNot
 
         const request: IRequest | null = await Request.findById(insight.request).session(session);
 
-        if (request?.insighted) {
+        if (request?.insighted || request?.status != 'Awaiting') {
             throw Error;
         }
 
@@ -416,6 +423,8 @@ export async function createRandomInsight(insight: { request: string, contentNot
             { $set: { status: 'Completed', insighted: true } },
             { session }
         ))
+
+        await UserFinancials.findOneAndUpdate({ User: insight.Insighter }, { '$inc': { "currentRequests": -1 } }, { session })
 
         await createEarning(insight.request, session)
 
