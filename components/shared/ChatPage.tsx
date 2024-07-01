@@ -70,14 +70,14 @@ const ChatPage = ({ id, userId }: { id: string, userId: string }) => {
         <>
             {renderPage && <div className='w-full flex justify-center items-center bg-white h-full'>
                 <div className='w-full flex flex-col md:max-w-[900px] h-full'>
-                    <div className='w-full flex justify-center items-center bg-blue-500 md:rounded-b-lg py-2 gap-2'>
-                        {chat && <Image src={chat.User1._id == userId ? chat.User2.photo : chat.User1.photo} alt='pfp' height={80} width={80} className='rounded-full border-[1px] border-white h-[40px] w-[40px] md:h-[50px] md:w-[50px]' />}
+                    <div className='w-full flex justify-center items-center bg-yellow-400 md:rounded-b-lg py-2 gap-2'>
+                        {chat && <Image src={chat.User1._id == userId ? chat.User2.photo : chat.User1.photo} alt='pfp' height={150} width={150} className='rounded-full h-[40px] w-[40px] md:h-[50px] md:w-[50px]' />}
                         {chat &&
                             <div className='flex flex-col pag-2'>
-                                <p className='font-semibold text-white text-[14px] md:text-[16px]'>{chat.User1._id == userId ? chat.User2.username : chat.User1.username}</p>
+                                <p className='font-semibold text-black text-[14px] md:text-[16px]'>{chat.User1._id == userId ? chat.User2.username : chat.User1.username}</p>
                                 <Link target='_blank' href={`/profile/${chat.User1._id == userId ? chat.User2.username : chat.User1.username}`} className='flex flex-row items-center gap-1'>
                                     <Image src={'/icons/arrow-up.svg'} alt='link' height={15} width={15} className='h-[13px] w-[13px] md:[15px] md:h-[15px]' />
-                                    <p className='font-semibold text-white underline text-[14px]'>Visit Profile</p>
+                                    <p className='font-semibold text-black underline text-[14px]'>Visit Profile</p>
                                 </Link>
                             </div>
                         }
@@ -88,13 +88,13 @@ const ChatPage = ({ id, userId }: { id: string, userId: string }) => {
                                 <div key={index} className='w-full'>
                                     {message.User?._id == userId &&
                                         <div className='p-3 ml-auto md:w-2/4 w-3/4 flex flex-row items-center gap-2'>
-                                            {message.type === "text" && <p className='md:text-[15px] text-[13px] bg-slate-200 p-2 rounded-md ml-auto font-semibold'>{message.text}</p>}
+                                            {message.type === "text" && <p className='md:text-[15px] text-[13px] bg-yellow-400 p-2 rounded-md ml-auto font-semibold'>{message.text}</p>}
                                             <Image src={message.User?.photo} alt='pfp' height={40} width={40} className='mt-auto rounded-full' />
                                         </div>}
                                     {message.User?._id != userId &&
                                         <div className='p-3 md:w-2/4 w-3/4 flex flex-row items-center gap-2'>
                                             <Image src={message.User?.photo} alt='pfp' height={40} width={40} className='mt-auto rounded-full' />
-                                            {message.type === "text" && <p className='md:text-[15px] text-[13px] bg-slate-200 p-2 rounded-md font-semibold'>{message.text}</p>}
+                                            {message.type === "text" && <p className='md:text-[15px] text-[13px] bg-yellow-400 p-2 rounded-md font-semibold'>{message.text}</p>}
                                         </div>}
                                 </div>
                             ))}
