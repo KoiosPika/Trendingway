@@ -54,7 +54,7 @@ const page = async () => {
                                         {request.type === 'VideoInsight' && <Image src={'/icons/star-white.svg'} alt='video' width={200} height={200} className='bg-blue-600 w-[40px] h-[40px] p-1.5 rounded-full ml-auto' />}
                                         {request.type === 'LongVideoInsight' && <Image src={'/icons/video.svg'} alt='video' width={200} height={200} className='bg-purple-600 w-[40px] h-[40px] p-1.5 rounded-full ml-auto' />}
                                         {request.type === 'ProfileInsight' && <Image src={'/icons/account.svg'} alt='video' width={200} height={200} className='bg-orange-600 w-[40px] h-[40px] p-1.5 rounded-full ml-auto' />}
-                                        {request.type === 'PersonalInsight' && <Image src={'/icons/s.svg'} alt='video' width={200} height={200} className='bg-pink-600 w-[40px] h-[40px] p-1.5 rounded-full ml-auto' />}
+                                        {request.type === 'PersonalInsight' && <Image src={'/icons/question.svg'} alt='video' width={200} height={200} className='bg-pink-600 w-[40px] h-[40px] p-1.5 rounded-full ml-auto' />}
                                         {request.type === 'RandomInsight' && <Image src={'/icons/gavel.svg'} alt='video' width={200} height={200} className='bg-[#3b711e] w-[40px] h-[40px] p-1.5 rounded-full ml-auto' />}
                                         {request.type === 'LongRandomInsight' && <Image src={'/icons/feather.svg'} alt='video' width={200} height={200} className='bg-[#3e2ea3] w-[40px] h-[40px] p-1.5 rounded-full ml-auto' />}
                                     </div>

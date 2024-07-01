@@ -77,7 +77,7 @@ const RandomInsight = ({ price, userId, insighter }: { price: number, userId: st
                         <div className='h-3/4 w-[2px] bg-black'></div>
                         <p className='text-[25px] font-semibold'>${price}</p>
                     </div>
-                    <p className='mt-2 mx-2 p-2 bg-[#3b711e] rounded-lg text-white font-semibold'>Upload a link to your TikTok, Reel or Short, and get an insight about the content, title, description, hashtags and more</p>
+                    <p className='mt-2 mx-2 p-2 bg-[#3b711e] rounded-lg text-white font-semibold'>Upload a link to a TikTok, Reel, or Short and tell the Insighter your question or request an opinion. Get valuable insights from them</p>
                 </div>
             </AlertDialogTrigger>
             <AlertDialogContent className="bg-[#3b711e] border-0">
@@ -122,7 +122,12 @@ const RandomInsight = ({ price, userId, insighter }: { price: number, userId: st
                 </AlertDialogHeader>
                 <SignedIn>
                     <AlertDialogFooter>
-                        {user && (user.creditBalance < price) && <>
+                    {user && (user.creditBalance < price) && (
+                            <Button className='bg-red-700 hover:bg-red-700 hover:cursor-default border-white border-[1px]'>
+                                Insufficient Funds
+                            </Button>
+                        )}
+                        {user && (user.creditBalance >= price) && <>
                             {status === 'Ready' &&
                                 <Button className="bg-white text-black font-semibold hover:bg-yellow-400" onClick={handleRequest}>
                                     {`Request for $${price}`}

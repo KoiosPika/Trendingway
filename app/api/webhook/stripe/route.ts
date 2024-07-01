@@ -27,7 +27,7 @@ export async function POST(request: Request) {
   // CREATE
   if (eventType === 'checkout.session.completed') {
 
-    const { id, amount_total, payment_intent, metadata, customer_details } = event.data.object
+    const { id, amount_subtotal, payment_intent, metadata, customer_details } = event.data.object
 
     try {
 
@@ -44,7 +44,7 @@ export async function POST(request: Request) {
         const order = {
           stripeId: id,
           User: metadata?.buyerId || '',
-          amount: amount_total! / 100 || 0,
+          amount: amount_subtotal! / 100 || 0,
           type:'recharge',
           createdAt: new Date(),
         }

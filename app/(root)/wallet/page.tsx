@@ -57,12 +57,12 @@ const page = async () => {
                                         Must have atleast 1000 points
                                     </div>}
                             </div>
-                            <div className='flex flex-col bg-green-700 w-full p-4 rounded-lg h-[165px]' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
+                            <div className='flex flex-col bg-green-600 w-full p-4 rounded-lg h-[165px]' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                                 <div className='flex flex-row items-center gap-2'>
                                     <Image src={'/icons/wallet.svg'} alt='wallet' height={20} width={20} />
                                     <p className='text-white font-semibold text-[18px]'>Earnings Information</p>
                                 </div>
-                                <p className='ml-7 text-[15px] text-white mt-1'>Transfer funds and see earning details</p>
+                                <p className='ml-7 text-[15px] text-white mt-1'>Manage earnings, view detailed reports, and transfer funds efficiently</p>
                                 <Link href={'/wallet/earnings'} className='flex flex-row items-center gap-2 ml-auto mt-auto bg-white px-2 py-1 rounded-lg h-[40px]'>
                                     <Image src={'/icons/dollar.svg'} alt='dollar' height={15} width={15} />
                                     <p className='font-semibold text-[13px]'>Go to Earnings</p>

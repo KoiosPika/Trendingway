@@ -79,7 +79,7 @@ const LongRandomInsight = ({ price, userId, insighter }: { price: number, userId
                         <div className='h-3/4 w-[2px] bg-black'></div>
                         <p className='text-[25px] font-semibold'>${price}</p>
                     </div>
-                    <p className='mt-2 mx-2 p-2 bg-[#3e2ea3] rounded-lg text-white font-semibold'>Upload a link to your TikTok, Reel or Short, and get an insight about the content, title, description, hashtags and more</p>
+                    <p className='mt-2 mx-2 p-2 bg-[#3e2ea3] rounded-lg text-white font-semibold'>Upload a link to a TikTok, Reel, or Short and tell the Insighter your question or request an opinion. Get valuable insights from them</p>
                 </div>
             </AlertDialogTrigger>
             <AlertDialogContent className="bg-[#3e2ea3] border-0">

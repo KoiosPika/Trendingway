@@ -284,6 +284,7 @@ export async function createTransfer(userId: string) {
             transferId: transfer.id,
             amount: transfer.amount / 100,
             fee: fee / 100,
+            fee_code: 1,
             monthlyDeductible: deducteStripeFee
         })
 

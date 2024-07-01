@@ -71,34 +71,34 @@ const page = async ({ params: { username } }: { params: { username: string } }) 
                     <p className='mx-5 font-semibold md:text-[15px] text-[14px]'>{user?.aboutMe || `Hi I'm ${user?.User.username}`}</p>
                     <p className='mr-auto mt-10 mb-3 font-semibold text-[14px] md:text-[18px] ml-3'>Services by {user?.User?.username}: </p>
                     <div className='w-full bg-white gap-3 sticky top-0 z-10 grid md:grid-cols-4 grid-cols-2 p-2'>
-                        <Link href={'#short'} className='flex justify-center items-center p-2 rounded-lg bg-blue-500' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
-                            <p className='font-semibold text-white text-[13px] md:text-[16px]'>Short Content</p>
+                        <Link href={'#video-insight'} className='flex justify-center items-center p-2 rounded-lg bg-blue-600' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
+                            <p className='font-semibold text-white text-[13px] md:text-[16px]'>Video Insight</p>
                         </Link>
-                        <Link href={'#long'} className='flex justify-center items-center p-2 rounded-lg bg-purple-500' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
-                            <p className='font-semibold text-white text-[13px] md:text-[16px]'>Long Content</p>
+                        <Link href={'#profile-insight'} className='flex justify-center items-center p-2 rounded-lg bg-orange-600' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
+                            <p className='font-semibold text-white text-[13px] md:text-[16px]'>Profile Insight</p>
                         </Link>
-                        <Link href={'#audit'} className='flex justify-center items-center p-2 rounded-lg bg-orange-500' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
-                            <p className='font-semibold text-white text-[13px] md:text-[16px]'>Profile Audit</p>
-                        </Link>
-                        <Link href={'#personal'} className='flex justify-center items-center p-2 rounded-lg bg-pink-500' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
+                        <Link href={'#personal-insight'} className='flex justify-center items-center p-2 rounded-lg bg-pink-600' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                             <p className='font-semibold text-white text-[13px] md:text-[16px]'>Personal Insight</p>
                         </Link>
+                        <Link href={'#random-insight'} className='flex justify-center items-center p-2 rounded-lg bg-green-700' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
+                            <p className='font-semibold text-white text-[13px] md:text-[16px]'>Random Insight</p>
+                        </Link>
                     </div>
-                    <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-5 px-3 w-full mb-[25px] mt-5'>
-                    <div className='flex flex-col justify-center items-center'>
-                            <p className='mb-3 text-slate-500 font-bold text-[16px]'>--- Short Content Insight (Less than 60s) ---</p>
+                    <div id='video-insight' className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-5 px-3 w-full mb-[25px] mt-5'>
+                        <div className='flex flex-col justify-center items-center'>
+                            <p className='mb-3 text-slate-500 font-bold text-[16px]'>--- Short Content Insight (60s Videos) ---</p>
                             {user?.VideoInsightAvailability && <VideoInsight price={user?.VideoInsight} userId={userId} insighter={user.User._id} />}
                             {!user?.VideoInsightAvailability &&
                                 <div className='flex flex-col justify-center items-center border-[1px] border-slate-300 rounded-lg h-[240px] md:h-[220px] bg-slate-200 relative' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                                     <div className='flex justify-center items-center gap-8' >
                                         <div className='flex flex-col items-center gap-2'>
-                                            <Image src={'/icons/star-white.svg'} alt='video' width={200} height={200} className='bg-blue-500 w-[55px] h-[55px] p-2 rounded-full' />
-                                            <p className='font-semibold'>Text Insight</p>
+                                            <Image src={'/icons/star-white.svg'} alt='video' width={200} height={200} className='bg-blue-600 w-[55px] h-[55px] p-2 rounded-full' />
+                                            <p className='font-semibold'>Video Insight</p>
                                         </div>
                                         <div className='h-2/4 w-[2px] bg-black'></div>
                                         <p className='text-[25px] font-semibold'>${user?.VideoInsight}</p>
                                     </div>
-                                    <p className='mt-2 mx-2 p-2 bg-blue-500 rounded-lg text-white font-semibold'>Upload a link to your TikTok, Reel or Short, and get an insight about the content, title, description, hashtags and more</p>
+                                    <p className='mt-2 mx-2 p-2 bg-blue-600 rounded-lg text-white font-semibold text-center'>Upload a link to your TikTok, Reel or Short, and get an insight about the content, title, description, hashtags and more</p>
                                     <div className='absolute top-1 right-2 flex flex-row items-center gap-2 bg-white px-2 border-[1px] border-red-500 rounded-lg'>
                                         <Image src={'/icons/unavailable.svg'} alt='unavailable' height={15} width={15} />
                                         <p className='text-red-500 font-bold'>Unavailable</p>
@@ -106,19 +106,19 @@ const page = async ({ params: { username } }: { params: { username: string } }) 
                                 </div>}
                         </div>
                         <div className='flex flex-col justify-center items-center'>
-                            <p className='mb-3 text-slate-500 font-bold text-[16px]'>--- Long Content Insight (More than 60s) ---</p>
+                            <p className='mb-3 text-slate-500 font-bold text-[16px]'>--- Long Content Insight (+60s Videos) ---</p>
                             {user?.LongVideoInsightAvailability && <LongVideoInsight price={user?.LongVideoInsight} userId={userId} insighter={user.User._id} />}
                             {!user?.LongVideoInsightAvailability &&
                                 <div className='flex flex-col justify-center items-center border-[1px] border-slate-300 rounded-lg h-[240px] md:h-[220px] bg-slate-200 relative' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                                     <div className='flex justify-center items-center gap-8' >
                                         <div className='flex flex-col items-center gap-2'>
-                                            <Image src={'/icons/video.svg'} alt='video' width={200} height={200} className='bg-purple-500 w-[55px] h-[55px] p-2 rounded-full' />
-                                            <p className='font-semibold'>Long Text Insight</p>
+                                            <Image src={'/icons/video.svg'} alt='video' width={200} height={200} className='bg-purple-600 w-[55px] h-[55px] p-2 rounded-full' />
+                                            <p className='font-semibold'>Long Video Insight</p>
                                         </div>
                                         <div className='h-2/4 w-[2px] bg-black'></div>
                                         <p className='text-[25px] font-semibold'>${user?.LongVideoInsight}</p>
                                     </div>
-                                    <p className='mt-2 mx-2 p-2 bg-purple-500 rounded-lg text-white font-semibold'>Upload a link to your TikTok, Reel or Short, and get an insight about the content, title, description, hashtags and more</p>
+                                    <p className='mt-2 mx-2 p-2 bg-purple-600 rounded-lg text-white font-semibold text-center'>Upload a link to your TikTok, Reel or Short, and get an insight about the content, title, description, hashtags and more</p>
                                     <div className='absolute top-1 right-2 flex flex-row items-center gap-2 bg-white px-2 border-[1px] border-red-500 rounded-lg'>
                                         <Image src={'/icons/unavailable.svg'} alt='unavailable' height={15} width={15} />
                                         <p className='text-red-500 font-bold'>Unavailable</p>
@@ -127,14 +127,14 @@ const page = async ({ params: { username } }: { params: { username: string } }) 
                         </div>
                     </div>
                     <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-5 px-3 w-full mb-[25px]'>
-                        <div className='flex flex-col justify-center items-center'>
+                        <div id='profile-insight' className='flex flex-col justify-center items-center'>
                             <p className='mb-3 text-slate-500 font-bold text-[16px]'>--- Profile Auditting Insight ---</p>
                             {user?.ProfileInsightAvailability && <ProfileInsight price={user?.ProfileInsight} userId={userId} insighter={user.User._id} />}
                             {!user?.ProfileInsightAvailability &&
                                 <div className='flex flex-col justify-center items-center border-[1px] border-slate-300 rounded-lg h-[240px] md:h-[220px] bg-slate-200 relative' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                                     <div className='flex justify-center items-center gap-8' >
                                         <div className='flex flex-col items-center gap-2'>
-                                            <Image src={'/icons/account.svg'} alt='video' width={200} height={200} className='bg-orange-500 w-[55px] h-[55px] p-2 rounded-full' />
+                                            <Image src={'/icons/account.svg'} alt='video' width={200} height={200} className='bg-orange-600 w-[55px] h-[55px] p-2 rounded-full' />
                                             <p className='font-semibold'>Profile Insight</p>
                                         </div>
                                         <div className='h-2/4 w-[2px] bg-black'></div>
@@ -144,17 +144,17 @@ const page = async ({ params: { username } }: { params: { username: string } }) 
                                             <p className='text-red-500 font-bold'>Unavailable</p>
                                         </div>
                                     </div>
-                                    <p className='mt-2 mx-2 p-2 bg-orange-500 rounded-lg text-white font-semibold'>Upload a link to your TikTok, Reel or Short, and get an insight about your account and what can be improved to attract more audience</p>
+                                    <p className='mt-2 mx-2 p-2 bg-orange-600 rounded-lg text-white font-semibold text-center'>Upload a link to your TikTok, Reel or Short, and get an insight about your account and what can be improved to attract more audience</p>
                                 </div>}
                         </div>
-                        <div className='flex flex-col justify-center items-center'>
+                        <div id='personal-insight' className='flex flex-col justify-center items-center'>
                             <p className='mb-3 text-slate-500 font-bold text-[16px]'>--- Personal Insight (Qs & As) ---</p>
                             {user?.PersonalInsightAvailability && <PersonalInsight price={user?.PersonalInsight} userId={userId} insighter={user.User._id} />}
                             {!user?.PersonalInsightAvailability &&
                                 <div className='flex flex-col justify-center items-center border-[1px] border-slate-300 rounded-lg h-[240px] md:h-[220px] bg-slate-200 relative' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                                     <div className='flex justify-center items-center gap-8' >
                                         <div className='flex flex-col items-center gap-2'>
-                                            <Image src={'/icons/question.svg'} alt='video' width={200} height={200} className='bg-pink-500 w-[55px] h-[55px] p-2 rounded-full' />
+                                            <Image src={'/icons/question.svg'} alt='video' width={200} height={200} className='bg-pink-600 w-[55px] h-[55px] p-2 rounded-full' />
                                             <p className='font-semibold'>Personal Insight</p>
                                         </div>
                                         <div className='h-2/4 w-[2px] bg-black'></div>
@@ -164,11 +164,11 @@ const page = async ({ params: { username } }: { params: { username: string } }) 
                                             <p className='text-red-500 font-bold'>Unavailable</p>
                                         </div>
                                     </div>
-                                    <p className='mt-2 mx-2 p-2 bg-pink-500 rounded-lg text-white font-semibold'>Start a conversation with your Insighter by simply asking a question, which will open up a chat room where you can connect and interact with them</p>
+                                    <p className='mt-2 mx-2 p-2 bg-pink-600 rounded-lg text-white font-semibold text-center'>Start a conversation with your Insighter by simply asking a question, which will open up a chat room where you can connect and interact with them</p>
                                 </div>}
                         </div>
                     </div>
-                    <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-5 px-3 w-full mb-[25px]'>
+                    <div id='random-insight' className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-5 px-3 w-full mb-[25px]'>
                         <div className='flex flex-col justify-center items-center'>
                             <p className='mb-3 text-slate-500 font-bold text-[16px]'>--- Random Insight (60s Videos) ---</p>
                             {user?.RandomInsightAvailability && <RandomInsight price={user?.RandomInsight} userId={userId} insighter={user.User._id} />}
@@ -186,7 +186,7 @@ const page = async ({ params: { username } }: { params: { username: string } }) 
                                             <p className='text-red-500 font-bold'>Unavailable</p>
                                         </div>
                                     </div>
-                                    <p className='mt-2 mx-2 p-2 bg-[#3b711e] rounded-lg text-white font-semibold'>Upload a link to your TikTok, Reel or Short, and get an insight about your account and what can be improved to attract more audience</p>
+                                    <p className='mt-2 mx-2 p-2 bg-[#3b711e] rounded-lg text-white font-semibold text-center'>Upload a link to a TikTok, Reel, or Short and tell the Insighter your question or request an opinion. Get valuable insights from them</p>
                                 </div>}
                         </div>
                         <div className='flex flex-col justify-center items-center'>
@@ -206,7 +206,7 @@ const page = async ({ params: { username } }: { params: { username: string } }) 
                                             <p className='text-red-500 font-bold'>Unavailable</p>
                                         </div>
                                     </div>
-                                    <p className='mt-2 mx-2 p-2 bg-[#3e2ea3] rounded-lg text-white font-semibold'>Start a conversation with your Insighter by simply asking a question, which will open up a chat room where you can connect and interact with them</p>
+                                    <p className='mt-2 mx-2 p-2 bg-[#3e2ea3] rounded-lg text-white font-semibold text-center'>Upload a link to a TikTok, Reel, or Short and tell the Insighter your question or request an opinion. Get valuable insights from them</p>
                                 </div>}
                         </div>
                     </div>
