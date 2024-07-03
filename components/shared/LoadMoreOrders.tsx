@@ -4,7 +4,6 @@ import { getPaginatedOrders } from '@/lib/actions/request.actions'
 import { IRequest } from '@/lib/database/models/request.model'
 import { timeAgo } from '@/lib/utils'
 import Image from 'next/image'
-import Link from 'next/link'
 import React, { useState } from 'react'
 import CancelOrder from './CancelOrder'
 
@@ -44,15 +43,15 @@ const LoadMoreOrders = ({ id, userId }: { id: string, userId: string }) => {
                         </div>
                         <p className='ml-3 mt-2 mr-auto text-[12.5px] h-[50px] overflow-hidden'>{request.description}</p>
                         {(request.type != 'PersonalInsight') &&
-                            <Link href={`/insight/${request._id}`} className='bg-yellow-400 w-full flex flex-row items-center justify-center gap-2 py-1 rounded-lg mt-4 mb-2'>
+                            <a href={`/insight/${request._id}`} className='bg-yellow-400 w-full flex flex-row items-center justify-center gap-2 py-1 rounded-lg mt-4 mb-2'>
                                 <Image src={'/icons/star-black.svg'} alt='star' height={15} width={15} />
                                 <p className='text-[13px] md:text-[16px]'>Start Insight</p>
-                            </Link>}
+                            </a>}
                         {(request.type === 'PersonalInsight') &&
-                            <Link href={`/personal-insight/${request._id}`} className='bg-yellow-400 w-full flex flex-row items-center justify-center gap-2 py-1 rounded-lg mt-4 mb-2'>
+                            <a href={`/personal-insight/${request._id}`} className='bg-yellow-400 w-full flex flex-row items-center justify-center gap-2 py-1 rounded-lg mt-4 mb-2'>
                                 <Image src={'/icons/star-black.svg'} alt='star' height={15} width={15} />
                                 <p className='text-[13px] md:text-[16px]'>Start Insight</p>
-                            </Link>}
+                            </a>}
                         <CancelOrder request={request} />
                     </div>
                 ))}

@@ -3,7 +3,6 @@
 import { IRequest } from '@/lib/database/models/request.model'
 import { AlertDialog, AlertDialogCancel, AlertDialogContent, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '../ui/alert-dialog'
 import Image from 'next/image'
-import Link from 'next/link'
 
 const CanceledOrderDialog = ({ request }: { request: IRequest }) => {
     return (
@@ -25,9 +24,9 @@ const CanceledOrderDialog = ({ request }: { request: IRequest }) => {
                 <p className='font-semibold'>Reason for canceling:</p>
                 <div className='w-full bg-white flex items-center gap-2 rounded-b-lg'>
                     {request.message != 'Canceled By Customer' &&
-                        <Link href={`/profile/${request?.Insighter?.username}`} className='h-[45px] w-[45px]'>
+                        <a href={`/profile/${request?.Insighter?.username}`} className='h-[45px] w-[45px]'>
                             <Image src={request?.Insighter?.photo} alt='pfp' className='h-[45px] w-[45px] border-2 border-green-400 rounded-full mb-auto' height={200} width={200} />
-                        </Link>}
+                        </a>}
                     <div className='bg-gray-300 p-1 rounded-r-lg rounded-bl-lg flex-1'>
                         <p className='text-[15px]'>{request?.message}</p>
                     </div>

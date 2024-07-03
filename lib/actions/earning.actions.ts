@@ -12,46 +12,46 @@ import UserFinancials from "../database/models/userFinancials.model";
 
 export async function createEarning(requestId: any, session: ClientSession) {
 
-    const today = new Date();
-    const dayOfWeek = today.getDay();
-
-    let daysToAdd;
-    switch (dayOfWeek) {
-        case 0: // Sunday
-            daysToAdd = 3; // Payment processed on Monday, available on Wednesday
-            break;
-        case 1: // Monday
-            daysToAdd = 2; // Payment processed on Monday, available on Wednesday
-            break;
-        case 2: // Tuesday
-            daysToAdd = 2; // Payment processed on Tuesday, available on Thursday
-            break;
-        case 3: // Wednesday
-            daysToAdd = 2; // Payment processed on Wednesday, available on Friday
-            break;
-        case 4: // Thursday
-            daysToAdd = 4; // Payment processed on Thursday, available next Monday
-            break;
-        case 5: // Friday
-            daysToAdd = 4; // Payment processed on Friday, available next Tuesday
-            break;
-        case 6: // Saturday
-            daysToAdd = 3; // Payment processed on Monday, available on Wednesday
-            break;
-        default:
-            daysToAdd = 2; // Default case to cover unexpected values
-            break;
-    }
-
-    daysToAdd++;
-
-    today.setDate(today.getDate() + daysToAdd);
-
     try {
 
         await connectToDatabase();
 
         const request = await Request.findById(requestId).session(session);
+
+        const requestDate = new Date(request.createdAt);
+        const dayOfWeek = requestDate.getDay();
+
+        let daysToAdd;
+        switch (dayOfWeek) {
+            case 0: // Sunday
+                daysToAdd = 3; // Payment processed on Monday, available on Wednesday
+                break;
+            case 1: // Monday
+                daysToAdd = 2; // Payment processed on Monday, available on Wednesday
+                break;
+            case 2: // Tuesday
+                daysToAdd = 2; // Payment processed on Tuesday, available on Thursday
+                break;
+            case 3: // Wednesday
+                daysToAdd = 2; // Payment processed on Wednesday, available on Friday
+                break;
+            case 4: // Thursday
+                daysToAdd = 4; // Payment processed on Thursday, available next Monday
+                break;
+            case 5: // Friday
+                daysToAdd = 4; // Payment processed on Friday, available next Tuesday
+                break;
+            case 6: // Saturday
+                daysToAdd = 3; // Payment processed on Monday, available on Wednesday
+                break;
+            default:
+                daysToAdd = 2; // Default case to cover unexpected values
+                break;
+        }
+
+        daysToAdd++;
+
+        requestDate.setDate(requestDate.getDate() + daysToAdd)
 
         await UserData.findOneAndUpdate(
             { User: request.Insighter },
@@ -68,7 +68,7 @@ export async function createEarning(requestId: any, session: ClientSession) {
             amount: Number((request.price * 0.87).toFixed(2)),
             fee: Number((request.price * 0.13).toFixed(2)),
             service: request.type,
-            availableDate: today
+            availableDate: requestDate
         }], { session })
 
     } catch (error) {
@@ -176,7 +176,7 @@ export async function getEarningsAsPayouts(userId: string) {
     try {
         await connectToDatabase();
 
-        const earnings = await Earning.find({ User: userId }).sort({ createdAt: -1 }).limit(10)
+        const earnings = await Earning.find({ User: userId }).sort({ availableDate: -1 }).limit(10)
 
         return JSON.parse(JSON.stringify(earnings));
     } catch (error) {

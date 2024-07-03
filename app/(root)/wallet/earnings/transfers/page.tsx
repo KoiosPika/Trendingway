@@ -7,7 +7,6 @@ import { IEarning } from '@/lib/database/models/earning.model';
 import { IUserFinancials } from '@/lib/database/models/userFinancials.model';
 import { auth } from '@clerk/nextjs/server';
 import Image from 'next/image';
-import Link from 'next/link';
 import React from 'react'
 
 const page = async () => {
@@ -58,7 +57,7 @@ const page = async () => {
                                 </>}
                                 {!user.onboardingCompleted && <>
                                     {<div className='flex w-full my-2'>
-                                        <Link href={'/wallet/earnings'} className='ml-auto px-3 py-1 bg-yellow-500 rounded-lg text-white font-semibold border-[1px] border-white md:text-[15px] text-[12px]'>Set up stripe account first</Link>
+                                        <a href={'/wallet/earnings'} className='ml-auto px-3 py-1 bg-yellow-500 rounded-lg text-white font-semibold border-[1px] border-white md:text-[15px] text-[12px]'>Set up stripe account first</a>
                                     </div>}
                                 </>}
                             </div>

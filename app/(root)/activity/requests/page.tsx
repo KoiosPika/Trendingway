@@ -8,7 +8,6 @@ import { IRequest } from '@/lib/database/models/request.model'
 import { timeAgo } from '@/lib/utils'
 import { auth } from '@clerk/nextjs/server'
 import Image from 'next/image'
-import Link from 'next/link'
 import React from 'react'
 
 const page = async () => {
@@ -25,22 +24,22 @@ const page = async () => {
           <div className='w-11/12 p-2 md:p-8 my-3 rounded-lg bg-white text-black'>
             <DetailsDialog page='Requests' />
             <div className='flex flex-row justify-around items-center my-3 font-bold w-full'>
-              <Link href={'/activity/orders'} className='flex flex-col md:flex-row justify-center items-center gap-3 px-4 py-3 text-center w-full'>
+              <a href={'/activity/orders'} className='flex flex-col md:flex-row justify-center items-center gap-3 px-4 py-3 text-center w-full'>
                 <Image src={'/icons/up.svg'} alt='up' height={20} width={20} />
                 <p className='text-[12px] md:text-[15px]'>Orders</p>
-              </Link>
-              <Link href={'/activity/responses'} className='flex flex-col md:flex-row justify-center items-center gap-3 px-4 py-3 text-center w-full border-t-2 border-[#258FC7] text-[#258FC7]'>
+              </a>
+              <a href={'/activity/responses'} className='flex flex-col md:flex-row justify-center items-center gap-3 px-4 py-3 text-center w-full border-t-2 border-[#258FC7] text-[#258FC7]'>
                 <Image src={'/icons/hourglass-blue.svg'} alt='up' height={15} width={15} className='rotate-180' />
                 <p className='text-[12px] md:text-[15px]'>Requests</p>
-              </Link>
-              <Link href={'/activity/insights'} className='flex flex-col md:flex-row justify-center items-center gap-3 px-4 py-3 text-center w-full rounded-r-lg'>
+              </a>
+              <a href={'/activity/insights'} className='flex flex-col md:flex-row justify-center items-center gap-3 px-4 py-3 text-center w-full rounded-r-lg'>
                 <Image src={'/icons/star-black.svg'} alt='up' height={20} width={20} />
                 <p className='text-[12px] md:text-[15px]'>Insights</p>
-              </Link>
-              <Link href={'/activity/history'} className='flex flex-col md:flex-row justify-center items-center gap-3 px-4 py-3 text-center w-full rounded-r-lg'>
+              </a>
+              <a href={'/activity/history'} className='flex flex-col md:flex-row justify-center items-center gap-3 px-4 py-3 text-center w-full rounded-r-lg'>
                 <Image src={'/icons/clock-black.svg'} alt='up' height={20} width={20} />
                 <p className='text-[12px] md:text-[15px]'>History</p>
-              </Link>
+              </a>
             </div>
             <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 font-semibold'>
               {requests.map((request: IRequest) => (

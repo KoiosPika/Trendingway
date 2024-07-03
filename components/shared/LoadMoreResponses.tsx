@@ -2,7 +2,6 @@
 
 import { timeAgo } from '@/lib/utils'
 import Image from 'next/image'
-import Link from 'next/link'
 import React, { useState } from 'react'
 import { getPaginatedResponses } from '@/lib/actions/insight.actions'
 import { IInsight } from '@/lib/database/models/insight.model'
@@ -29,9 +28,9 @@ const LoadMoreResponses = ({ id, userId }: { id: string, userId: string }) => {
         {insights.map((insight: IInsight) => (
           <div key={insight?._id} className='flex flex-col justify-center items-center p-5 bg-white text-black rounded-lg border-[0.5px] border-gray-400' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
             <div className='flex flex-row items-center gap-2 mr-auto md:ml-2 w-full'>
-              <Link href={`/profile/${insight?.Insighter?.username}`}>
+              <a href={`/profile/${insight?.Insighter?.username}`}>
                 <Image src={insight?.Insighter?.photo} alt='pfp' className='h-[40px] w-[40px] border-2 border-green-400 rounded-full' height={1000} width={1000} />
-              </Link>
+              </a>
               <div>
                 <p className='text-[13px]'>{insight?.Insighter?.username}</p>
                 <p className='text-[12px] text-slate-400'>{timeAgo(insight?.createdAt.toString())}</p>
@@ -45,15 +44,15 @@ const LoadMoreResponses = ({ id, userId }: { id: string, userId: string }) => {
             </div>
             <p className='ml-3 mt-2 mr-auto text-[12.5px] h-[50px] overflow-hidden'>{insight?.Request?.description}</p>
             {(insight?.Request.type != 'PersonalInsight') &&
-              <Link href={`/activity/insights/${insight?.Request?._id}`} className='bg-yellow-400 w-full flex flex-row items-center justify-center gap-2 py-1 rounded-lg mt-4 mb-2'>
+              <a href={`/activity/insights/${insight?.Request?._id}`} className='bg-yellow-400 w-full flex flex-row items-center justify-center gap-2 py-1 rounded-lg mt-4 mb-2'>
                 <Image src={'/icons/star-black.svg'} alt='star' height={15} width={15} />
                 <p className='text-[13px] md:text-[16px]'>Go to Insight</p>
-              </Link>}
+              </a>}
             {(insight?.Request.type == 'PersonalInsight') &&
-              <Link href={`/chat/${insight?.Request?.chatId}`} className='bg-yellow-400 w-full flex flex-row items-center justify-center gap-2 py-1 rounded-lg mt-4 mb-2'>
+              <a href={`/chat/${insight?.Request?.chatId}`} className='bg-yellow-400 w-full flex flex-row items-center justify-center gap-2 py-1 rounded-lg mt-4 mb-2'>
                 <Image src={'/icons/star-black.svg'} alt='star' height={15} width={15} />
                 <p className='text-[13px] md:text-[16px]'>Go to Insight</p>
-              </Link>}
+              </a>}
           </div>
         ))}
       </div>

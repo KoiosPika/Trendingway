@@ -1,7 +1,6 @@
 import SearchUsername from '@/components/shared/SearchUsername'
 import Head from 'next/head'
 import Image from 'next/image'
-import Link from 'next/link'
 import React from 'react'
 
 const page = () => {

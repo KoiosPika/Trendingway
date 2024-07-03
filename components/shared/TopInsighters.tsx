@@ -1,7 +1,6 @@
 'use client'
 
 import Image from 'next/image'
-import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, } from "@/components/ui/select"
 import { getTopUsers, getTopUsersByConditions } from '@/lib/actions/userData.actions';
@@ -218,10 +217,10 @@ const TopInsighters = () => {
                                             <p className='md:text-[15px] font-bold'>{index + 1}</p>
                                         </td>
                                         <td className='flex justify-center items-center h-[35px] md:h-[60px]'>
-                                            <Link href={`/profile/${user?.User?.username}`} className='flex flex-row items-center justify-center gap-2 h-8 w-7/8 '>
+                                            <a href={`/profile/${user?.User?.username}`} className='flex flex-row items-center justify-center gap-2 h-8 w-7/8 '>
                                                 <Image src={user?.User?.photo} alt='pfp' className='w-[25px] h-[25px] md:w-[45px] md:h-[45px] border-[1px] border-black rounded-full' width={100} height={100} />
                                                 <p className='truncate font-bold text-[12px] md:text-[15px] mr-auto'>{user?.User?.username}</p>
-                                            </Link>
+                                            </a>
                                         </td>
                                         <td>
                                             <div className='flex flex-row items-center justify-center'>

@@ -4,7 +4,6 @@ import { ScrollArea } from '../ui/scroll-area'
 import Image from 'next/image'
 import { IMessage } from '@/lib/database/models/message.model'
 import { getChatByID } from '@/lib/actions/chat.actions'
-import Link from 'next/link'
 import { getMessagesByChatID, getMoreMessages } from '@/lib/actions/message.actions'
 import { useRouter } from 'next/navigation'
 
@@ -75,10 +74,10 @@ const ChatPage = ({ id, userId }: { id: string, userId: string }) => {
                         {chat &&
                             <div className='flex flex-col pag-2'>
                                 <p className='font-semibold text-black text-[14px] md:text-[16px]'>{chat.User1._id == userId ? chat.User2.username : chat.User1.username}</p>
-                                <Link target='_blank' href={`/profile/${chat.User1._id == userId ? chat.User2.username : chat.User1.username}`} className='flex flex-row items-center gap-1'>
+                                <a target='_blank' href={`/profile/${chat.User1._id == userId ? chat.User2.username : chat.User1.username}`} className='flex flex-row items-center gap-1'>
                                     <Image src={'/icons/arrow-up.svg'} alt='link' height={15} width={15} className='h-[13px] w-[13px] md:[15px] md:h-[15px]' />
                                     <p className='font-semibold text-black underline text-[14px]'>Visit Profile</p>
-                                </Link>
+                                </a>
                             </div>
                         }
                     </div>

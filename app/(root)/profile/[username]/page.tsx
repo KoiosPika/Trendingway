@@ -8,7 +8,6 @@ import { getUserDataByUsername } from '@/lib/actions/userData.actions';
 import { IUserData } from '@/lib/database/models/userData.model';
 import { auth } from '@clerk/nextjs/server';
 import Image from 'next/image'
-import Link from 'next/link';
 import React from 'react'
 
 const page = async ({ params: { username } }: { params: { username: string } }) => {
@@ -54,7 +53,7 @@ const page = async ({ params: { username } }: { params: { username: string } }) 
                             </div>
                         </div>
                         <div className='flex flex-col justify-center items-center md:flex-row w-full gap-2 my-3 text-black'>
-                            <Link href={'#short'} className='bg-yellow-400 w-3/4 self-center flex justify-center items-center py-2 rounded-[10px] font-bold'>Explore Services</Link>
+                            <a href={'#short'} className='bg-yellow-400 w-3/4 self-center flex justify-center items-center py-2 rounded-[10px] font-bold'>Explore Services</a>
                         </div>
                     </div>
                     <p className='mr-auto my-3 font-semibold text-[14px] md:text-[18px] ml-3'>Tags:</p>
@@ -71,18 +70,18 @@ const page = async ({ params: { username } }: { params: { username: string } }) 
                     <p className='mx-5 font-semibold md:text-[15px] text-[14px]'>{user?.aboutMe || `Hi I'm ${user?.User.username}`}</p>
                     <p className='mr-auto mt-10 mb-3 font-semibold text-[14px] md:text-[18px] ml-3'>Services by {user?.User?.username}: </p>
                     <div className='w-full bg-white gap-3 sticky top-0 z-10 grid md:grid-cols-4 grid-cols-2 p-2'>
-                        <Link href={'#video-insight'} className='flex justify-center items-center p-2 rounded-lg bg-blue-600' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
+                        <a href={'#video-insight'} className='flex justify-center items-center p-2 rounded-lg bg-blue-600' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                             <p className='font-semibold text-white text-[13px] md:text-[16px]'>Video Insight</p>
-                        </Link>
-                        <Link href={'#profile-insight'} className='flex justify-center items-center p-2 rounded-lg bg-orange-600' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
+                        </a>
+                        <a href={'#profile-insight'} className='flex justify-center items-center p-2 rounded-lg bg-orange-600' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                             <p className='font-semibold text-white text-[13px] md:text-[16px]'>Profile Insight</p>
-                        </Link>
-                        <Link href={'#personal-insight'} className='flex justify-center items-center p-2 rounded-lg bg-pink-600' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
+                        </a>
+                        <a href={'#personal-insight'} className='flex justify-center items-center p-2 rounded-lg bg-pink-600' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                             <p className='font-semibold text-white text-[13px] md:text-[16px]'>Personal Insight</p>
-                        </Link>
-                        <Link href={'#random-insight'} className='flex justify-center items-center p-2 rounded-lg bg-green-700' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
+                        </a>
+                        <a href={'#random-insight'} className='flex justify-center items-center p-2 rounded-lg bg-green-700' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
                             <p className='font-semibold text-white text-[13px] md:text-[16px]'>Random Insight</p>
-                        </Link>
+                        </a>
                     </div>
                     <div id='video-insight' className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-5 px-3 w-full mb-[25px] mt-5'>
                         <div className='flex flex-col justify-center items-center'>

@@ -2,7 +2,6 @@
 'use client'
 
 import Image from 'next/image'
-import Link from 'next/link'
 import React from 'react'
 import NavItems from './NavItems'
 import MobileNav from './MobileNav'
@@ -19,9 +18,9 @@ const Header = () => {
       <div className='flex items-center justify-between w-full gap-5 max-w-[900px] px-2'>
         <MobileNav />
         <div className='flex md:flex-none justify-center'>
-            <Link href={'/'}>
+            <a href={'/'}>
               <Image className='h-[60px] w-[60px] bg-black rounded-full' src={'/images/uncut.png'} alt='logo' height={1000} width={1000} />
-            </Link>
+            </a>
         </div>
         <nav className='hidden md:block'>
           <NavItems />
@@ -39,9 +38,9 @@ const Header = () => {
           </SignedIn>
           <SignedOut>
             <Button asChild className='rounded-full bg-white border-2 border-black hover:bg-yellow-400' size={'icon'}>
-              <Link href={`/sign-in?redirectTo=${encodeURIComponent(pathname)}`}>
+              <a href={`/sign-in?redirectTo=${encodeURIComponent(pathname)}`}>
                 <Image src={'/icons/login.svg'} alt='sigin' width={20} height={20} />
-              </Link>
+              </a>
             </Button>
           </SignedOut>
         </div>

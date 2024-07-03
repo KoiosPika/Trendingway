@@ -130,6 +130,12 @@ const EarningDialog = ({ earning }: { earning: IEarning }) => {
                         </tr>
                     </tbody>
                 </table>
+                <p className='font-bold text-[12px] md:text-[14px] ml-3 text-white'>
+                    • For more information about our fees, go to
+                    <a href="/guide/fees-page" className='mx-[6px] bg-yellow-400 rounded-md px-2 inline-block text-black'>
+                        Fees Page
+                    </a>
+                </p>
             </AlertDialogContent>
         </AlertDialog>
     )

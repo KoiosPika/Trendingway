@@ -11,7 +11,6 @@ import { IUserFinancials } from '@/lib/database/models/userFinancials.model'
 import { checkRechargeDate, formatDate } from '@/lib/utils'
 import { auth } from '@clerk/nextjs/server'
 import Image from 'next/image'
-import Link from 'next/link'
 import React from 'react'
 
 const page = async () => {
@@ -47,14 +46,18 @@ const page = async () => {
                                         <p className='border-b-[3px] border-red-500 w-full text-center bg-white py-[3px] rounded-tr-md font-semibold text-[15px]'>Points</p>
                                         <div className='border-t-[3px] border-red-500 w-full bg-white py-[3px] rounded-br-md font-semibold text-[15px] flex flex-row items-center justify-center'>
                                             <p>{user.points}</p>
-                                            {checkRechargeDate(new Date(user.lastRechargeDate)) && <p className='text-slate-500 text-[11px] ml-1'>({checkRechargeDate(new Date(user.lastRechargeDate))})</p>}
+                                            {(checkRechargeDate(new Date(user.lastRechargeDate)) && user.points > 0) && <p className='text-slate-500 text-[11px] ml-1'>({checkRechargeDate(new Date(user.lastRechargeDate))})</p>}
                                         </div>
                                     </div>
                                 </div>
                                 {user.points >= 1000 && <RedeemPointsButton userId={userId} />}
-                                {user.points < 1000 &&
+                                {(user.points < 1000 && user.points > 0) &&
                                     <div className='w-5/6 bg-blue-600 py-[2px] text-center rounded-sm text-white font-semibold text-[13px] border-[1px] border-white place-self-center'>
                                         Must have atleast 1000 points
+                                    </div>}
+                                {user.points == 0 &&
+                                    <div className='w-5/6 bg-blue-600 py-[2px] text-center rounded-sm text-white font-semibold text-[13px] border-[1px] border-white place-self-center'>
+                                        Recharge your wallet to gain points
                                     </div>}
                             </div>
                             <div className='flex flex-col bg-green-600 w-full p-4 rounded-lg h-[165px]' style={{ boxShadow: '0 8px 10px -6px gray, -8px 8px 8px -6px gray, 8px 8px 8px -6px gray' }}>
@@ -63,10 +66,10 @@ const page = async () => {
                                     <p className='text-white font-semibold text-[18px]'>Earnings Information</p>
                                 </div>
                                 <p className='ml-7 text-[15px] text-white mt-1'>Manage earnings, view detailed reports, and transfer funds efficiently</p>
-                                <Link href={'/wallet/earnings'} className='flex flex-row items-center gap-2 ml-auto mt-auto bg-white px-2 py-1 rounded-lg h-[40px]'>
+                                <a href={'/wallet/earnings'} className='flex flex-row items-center gap-2 ml-auto mt-auto bg-white px-2 py-1 rounded-lg h-[40px]'>
                                     <Image src={'/icons/dollar.svg'} alt='dollar' height={15} width={15} />
                                     <p className='font-semibold text-[13px]'>Go to Earnings</p>
-                                </Link>
+                                </a>
                             </div>
                         </div>
                         <div className='grid grid-cols-1 sm:grid-cols-2 w-11/12 gap-4 mt-2'>
@@ -117,9 +120,9 @@ const page = async () => {
                                             </div>
                                         </div>
                                     ))}
-                                    {orders.length > 0 && <Link href={'/wallet/recharges'} className='ml-auto'>
+                                    {orders.length > 0 && <a href={'/wallet/recharges'} className='ml-auto'>
                                         <p className='bg-white px-4 py-2 rounded-lg inline-flex text-black text-[13px] font-semibold hover:bg-yellow-400'>More Details {`->`}</p>
-                                    </Link>}
+                                    </a>}
                                 </div>
                                 {orders.length == 0 &&
                                     <div className='flex justify-center items-center h-3/4'>
@@ -186,9 +189,9 @@ const page = async () => {
                                         </div>
                                     ))}
 
-                                    {spendings.length > 0 && <Link href={'/wallet/spendings'} className='ml-auto'>
+                                    {spendings.length > 0 && <a href={'/wallet/spendings'} className='ml-auto'>
                                         <p className='bg-white px-4 py-2 rounded-lg inline-flex text-black text-[13px] font-semibold hover:bg-yellow-400'>More Details {`->`}</p>
-                                    </Link>}
+                                    </a>}
                                 </div>
                                 {spendings.length == 0 &&
                                     <div className='flex justify-center items-center h-3/4'>
@@ -222,9 +225,9 @@ const page = async () => {
                                             </div>
                                         </div>
                                     ))}
-                                    {refunds.length > 0 && <Link href={'/wallet/refunds'} className='ml-auto'>
+                                    {refunds.length > 0 && <a href={'/wallet/refunds'} className='ml-auto'>
                                         <p className='bg-white px-4 py-2 rounded-lg inline-flex text-black text-[13px] font-semibold hover:bg-yellow-400'>More Details {`->`}</p>
-                                    </Link>}
+                                    </a>}
                                 </div>
                                 {refunds.length == 0 &&
                                     <div className='flex justify-center items-center h-3/4'>

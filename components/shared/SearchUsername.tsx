@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react'
 import { Input } from '../ui/input'
 import { getUsersByUsername } from '@/lib/actions/user.actions'
 import { IUser } from '@/lib/database/models/user.model'
-import Link from 'next/link'
 import Image from 'next/image'
 
 const SearchUsername = () => {
@@ -40,10 +39,10 @@ const SearchUsername = () => {
                 {!loading && <Image src={'/icons/search-black.svg'} alt='loading' height={20} width={20} className='absolute right-2 top-3' />}
             </div>
             {(search.length >= 3 && users) && users.map((user: IUser) => (
-                <Link key={user?._id} className='bg-slate-100 w-5/6 md:w-3/5 p-1 flex flex-row items-center' href={`/profile/${user?.username}`}>
+                <a key={user?._id} className='bg-slate-100 w-5/6 md:w-3/5 p-1 flex flex-row items-center' href={`/profile/${user?.username}`}>
                     <Image src={user?.photo} alt='photo' className='h-[35px] w-[35px] rounded-full' height={150} width={150} />
                     <p className='font-bold mx-2'>{user?.username}</p>
-                </Link>
+                </a>
             ))}
         </div>
     )

@@ -8,7 +8,6 @@ import { Input } from '../ui/input'
 import { Textarea } from '../ui/textarea'
 import { createRequest } from '@/lib/actions/request.actions'
 import { SignedIn, SignedOut } from '@clerk/nextjs'
-import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { getUserFinancials } from '@/lib/actions/userFinancials.actions'
 import { IUserFinancials } from '@/lib/database/models/userFinancials.model'
@@ -155,9 +154,9 @@ const LongRandomInsight = ({ price, userId, insighter }: { price: number, userId
                 </SignedIn>
                 <SignedOut>
                     <AlertDialogFooter>
-                        <Link href={`/sign-in?redirectTo=${encodeURIComponent(pathname)}`} className='w-full'>
+                        <a href={`/sign-in?redirectTo=${encodeURIComponent(pathname)}`} className='w-full'>
                             <Button className='bg-yellow-400 hover:bg-yellow-400 text-black font-bold w-full'>Sign In</Button>
-                        </Link>
+                        </a>
                     </AlertDialogFooter>
                 </SignedOut>
             </AlertDialogContent>

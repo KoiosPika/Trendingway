@@ -8,7 +8,6 @@ import { IUserFinancials } from '@/lib/database/models/userFinancials.model';
 import { formatDate } from '@/lib/utils';
 import { auth } from '@clerk/nextjs/server';
 import Image from 'next/image';
-import Link from 'next/link';
 import React from 'react'
 
 const page = async () => {
@@ -39,9 +38,9 @@ const page = async () => {
                                     <p className='w-1/2 bg-white text-center py-1 rounded-r-lg'>${(data.availableEarning)?.toFixed(2)}</p>
                                 </div>
                             </div>
-                            <Link href={'/wallet/earnings/transfers'} className='bg-[#388931] flex justify-center items-center rounded-lg ml-auto md:w-2/5 w-2/3 py-2 mt-5 md:mr-5 border-[2px] border-white'>
+                            <a href={'/wallet/earnings/transfers'} className='bg-[#388931] flex justify-center items-center rounded-lg ml-auto md:w-2/5 w-2/3 py-2 mt-5 md:mr-5 border-[2px] border-white'>
                                 <p className='text-white font-bold text-[10px] md:text-[14px]'>View Details and Transfer {`->`}</p>
-                            </Link>
+                            </a>
 
                         </div>
                         <StripeSetup userId={userId} account_id={user?.expressAccountID || ''} onboardingCompleted={user?.onboardingCompleted} />
@@ -102,9 +101,9 @@ const page = async () => {
                                                 </div>}
                                         </div>
                                     ))}
-                                    {earnings.length > 0 && <Link href={'/wallet/earnings/details'} className='ml-auto'>
+                                    {earnings.length > 0 && <a href={'/wallet/earnings/details'} className='ml-auto'>
                                         <p className='bg-white px-4 py-2 rounded-lg inline-flex text-black text-[13px] font-semibold hover:bg-yellow-400'>More Details {`->`}</p>
-                                    </Link>}
+                                    </a>}
                                 </div>
                                 {earnings.length == 0 &&
                                     <div className='flex justify-center items-center h-3/4'>
@@ -138,9 +137,9 @@ const page = async () => {
                                             </div>
                                         </div>
                                     ))}
-                                    {transfers.length > 0 && <Link href={'/wallet/earnings/transfer-details'} className='ml-auto'>
+                                    {transfers.length > 0 && <a href={'/wallet/earnings/transfer-details'} className='ml-auto'>
                                         <p className='bg-white px-4 py-2 rounded-lg inline-flex text-black text-[13px] font-semibold hover:bg-yellow-400'>More Details {`->`}</p>
-                                    </Link>}
+                                    </a>}
                                 </div>
                                 {transfers.length == 0 &&
                                     <div className='flex justify-center items-center h-3/4'>

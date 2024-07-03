@@ -202,7 +202,7 @@ export async function createProfileInsight(insight: { request: string, bioNotes:
 
         const emailOptions = {
             From: 'automated@insightend.com',
-            To: 'admin@insightend.com',
+            To: `${updatedRequest.User.email}`,
             Subject: 'New Insight Available',
             HtmlBody:
                 `
@@ -320,7 +320,7 @@ export async function createPersonalInsight(insight: { request: string, text: st
 
         const emailOptions = {
             From: 'automated@insightend.com',
-            To: 'admin@insightend.com',
+            To: `${updatedRequest.User.email}`,
             Subject: 'New Insight Available',
             HtmlBody:
                 `
@@ -435,7 +435,7 @@ export async function createRandomInsight(insight: { request: string, contentNot
 
         const emailOptions = {
             From: 'automated@insightend.com',
-            To: 'admin@insightend.com',
+            To: `${updatedRequest.User.email}`,
             Subject: 'New Insight Available',
             HtmlBody:
                 `

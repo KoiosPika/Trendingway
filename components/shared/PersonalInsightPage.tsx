@@ -9,7 +9,6 @@ import { getMessagesByRequestID, getMoreMessages } from '@/lib/actions/message.a
 import { getChatByRequestID } from '@/lib/actions/chat.actions';
 import { useRouter } from 'next/navigation';
 import { createPersonalInsight } from '@/lib/actions/insight.actions';
-import Link from 'next/link';
 import { useSession } from '@clerk/nextjs';
 import { getSessionByUserID } from '@/lib/actions/session.actions';
 
@@ -106,10 +105,10 @@ const PersonalInsightPage = ({ id, userId, user }: { id: string, userId: string,
                         {chat &&
                             <div className='flex flex-col pag-2'>
                                 <p className='font-semibold text-black'>{chat.User1._id == userId ? chat.User2.username : chat.User1.username}</p>
-                                <Link target='_blank' href={`/profile/${chat.User1._id == userId ? chat.User2.username : chat.User1.username}`} className='flex flex-row items-center gap-1'>
+                                <a target='_blank' href={`/profile/${chat.User1._id == userId ? chat.User2.username : chat.User1.username}`} className='flex flex-row items-center gap-1'>
                                     <Image src={'/icons/arrow-up.svg'} alt='link' height={15} width={15} />
                                     <p className='font-semibold text-black underline text-[14px]'>Visit Profile</p>
-                                </Link>
+                                </a>
                             </div>
                         }
                     </div>
