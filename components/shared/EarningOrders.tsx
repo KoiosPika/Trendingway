@@ -13,10 +13,17 @@ interface IEarningData {
     orderCount: number
 }
 
+interface IYearlyData {
+    total: number,
+    total_fees: number,
+    total_orders: number
+}
+
 const EarningOrders = ({ userId }: { userId: string }) => {
 
     const [earnings, setEarnings] = useState<IEarning[]>()
     const [earningsData, setEarningsData] = useState<IEarningData[]>([]);
+    const [yearlyData, setYearlyData] = useState<IYearlyData>();
     const [year, setYear] = useState<number>(2024)
 
     useEffect(() => {
@@ -33,6 +40,15 @@ const EarningOrders = ({ userId }: { userId: string }) => {
         async function getData() {
             const requestedOrders = await getEarningsData(userId, year)
             setEarningsData(requestedOrders)
+            const totalSum = requestedOrders.reduce((acc: any, curr: any) => acc + curr.total, 0);
+            const feeSum = requestedOrders.reduce((acc: any, curr: any) => acc + curr.fee, 0);
+            const orderCountSum = requestedOrders.reduce((acc: any, curr: any) => acc + curr.orderCount, 0);
+
+            setYearlyData({
+                total: totalSum,
+                total_fees: feeSum,
+                total_orders: orderCountSum
+            })
         }
 
         getData()
@@ -79,6 +95,20 @@ const EarningOrders = ({ userId }: { userId: string }) => {
                                         </div>
                                     </div>
                                 ))}
+                                <div className='flex flex-row justify-center items-center p-2 gap-2 bg-black text-white font-bold rounded-lg border-2 border-white'>
+                                    <div className='w-full flex flex-row items-center gap-2'>
+                                        <p className='text-[12px] lg:text-[15px]'>Total</p>
+                                    </div>
+                                    <div className='w-full flex flex-row items-center gap-2'>
+                                        <p className='text-[13px] lg:text-[15px]'>$ {(yearlyData?.total)?.toFixed(2)}</p>
+                                    </div>
+                                    <div className='w-full flex flex-row items-center gap-2'>
+                                        <p className='text-[13px] lg:text-[15px]'>$ {(yearlyData?.total_fees)?.toFixed(2)}</p>
+                                    </div>
+                                    <div className='w-full flex flex-row items-center gap-2'>
+                                        <p className='text-[13px] lg:text-[15px]'>{(yearlyData?.total_orders)}</p>
+                                    </div>
+                                </div>
                             </div>
                             <div className='flex flex-row w-full justify-center items-center mt-4 gap-3'>
                                 <Image src={'/icons/up.svg'} alt='arrow' height={30} width={30} style={{ transform: 'rotate(270deg)' }} className='bg-white rounded-full border-[1px] border-white hover:cursor-pointer' onClick={() => setYear(year - 1)} />
