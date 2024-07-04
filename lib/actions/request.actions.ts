@@ -36,7 +36,7 @@ export async function createRequest({ User, Insighter, postLink, description, pl
         session.startTransaction();
 
         const user = await populateFinance(UserFinancials.findOneAndUpdate(
-            { User: User, currentRequests: { $lt: 1000 } },
+            { User: Insighter, currentRequests: { $lt: 1000 } },
             { '$inc': { creditBalance: -1 * price, currentRequests: 1 } },
             { new: true, session }
         ));
@@ -140,7 +140,7 @@ export async function createPersonalRequest(User: string, Insighter: string, des
         let chat = null;
 
         const user = await populateFinance(UserFinancials.findOneAndUpdate(
-            { User: User, currentRequests: { $lt: 1000 } },
+            { User: Insighter, currentRequests: { $lt: 1000 } },
             { '$inc': { creditBalance: -1 * price, currentRequests: 1 } },
             { new: true, session }
         ));
