@@ -97,16 +97,3 @@ export async function redeemPoints(userId: string) {
         return false;
     }
 }
-
-export async function createCurrentRequests() {
-    try {
-        await connectToDatabase();
-
-        await UserFinancials.updateMany(
-            {},
-            { '$set': { "currentRequests": 0 } }
-        )
-    } catch (error) {
-        console.log(error);
-    }
-}

@@ -9,6 +9,7 @@ import { IUserData } from '@/lib/database/models/userData.model';
 import { auth } from '@clerk/nextjs/server';
 import Image from 'next/image'
 import React from 'react'
+import CopyLinkButton from '@/components/shared/CopyLinkButton';
 
 const page = async () => {
 
@@ -52,8 +53,9 @@ const page = async () => {
                                 {!user?.personalLink && <p className='text-blue-600 hover:underline font-semibold'>No Link Added</p>}
                             </div>
                         </div>
-                        <div className='flex flex-col justify-center items-center md:flex-row w-full gap-2 my-3 text-black'>
+                        <div className='flex justify-center items-center flex-row w-full gap-2 my-3 text-black'>
                             <a href={'/edit-profile'} className='bg-yellow-400 w-3/4 self-center flex justify-center items-center py-2 rounded-[10px] font-bold'>Edit Profile</a>
+                            <CopyLinkButton username={user?.User.username} />
                         </div>
                     </div>
                     <p className='mr-auto my-3 font-semibold text-[14px] md:text-[18px] ml-3'>Tags:</p>

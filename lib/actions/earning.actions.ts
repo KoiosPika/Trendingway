@@ -249,7 +249,7 @@ export async function createTransfer(userId: string) {
         }
 
         const updatePromises = earnings.map((earning) =>
-            Earning.findByIdAndUpdate(earning._id, { withdrawn: true }, { session })
+            Earning.findByIdAndUpdate(earning._id, { '$set': { withdrawn: true } }, { session })
         );
 
         await Promise.all(updatePromises);
