@@ -37,13 +37,19 @@ export async function createRequest({ User, Insighter, postLink, description, pl
 
         const user = await populateFinance(UserFinancials.findOneAndUpdate(
             { User: Insighter, currentRequests: { $lt: 1000 } },
-            { '$inc': { creditBalance: -1 * price, currentRequests: 1 } },
+            { '$inc': { currentRequests: 1 } },
             { new: true, session }
         ));
 
-        if(!user){
+        if (!user) {
             throw Error('Limit Reached')
         }
+
+        await UserFinancials.findOneAndUpdate(
+            { User: User },
+            { '$inc': { creditBalance: -1 * price } },
+            { new: true, session }
+        );
 
         const request = await Request.create([{ User, Insighter, postLink, description, platform, insighted: false, price, type }], { session })
 
@@ -107,7 +113,7 @@ export async function createRequest({ User, Insighter, postLink, description, pl
 
         return 'Success';
 
-    } catch (error : any) {
+    } catch (error: any) {
 
         if (session) {
             await session.abortTransaction();
@@ -116,7 +122,7 @@ export async function createRequest({ User, Insighter, postLink, description, pl
 
         console.log(error)
 
-        if(error.message === 'Limit Reached'){
+        if (error.message === 'Limit Reached') {
             return 'Limit Reached';
         } else {
             return 'Error'
@@ -141,13 +147,19 @@ export async function createPersonalRequest(User: string, Insighter: string, des
 
         const user = await populateFinance(UserFinancials.findOneAndUpdate(
             { User: Insighter, currentRequests: { $lt: 1000 } },
-            { '$inc': { creditBalance: -1 * price, currentRequests: 1 } },
+            { '$inc': { currentRequests: 1 } },
             { new: true, session }
         ));
 
-        if(!user){
+        if (!user) {
             throw Error('Limit Reached')
         }
+
+        await UserFinancials.findOneAndUpdate(
+            { User: User },
+            { '$inc': { creditBalance: -1 * price } },
+            { new: true, session }
+        );
 
         chat = await Chat.findOne({
             $or: [
@@ -228,7 +240,7 @@ export async function createPersonalRequest(User: string, Insighter: string, des
 
         return 'Success'
 
-    } catch (error : any) {
+    } catch (error: any) {
 
         if (session) {
             await session.abortTransaction();
@@ -237,7 +249,7 @@ export async function createPersonalRequest(User: string, Insighter: string, des
 
         console.log(error)
 
-        if(error.message === 'Limit Reached'){
+        if (error.message === 'Limit Reached') {
             return 'Limit Reached';
         } else {
             return 'Error'
@@ -317,6 +329,12 @@ export async function cancelOrder(id: string, message: string) {
         await UserFinancials.findOneAndUpdate(
             { User: request?.User },
             { '$inc': { creditBalance: request?.price } },
+            { session }
+        )
+
+        await UserFinancials.findOneAndUpdate(
+            { User: request?.Insighter },
+            { '$inc': { currentRequests: -1 } },
             { session }
         )
 

@@ -96,7 +96,7 @@ export async function createEmail(email: string, message: string) {
     try {
         const emailOptions = {
             From: 'automated@insightend.com',
-            To: 'services@insightend.com',
+            To: 'support@insightend.com',
             Subject: 'New Email',
             HtmlBody:
                 `

@@ -163,23 +163,3 @@ export async function getTopUsersByConditions(matchConditions: any) {
         console.log(error)
     }
 }
-
-export async function createFields() {
-    try {
-        await connectToDatabase();
-
-        const users = await UserData.updateMany(
-            {}, // The filter object is empty, which means this operation will affect all documents
-            {
-                '$set': {
-                    RandomInsight: 2.99,
-                    RandomInsightAvailability: true,
-                    LongRandomInsight: 3.99,
-                    LongRandomInsightAvailability: true,
-                }
-            }
-        );
-    } catch (error) {
-        console.log(error);
-    }
-}
