@@ -51,7 +51,7 @@ const page = () => {
                     <p className='font-bold mr-auto ml-3 text-[12px] md:text-[16px] my-1'>3. Payment Processing Servcies</p>
                     <p className='font-bold mr-auto ml-3 text-[12px] md:text-[16px] my-1'>4. User Account and Authentication Services</p>
                     <p className='font-bold mr-auto ml-3 text-[12px] md:text-[16px] my-1'>5. Legal Compliance Servcies</p>
-                    <p className='font-bold mr-auto ml-3 text-[12px] md:text-[16px] my-1'>6. Legal Compliance Servcies</p>
+                    <p className='font-bold mr-auto ml-3 text-[12px] md:text-[16px] my-1'>6. Business Administration Services</p>
                     <p className='font-bold mr-auto ml-3 text-[12px] md:text-[16px] my-1'>7. Website Hosting Services</p>
                     <p className='font-bold mr-auto ml-3 text-[12px] md:text-[16px] my-1'>8. Domain Management Services</p>
                     <p className='font-bold mr-auto ml-3 text-[12px] md:text-[16px] mb-5 mt-2'>• This structure ensures a robust and secure infrastructure that enhances user experience and operational efficiency.</p>
