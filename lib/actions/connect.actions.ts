@@ -83,9 +83,8 @@ export async function handleCreatingAccount(userId: string) {
 
         await createAccountLink(userId);
 
-        return;
     } catch (error) {
-        console.log(error)
+        throw error;
     }
 }
 
