@@ -54,7 +54,7 @@ const page = async () => {
                             </div>
                         </div>
                         <div className='flex justify-center items-center flex-row w-full gap-2 my-3 text-black'>
-                            <a href={'/edit-profile'} className='bg-yellow-400 w-3/4 self-center flex justify-center items-center py-2 rounded-[10px] font-bold'>Edit Profile</a>
+                            <a href={'/edit-profile'} className='bg-yellow-400 w-2/3 self-center flex justify-center items-center py-2 rounded-[10px] font-bold'>Edit Profile</a>
                             <CopyLinkButton username={user?.User.username} />
                         </div>
                     </div>

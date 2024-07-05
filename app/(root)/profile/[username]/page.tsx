@@ -55,7 +55,7 @@ const page = async ({ params: { username } }: { params: { username: string } }) 
                             </div>
                         </div>
                         <div className='flex justify-center items-center flex-row w-full gap-2 my-3 text-black'>
-                            <a href={'#short'} className='bg-yellow-400 w-3/4 self-center flex justify-center items-center py-2 rounded-[10px] font-bold'>Explore Services</a>
+                            <a href={'#video-insight'} className='bg-yellow-400 w-2/3 self-center flex justify-center items-center py-2 rounded-[10px] font-bold'>Explore Services</a>
                             <CopyLinkButton username={user?.User.username} />
                         </div>
                     </div>

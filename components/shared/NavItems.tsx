@@ -44,10 +44,12 @@ const NavItems = () => {
         return (
           <li
             key={link.route}
-            className={`text-black flex-center flex flex-row whitespace-nowrap hover:text-black hover:bg-yellow-300 p-1 rounded-md`}
+            className={`text-black flex-center flex flex-row whitespace-nowrap hover:text-black hover:bg-yellow-300 p-2 rounded-md`}
           >
-            <Image src={link.icon} alt='icon' height={20} width={20} className='mr-5 ml-2 md:hidden' />
-            <a className='text-[14px] lg:text-[16px] font-bold' href={link.route}>{link.label}</a>
+            <a href={link.route} className="flex items-center w-full text-[14px] lg:text-[16px] font-bold">
+              <Image src={link.icon} alt="icon" height={20} width={20} className="mr-5 ml-2 md:hidden" />
+              {link.label}
+            </a>
           </li>
         )
       })}
