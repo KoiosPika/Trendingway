@@ -106,20 +106,20 @@ export async function createEmail(email: string, message: string) {
         //     `,
         // };
         const emailOptions = {
-            From: 'automated@insightend.com',
+            From: 'support@insightend.com',
             To: 'rami10malass@gmail.com',
-            Subject: 'New Email',
+            Subject: 'Maximize Your Impact and Earnings with Insightend',
             HtmlBody:
                 `
                 <div style="max-width: 600px; font-family: Arial ;border-radius: 10px; box-shadow: 0 15px 15px rgba(0,0,0,0.3); padding: 15px 15px; font-weight: 500;">
                  <img src="https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvdXBsb2FkZWQvaW1nXzJpVVN2a2hxcjFFQ2c5ZWFnSTQ2MEhrOEE2YSJ9"
                                 alt="logo"
                                 style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
-                <p>Hi [YouTuber's Name],</p>
-        <p>I hope this message finds you well! I’m [Your Name], the founder of [Your Platform Name], where we enable
+                <p>Hi howtoai,</p>
+        <p>I hope this message finds you well! I’m Rami Malass, the founder of Insightend, where we enable
             content
             creators like you to deepen connections with their audience through personalized insights and feedback.</p>
-        <p>Here's what [Your Platform Name] offers:</p>
+        <p>Here's what Insightend offers:</p>
         <ul>
             <li><strong>No Schedule Commitment:</strong> Respond to orders on your own time, from anywhere. Our platform
                 is
@@ -132,7 +132,7 @@ export async function createEmail(email: string, message: string) {
                 giving
                 you complete control over the types of engagements you accept.</li>
         </ul>
-        <p>At [Your Platform Name], we offer various insight services tailored to different content types and
+        <p>At Insightend, we offer various insight services tailored to different content types and
             interaction
             levels:</p>
         <ul>
@@ -141,7 +141,7 @@ export async function createEmail(email: string, message: string) {
             <li><strong>Profile Insight: </strong>Give critiques and advice on how to enhance social media profiles.
             </li>
             <li><strong>Personal Insights: </strong>Respond directly to individual messages from fans.</li>
-            <li><strong>Random Insight: </strong>Answer specific questions from viewers related to any video content.
+            <li><strong>Random Insight: </strong>Viewers send videos and ask specific questions or for your commentary, allowing you to provide personalized insights on the content.
             </li>
             <li><strong>Long Random Insight: </strong>Similar to Random Insight but designed for longer video formats.
             </li>
@@ -154,15 +154,16 @@ export async function createEmail(email: string, message: string) {
         <p>We believe your presence on our platform could not only provide immense value to your fans but also offer you
             a
             fresh avenue to monetize your expertise and insights in a meaningful way.</p>
+        <p>Please note, Insightend is currently only operational in the United States. We are excited to explore opportunities to expand and serve more creators globally in the future.</p>
         <p>Please also review our Privacy Policy and Terms of Use to ensure you're informed about how we manage data and
             user interactions.</p>
-        <p>Thank you for considering this opportunity, [YouTuber's Name]. I look forward to the possibility of welcoming
+        <p>Thank you for considering this opportunity, howtoai. I look forward to the possibility of welcoming
             you
             to our community.</p>
         <p>Warm regards,</p>
-        <p>[Your Name]<br>
-            [Your Contact Information]<br>
-            [Your Platform URL]</p>
+        <p>Rami Malass<br>
+            support@insightend.com<br>
+            https://www.insightend.com</p>
     </div>
             `,
         };
