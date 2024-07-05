@@ -43,7 +43,7 @@ const EditProfile = ({ userId }: { userId: string }) => {
     const [selectedCategory, setSelectedCategory] = useState<string[]>(['']);
     const [loading, setLoading] = useState(false)
 
-    const enableSaving = VideoInsight >= 0.99 && LongVideoInsight >= 1.99 && ProfileInsight >= 2.99 && PersonalInsight >= 0.99;
+    const enableSaving = VideoInsight >= 0.99 && LongVideoInsight >= 1.99 && ProfileInsight >= 2.99 && PersonalInsight >= 0.99 && RandomInsight >= 0.99 && LongRandomInsight >= 1.99;
 
     useEffect(() => {
         async function getUser() {
@@ -318,9 +318,9 @@ const EditProfile = ({ userId }: { userId: string }) => {
                                     <div className='flex flex-col items-center justify-center flex-1 mr-auto'>
                                         <div className='flex flex-row justify-center items-center w-full'>
                                             <p className='text-[20px] md:text-[25px] font-semibold' style={{ color: LongRandomInsight < 0.99 ? 'red' : 'black' }}>$</p>
-                                            <Input value={LongRandomInsight} className='text-[20px] md:text-[25px] font-semibold w-2/3 border-0' type='number' onChange={(e) => setLongRandomInsight(Number(e.target.value))} style={{ color: LongRandomInsight < 0.99 ? 'red' : 'black' }} />
+                                            <Input value={LongRandomInsight} className='text-[20px] md:text-[25px] font-semibold w-2/3 border-0' type='number' onChange={(e) => setLongRandomInsight(Number(e.target.value))} style={{ color: LongRandomInsight < 1.99 ? 'red' : 'black' }} />
                                         </div>
-                                        {LongRandomInsight < 0.99 && <p className='mt-[5px] md:mr-[100px] mr-auto text-[10px] md:text-[12px] font-semibold text-red-500'>{`Price Can't be Bellow 0.99`}</p>}
+                                        {LongRandomInsight < 1.99 && <p className='mt-[5px] md:mr-[100px] mr-auto text-[10px] md:text-[12px] font-semibold text-red-500'>{`Price Can't be Bellow 1.99`}</p>}
                                     </div>
                                     <div className='absolute top-1 right-2 flex flex-row items-center gap-2 text-[#3e2ea3]'>
                                         {LongRandomInsightAvailability && <p className='font-bold text-[12px]'>Service Available</p>}

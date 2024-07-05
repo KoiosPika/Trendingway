@@ -48,7 +48,7 @@ export async function createEarning(requestId: any, session: ClientSession) {
                 daysToAdd = 2; // Default case to cover unexpected values
                 break;
         }
-
+        
         daysToAdd++;
 
         requestDate.setDate(requestDate.getDate() + daysToAdd)

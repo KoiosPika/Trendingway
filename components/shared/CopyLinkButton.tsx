@@ -20,7 +20,7 @@ const CopyLinkButton = ({ username }: { username: string }) => {
     };
 
     return (
-        <Button className='bg-blue-500 rounded-lg' onClick={copyToClipboard}>
+        <Button className='bg-blue-500 rounded-lg hover:bg-blue-500' onClick={copyToClipboard}>
             {status === 'Ready' && <Image src={'/icons/link-white.svg'} alt='link' height={20} width={20} />}
             {status === 'Copied' && <Image src={'/icons/check-white.svg'} alt='link' height={20} width={20} />}
         </Button>

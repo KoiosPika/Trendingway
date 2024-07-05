@@ -3,7 +3,7 @@
 import { ClientSession } from "mongoose";
 import { connectToDatabase } from "../database"
 import UserData from "../database/models/userData.model";
-import UserFinancials from "../database/models/userFinancials.model";
+import UserFinancials, { IUserFinancials } from "../database/models/userFinancials.model";
 import Status from "../database/models/status.model";
 import Stripe from "stripe";
 import Order from "../database/models/order.model";
@@ -19,11 +19,11 @@ export async function getUserFinancials(userId: string) {
 
         const now = new Date();
 
-        const userFinancials = await UserFinancials.findOne({ User: userId })
+        const userFinancials: IUserFinancials | null = await UserFinancials.findOne({ User: userId })
 
-        let points = userFinancials.points;
+        let points = userFinancials?.points;
 
-        if (points > 0 && userFinancials.lastRechargeDate < now) {
+        if ((points && points > 0) && (userFinancials && userFinancials?.lastRechargeDate < now)) {
             await UserFinancials.findByIdAndUpdate(userFinancials._id, { '$set': { points: 0 } })
 
             await stripe.transfers.create({
