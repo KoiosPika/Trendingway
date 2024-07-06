@@ -155,7 +155,8 @@ export async function createEmail(email: string, message: string) {
             a
             fresh avenue to monetize your expertise and insights in a meaningful way.</p>
         <p>Please note, Insightend is currently only operational in the United States. We are excited to explore opportunities to expand and serve more creators globally in the future.</p>
-        <p>Please also review our Privacy Policy and Terms of Use to ensure you're informed about how we manage data and
+        <p><strong>Note:</strong> If you decide to join our platform, please reply to this email with your username. This will enable me to personally request various services from you. It's a great way for you to try out the system, engage directly with requests, and see how earning and transferring money works on our platform.</p>
+        <p>You can review our Privacy Policy and Terms of Use to ensure you're informed about how we manage data and
             user interactions.</p>
         <p>Thank you for considering this opportunity, howtoai. I look forward to the possibility of welcoming
             you

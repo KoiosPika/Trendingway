@@ -6,7 +6,6 @@ import Refund from "../database/models/refund.model"
 import Request, { IRequest } from "../database/models/request.model"
 import Spending from "../database/models/spending.model"
 import User from "../database/models/user.model"
-import UserData from "../database/models/userData.model"
 import Chat from "../database/models/chat.model"
 import Message from "../database/models/message.model"
 import { ClientSession } from "mongoose"
@@ -109,7 +108,6 @@ export async function createRequest({ User, Insighter, postLink, description, pl
 
         await session.commitTransaction();
         session.endSession();
-
 
         return 'Success';
 

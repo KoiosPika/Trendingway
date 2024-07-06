@@ -19,10 +19,8 @@ const ContactDialog = () => {
     const handleEmail = async () => {
         setLoading(true);
         await createEmail(email, message)
-        router.push('/profile')
 
         setLoading(false);
-
     }
 
 
