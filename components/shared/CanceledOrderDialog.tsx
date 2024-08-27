@@ -20,7 +20,7 @@ const CanceledOrderDialog = ({ request }: { request: IRequest }) => {
                         <AlertDialogCancel className="rounded-full bg-white text-black hover:bg-black hover:text-white border-[1px] border-black">X</AlertDialogCancel>
                     </AlertDialogTitle>
                 </AlertDialogHeader>
-                <p className='font-semibold'>Your order was canceled and ${request?.price} were refunded to your current balance</p>
+                <p className='font-semibold'>Your order was canceled and ${request?.price} were refunded to your current</p>
                 <p className='font-semibold'>Reason for canceling:</p>
                 <div className='w-full bg-white flex items-center gap-2 rounded-b-lg'>
                     {request.message != 'Canceled By Customer' &&
